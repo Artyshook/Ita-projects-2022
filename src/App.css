@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  background: #36454F	;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1,h2,h3,h4,h5 {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 18px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul,li {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+}
+.container-1 {
+
+  padding: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.header {
+  background: url("2.jpg") no-repeat center / cover;
+}
+
+header .a {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.menu {
+  display: flex;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menu li a {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  margin-right: 40px;
+  letter-spacing: 0.1em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  padding:  50px;
+  width: 120px;
+}
+
+.offer {
+  text-transform: uppercase;
+  margin-top: 200px;
+  padding: 40px;
+}
+.offer h1 {
+  font-size: 70px;
+  margin-bottom: 19px;
+  margin-top: -9px;
+  letter-spacing: 0.02em;
+}
+.btn {
+  display: block;
+  font-size: 17px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  padding: 17px 47px;
+  border: 1px solid #fff;
+  width: 238px;
+  color: white;
+}
+
+section {
+  display: flex;
+}
+
+
+.title {
+  display: block;
+  font-size: 50px;
+  text-align: left;
+  letter-spacing: 0.02em;
+  margin-bottom: 50px;
+}
+
+
+.articles {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.articles p {
+  display: block;
+  font-size: 20px;
+  text-align: left;
+}
+
+.articles-1 {
+  display: block;
+  justify-content: center;
+  text-align: justify;
+  margin-left: 20px;
+  margin-bottom: 100px;
+}
+
+.articles-2 {
+  display: block;
+  justify-content: center;
+  text-align: justify;
+
+}
+
+
+.code-frame {
+  display: block;
+  font-size: 17px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  padding: 17px 47px;
+  border: 1px solid #fff;
+  width: fit-content;
+  color: white;
+}
+
+.footer {
+  height: 100px;
+  border-top: 3px solid white;
+}
+
+.social-media {
+  width: 400px;
+  align-items: center;
+  margin-top: -50px;
+}
+
+.container-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+
 }
