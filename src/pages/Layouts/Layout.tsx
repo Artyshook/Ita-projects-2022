@@ -1,12 +1,12 @@
-import { Global, Li, Menu, Nav } from './Styles.styled'
 import { Link, Outlet } from 'react-router-dom'
 import React from 'react'
+import styled from 'styled-components'
 
 export const Layout = () => {
   return (
     <>
-      <Nav>
-        <Menu>
+      <Div_Nav>
+        <UL_Menu>
           <Li>
             <Link to='/'>Home</Link>
           </Li>
@@ -16,9 +16,24 @@ export const Layout = () => {
           <Li>
             <Link to='/counter'>Counter</Link>
           </Li>
-        </Menu>
-      </Nav>
+        </UL_Menu>
+      </Div_Nav>
       <Outlet />
     </>
   )
 }
+
+export const Div_Nav = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+`
+export const Li = styled.li`
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  margin-right: 20px;
+`
+export const UL_Menu = styled.ul`
+  display: flex;
+`

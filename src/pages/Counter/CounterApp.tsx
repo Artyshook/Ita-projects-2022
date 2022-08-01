@@ -1,6 +1,8 @@
 import { Button } from '@mui/material'
-import { Config, Global, MyContainer } from './Styles.styled'
+import { colors, size } from '../../helpers/theme'
 import React, { Component } from 'react'
+import styled from 'styled-components'
+
 type Props = {}
 type State = {
   count: number
@@ -20,19 +22,13 @@ export class CounterApp extends React.Component<Props, State> {
   error = () => {
     this.setState({
       error: "You can't reduce below 0",
-    })
-    this.setState({
       disable: true,
     })
   }
   increment = () => {
     this.setState({
       count: this.state.count + 1,
-    })
-    this.setState({
       error: '',
-    })
-    this.setState({
       disable: false,
     })
   }
@@ -65,3 +61,24 @@ export class CounterApp extends React.Component<Props, State> {
     )
   }
 }
+
+export const Config = styled.div`
+  margin-top: 10px;
+`
+export const MyContainer = styled.span`
+  margin-right: 5px;
+`
+export const Global = styled.div`
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: ${size.fontSize};
+  color: ${colors.fontColor};
+  background: ${colors.background};
+  width: 100%;
+  height: ${size.backgroundSize};
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
