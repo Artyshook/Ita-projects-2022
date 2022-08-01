@@ -1,7 +1,6 @@
-import React from 'react'
-
-import { Li, Menu, Nav } from './Styles.styled'
+import { Global, Li, Menu, Nav } from './Styles.styled'
 import { Link, Outlet } from 'react-router-dom'
+import React from 'react'
 
 export const Layout = () => {
   return (

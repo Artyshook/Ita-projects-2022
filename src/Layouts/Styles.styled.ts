@@ -14,3 +14,16 @@ export const Li = styled.li`
 export const Menu = styled.ul`
   display: flex;
 `
+export const Global = styled.div`
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  background: #36454f;
+  width: 100%;
+  height: 1000px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`
