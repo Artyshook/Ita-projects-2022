@@ -1,5 +1,5 @@
-import { Button } from '@mui/material'
-import { colors, size } from '../../helpers/theme'
+import { Button, Container } from '@mui/material'
+import { Wrapper } from '../../helpers/theme'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -43,8 +43,8 @@ export class CounterApp extends React.Component<Props, State> {
   }
   render() {
     return (
-      <Global>
-        <div>{this.state.error ? this.state.error : `My count: ${this.state.count}`}</div>
+      <Wrapper>
+        <div>{this.state.error || `My count: ${this.state.count}`}</div>
         <Config>
           <MyContainer>
             <Button variant='contained' onClick={this.increment}>
@@ -57,7 +57,7 @@ export class CounterApp extends React.Component<Props, State> {
             </Button>
           </MyContainer>
         </Config>
-      </Global>
+      </Wrapper>
     )
   }
 }
@@ -67,18 +67,4 @@ export const Config = styled.div`
 `
 export const MyContainer = styled.span`
   margin-right: 5px;
-`
-export const Global = styled.div`
-  padding: 0;
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: ${size.fontSize};
-  color: ${colors.fontColor};
-  background: ${colors.background};
-  width: 100%;
-  height: ${size.backgroundSize};
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 `

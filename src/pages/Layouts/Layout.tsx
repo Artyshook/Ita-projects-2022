@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
+import { urls } from '../../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -8,13 +9,13 @@ export const Layout = () => {
       <Div_Nav>
         <UL_Menu>
           <Li>
-            <Link to='/'>Home</Link>
+            <Link to={urls.home}>Home</Link>
           </Li>
           <Li>
-            <Link to='/web'>WebPage</Link>
+            <Link to={urls.web}>WebPage</Link>
           </Li>
           <Li>
-            <Link to='/counter'>Counter</Link>
+            <Link to={urls.counter}>Counter</Link>
           </Li>
         </UL_Menu>
       </Div_Nav>

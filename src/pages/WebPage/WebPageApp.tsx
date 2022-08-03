@@ -1,4 +1,4 @@
-import { colors, size } from '../../helpers/theme'
+import { background, colors, fonts } from '../../helpers/theme'
 import React from 'react'
 import backroundImage from './backround.jpg'
 import styled from 'styled-components'
@@ -116,7 +116,7 @@ export const Ul_Menu = styled.ul`
 export const A_MenuItems = styled.a`
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 14px;
+  font-size: ${fonts.fontSizeMenu};
   color: white;
   margin-right: 40px;
   letter-spacing: 0.1em;
@@ -127,14 +127,14 @@ export const Div_Offer = styled.div`
   padding: 40px;
 `
 export const H1_OfferItem = styled.h1`
-  font-size: 70px;
+  font-size: ${fonts.fontSizeH1};
   margin-bottom: 19px;
   margin-top: -9px;
   letter-spacing: 0.02em;
 `
 export const A_Btn = styled.a`
   display: block;
-  font-size: 17px;
+  font-size: ${fonts.fontSizeArticle};
   text-align: center;
   letter-spacing: 0.01em;
   padding: 17px 47px;
@@ -172,15 +172,15 @@ export const Header_Text = styled.header`
   padding: 0;
   margin: 0;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: ${fonts.fontSizeH2};
 `
 export const P_CodeFrame = styled.p`
   display: block;
-  font-size: 17px;
+  font-size: ${fonts.fontSizeArticle};
   text-align: center;
   letter-spacing: 0.01em;
   padding: 17px 47px;
-  border: 1px solid #fff;
+  border: 1px solid ${colors.borderColor};
   width: fit-content;
   color: white;
 `
@@ -192,7 +192,7 @@ export const Div_ContainerSocial = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 20px;
+  font-size: ${fonts.fontSizeArticle};
 `
 export const Img_SocialMedia = styled.img`
   width: 400px;
@@ -215,9 +215,9 @@ export const Div_Global = styled.div`
   padding: 0;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  font-size: ${size.fontSize};
-  color: ${colors.fontColor};
-  background: ${colors.background};
+  font-size: ${fonts.fontSizeStandard};
+  color: ${fonts.fontColor};
+  background: ${background.backgroundColor};
 `
 export const Img_Img = styled.img`
   margin-top: 30px;

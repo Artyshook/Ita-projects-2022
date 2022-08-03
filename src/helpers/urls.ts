@@ -1,5 +1,5 @@
 export const urls = {
-  homeUrl: '/',
-  webUrl: '/web',
-  counterAppUrl: '/counter',
+  home: '/',
+  web: '/web',
+  counter: '/counter',
 }
