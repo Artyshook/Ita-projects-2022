@@ -1,6 +1,6 @@
 import { background, colors, fonts } from '../../helpers/theme'
 import React from 'react'
-import backroundImage from './backround.jpg'
+import backroundImage from './2.webp'
 import styled from 'styled-components'
 
 export const WebPageApp = () => {
@@ -15,14 +15,7 @@ export const WebPageApp = () => {
       <Header_Header>
         <div>
           <Div_Nav>
-            <Ul_Menu>
-              <Li_Li>
-                <A_MenuItems href='home'>Home</A_MenuItems>
-              </Li_Li>
-              <Li_Li>
-                <A_MenuItems href='about'>About</A_MenuItems>
-              </Li_Li>
-            </Ul_Menu>
+            <Ul_Menu></Ul_Menu>
           </Div_Nav>
           <Div_Offer>
             <p>Learn Javascript Fast by</p>
@@ -116,7 +109,7 @@ export const Ul_Menu = styled.ul`
 export const A_MenuItems = styled.a`
   text-transform: uppercase;
   text-decoration: none;
-  font-size: ${fonts.fontSizeMenu};
+  font-size: ${fonts.small};
   color: white;
   margin-right: 40px;
   letter-spacing: 0.1em;
@@ -127,14 +120,14 @@ export const Div_Offer = styled.div`
   padding: 40px;
 `
 export const H1_OfferItem = styled.h1`
-  font-size: ${fonts.fontSizeH1};
+  font-size: ${fonts.large};
   margin-bottom: 19px;
   margin-top: -9px;
   letter-spacing: 0.02em;
 `
 export const A_Btn = styled.a`
   display: block;
-  font-size: ${fonts.fontSizeArticle};
+  font-size: ${fonts.small};
   text-align: center;
   letter-spacing: 0.01em;
   padding: 17px 47px;
@@ -167,22 +160,24 @@ export const Article_Text = styled.article`
   display: block;
   font-size: 20px;
   text-align: left;
+  color: black;
 `
 export const Header_Text = styled.header`
   padding: 0;
   margin: 0;
   text-transform: uppercase;
-  font-size: ${fonts.fontSizeH2};
+  font-size: ${fonts.small};
 `
 export const P_CodeFrame = styled.p`
-  display: block;
-  font-size: ${fonts.fontSizeArticle};
+  display: flex;
+  align-items: center;
+  font-size: ${fonts.small};
   text-align: center;
   letter-spacing: 0.01em;
   padding: 17px 47px;
-  border: 1px solid ${colors.borderColor};
+  border: 0.3rem solid ${colors.green};
   width: fit-content;
-  color: white;
+  color: ${colors.blue};
 `
 export const Footer_Footer = styled.footer`
   border-top: 3px solid white;
@@ -192,7 +187,7 @@ export const Div_ContainerSocial = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: ${fonts.fontSizeArticle};
+  font-size: ${fonts.small};
 `
 export const Img_SocialMedia = styled.img`
   width: 400px;
@@ -212,11 +207,11 @@ export const Li_Li = styled.li`
   padding: 0px;
 `
 export const Div_Global = styled.div`
+  justify-content: center;
   padding: 0;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  font-size: ${fonts.fontSizeStandard};
-  color: ${fonts.fontColor};
+  font-size: ${fonts.small};
   background: ${background.backgroundColor};
 `
 export const Img_Img = styled.img`
