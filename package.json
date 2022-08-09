@@ -1,5 +1,4 @@
 {
-  "homepage": "http//Artyshook.github.io/MyProjects/",
   "name": "new-react-app",
   "version": "0.1.0",
   "private": true,
@@ -22,7 +21,6 @@
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
-    "gh-pages": "^4.0.0",
     "prettier": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -37,8 +35,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "lint": "eslint \"{src,scripts}/**/*.{js,ts,tsx}\" --max-warnings 0",
     "lint:fix": "eslint \"{src,scripts}/**/*.{js,ts,tsx}\" --fix",

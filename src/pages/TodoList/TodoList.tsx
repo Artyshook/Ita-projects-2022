@@ -33,6 +33,7 @@ export const TodoList = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewTask(event.target.value)
   }
+  const handleKeyDown = (event: number) => {}
   const addTask = () => {
     let myTask = { id: v1(), task: newTask, isDone: false }
     let copy = [...tasks, myTask]
@@ -64,14 +65,21 @@ export const TodoList = () => {
   }
 
   const statusTask = (id: string, status: boolean) => {
-    let newStatus = tasks.map(e => (e.id === id ? { ...e, isDone: !status } : e)) // check spred operator
+    let newStatus = tasks.map(e => (e.id === id ? { ...e, isDone: !status } : e))
     setTasks(newStatus)
   }
   return (
     <Div_Wrapper>
       <Div_Title>Todos</Div_Title>
       <Div_Input>
-        <Input type='text' onChange={handleChange} value={newTask} />
+        <Input
+          type='text'
+          onChange={handleChange}
+          value={newTask}
+          onKeyDown={e => {
+            handleChange
+          }}
+        />
         <Div_Button onClick={addTask}>+</Div_Button>
       </Div_Input>
       <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
