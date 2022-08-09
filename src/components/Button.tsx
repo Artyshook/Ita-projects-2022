@@ -11,7 +11,7 @@ export const My_Button = (props: Props) => {
   return <Div_Button onClick={props?.onClick}>{props.text}</Div_Button>
 }
 
-const Div_Button = styled.button`
+export const Div_Button = styled.button`
   letter-spacing: 1px;
   font-size: 2rem;
   border-radius: 70px;

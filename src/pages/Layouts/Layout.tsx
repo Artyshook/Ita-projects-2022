@@ -1,4 +1,4 @@
-import { CgAddR, CgWebsite } from 'react-icons/cg'
+import { CgAddR, CgGoogleTasks, CgWebsite } from 'react-icons/cg'
 import { Link, Outlet } from 'react-router-dom'
 import { colors, fonts } from '../../helpers/theme'
 import { urls } from '../../helpers/urls'
@@ -10,12 +10,16 @@ export const Layout = () => {
     <>
       <Div_Nav>
         <Li>
-          <CgWebsite size='4rem' />
+          <CgWebsite size='2rem' />
           <Link to={urls.web}>JS Hacks</Link>
         </Li>
         <Li>
-          <CgAddR size='4rem' />
+          <CgAddR size='2rem' />
           <Link to={urls.counter}>Counter</Link>
+        </Li>
+        <Li>
+          <CgGoogleTasks size='2rem' />
+          <Link to={urls.todolist}>TodoList</Link>
         </Li>
       </Div_Nav>
       <Outlet />
