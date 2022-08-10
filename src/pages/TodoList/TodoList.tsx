@@ -27,19 +27,9 @@ export const TodoList = () => {
     setTask2([...task2, { id: v1(), task: newTask, isDone: false }])
     setNewTask('')
   }
-  // const addTask = () => {
-  //   if (newTask.trim() !== '') {
-  //     setError(null)
-  //     setTask2([...task2, { id: v1(), task: newTask, isDone: false }])
-  //     setNewTask('')
-  //   } else {
-  //     setError('Title is required')
-  //   }
-  // }
+
   const removeTask = (id: string) => {
     setTask2(task2.filter((el: { id: string }) => el.id !== id))
-    // let filteredTasks = task2.filter((el: { id: string }) => el.id !== id)
-    // setTask2(filteredTasks)
   }
 
   if (filter === 'active') {
