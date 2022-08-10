@@ -12,7 +12,7 @@ export const TodoList = () => {
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState<FilterValuesType>('all')
   const [error, setError] = useState<string | null>(null)
-  let [task2, setTask2] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
+  const [task, setTask] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewTask(event.target.value)
@@ -24,18 +24,20 @@ export const TodoList = () => {
       return
     }
     setError(null)
-    setTask2([...task2, { id: v1(), task: newTask, isDone: false }])
+    setTask([...task, { id: v1(), task: newTask, isDone: false }])
     setNewTask('')
   }
 
   const removeTask = (id: string) => {
-    setTask2(task2.filter((el: { id: string }) => el.id !== id))
+    setTask(task.filter((el: { id: string }) => el.id !== id))
   }
 
+  let tasksForTodolist = task
+
   if (filter === 'active') {
-    task2 = task2.filter((t: { isDone: boolean }) => !t.isDone)
+    tasksForTodolist = task.filter(t => !t.isDone)
   } else if (filter === 'completed') {
-    task2 = task2.filter((t: { isDone: boolean }) => t.isDone)
+    tasksForTodolist = task.filter(t => t.isDone)
   } else filter === 'all'
 
   function changeFilter(value: FilterValuesType) {
@@ -43,7 +45,7 @@ export const TodoList = () => {
   }
 
   const statusTask = (id: string, status: boolean) => {
-    setTask2(task2.map(el => (el.id === id ? { ...el, isDone: !status } : el)))
+    setTask(task.map(el => (el.id === id ? { ...el, isDone: !status } : el)))
   }
   return (
     <Div_Wrapper>
@@ -54,7 +56,7 @@ export const TodoList = () => {
       </Div_Input>
       <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
       <Div_Tasks>
-        {task2.map((e: Tasks) => (
+        {tasksForTodolist.map((e: Tasks) => (
           <Li_Tasks key={e.id}>
             <input type='checkbox' checked={e.isDone} onClick={() => statusTask(e.id, e.isDone)} />
             {e.task}

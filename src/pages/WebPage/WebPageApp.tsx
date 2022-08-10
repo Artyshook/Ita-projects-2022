@@ -1,4 +1,4 @@
-import { background, colors, fonts } from '../../helpers/theme'
+import { theme } from '../../helpers/theme'
 import React from 'react'
 import backroundImage from './2.webp'
 import styled from 'styled-components'
@@ -109,7 +109,7 @@ export const Ul_Menu = styled.ul`
 export const A_MenuItems = styled.a`
   text-transform: uppercase;
   text-decoration: none;
-  font-size: ${fonts.small};
+  font-size: ${theme.fonts.small};
   color: white;
   margin-right: 40px;
   letter-spacing: 0.1em;
@@ -120,14 +120,14 @@ export const Div_Offer = styled.div`
   padding: 40px;
 `
 export const H1_OfferItem = styled.h1`
-  font-size: ${fonts.large};
+  font-size: ${theme.fonts.large};
   margin-bottom: 19px;
   margin-top: -9px;
   letter-spacing: 0.02em;
 `
 export const A_Btn = styled.a`
   display: block;
-  font-size: ${fonts.small};
+  font-size: ${theme.fonts.small};
   text-align: center;
   letter-spacing: 0.01em;
   padding: 17px 47px;
@@ -166,18 +166,18 @@ export const Header_Text = styled.header`
   padding: 0;
   margin: 0;
   text-transform: uppercase;
-  font-size: ${fonts.small};
+  font-size: ${theme.fonts.small};
 `
 export const P_CodeFrame = styled.p`
   display: flex;
   align-items: center;
-  font-size: ${fonts.small};
+  font-size: ${theme.fonts.small};
   text-align: center;
   letter-spacing: 0.01em;
   padding: 17px 47px;
-  border: 0.3rem solid ${colors.green};
+  border: 0.3rem solid ${theme.colors.green};
   width: fit-content;
-  color: ${colors.blue};
+  color: ${theme.colors.blue};
 `
 export const Footer_Footer = styled.footer`
   border-top: 3px solid white;
@@ -187,7 +187,7 @@ export const Div_ContainerSocial = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: ${fonts.small};
+  font-size: ${theme.fonts.small};
 `
 export const Img_SocialMedia = styled.img`
   width: 400px;
@@ -211,8 +211,8 @@ export const Div_Global = styled.div`
   padding: 0;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  font-size: ${fonts.small};
-  background: ${background.backgroundColor};
+  font-size: ${theme.fonts.small};
+  background: ${theme.background.backgroundColor};
 `
 export const Img_Img = styled.img`
   margin-top: 30px;

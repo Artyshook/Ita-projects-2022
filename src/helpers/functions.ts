@@ -1,9 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-export const useLocalStorage = <T>(
-  key: string,
-  defaultValue: T
-): [T, Dispatch<SetStateAction<T>>] => {
+export const useLocalStorage = <T>(key: string, defaultValue: T) => {
   const [value, setValue] = useState<T>(() => {
     let currentValue
 
@@ -20,5 +17,5 @@ export const useLocalStorage = <T>(
     localStorage.setItem(key, JSON.stringify(value))
   }, [value, key])
 
-  return [value, setValue]
+  return [value, setValue] as const
 }

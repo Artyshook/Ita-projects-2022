@@ -1,4 +1,4 @@
-import { colors } from '../helpers/theme'
+import { theme } from '../helpers/theme'
 import styled from 'styled-components'
 
 export const Div_Button = styled.button`
@@ -6,10 +6,10 @@ export const Div_Button = styled.button`
   font-size: 2rem;
   border-radius: 70px;
   color: #00ff7f;
-  background-color: ${colors.blue};
+  background-color: ${theme.colors.blue};
   padding: 40px;
   border: none;
   &:hover {
-    background: ${colors.blue2};
+    background: ${theme.colors.blue2};
   }
 `
