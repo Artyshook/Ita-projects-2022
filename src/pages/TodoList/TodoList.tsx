@@ -56,7 +56,7 @@ export const TodoList = () => {
       </Div_Input>
       <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
       <Div_Tasks>
-        {tasksForTodolist.map((e: Tasks) => (
+        {tasksForTodolist.map(e => (
           <Li_Tasks key={e.id}>
             <input type='checkbox' checked={e.isDone} onClick={() => statusTask(e.id, e.isDone)} />
             {e.task}
