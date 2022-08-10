@@ -7,7 +7,7 @@ import styled from 'styled-components'
 type Props = {}
 type State = {
   count: number
-  error: string
+  error: null | string
   disable: boolean
 }
 export class CounterApp extends React.Component<Props, State> {
@@ -15,7 +15,7 @@ export class CounterApp extends React.Component<Props, State> {
     super(props)
     this.state = {
       count: 10,
-      error: '',
+      error: null,
       disable: false,
     }
   }
@@ -30,13 +30,13 @@ export class CounterApp extends React.Component<Props, State> {
   reset = () => {
     this.setState({
       count: 0,
-      error: '',
+      error: null,
     })
   }
   increment = () => {
     this.setState({
       count: this.state.count + 1,
-      error: '',
+      error: null,
       disable: false,
     })
   }
@@ -52,7 +52,7 @@ export class CounterApp extends React.Component<Props, State> {
   render() {
     return (
       <Div_Wrapper>
-        <Div_Value>{this.state.error || `My count: ${this.state.count}`}</Div_Value>
+        <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
         <Div_Config>
           <Div_MyContainer>
             <My_Button onClick={this.increment} text='Increase' disabled={this.state.disable} />

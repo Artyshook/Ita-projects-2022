@@ -1,8 +1,15 @@
 import { CgTrash } from 'react-icons/cg'
 import { background, colors, fonts } from '../../helpers/theme'
 import { v1 } from 'uuid'
-import React, { ChangeEvent, KeyboardEventHandler, MouseEventHandler, useState } from 'react'
+import React, {
+  ChangeEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react'
 import styled from 'styled-components'
+import useLocalStorage from '../../helpers/functions'
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 type Tasks = { id: string; task: string; isDone: boolean }
@@ -19,45 +26,36 @@ const getTasksFromLs = (): Tasks[] => {
 }
 
 export const TodoList = () => {
-  const [tasks, _setTasks] = useState(getTasksFromLs())
   const [newTask, setNewTask] = useState('')
   const [filter, setFilter] = useState<FilterValuesType>('all')
-  const [error, setError] = useState('')
-
-  const setTasks = (tasks: Tasks[]) => {
-    localStorage.setItem(lsId.task, JSON.stringify(tasks))
-    _setTasks(tasks)
-    setNewTask('')
-  }
+  const [error, setError] = useState<string | null>(null)
+  let [task2, setTask2] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewTask(event.target.value)
   }
-  const handleKeyDown = (event: number) => {}
+
   const addTask = () => {
-    let myTask = { id: v1(), task: newTask, isDone: false }
-    let copy = [...tasks, myTask]
     if (newTask.trim() !== '') {
-      setError('')
-      setTasks(copy)
+      setError(null)
+      let myTask = { id: v1(), task: newTask, isDone: false }
+      setTask2([...task2, myTask]) // change
+      // localStorage.setItem('localTasks', JSON.stringify([...task2, myTask])) //ch
+      setNewTask('')
     } else {
       setError('Title is required')
     }
   }
-
   const removeTask = (id: string) => {
-    let filteredTasks = tasks.filter(e => e.id !== id)
-    setTasks(filteredTasks)
+    let filteredTasks = task2.filter((e: { id: string }) => e.id !== id) //ch
+    setTask2(filteredTasks) //ch
   }
 
-  let tasksForTodolist = tasks
   if (filter === 'active') {
-    let copy = [...tasks]
-    tasksForTodolist = copy.filter(t => !t.isDone)
+    task2 = task2.filter((t: { isDone: any }) => !t.isDone) //ch
   }
   if (filter === 'completed') {
-    let copy = [...tasks]
-    tasksForTodolist = copy.filter(t => t.isDone)
+    task2 = task2.filter((t: { isDone: any }) => t.isDone) //ch
   }
 
   function changeFilter(value: FilterValuesType) {
@@ -65,26 +63,18 @@ export const TodoList = () => {
   }
 
   const statusTask = (id: string, status: boolean) => {
-    let newStatus = tasks.map(e => (e.id === id ? { ...e, isDone: !status } : e))
-    setTasks(newStatus)
-  }
+    setTask2(task2.map((e: { id: string }) => (e.id === id ? { ...e, isDone: !status } : e)))
+  } //ch
   return (
     <Div_Wrapper>
       <Div_Title>Todos</Div_Title>
       <Div_Input>
-        <Input
-          type='text'
-          onChange={handleChange}
-          value={newTask}
-          onKeyDown={e => {
-            handleChange
-          }}
-        />
+        <Input type='text' onChange={handleChange} value={newTask} />
         <Div_Button onClick={addTask}>+</Div_Button>
       </Div_Input>
       <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
       <Div_Tasks>
-        {tasksForTodolist.map(e => (
+        {task2.map((e: Tasks) => (
           <Li_Tasks key={e.id}>
             <input type='checkbox' checked={e.isDone} onClick={() => statusTask(e.id, e.isDone)} />
             {e.task}
