@@ -11,6 +11,25 @@ export const fonts1 = {
   fontFamily: "'Open Sans', sans-serif",
 }
 
+export const theme = {
+  fonts: {
+    small: '1.5rem',
+    medium: '3rem',
+    large: '5rem',
+    extraLarge: '7rem',
+  },
+  colors: {
+    white: '#f5f5f5',
+    blue: '#507CFB',
+    blue2: '#7A4BDD',
+    green: '#00ff7f',
+    yellow: '#F3C84B',
+    black: '#1c1c1c',
+  },
+  background: {
+    backgroundColor: '#fffff',
+  },
+}
 export const fonts = {
   small: '1.5rem',
   medium: '3rem',
@@ -19,7 +38,7 @@ export const fonts = {
 }
 
 export const background = {
-  backgroundColor: '${colors.white}',
+  backgroundColor: '#fffff',
 }
 
 export const colors = {
@@ -31,13 +50,13 @@ export const colors = {
   black: '#1c1c1c',
 }
 
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1976d2',
-    },
-  },
-})
+// export const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#1976d2',
+//     },
+//   },
+// })
 
 export const Wrapper = styled.div`
   padding: 0;

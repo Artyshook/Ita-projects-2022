@@ -1,6 +1,6 @@
 import { CgAddR, CgGoogleTasks, CgWebsite } from 'react-icons/cg'
 import { Link, Outlet } from 'react-router-dom'
-import { colors, fonts } from '../../helpers/theme'
+import { theme } from '../../helpers/theme'
 import { urls } from '../../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
@@ -37,17 +37,17 @@ export const Div_Nav = styled.div`
   color: white;
 `
 export const Li = styled.li`
-  font-size: ${fonts.small};
-  color: ${colors.blue};
+  font-size: ${theme.fonts.small};
+  color: ${theme.colors.blue};
   display: flex;
   margin: 0;
   padding: 0;
   a {
     color: blue;
-    font-size: ${fonts.medium};
+    font-size: ${theme.fonts.medium};
     text-decoration: none;
     &:hover {
-      color: ${colors.green};
+      color: ${theme.colors.green};
 
     }
 `

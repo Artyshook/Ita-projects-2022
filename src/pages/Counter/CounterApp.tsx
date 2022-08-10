@@ -1,6 +1,6 @@
 import { CgCloseO } from 'react-icons/cg'
-import { My_Button } from '../../components/Button'
-import { background, colors, fonts } from '../../helpers/theme'
+import { Div_Button } from '../../components/Button'
+import { theme } from '../../helpers/theme'
 import React, { Component, MouseEventHandler } from 'react'
 import styled from 'styled-components'
 
@@ -55,10 +55,14 @@ export class CounterApp extends React.Component<Props, State> {
         <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
         <Div_Config>
           <Div_MyContainer>
-            <My_Button onClick={this.increment} text='Increase' disabled={this.state.disable} />
+            <Div_Button onClick={this.increment} disabled={this.state.disable}>
+              Increase
+            </Div_Button>
           </Div_MyContainer>
           <Div_MyContainer>
-            <My_Button onClick={this.decrement} disabled={this.state.disable} text={'Decrease'} />
+            <Div_Button onClick={this.decrement} disabled={this.state.disable}>
+              Decrease
+            </Div_Button>
           </Div_MyContainer>
         </Div_Config>
         <Div_Icon>
@@ -79,15 +83,15 @@ export const Div_Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
-  color: ${colors.blue};
-  background: ${background.backgroundColor};
+  color: ${theme.colors.blue};
+  background: ${theme.background.backgroundColor};
 `
 
 export const Div_Value = styled.div`
   display: flex;
   justify-content: center;
-  font-size: ${fonts.medium};
-  color: ${colors.blue};
+  font-size: ${theme.fonts.medium};
+  color: ${theme.colors.blue};
 `
 export const Div_Config = styled.div`
   display: flex;
@@ -101,6 +105,6 @@ export const Div_Icon = styled.div`
   display: flex;
   justify-content: center;
   &:hover {
-    color: ${colors.green};
+    color: ${theme.colors.green};
   }
 `

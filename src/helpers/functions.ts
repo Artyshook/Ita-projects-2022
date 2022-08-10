@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-const useLocalStorage = <T>(key: string, defaultValue: T) => {
-  const [value, setValue] = useState(() => {
+export const useLocalStorage = <T>(
+  key: string,
+  defaultValue: T
+): [T, Dispatch<SetStateAction<T>>] => {
+  const [value, setValue] = useState<T>(() => {
     let currentValue
 
     try {
@@ -19,5 +22,3 @@ const useLocalStorage = <T>(key: string, defaultValue: T) => {
 
   return [value, setValue]
 }
-
-export default useLocalStorage
