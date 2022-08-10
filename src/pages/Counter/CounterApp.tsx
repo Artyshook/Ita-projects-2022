@@ -1,20 +1,21 @@
-import { Button, Container } from '@mui/material'
-import { Wrapper } from '../../helpers/theme'
-import React, { Component } from 'react'
+import { CgCloseO } from 'react-icons/cg'
+import { Div_Button } from '../../components/Button'
+import { theme } from '../../helpers/theme'
+import React, { Component, MouseEventHandler } from 'react'
 import styled from 'styled-components'
 
 type Props = {}
 type State = {
   count: number
-  error: string
+  error: null | string
   disable: boolean
 }
 export class CounterApp extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      count: 0,
-      error: '',
+      count: 10,
+      error: null,
       disable: false,
     }
   }
@@ -25,10 +26,17 @@ export class CounterApp extends React.Component<Props, State> {
       disable: true,
     })
   }
+
+  reset = () => {
+    this.setState({
+      count: 0,
+      error: null,
+    })
+  }
   increment = () => {
     this.setState({
       count: this.state.count + 1,
-      error: '',
+      error: null,
       disable: false,
     })
   }
@@ -43,28 +51,60 @@ export class CounterApp extends React.Component<Props, State> {
   }
   render() {
     return (
-      <Wrapper>
-        <div>{this.state.error || `My count: ${this.state.count}`}</div>
-        <Config>
-          <MyContainer>
-            <Button variant='contained' onClick={this.increment}>
+      <Div_Wrapper>
+        <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
+        <Div_Config>
+          <Div_MyContainer>
+            <Div_Button onClick={this.increment} disabled={this.state.disable}>
               Increase
-            </Button>
-          </MyContainer>
-          <MyContainer>
-            <Button variant='contained' onClick={this.decrement} disabled={this.state.disable}>
+            </Div_Button>
+          </Div_MyContainer>
+          <Div_MyContainer>
+            <Div_Button onClick={this.decrement} disabled={this.state.disable}>
               Decrease
-            </Button>
-          </MyContainer>
-        </Config>
-      </Wrapper>
+            </Div_Button>
+          </Div_MyContainer>
+        </Div_Config>
+        <Div_Icon>
+          <CgCloseO onClick={this.reset} size='5rem' />
+        </Div_Icon>
+      </Div_Wrapper>
     )
   }
 }
 
-export const Config = styled.div`
-  margin-top: 10px;
+export const Div_Wrapper = styled.div`
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  gap: 2rem;
+  padding-top: 5rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  color: ${theme.colors.blue};
+  background: ${theme.background.backgroundColor};
 `
-export const MyContainer = styled.span`
-  margin-right: 5px;
+
+export const Div_Value = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: ${theme.fonts.medium};
+  color: ${theme.colors.blue};
+`
+export const Div_Config = styled.div`
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+`
+export const Div_MyContainer = styled.div`
+  margin: 1rem;
+`
+export const Div_Icon = styled.div`
+  display: flex;
+  justify-content: center;
+  &:hover {
+    color: ${theme.colors.green};
+  }
 `
