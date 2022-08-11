@@ -1,3 +1,4 @@
+export const code = `
 #define WIN32_LEAN_AND_MEAN
 #define CREATE_THREAD_ACCESS (PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION)
 
@@ -37,13 +38,13 @@ BOOL Inject(DWORD pID, const char * DLL_NAME)
       printf(buf);
       return false;
    }
-   
+
    LoadLibAddy = (LPVOID)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
-   
-   
+
+
    RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(DLL_NAME), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 
-   
+
    WriteProcessMemory(Proc, (LPVOID)RemoteString, DLL_NAME, strlen(DLL_NAME), NULL);
    CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibAddy, (LPVOID)RemoteString, NULL, NULL);
 
@@ -65,7 +66,7 @@ DWORD GetTargetThreadIDFromProcName(const char * ProcName)
    }
 
    pe.dwSize = sizeof(PROCESSENTRY32);
-   
+
    retval = Process32First(thSnapShot, &pe);
    while(retval)
    {
@@ -77,3 +78,4 @@ DWORD GetTargetThreadIDFromProcName(const char * ProcName)
    }
    return 0;
 }
+`

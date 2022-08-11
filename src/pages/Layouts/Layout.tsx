@@ -21,6 +21,10 @@ export const Layout = () => {
           <CgGoogleTasks size='2rem' />
           <Link to={urls.todolist}>TodoList</Link>
         </Li>
+        <Li>
+          <CgGoogleTasks size='2rem' />
+          <Link to={urls.hackerTyper}>Hacker Typer</Link>
+        </Li>
       </Div_Nav>
       <Outlet />
     </>
