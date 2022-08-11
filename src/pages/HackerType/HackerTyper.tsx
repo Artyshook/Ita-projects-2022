@@ -5,67 +5,52 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 type AlertType = 'granted' | 'denied' | null
-
-export type MessageType = {
-  type: AlertType
-  setAlerts: (alert: AlertType) => void
-}
-
-export const Message = (props: MessageType) => {
-  return (
-    <div>
-      {props.type === 'granted' ? (
-        <Div_GrantedMessage onClick={() => props.setAlerts(null)}>
-          Access Granted
-          <TbHandClick />
-        </Div_GrantedMessage>
-      ) : (
-        <Div_DeniedMessage onClick={() => props.setAlerts(null)}>
-          Access Denied
-          <TbHandClick />
-        </Div_DeniedMessage>
-      )}
-    </div>
-  )
-}
-
 export const HackerTyper = () => {
   const [alert, setAlert] = useState<AlertType>(null)
   const [index, setIndex] = useState(0)
-  const [content, setContent] = useState('')
-  const [isLocked, setIsLocked] = useState(false)
 
-  const runCode = () => {
-    setIndex(index + 3)
-    setContent(code.slice(0, index))
-  }
-
-  const setAlerts = (alert: 'granted' | 'denied' | null) => {
+  const setAlerts = (alert: AlertType) => {
     setAlert(alert)
-    setIsLocked(false)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      setIsLocked(true)
       setAlert('granted')
     } else if (e.key === 'Escape') {
-      setIsLocked(true)
       setAlert('denied')
     } else {
-      setIsLocked(false)
       setAlert(null)
-      runCode()
+      setIndex(index + 3)
+    }
+  }
+  const checkAlert = () => {
+    switch (alert) {
+      case 'granted':
+        return (
+          <Div_GrantedMessage onClick={() => setAlerts(null)}>
+            Access Granted
+            <TbHandClick />
+          </Div_GrantedMessage>
+        )
+      case 'denied':
+        return (
+          <Div_DeniedMessage onClick={() => setAlerts(null)}>
+            Access Denied
+            <TbHandClick />
+          </Div_DeniedMessage>
+        )
+      case null:
+        break
     }
   }
 
   return (
     <Div_Wrapper>
       <TextArea_Code
-        value={index === 0 ? 'Please type anything' : content}
+        value={index === 0 ? 'Please type anything' : code.slice(0, index)}
         onKeyDown={handleKeyDown}
       />
-      {isLocked && <Message type={alert} setAlerts={setAlerts} />}
+      {checkAlert()}
     </Div_Wrapper>
   )
 }
