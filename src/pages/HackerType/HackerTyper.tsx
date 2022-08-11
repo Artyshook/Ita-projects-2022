@@ -4,9 +4,11 @@ import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+type AlertType = 'granted' | 'denied' | null
+
 export type MessageType = {
-  type: 'granted' | 'denied' | null
-  setAlerts: (alert: 'granted' | 'denied' | null) => void
+  type: AlertType
+  setAlerts: (alert: AlertType) => void
 }
 
 export const Message = (props: MessageType) => {
@@ -27,8 +29,8 @@ export const Message = (props: MessageType) => {
   )
 }
 
-export const HackerType = () => {
-  const [alert, setAlert] = useState<MessageType['type']>(null)
+export const HackerTyper = () => {
+  const [alert, setAlert] = useState<AlertType>(null)
   const [index, setIndex] = useState(0)
   const [content, setContent] = useState('')
   const [isLocked, setIsLocked] = useState(false)
@@ -81,16 +83,16 @@ export const Div_Wrapper = styled.div`
 const TextArea_Code = styled.textarea`
   border: none;
   width: 70%;
-  height: 65vh;
+  height: 50vh;
   background: ${theme.background.backgroundColor}
   padding: 2rem;
-  font-size: ${theme.fonts.medium};
+  font-size: ${theme.fonts.small};
 '&:focus': {
   outline: none
 }
 `
 const Div_DeniedMessage = styled.div`
-  font-size: 5rem;
+  font-size: ${theme.fonts.medium};
   color: red;
   position: fixed;
   height: 100%;
@@ -105,7 +107,7 @@ const Div_DeniedMessage = styled.div`
   transform: translate(0, 0);
 `
 const Div_GrantedMessage = styled.div`
-  font-size: 5rem;
+  font-size: ${theme.fonts.medium};
   color: ${theme.colors.blue};
   align-items: center;
   flex-direction: column;
