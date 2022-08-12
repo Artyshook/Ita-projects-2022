@@ -3,4 +3,5 @@ export const urls = {
   web: '/web',
   counter: '/counter',
   todolist: '/todolist',
+  hackerTyper: '/hacker-typer',
 }

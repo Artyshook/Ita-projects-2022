@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CounterApp } from './pages/Counter/CounterApp'
+import { HackerTyper } from './pages/HackerType/HackerTyper'
 import { Home } from './pages/Layouts/Home'
 import { Layout } from './pages/Layouts/Layout'
 import { ThemeProvider } from '@mui/material'
@@ -18,6 +19,7 @@ const App = () => {
           <Route path={urls.counter} element={<CounterApp />} />
           <Route path={urls.web} element={<WebPageApp />} />
           <Route path={urls.todolist} element={<TodoList />} />
+          <Route path={urls.hackerTyper} element={<HackerTyper />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -14,6 +14,11 @@ export const TodoList = () => {
   const [error, setError] = useState<string | null>(null)
   const [task, setTask] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      addTask1()
+    }
+  }
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewTask(event.target.value)
   }
@@ -51,12 +56,17 @@ export const TodoList = () => {
     <Div_Wrapper>
       <Div_Title>Todos</Div_Title>
       <Div_Input>
-        <Input_Input type='text' onChange={handleChange} value={newTask} />
+        <Input_Input
+          type='text'
+          onChange={handleChange}
+          value={newTask}
+          onKeyDown={handleKeyDown}
+        />
         <Button_MyButton onClick={addTask1}>+</Button_MyButton>
       </Div_Input>
       <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
       <Div_Tasks>
-        {tasksForTodolist.map((e: Tasks) => (
+        {tasksForTodolist.map(e => (
           <Li_Tasks key={e.id}>
             <input type='checkbox' checked={e.isDone} onClick={() => statusTask(e.id, e.isDone)} />
             {e.task}
