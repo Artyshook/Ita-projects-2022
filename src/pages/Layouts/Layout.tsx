@@ -1,3 +1,4 @@
+import { BiCodeAlt } from 'react-icons/bi'
 import { CgAddR, CgGoogleTasks, CgWebsite } from 'react-icons/cg'
 import { Link, Outlet } from 'react-router-dom'
 import { theme } from '../../helpers/theme'
@@ -22,7 +23,7 @@ export const Layout = () => {
           <Link to={urls.todolist}>TodoList</Link>
         </Li>
         <Li>
-          <CgGoogleTasks size='2rem' />
+          <BiCodeAlt size='2rem' />
           <Link to={urls.hackerTyper}>Hacker Typer</Link>
         </Li>
       </Div_Nav>

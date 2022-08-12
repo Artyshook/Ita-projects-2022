@@ -1,18 +1,60 @@
 import { TbHandClick } from 'react-icons/tb'
 import { code } from './code'
 import { theme } from '../../helpers/theme'
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import styled from 'styled-components'
 
 type AlertType = 'granted' | 'denied' | null
+type AlertPropsType = {
+  alert: AlertType
+  setAlert: Dispatch<AlertType>
+}
+
+export const CheckAlert = (props: AlertPropsType) => {
+  switch (props.alert) {
+    case 'granted':
+      return (
+        <Div_GrantedMessage onClick={() => props.setAlert(null)}>
+          Access Granted
+          <TbHandClick />
+        </Div_GrantedMessage>
+      )
+    case 'denied':
+      return (
+        <Div_DeniedMessage onClick={() => props.setAlert(null)}>
+          Access Denied
+          <TbHandClick />
+        </Div_DeniedMessage>
+      )
+    case null:
+      return null
+  }
+}
+
 export const HackerTyper = () => {
   const [alert, setAlert] = useState<AlertType>(null)
   const [index, setIndex] = useState(0)
 
-  const setAlerts = (alert: AlertType) => {
-    setAlert(alert)
+  const checkAlertRender = (alert: AlertType) => {
+    switch (alert) {
+      case 'granted':
+        return (
+          <Div_GrantedMessage onClick={() => setAlert(null)}>
+            Access Granted
+            <TbHandClick />
+          </Div_GrantedMessage>
+        )
+      case 'denied':
+        return (
+          <Div_DeniedMessage onClick={() => setAlert(null)}>
+            Access Denied
+            <TbHandClick />
+          </Div_DeniedMessage>
+        )
+      case null:
+        break
+    }
   }
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       setAlert('granted')
@@ -23,26 +65,6 @@ export const HackerTyper = () => {
       setIndex(index + 3)
     }
   }
-  const checkAlert = () => {
-    switch (alert) {
-      case 'granted':
-        return (
-          <Div_GrantedMessage onClick={() => setAlerts(null)}>
-            Access Granted
-            <TbHandClick />
-          </Div_GrantedMessage>
-        )
-      case 'denied':
-        return (
-          <Div_DeniedMessage onClick={() => setAlerts(null)}>
-            Access Denied
-            <TbHandClick />
-          </Div_DeniedMessage>
-        )
-      case null:
-        break
-    }
-  }
 
   return (
     <Div_Wrapper>
@@ -50,7 +72,7 @@ export const HackerTyper = () => {
         value={index === 0 ? 'Please type anything' : code.slice(0, index)}
         onKeyDown={handleKeyDown}
       />
-      {checkAlert()}
+      <CheckAlert alert={alert} setAlert={setAlert} />
     </Div_Wrapper>
   )
 }
