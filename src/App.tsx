@@ -2,10 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Calculator } from './pages/Mortgage calculator/Mortgage calculator'
 import { CounterApp } from './pages/Counter/CounterApp'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
-import { Home } from './pages/Layouts/Home'
 import { Layout } from './pages/Layouts/Layout'
 import { Pexeso } from './pages/Pexeso/Pexeso'
-import { ThemeProvider } from '@mui/material'
 import { TodoList } from './pages/TodoList/TodoList'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
@@ -16,7 +14,6 @@ import WebPageApp from './pages/WebPage/WebPageApp'
 export const App = () => {
   return (
     <div>
-      {' '}
       <Routes>
         <Route path={urls.home} element={<Layout />} />
         <Route path={urls.counter} element={<CounterApp />} />

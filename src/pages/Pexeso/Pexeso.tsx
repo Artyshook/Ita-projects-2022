@@ -16,7 +16,7 @@ export const Pexeso = () => {
   const [won, setWon] = useState<string | null>()
   const [clickable, setClickable] = useState(false)
 
-  const handleChoise = (card: CardsType) => {
+  const handleChoice = (card: CardsType) => {
     if (card.id === card1?.id) return
     card1 ? setCard2(card) : setCard1(card)
   }
@@ -81,7 +81,7 @@ export const Pexeso = () => {
             <Card
               card={card}
               key={card.id}
-              handleChoice={handleChoise}
+              handleChoice={handleChoice}
               flipped={card === card1 || card === card2 || card.flipped}
               clickable={clickable}
             />
@@ -110,6 +110,7 @@ const Div_Card = styled.div`
 const Button_MyButton = styled.button`
   border: 0.2rem solid ${theme.colors.blue2};
   border-radius: 30px;
+  width: 20rem;
   padding: 2rem;
   color: ${theme.colors.blue};
   font-size: ${theme.fonts.small};
