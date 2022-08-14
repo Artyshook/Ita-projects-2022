@@ -19,3 +19,10 @@ export const useLocalStorage = <T>(key: string, defaultValue: T) => {
 
   return [value, setValue] as const
 }
+
+export const mixCards = (arr: any[]): any[] => {
+  return arr
+    .map(a => [Math.random(), a])
+    .sort((a, b) => a[0] - b[0])
+    .map(a => a[1])
+}

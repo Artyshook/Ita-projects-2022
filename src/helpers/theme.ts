@@ -4,6 +4,7 @@ import styled from 'styled-components'
 export const theme = {
   fonts: {
     small: '1.5rem',
+    sMedium: '2.5rem',
     medium: '3rem',
     large: '5rem',
     extraLarge: '7rem',
@@ -18,5 +19,7 @@ export const theme = {
   },
   background: {
     backgroundColor: '#fffff',
+    backgroungColorHome:
+      'linear-gradient(34deg, rgba(255,255,255,1) 25%, rgba(186,203,254,1) 93%, rgba(161,184,253,1) 100%, rgba(104,209,209,1) 100%);',
   },
 }
