@@ -19,3 +19,11 @@ export const useLocalStorage = <T>(key: string, defaultValue: T) => {
 
   return [value, setValue] as const
 }
+
+export const mixCards = <T>(array: T[]) => {
+  return array.sort(() => Math.random() - 0.5)
+}
+
+export const mortgageCalculation = (amount: number, interest: number, year: number) => {
+  return (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
+}

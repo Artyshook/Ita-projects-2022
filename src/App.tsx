@@ -1,29 +1,45 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Calculator } from './pages/Mortgage calculator/Mortgage calculator'
 import { CounterApp } from './pages/Counter/CounterApp'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
-import { Home } from './pages/Layouts/Home'
 import { Layout } from './pages/Layouts/Layout'
-import { ThemeProvider } from '@mui/material'
+import { MemoryGame } from './pages/Memory game/MemoryGame'
 import { TodoList } from './pages/TodoList/TodoList'
+import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
 import { urls } from './helpers/urls'
 import React from 'react'
 import WebPageApp from './pages/WebPage/WebPageApp'
 
-const App = () => {
+export const App = () => {
   return (
-    <BrowserRouter>
+    <div>
       <Routes>
-        <Route path={urls.home} element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path={urls.counter} element={<CounterApp />} />
-          <Route path={urls.web} element={<WebPageApp />} />
-          <Route path={urls.todolist} element={<TodoList />} />
-          <Route path={urls.hackerTyper} element={<HackerTyper />} />
-        </Route>
+        <Route path={urls.home} element={<Layout />} />
+        <Route path={urls.counter} element={<CounterApp />} />
+        <Route path={urls.web} element={<WebPageApp />} />
+        <Route path={urls.todolist} element={<TodoList />} />
+        <Route path={urls.hackerTyper} element={<HackerTyper />} />
+        <Route path={urls.pexeso} element={<MemoryGame />} />
+        <Route path={urls.calculator} element={<Calculator />} />
       </Routes>
-    </BrowserRouter>
+      <GlobalStyle />
+    </div>
   )
 }
 
-export default App
+const GlobalStyle = createGlobalStyle`
+  body {
+    box-sizing: border-box;
+    background-color: ${theme.background.backgroundColor};
+    font-family: 'Open Sans', sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    font-size: 65%;
+  }
+`
