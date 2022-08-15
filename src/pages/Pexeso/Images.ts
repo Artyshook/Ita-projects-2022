@@ -10,13 +10,6 @@ import poo from './images/poo.png'
 import unicorn from './images/unicorn.png'
 import woman from './images/woman.png'
 
-export type CardsType = {
-  id: string
-  flipped: boolean
-  backImage: string
-  frontImage: string
-}
-
 export const cards: string[] = [
   panda,
   mouse,
@@ -30,7 +23,9 @@ export const cards: string[] = [
   woman,
 ]
 
-export const CreateCardsBoard = (): CardsType[] =>
+export type CardType = ReturnType<typeof createCardsBoard>[number]
+
+export const createCardsBoard = () =>
   [...cards, ...cards].map((card, i) => ({
     id: `card${i}`,
     flipped: false,

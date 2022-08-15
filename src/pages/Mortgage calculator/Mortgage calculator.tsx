@@ -1,6 +1,7 @@
 import { BiCalculator } from 'react-icons/bi'
+import { mortgageCalculation } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import styled from 'styled-components'
 
 export const Calculator = () => {
@@ -8,24 +9,22 @@ export const Calculator = () => {
   const [interest, setStateMortgage] = useState(5)
   const [year, setStateMonth] = useState(1)
   const [result, setResult] = useState(0)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    CalculatorHandler()
-  }, [amount, interest, year])
 
   const onAmountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setStateAmount(+event.currentTarget.value)
+    CalculatorHandler()
   }
   const onMortgageRateHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setStateMortgage(+event.currentTarget.value)
+    CalculatorHandler()
   }
   const onYearsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setStateMonth(+event.currentTarget.value)
+    CalculatorHandler()
   }
   const CalculatorHandler = () => {
-    const rate = (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
-    setResult(+rate.toFixed(2))
+    setResult(+mortgageCalculation(amount, interest, year).toFixed(2))
+    CalculatorHandler()
   }
 
   return (
@@ -35,8 +34,7 @@ export const Calculator = () => {
         Mortgage Calculator
       </Div_Title>
       <Div_Form>
-        {/* eslint-disable-next-line react/no-unescaped-entities */}
-        <Div_Header>I'd like to loan:</Div_Header>
+        <Div_Header>I&apos;d like to loan:</Div_Header>
         <Input_Input
           value={amount >= 0 ? amount : 0}
           type={'number'}
@@ -52,8 +50,7 @@ export const Calculator = () => {
         />
       </Div_Form>
       <Div_Form>
-        {/* eslint-disable-next-line react/no-unescaped-entities */}
-        <Div_Header>I'd like to pay back in:</Div_Header>
+        <Div_Header>I&apos;d like to pay back in:</Div_Header>
         <Input_Input
           value={year}
           type={'range'}

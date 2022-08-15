@@ -3,7 +3,7 @@ import { Calculator } from './pages/Mortgage calculator/Mortgage calculator'
 import { CounterApp } from './pages/Counter/CounterApp'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
 import { Layout } from './pages/Layouts/Layout'
-import { Pexeso } from './pages/Pexeso/Pexeso'
+import { MemoryGame } from './pages/Pexeso/MemoryGame'
 import { TodoList } from './pages/TodoList/TodoList'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
@@ -20,7 +20,7 @@ export const App = () => {
         <Route path={urls.web} element={<WebPageApp />} />
         <Route path={urls.todolist} element={<TodoList />} />
         <Route path={urls.hackerTyper} element={<HackerTyper />} />
-        <Route path={urls.pexeso} element={<Pexeso />} />
+        <Route path={urls.pexeso} element={<MemoryGame />} />
         <Route path={urls.calculator} element={<Calculator />} />
       </Routes>
       <GlobalStyle />

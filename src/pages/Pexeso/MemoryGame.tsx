@@ -1,65 +1,72 @@
 import { Card } from './Card'
-import { CardsType, CreateCardsBoard } from './Images'
+import { CardType } from './Images'
 import { CgSmileMouthOpen } from 'react-icons/cg'
 import { IoFootstepsSharp } from 'react-icons/io5'
+import { createCardsBoard } from './Images'
 import { mixCards } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
-export const Pexeso = () => {
-  const [cards, setCards] = useState<CardsType[]>(mixCards(CreateCardsBoard()))
+export const MemoryGame = () => {
+  const [cards, setCards] = useState(mixCards(createCardsBoard()))
   const [matchedPairs, setMatchedPairs] = useState(0)
-  const [card1, setCard1] = useState<CardsType | null>(null)
-  const [card2, setCard2] = useState<CardsType | null>(null)
   const [turn, setTurn] = useState(0)
-  const [won, setWon] = useState<string | null>()
   const [clickable, setClickable] = useState(false)
+  const [chosenCard, setChosenCard] = useState<CardType | null>(null)
 
-  const handleChoice = (card: CardsType) => {
-    if (card.id === card1?.id) return
-    card1 ? setCard2(card) : setCard1(card)
-  }
-
-  useEffect(() => {
-    if (card1 && card2) {
-      setClickable(true)
-      if (card1.frontImage === card2.frontImage) {
-        setCards(prevCards => {
-          return prevCards.map(card => {
-            if (card.frontImage === card1.frontImage) {
-              return { ...card, flipped: true, clickable: false }
-            } else {
-              return card
-            }
-          })
-        })
-        setMatchedPairs(prev => prev + 1)
-        resetTurn()
-      } else {
-        setTimeout(() => resetTurn(), 500)
-      }
-    }
-  }, [card1, card2])
-
-  React.useEffect(() => {
-    if (matchedPairs === cards.length / 2) {
-      setWon('Game Won!')
-    }
-  }, [matchedPairs])
+  const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
   const resetTurn = () => {
-    setCard1(null)
-    setCard2(null)
     setTurn(turn + 1)
+    setChosenCard(null)
     setClickable(false)
+  }
+  const handleChoice = (currentClickedCard: CardType) => {
+    if (currentClickedCard.flipped) {
+      return
+    } else {
+      setCards(prev =>
+        prev.map(card => (card.id === currentClickedCard.id ? { ...card, flipped: true } : card))
+      )
+    }
+    if (chosenCard === null) {
+      setChosenCard(currentClickedCard)
+      return
+    }
+    if (currentClickedCard && chosenCard) {
+      setClickable(true)
+      if (currentClickedCard.idMatching === chosenCard.id) {
+        setCards(prevCards =>
+          prevCards.map(card =>
+            card.frontImage === currentClickedCard.frontImage ? { ...card } : card
+          )
+        )
+        setMatchedPairs(prev => prev + 1)
+        resetTurn()
+        return
+      } else {
+        const wait = async () => {
+          await sleep(600)
+          resetTurn()
+          setCards(prev =>
+            prev.map(card =>
+              card.id === currentClickedCard.id || card.id === chosenCard.id
+                ? { ...card, flipped: false }
+                : card
+            )
+          )
+        }
+        wait()
+      }
+    }
   }
 
   const newGameHandleClick = () => {
-    setCards(mixCards(CreateCardsBoard()))
+    setCards(mixCards(createCardsBoard()))
     setTurn(0)
     setMatchedPairs(0)
-    setWon(null)
+    setChosenCard(null)
   }
 
   return (
@@ -73,22 +80,22 @@ export const Pexeso = () => {
           <IoFootstepsSharp />
           Turns: {turn}
         </Div_Counter>
-        <Div_Counter>{won && <div>{won}</div>}</Div_Counter>
+        <Div_Counter>
+          {matchedPairs === cards.length / 2 ? <div>Game Won!</div> : <></>}
+        </Div_Counter>
       </Div_Title>
       <Div_Card>
         {cards.map(card => (
           <div key={card.id}>
-            <Card
-              card={card}
-              key={card.id}
-              handleChoice={handleChoice}
-              flipped={card === card1 || card === card2 || card.flipped}
-              clickable={clickable}
-            />
+            <Card card={card} key={card.id} handleChoice={handleChoice} clickable={clickable} />
           </div>
         ))}
       </Div_Card>
-      <Button_MyButton onClick={newGameHandleClick}>New Game</Button_MyButton>
+      {matchedPairs === cards.length / 2 ? (
+        <Button_MyButton onClick={newGameHandleClick}>New Game</Button_MyButton>
+      ) : (
+        <></>
+      )}
     </Div_GridWrapper>
   )
 }

@@ -1,29 +1,27 @@
-import { CardsType } from './Images'
-import { theme } from '../../helpers/theme'
+import { CardType } from './Images'
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 type PropsType = {
-  card: CardsType
-  handleChoice: (card: CardsType) => void
-  flipped: boolean
+  card: CardType
+  handleChoice: (clickedCard: CardType) => void
   clickable: boolean
 }
 type Props = {
   flipped: boolean
 }
 
-export const Card = ({ card, handleChoice, flipped, clickable }: PropsType) => {
+export const Card = (props: PropsType) => {
   const handleClick = () => {
-    if (!clickable) {
-      handleChoice(card)
+    if (!props.clickable) {
+      props.handleChoice(props.card)
     }
   }
 
   return (
     <Wrapper onClick={handleClick}>
-      <FrontImg src={card.frontImage} alt='card-front' flipped={flipped} />
-      <BackImg src={card.backImage} alt='card-back' flipped={flipped} />
+      <FrontImg src={props.card.frontImage} alt='card-front' flipped={props.card.flipped} />
+      <BackImg src={props.card.backImage} alt='card-back' flipped={props.card.flipped} />
     </Wrapper>
   )
 }

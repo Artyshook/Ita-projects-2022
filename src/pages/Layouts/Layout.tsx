@@ -29,7 +29,7 @@ export const Layout = () => {
         </Li>
         <Li>
           <CgSmileMouthOpen size='2.5rem' />
-          <Link to={urls.pexeso}>Pexeso</Link>
+          <Link to={urls.pexeso}>Memory game</Link>
         </Li>
         <Li>
           <BiCalculator size='2.5rem' />
