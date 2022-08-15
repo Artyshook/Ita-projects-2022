@@ -30,11 +30,7 @@ export const Calculator = () => {
       </Div_Title>
       <Div_Form>
         <Div_Header>I&apos;d like to loan:</Div_Header>
-        <Input_Input
-          value={amount >= 0 ? amount : 0}
-          type={'number'}
-          onChange={onAmountChangeHandler}
-        />
+        <Input_Input value={Math.max(0, amount)} type={'number'} onChange={onAmountChangeHandler} />
       </Div_Form>
       <Div_Form>
         <Div_Header>Interest from the bank </Div_Header>
