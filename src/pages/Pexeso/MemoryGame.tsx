@@ -8,6 +8,8 @@ import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
+
 export const MemoryGame = () => {
   const [cards, setCards] = useState(mixCards(createCardsBoard()))
   const [matchedPairs, setMatchedPairs] = useState(0)
@@ -15,14 +17,12 @@ export const MemoryGame = () => {
   const [clickable, setClickable] = useState(false)
   const [chosenCard, setChosenCard] = useState<CardType | null>(null)
 
-  const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
-
   const resetTurn = () => {
     setTurn(turn + 1)
     setChosenCard(null)
     setClickable(false)
   }
-  const handleChoice = (currentClickedCard: CardType) => {
+  const handleChoice = async (currentClickedCard: CardType) => {
     if (currentClickedCard.flipped) {
       return
     } else {
@@ -34,31 +34,29 @@ export const MemoryGame = () => {
       setChosenCard(currentClickedCard)
       return
     }
-    if (currentClickedCard && chosenCard) {
-      setClickable(true)
-      if (currentClickedCard.idMatching === chosenCard.id) {
-        setCards(prevCards =>
-          prevCards.map(card =>
-            card.frontImage === currentClickedCard.frontImage ? { ...card } : card
-          )
+    if (!currentClickedCard && !chosenCard) {
+      return
+    }
+    setClickable(true)
+    if (currentClickedCard.idMatching === chosenCard.id) {
+      setCards(prevCards =>
+        prevCards.map(card =>
+          card.frontImage === currentClickedCard.frontImage ? { ...card } : card
         )
-        setMatchedPairs(prev => prev + 1)
-        resetTurn()
-        return
-      } else {
-        const wait = async () => {
-          await sleep(600)
-          resetTurn()
-          setCards(prev =>
-            prev.map(card =>
-              card.id === currentClickedCard.id || card.id === chosenCard.id
-                ? { ...card, flipped: false }
-                : card
-            )
-          )
-        }
-        wait()
-      }
+      )
+      setMatchedPairs(prev => prev + 1)
+      resetTurn()
+      return
+    } else {
+      await sleep(600)
+      resetTurn()
+      setCards(prev =>
+        prev.map(card =>
+          card.id === currentClickedCard.id || card.id === chosenCard.id
+            ? { ...card, flipped: false }
+            : card
+        )
+      )
     }
   }
 

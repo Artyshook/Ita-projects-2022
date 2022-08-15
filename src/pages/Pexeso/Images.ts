@@ -10,18 +10,7 @@ import poo from './images/poo.png'
 import unicorn from './images/unicorn.png'
 import woman from './images/woman.png'
 
-export const cards: string[] = [
-  panda,
-  mouse,
-  disgusted,
-  ghost,
-  fox,
-  lion,
-  man2,
-  poo,
-  unicorn,
-  woman,
-]
+export const cards = [panda, mouse, disgusted, ghost, fox, lion, man2, poo, unicorn, woman]
 
 export type CardType = ReturnType<typeof createCardsBoard>[number]
 

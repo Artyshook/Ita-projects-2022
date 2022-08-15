@@ -8,23 +8,18 @@ export const Calculator = () => {
   const [amount, setStateAmount] = useState(1000)
   const [interest, setStateMortgage] = useState(5)
   const [year, setStateMonth] = useState(1)
-  const [result, setResult] = useState(0)
 
   const onAmountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setStateAmount(+event.currentTarget.value)
-    CalculatorHandler()
   }
   const onMortgageRateHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setStateMortgage(+event.currentTarget.value)
-    CalculatorHandler()
   }
   const onYearsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setStateMonth(+event.currentTarget.value)
-    CalculatorHandler()
   }
-  const CalculatorHandler = () => {
-    setResult(+mortgageCalculation(amount, interest, year).toFixed(2))
-    CalculatorHandler()
+  const calculatorHandler = () => {
+    return +mortgageCalculation(amount, interest, year).toFixed(2)
   }
 
   return (
@@ -44,7 +39,7 @@ export const Calculator = () => {
       <Div_Form>
         <Div_Header>Interest from the bank </Div_Header>
         <Input_Input
-          value={interest >= 0 ? interest : 0}
+          value={Math.max(0, interest)}
           type={'number'}
           onChange={onMortgageRateHandler}
         />
@@ -59,11 +54,13 @@ export const Calculator = () => {
           min='1'
           max='30'
         />
-        <output id='amount' name='amount' htmlFor='onYearsChangeHandler'>
+        <output name='amount' htmlFor='onYearsChangeHandler'>
           {year} yrs.
         </output>
       </Div_Form>
-      <Div_Total>{isFinite(result) ? `Monthly payment: ${result} CZK` : 0}</Div_Total>
+      <Div_Total>
+        {isFinite(calculatorHandler()) ? `Monthly payment: ${calculatorHandler()} CZK` : 0}
+      </Div_Total>
     </Div_Wrapper>
   )
 }
