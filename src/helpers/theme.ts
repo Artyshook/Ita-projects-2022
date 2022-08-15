@@ -16,6 +16,7 @@ export const theme = {
     green: '#00ff7f',
     yellow: '#F3C84B',
     black: '#1c1c1c',
+    boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
   },
   background: {
     backgroundColor: '#fffff',

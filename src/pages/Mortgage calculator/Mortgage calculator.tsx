@@ -9,15 +9,6 @@ export const Calculator = () => {
   const [interest, setStateMortgage] = useState(5)
   const [year, setStateMonth] = useState(1)
 
-  const onAmountChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setStateAmount(+event.currentTarget.value)
-  }
-  const onMortgageRateHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setStateMortgage(+event.currentTarget.value)
-  }
-  const onYearsChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setStateMonth(+event.currentTarget.value)
-  }
   const calculatorHandler = () => {
     return +mortgageCalculation(amount, interest, year).toFixed(2)
   }
@@ -30,14 +21,18 @@ export const Calculator = () => {
       </Div_Title>
       <Div_Form>
         <Div_Header>I&apos;d like to loan:</Div_Header>
-        <Input_Input value={Math.max(0, amount)} type={'number'} onChange={onAmountChangeHandler} />
+        <Input_Input
+          value={Math.max(0, amount)}
+          type={'number'}
+          onChange={event => setStateAmount(+event.currentTarget.value)}
+        />
       </Div_Form>
       <Div_Form>
         <Div_Header>Interest from the bank </Div_Header>
         <Input_Input
           value={Math.max(0, interest)}
           type={'number'}
-          onChange={onMortgageRateHandler}
+          onChange={event => setStateMortgage(+event.currentTarget.value)}
         />
       </Div_Form>
       <Div_Form>
@@ -45,7 +40,7 @@ export const Calculator = () => {
         <Input_Input
           value={year}
           type={'range'}
-          onChange={onYearsChangeHandler}
+          onChange={event => setStateMonth(+event.currentTarget.value)}
           name='volume'
           min='1'
           max='30'
@@ -71,7 +66,7 @@ const Div_Wrapper = styled.div`
   border: 1px solid ${theme.colors.green};
   border-radius: 20px;
   padding-top: 3rem;
-  box-shadow: 6px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: ${theme.colors.boxShadow};
 `
 export const Div_Title = styled.div`
   align-items: center;
