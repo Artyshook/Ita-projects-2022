@@ -24,11 +24,11 @@ const useLogicState = () => {
   const [filter, setFilter] = useState<FilterValuesType>('all')
 
   const getFilteredTasks = (filter: FilterValuesType) => {
-    if (filter === 'active') {
-      return todoList.filter(t => !t.isDone)
-    } else if (filter === 'completed') {
-      return todoList.filter(t => t.isDone)
-    } else return todoList
+    return filter === 'active'
+      ? todoList.filter(t => !t.isDone)
+      : filter === 'completed'
+      ? todoList.filter(t => t.isDone)
+      : todoList
   }
   const tasksForTodolist = getFilteredTasks(filter)
 
