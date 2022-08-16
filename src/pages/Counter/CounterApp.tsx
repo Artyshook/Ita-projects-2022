@@ -1,14 +1,14 @@
 import { CgCloseO } from 'react-icons/cg'
 import { Div_Button } from '../../components/Button'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
-import React, { Component, MouseEventHandler } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 type Props = {}
 type State = {
   count: number
   error: null | string
-  disable: boolean
 }
 export class CounterApp extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -16,14 +16,12 @@ export class CounterApp extends React.Component<Props, State> {
     this.state = {
       count: 10,
       error: null,
-      disable: false,
     }
   }
 
   error = () => {
     this.setState({
       error: "You can't reduce below 0",
-      disable: true,
     })
   }
 
@@ -37,7 +35,6 @@ export class CounterApp extends React.Component<Props, State> {
     this.setState({
       count: this.state.count + 1,
       error: null,
-      disable: false,
     })
   }
   decrement = () => {
@@ -51,38 +48,38 @@ export class CounterApp extends React.Component<Props, State> {
   }
   render() {
     return (
-      <Div_Wrapper>
-        <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
-        <Div_Config>
-          <Div_MyContainer>
-            <Div_Button onClick={this.increment} disabled={this.state.disable}>
-              Increase
-            </Div_Button>
-          </Div_MyContainer>
-          <Div_MyContainer>
-            <Div_Button onClick={this.decrement} disabled={this.state.disable}>
-              Decrease
-            </Div_Button>
-          </Div_MyContainer>
-        </Div_Config>
-        <Div_Icon>
-          <CgCloseO onClick={this.reset} size='5rem' />
-        </Div_Icon>
-      </Div_Wrapper>
+      <HelmetProvider>
+        <Div_Wrapper>
+          <Helmet>
+            <title>Artem Saibel - Counter App</title>
+            <meta name='description' content='Simple Counter App in React JS' />
+          </Helmet>
+          <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
+          <Div_Config>
+            <Div_MyContainer>
+              <Div_Button onClick={this.increment}>Increase</Div_Button>
+            </Div_MyContainer>
+            <Div_MyContainer>
+              <Div_Button onClick={this.decrement}>Decrease</Div_Button>
+            </Div_MyContainer>
+          </Div_Config>
+          <Div_Icon>
+            <CgCloseO onClick={this.reset} size='5rem' />
+          </Div_Icon>
+        </Div_Wrapper>
+      </HelmetProvider>
     )
   }
 }
 
 export const Div_Wrapper = styled.div`
-  padding: 0;
-  margin: 0;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   gap: 2rem;
-  padding-top: 5rem;
   align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  font-family: 'Open Sans', sans-serif;
   color: ${theme.colors.blue};
   background: ${theme.background.backgroundColor};
 `
