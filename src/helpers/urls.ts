@@ -4,6 +4,6 @@ export const urls = {
   counter: '/counter',
   todolist: '/todolist',
   hackerTyper: '/hacker-typer',
-  pexeso: '/pexeso',
+  memoryGame: '/memory-game',
   calculator: '/calculator',
 }
