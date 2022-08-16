@@ -1,83 +1,114 @@
 import { CgTrash } from 'react-icons/cg'
+import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
 import { useLocalStorage } from '../../helpers/functions'
 import { v1 } from 'uuid'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 type Tasks = { id: string; task: string; isDone: boolean }
 
-export const TodoList = () => {
+export const NewTodoList = () => {
+  return (
+    <TodoContextProvider>
+      <TodoList />
+    </TodoContextProvider>
+  )
+}
+
+const useLogicState = () => {
+  const [todoList, setTodoList] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
   const [newTask, setNewTask] = useState('')
-  const [filter, setFilter] = useState<FilterValuesType>('all')
   const [error, setError] = useState<string | null>(null)
-  const [task, setTask] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
+  const [filter, setFilter] = useState<FilterValuesType>('all')
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      addTask1()
-    }
-  }
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewTask(event.target.value)
-  }
-
-  const addTask1 = () => {
-    if (newTask.trim() === '') {
-      setError('Title is required')
-      return
-    }
-    setError(null)
-    setTask([...task, { id: v1(), task: newTask, isDone: false }])
-    setNewTask('')
-  }
-
-  const removeTask = (id: string) => {
-    setTask(task.filter((el: { id: string }) => el.id !== id))
-  }
-
-  let tasksForTodolist = task
+  let tasksForTodolist = todoList
 
   if (filter === 'active') {
-    tasksForTodolist = task.filter(t => !t.isDone)
+    tasksForTodolist = todoList.filter(t => !t.isDone)
   } else if (filter === 'completed') {
-    tasksForTodolist = task.filter(t => t.isDone)
+    tasksForTodolist = todoList.filter(t => t.isDone)
   } else filter === 'all'
 
   function changeFilter(value: FilterValuesType) {
     setFilter(value)
   }
 
-  const statusTask = (id: string, status: boolean) => {
-    setTask(task.map(el => (el.id === id ? { ...el, isDone: !status } : el)))
+  const addTask = () => {
+    if (newTask.trim() === '') {
+      setError('Title is required')
+      return
+    }
+    setError(null)
+    setTodoList([...todoList, { id: v1(), task: newTask, isDone: false }])
+    setNewTask('')
   }
+  const removeTask = (id: string) => {
+    setTodoList(todoList.filter((el: { id: string }) => el.id !== id))
+  }
+  const statusTodoList = (id: string, status: boolean) => {
+    setTodoList(todoList.map(el => (el.id === id ? { ...el, isDone: !status } : el)))
+  }
+
+  return {
+    todoList,
+    setTodoList,
+    filter,
+    setFilter,
+    newTask,
+    setNewTask,
+    error,
+    setError,
+    addTask,
+    removeTask,
+    statusTodoList,
+    changeFilter,
+    tasksForTodolist,
+  }
+}
+
+export const { ContextProvider: TodoContextProvider, Context: TodoContext } =
+  genericHookContextBuilder(useLogicState)
+
+export const TodoList = () => {
+  const logic = useContext(TodoContext)
   return (
     <Div_Wrapper>
       <Div_Title>Todos</Div_Title>
       <Div_Input>
         <Input_Input
           type='text'
-          onChange={handleChange}
-          value={newTask}
-          onKeyDown={handleKeyDown}
+          onChange={event => logic.setNewTask(event.target.value)}
+          value={logic.newTask}
+          onKeyDown={event => {
+            if (event.key === 'Enter') {
+              logic.addTask()
+            }
+          }}
         />
-        <Button_MyButton onClick={addTask1}>+</Button_MyButton>
+        <Button_MyButton onClick={logic.addTask}>+</Button_MyButton>
       </Div_Input>
-      <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
+      <Div_ErrorMessage>{logic.error && <div> {logic.error} </div>} </Div_ErrorMessage>
       <Div_Tasks>
-        {tasksForTodolist.map(e => (
+        {logic.tasksForTodolist.map(e => (
           <Li_Tasks key={e.id}>
-            <input type='checkbox' checked={e.isDone} onClick={() => statusTask(e.id, e.isDone)} />
+            <input
+              type='checkbox'
+              checked={e.isDone}
+              onClick={() => logic.statusTodoList(e.id, e.isDone)}
+            />
             {e.task}
-            <CgTrash onClick={() => removeTask(e.id)} />
+            <CgTrash onClick={() => logic.removeTask(e.id)} />
           </Li_Tasks>
         ))}
       </Div_Tasks>
       <Div_Filter>
-        <Button_FilterButton onClick={() => changeFilter('all')}>All</Button_FilterButton>
-        <Button_FilterButton onClick={() => changeFilter('active')}>Active</Button_FilterButton>
-        <Button_FilterButton onClick={() => changeFilter('completed')}>
+        <Button_FilterButton onClick={() => logic.changeFilter('all')}>All</Button_FilterButton>
+        <Button_FilterButton onClick={() => logic.changeFilter('active')}>
+          Active
+        </Button_FilterButton>
+        <Button_FilterButton onClick={() => logic.changeFilter('completed')}>
           Completed
         </Button_FilterButton>
       </Div_Filter>
