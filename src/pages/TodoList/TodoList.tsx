@@ -7,7 +7,7 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
-type Tasks = { id: string; task: string; isDone: boolean }
+type Task = { id: string; task: string; isDone: boolean }
 
 export const NewTodoList = () => {
   return (
@@ -18,34 +18,32 @@ export const NewTodoList = () => {
 }
 
 const useLogicState = () => {
-  const [todoList, setTodoList] = useLocalStorage<Tasks[]>('tasks', [] as Tasks[])
+  const [todoList, setTodoList] = useLocalStorage<Task[]>('task', [])
   const [newTask, setNewTask] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<FilterValuesType>('all')
 
-  let tasksForTodolist = todoList
-
-  if (filter === 'active') {
-    tasksForTodolist = todoList.filter(t => !t.isDone)
-  } else if (filter === 'completed') {
-    tasksForTodolist = todoList.filter(t => t.isDone)
-  } else filter === 'all'
-
-  function changeFilter(value: FilterValuesType) {
-    setFilter(value)
+  const getFilteredTasks = (filter: FilterValuesType) => {
+    if (filter === 'active') {
+      return todoList.filter(t => !t.isDone)
+    } else if (filter === 'completed') {
+      return todoList.filter(t => t.isDone)
+    } else return todoList
   }
+  const tasksForTodolist = getFilteredTasks(filter)
 
   const addTask = () => {
-    if (newTask.trim() === '') {
+    if (newTask.trim() !== '') {
+      setError(null)
+      setTodoList([...todoList, { id: v1(), task: newTask, isDone: false }])
+      setNewTask('')
+    } else {
       setError('Title is required')
       return
     }
-    setError(null)
-    setTodoList([...todoList, { id: v1(), task: newTask, isDone: false }])
-    setNewTask('')
   }
   const removeTask = (id: string) => {
-    setTodoList(todoList.filter((el: { id: string }) => el.id !== id))
+    setTodoList(todoList.filter(el => el.id !== id))
   }
   const statusTodoList = (id: string, status: boolean) => {
     setTodoList(todoList.map(el => (el.id === id ? { ...el, isDone: !status } : el)))
@@ -63,7 +61,6 @@ const useLogicState = () => {
     addTask,
     removeTask,
     statusTodoList,
-    changeFilter,
     tasksForTodolist,
   }
 }
@@ -81,34 +78,28 @@ export const TodoList = () => {
           type='text'
           onChange={event => logic.setNewTask(event.target.value)}
           value={logic.newTask}
-          onKeyDown={event => {
-            if (event.key === 'Enter') {
-              logic.addTask()
-            }
-          }}
+          onKeyDown={event => (event.key === 'Enter' ? logic.addTask() : null)}
         />
         <Button_MyButton onClick={logic.addTask}>+</Button_MyButton>
       </Div_Input>
       <Div_ErrorMessage>{logic.error && <div> {logic.error} </div>} </Div_ErrorMessage>
       <Div_Tasks>
-        {logic.tasksForTodolist.map(e => (
-          <Li_Tasks key={e.id}>
+        {logic.tasksForTodolist.map(task => (
+          <Li_Tasks key={task.id}>
             <input
               type='checkbox'
-              checked={e.isDone}
-              onClick={() => logic.statusTodoList(e.id, e.isDone)}
+              checked={task.isDone}
+              onClick={() => logic.statusTodoList(task.id, task.isDone)}
             />
-            {e.task}
-            <CgTrash onClick={() => logic.removeTask(e.id)} />
+            {task.task}
+            <CgTrash onClick={() => logic.removeTask(task.id)} />
           </Li_Tasks>
         ))}
       </Div_Tasks>
       <Div_Filter>
-        <Button_FilterButton onClick={() => logic.changeFilter('all')}>All</Button_FilterButton>
-        <Button_FilterButton onClick={() => logic.changeFilter('active')}>
-          Active
-        </Button_FilterButton>
-        <Button_FilterButton onClick={() => logic.changeFilter('completed')}>
+        <Button_FilterButton onClick={() => logic.setFilter('all')}>All</Button_FilterButton>
+        <Button_FilterButton onClick={() => logic.setFilter('active')}>Active</Button_FilterButton>
+        <Button_FilterButton onClick={() => logic.setFilter('completed')}>
           Completed
         </Button_FilterButton>
       </Div_Filter>
