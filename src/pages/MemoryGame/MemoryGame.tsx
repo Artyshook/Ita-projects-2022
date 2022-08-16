@@ -1,6 +1,7 @@
 import { Card } from './Card'
 import { CardType } from './Images'
 import { CgSmileMouthOpen } from 'react-icons/cg'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { IoFootstepsSharp } from 'react-icons/io5'
 import { createCardsBoard } from './Images'
 import { mixCards } from '../../helpers/functions'
@@ -68,33 +69,39 @@ export const MemoryGame = () => {
   }
 
   return (
-    <Div_GridWrapper>
-      <Div_Title>
-        <Div_Counter>
-          <CgSmileMouthOpen size='3rem' />
-          Matching pairs total: {matchedPairs}
-        </Div_Counter>
-        <Div_Counter>
-          <IoFootstepsSharp />
-          Turns: {turn}
-        </Div_Counter>
-        <Div_Counter>
-          {matchedPairs === cards.length / 2 ? <div>Game Won!</div> : <></>}
-        </Div_Counter>
-      </Div_Title>
-      <Div_Card>
-        {cards.map(card => (
-          <div key={card.id}>
-            <Card card={card} key={card.id} handleChoice={handleChoice} clickable={clickable} />
-          </div>
-        ))}
-      </Div_Card>
-      {matchedPairs === cards.length / 2 ? (
-        <Button_MyButton onClick={newGameHandleClick}>New Game</Button_MyButton>
-      ) : (
-        <></>
-      )}
-    </Div_GridWrapper>
+    <HelmetProvider>
+      <Div_GridWrapper>
+        <Helmet>
+          <title>Artem Saibel - Memory game</title>
+          <meta name='description' content='Simple Counter App in React JS' />
+        </Helmet>
+        <Div_Title>
+          <Div_Counter>
+            <CgSmileMouthOpen size='3rem' />
+            Matching pairs total: {matchedPairs}
+          </Div_Counter>
+          <Div_Counter>
+            <IoFootstepsSharp />
+            Turns: {turn}
+          </Div_Counter>
+          <Div_Counter>
+            {matchedPairs === cards.length / 2 ? <div>Game Won!</div> : <></>}
+          </Div_Counter>
+        </Div_Title>
+        <Div_Card>
+          {cards.map(card => (
+            <div key={card.id}>
+              <Card card={card} key={card.id} handleChoice={handleChoice} clickable={clickable} />
+            </div>
+          ))}
+        </Div_Card>
+        {matchedPairs === cards.length / 2 ? (
+          <Button_MyButton onClick={newGameHandleClick}>New Game</Button_MyButton>
+        ) : (
+          <></>
+        )}
+      </Div_GridWrapper>
+    </HelmetProvider>
   )
 }
 

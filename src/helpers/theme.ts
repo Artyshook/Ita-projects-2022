@@ -9,6 +9,13 @@ export const theme = {
     large: '5rem',
     extraLarge: '7rem',
   },
+  spacing: {
+    small: '1.5rem',
+    medium: '3rem',
+    large: '5rem',
+    xl: '7rem',
+    xxl: '15rem',
+  },
   colors: {
     white: '#f5f5f5',
     blue: '#507CFB',
@@ -23,4 +30,10 @@ export const theme = {
     backgroungColorHome:
       'linear-gradient(34deg, rgba(255,255,255,1) 25%, rgba(186,203,254,1) 93%, rgba(161,184,253,1) 100%, rgba(104,209,209,1) 100%);',
   },
-}
+  mediaMaxSizes: {
+    mobile: '480px',
+    tablet: '1024px',
+    desktop: '1280px',
+    desktopBig: '1600px',
+  },
+} as const

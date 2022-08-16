@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { TbHandClick } from 'react-icons/tb'
 import { code } from './code'
 import { theme } from '../../helpers/theme'
@@ -67,13 +68,19 @@ export const HackerTyper = () => {
   }
 
   return (
-    <Div_Wrapper>
-      <TextArea_Code
-        value={index === 0 ? 'Please type anything' : code.slice(0, index)}
-        onKeyDown={handleKeyDown}
-      />
-      <CheckAlert alert={alert} setAlert={setAlert} />
-    </Div_Wrapper>
+    <HelmetProvider>
+      <Div_Wrapper>
+        <Helmet>
+          <title>Artem Saibel - Hacker Typer</title>
+          <meta name='description' content='Hacker Typer app in React JS' />
+        </Helmet>
+        <TextArea_Code
+          value={index === 0 ? 'Please type anything' : code.slice(0, index)}
+          onKeyDown={handleKeyDown}
+        />
+        <CheckAlert alert={alert} setAlert={setAlert} />
+      </Div_Wrapper>
+    </HelmetProvider>
   )
 }
 

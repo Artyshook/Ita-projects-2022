@@ -1,93 +1,100 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import React from 'react'
-import backroundImage from './2.webp'
+import backroundImage from './backgroundImage.webp'
 import styled from 'styled-components'
 
 export const WebPageApp = () => {
   return (
-    <Div_Global>
-      <meta charSet='UTF-8' />
-      <meta
-        name='viewport'
-        content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
-      />
-      <meta httpEquiv='X-UA-Compatible' content='ie=edge' />
-      <Header_Header>
-        <div>
-          <Div_Nav>
-            <Ul_Menu></Ul_Menu>
-          </Div_Nav>
-          <Div_Offer>
-            <p>Learn Javascript Fast by</p>
-            <H1_OfferItem>“Hacking” Your Favorite Websites</H1_OfferItem>
-            <A_Btn href='#'>Learn more</A_Btn>
-          </Div_Offer>
-        </div>
-      </Header_Header>
-      <Section_Section>
-        <Div_Container1>
-          <Div_Title>Hacks:</Div_Title>
-          <Div_Articles>
-            <Div_Articles1>
-              <Header_Text>1. Replace All</Header_Text>
-              <Article_Text>
-                Sometimes used in debugging, alert() will pop up a small dialogue box in the
-                browser. Go ahead and modify the code below to include your own message. (Don’t
-                worry, you are the only one who will see this dialog box, you aren’t actually
-                hacking the website!)
-              </Article_Text>
-              <P_CodeFrame>
-                alert(HACKING IN PROGRESS!!! ^%$ I HAAZ HAXX (&amp;&amp;* 1337 )
-              </P_CodeFrame>
-              <Img_Img
-                src='https://i.imgur.com/He1mv08.png'
-                alt={'1'}
-                style={{ marginLeft: '65px' }}
-              />
-            </Div_Articles1>
-            <Div_Articles2>
-              <Header_Text>
-                2. Use Math.random() to give everything different orientations
-              </Header_Text>
-              <Article_Text>
-                By selecting the div, p, span, img, a, and body tag(s) and using Math.random() you
-                can give everything on the page random orientations, producing a very entertaining
-                effect!
-              </Article_Text>
-              <P_CodeFrame>
-                Array.prototype.slice.call( document.querySelectorAll(
-                div,p,span,img,a,body)).map(function(tag){'{'}
-                tag.style[transform] = rotate( + ( Math.floor(Math.random() * 3) - 1) + deg);
-                {'}'});
-              </P_CodeFrame>
-              <Img_Img src='https://i.imgur.com/DurDSQu.png' alt={'2'} />
-            </Div_Articles2>
-            <Div_Articles2>
-              <Header_Text>3. Change all tags &lt;&img&gt; to have cat pictures</Header_Text>
-              <Article_Text>
-                By selecting the div, p, span, img, a, and body tag(s) and using Math.random() you
-                can give everything on the page random orientations, producing a very entertaining
-                effect!
-              </Article_Text>
-              <P_CodeFrame>
-                Array.prototype.slice.call( document.querySelectorAll(img)).map(function(tag)
-                {'tag.src = http://bit.ly/2okYTfn'});
-              </P_CodeFrame>
-              <Img_Img src='https://i.imgur.com/Xk4e7gQ.png' alt={'3'} />
-            </Div_Articles2>
-          </Div_Articles>
-        </Div_Container1>
-      </Section_Section>
-      <Footer_Footer>
-        <Div_ContainerSocial>
-          <p>Share this article</p>
-          <Img_SocialMedia
-            src='https://cdn.pixabay.com/photo/2021/02/08/15/44/social-media-5995266_960_720.png'
-            alt='social-media'
-          />
-        </Div_ContainerSocial>
-      </Footer_Footer>
-    </Div_Global>
+    <HelmetProvider>
+      <Div_Global>
+        <meta charSet='UTF-8' />
+        <meta
+          name='viewport'
+          content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
+        />
+        <meta httpEquiv='X-UA-Compatible' content='ie=edge' />
+        <Header_Header>
+          <div>
+            <Helmet>
+              <title>Artem Saibel - JS Hacks</title>
+              <meta name='description' content='Learn JS by "Hacking" websites' />
+            </Helmet>
+            <Div_Nav>
+              <Ul_Menu></Ul_Menu>
+            </Div_Nav>
+            <Div_Offer>
+              <p>Learn Javascript Fast by</p>
+              <H1_OfferItem>“Hacking” Your Favorite Websites</H1_OfferItem>
+              <A_Btn href='#'>Learn more</A_Btn>
+            </Div_Offer>
+          </div>
+        </Header_Header>
+        <Section_Section>
+          <Div_Container1>
+            <Div_Title>Hacks:</Div_Title>
+            <Div_Articles>
+              <Div_Articles1>
+                <Header_Text>1. Replace All</Header_Text>
+                <Article_Text>
+                  Sometimes used in debugging, alert() will pop up a small dialogue box in the
+                  browser. Go ahead and modify the code below to include your own message. (Don’t
+                  worry, you are the only one who will see this dialog box, you aren’t actually
+                  hacking the website!)
+                </Article_Text>
+                <P_CodeFrame>
+                  alert(HACKING IN PROGRESS!!! ^%$ I HAAZ HAXX (&amp;&amp;* 1337 )
+                </P_CodeFrame>
+                <Img_Img
+                  src='https://i.imgur.com/He1mv08.png'
+                  alt={'1'}
+                  style={{ marginLeft: '65px' }}
+                />
+              </Div_Articles1>
+              <Div_Articles2>
+                <Header_Text>
+                  2. Use Math.random() to give everything different orientations
+                </Header_Text>
+                <Article_Text>
+                  By selecting the div, p, span, img, a, and body tag(s) and using Math.random() you
+                  can give everything on the page random orientations, producing a very entertaining
+                  effect!
+                </Article_Text>
+                <P_CodeFrame>
+                  Array.prototype.slice.call( document.querySelectorAll(
+                  div,p,span,img,a,body)).map(function(tag){'{'}
+                  tag.style[transform] = rotate( + ( Math.floor(Math.random() * 3) - 1) + deg);
+                  {'}'});
+                </P_CodeFrame>
+                <Img_Img src='https://i.imgur.com/DurDSQu.png' alt={'2'} />
+              </Div_Articles2>
+              <Div_Articles2>
+                <Header_Text>3. Change all tags &lt;&img&gt; to have cat pictures</Header_Text>
+                <Article_Text>
+                  By selecting the div, p, span, img, a, and body tag(s) and using Math.random() you
+                  can give everything on the page random orientations, producing a very entertaining
+                  effect!
+                </Article_Text>
+                <P_CodeFrame>
+                  Array.prototype.slice.call( document.querySelectorAll(img)).map(function(tag)
+                  {'tag.src = http://bit.ly/2okYTfn'});
+                </P_CodeFrame>
+                <Img_Img src='https://i.imgur.com/Xk4e7gQ.png' alt={'3'} />
+              </Div_Articles2>
+            </Div_Articles>
+          </Div_Container1>
+        </Section_Section>
+        <Footer_Footer>
+          <Div_ContainerSocial>
+            <p>Share this article</p>
+            <Img_SocialMedia
+              src='https://cdn.pixabay.com/photo/2021/02/08/15/44/social-media-5995266_960_720.png'
+              alt='social-media'
+            />
+          </Div_ContainerSocial>
+        </Footer_Footer>
+      </Div_Global>
+    </HelmetProvider>
   )
 }
 

@@ -41,6 +41,14 @@ export const Layout = () => {
   )
 }
 
+const StyledHomePage = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 export const Div_Nav = styled.div`
   height: 100vh;
   display: flex;
@@ -48,7 +56,6 @@ export const Div_Nav = styled.div`
   align-items: center;
   gap: 5rem;
   justify-content: center;
-  padding: 10rem;
   background: ${theme.background.backgroungColorHome};
   color: white;
 `
@@ -68,8 +75,4 @@ export const Li = styled.li`
       color: ${theme.colors.green};
 
     }
-`
-export const UL_Menu = styled.ul`
-  gap: 1.5rem;
-  display: flex;
 `

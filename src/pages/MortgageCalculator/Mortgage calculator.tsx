@@ -1,4 +1,5 @@
 import { BiCalculator } from 'react-icons/bi'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { mortgageCalculation } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
 import React, { ChangeEvent, useState } from 'react'
@@ -14,60 +15,76 @@ export const Calculator = () => {
   }
 
   return (
-    <Div_Wrapper>
-      <Div_Title>
-        <BiCalculator />
-        Mortgage Calculator
-      </Div_Title>
-      <Div_Form>
-        <Div_Header>I&apos;d like to loan:</Div_Header>
-        <Input_Input
-          value={Math.max(0, amount)}
-          type={'number'}
-          onChange={event => setStateAmount(+event.currentTarget.value)}
-        />
-      </Div_Form>
-      <Div_Form>
-        <Div_Header>Interest from the bank </Div_Header>
-        <Input_Input
-          value={Math.max(0, interest)}
-          type={'number'}
-          onChange={event => setStateMortgage(+event.currentTarget.value)}
-        />
-      </Div_Form>
-      <Div_Form>
-        <Div_Header>I&apos;d like to pay back in:</Div_Header>
-        <Input_Input
-          value={year}
-          type={'range'}
-          onChange={event => setStateMonth(+event.currentTarget.value)}
-          name='volume'
-          min='1'
-          max='30'
-        />
-        <output name='amount' htmlFor='onYearsChangeHandler'>
-          {year} yrs.
-        </output>
-      </Div_Form>
-      <Div_Total>
-        {isFinite(calculatorHandler()) ? `Monthly payment: ${calculatorHandler()} CZK` : 0}
-      </Div_Total>
-    </Div_Wrapper>
+    <HelmetProvider>
+      <Div_Wrapper>
+        <Helmet>
+          <title>Artem Saibel - Mortgage calculator</title>
+          <meta name='description' content='Simple Counter App in React JS' />
+        </Helmet>
+        <Div_TodoContainer>
+          <Div_Title>
+            <BiCalculator />
+            Mortgage Calculator
+          </Div_Title>
+          <Div_Form>
+            <Div_Header>I&apos;d like to loan:</Div_Header>
+            <Input_Input
+              value={Math.max(0, amount)}
+              type={'number'}
+              onChange={event => setStateAmount(+event.currentTarget.value)}
+            />
+          </Div_Form>
+          <Div_Form>
+            <Div_Header>Interest from the bank </Div_Header>
+            <Input_Input
+              value={Math.max(0, interest)}
+              type={'number'}
+              onChange={event => setStateMortgage(+event.currentTarget.value)}
+            />
+          </Div_Form>
+          <Div_Form>
+            <Div_Header>I&apos;d like to pay back in:</Div_Header>
+            <Input_Input
+              value={year}
+              type={'range'}
+              onChange={event => setStateMonth(+event.currentTarget.value)}
+              name='volume'
+              min='1'
+              max='30'
+            />
+            <output name='amount' htmlFor='onYearsChangeHandler'>
+              {year} yrs.
+            </output>
+          </Div_Form>
+          <Div_Total>
+            {isFinite(calculatorHandler()) ? `Monthly payment: ${calculatorHandler()} CZK` : 0}
+          </Div_Total>
+        </Div_TodoContainer>
+      </Div_Wrapper>
+    </HelmetProvider>
   )
 }
 const Div_Wrapper = styled.div`
-  height: 80vh;
+  width: 100vw;
+  min-height: 100vh;
   font-size: ${theme.fonts.small};
   color: ${theme.colors.blue2};
   text-align: center;
   justify-content: center;
   max-width: 560px;
   margin: 3rem auto;
+  padding-top: 3rem;
+`
+const Div_TodoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: ${theme.colors.boxShadow};
   border: 1px solid ${theme.colors.green};
   border-radius: 20px;
-  padding-top: 3rem;
-  box-shadow: ${theme.colors.boxShadow};
+  padding-top: 5rem;
 `
+
 export const Div_Title = styled.div`
   align-items: center;
   justify-content: center;

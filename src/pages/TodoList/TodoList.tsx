@@ -1,4 +1,5 @@
 import { CgTrash } from 'react-icons/cg'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
 import { useLocalStorage } from '../../helpers/functions'
@@ -23,14 +24,13 @@ const useLogicState = () => {
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<FilterValuesType>('all')
 
-  const getFilteredTasks = (filter: FilterValuesType) => {
-    return filter !== 'active'
-      ? filter === 'completed'
-        ? todoList.filter(t => t.isDone)
-        : todoList
-      : todoList.filter(t => !t.isDone)
+  const filteredTodolist = (filter: FilterValuesType) => {
+    return filter === 'active'
+      ? todoList.filter(t => !t.isDone)
+      : filter === 'completed'
+      ? todoList.filter(t => t.isDone)
+      : todoList
   }
-  const tasksForTodolist = getFilteredTasks(filter)
 
   const addTask = () => {
     if (newTask.trim() !== '') {
@@ -53,8 +53,6 @@ const useLogicState = () => {
   return {
     todoList,
     setTodoList,
-    filter,
-    setFilter,
     newTask,
     setNewTask,
     error,
@@ -62,7 +60,9 @@ const useLogicState = () => {
     addTask,
     removeTask,
     statusTodoList,
-    tasksForTodolist,
+    filteredTodolist,
+    filter,
+    setFilter,
   }
 }
 
@@ -72,39 +72,47 @@ export const { ContextProvider: TodoContextProvider, Context: TodoContext } =
 export const TodoList = () => {
   const logic = useContext(TodoContext)
   return (
-    <Div_Wrapper>
-      <Div_Title>Todos</Div_Title>
-      <Div_Input>
-        <Input_Input
-          type='text'
-          onChange={event => logic.setNewTask(event.target.value)}
-          value={logic.newTask}
-          onKeyDown={event => (event.key === 'Enter' ? logic.addTask() : null)}
-        />
-        <Button_MyButton onClick={logic.addTask}>+</Button_MyButton>
-      </Div_Input>
-      <Div_ErrorMessage>{logic.error && <div> {logic.error} </div>} </Div_ErrorMessage>
-      <Div_Tasks>
-        {logic.tasksForTodolist.map(task => (
-          <Li_Tasks key={task.id}>
-            <input
-              type='checkbox'
-              checked={task.isDone}
-              onClick={() => logic.statusTodoList(task.id, task.isDone)}
-            />
-            {task.task}
-            <CgTrash onClick={() => logic.removeTask(task.id)} />
-          </Li_Tasks>
-        ))}
-      </Div_Tasks>
-      <Div_Filter>
-        <Button_FilterButton onClick={() => logic.setFilter('all')}>All</Button_FilterButton>
-        <Button_FilterButton onClick={() => logic.setFilter('active')}>Active</Button_FilterButton>
-        <Button_FilterButton onClick={() => logic.setFilter('completed')}>
-          Completed
-        </Button_FilterButton>
-      </Div_Filter>
-    </Div_Wrapper>
+    <HelmetProvider>
+      <Div_Wrapper>
+        <Helmet>
+          <title>Artem Saibel - TodoList app</title>
+          <meta name='description' content='Todo List App with React (using Hooks and Contexts)' />
+        </Helmet>
+        <Div_Title>Todos</Div_Title>
+        <Div_Input>
+          <Input_Input
+            type='text'
+            onChange={event => logic.setNewTask(event.target.value)}
+            value={logic.newTask}
+            onKeyDown={event => (event.key === 'Enter' ? logic.addTask() : null)}
+          />
+          <Button_MyButton onClick={logic.addTask}>+</Button_MyButton>
+        </Div_Input>
+        <Div_ErrorMessage>{logic.error && <div> {logic.error} </div>} </Div_ErrorMessage>
+        <Div_Tasks>
+          {logic.filteredTodolist(logic.filter).map(task => (
+            <Li_Tasks key={task.id}>
+              <input
+                type='checkbox'
+                checked={task.isDone}
+                onClick={() => logic.statusTodoList(task.id, task.isDone)}
+              />
+              {task.task}
+              <CgTrash onClick={() => logic.removeTask(task.id)} />
+            </Li_Tasks>
+          ))}
+        </Div_Tasks>
+        <Div_Filter>
+          <Button_FilterButton onClick={() => logic.setFilter('all')}>All</Button_FilterButton>
+          <Button_FilterButton onClick={() => logic.setFilter('active')}>
+            Active
+          </Button_FilterButton>
+          <Button_FilterButton onClick={() => logic.setFilter('completed')}>
+            Completed
+          </Button_FilterButton>
+        </Div_Filter>
+      </Div_Wrapper>
+    </HelmetProvider>
   )
 }
 
