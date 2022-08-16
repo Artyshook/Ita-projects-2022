@@ -33,15 +33,13 @@ const useLogicState = () => {
   const tasksForTodolist = getFilteredTasks(filter)
 
   const addTask = () => {
-    if (newTask.trim() !== '') {
-      setError(null)
-      setTodoList([...todoList, { id: v1(), task: newTask, isDone: false }])
-      setNewTask('')
-    } else {
-      setError('Title is required')
-      return
-    }
+    newTask.trim() === ''
+      ? setError('Title is required')
+      : (setError(null),
+        setTodoList([...todoList, { id: v1(), task: newTask, isDone: false }]),
+        setNewTask(''))
   }
+
   const removeTask = (id: string) => {
     setTodoList(todoList.filter(el => el.id !== id))
   }
