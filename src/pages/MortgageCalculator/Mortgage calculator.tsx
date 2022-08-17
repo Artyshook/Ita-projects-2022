@@ -1,4 +1,5 @@
 import { BiCalculator } from 'react-icons/bi'
+import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { mortgageCalculation } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
@@ -16,6 +17,7 @@ export const Calculator = () => {
 
   return (
     <HelmetProvider>
+      <GoBackButton />
       <Div_Wrapper>
         <Helmet>
           <title>Artem Saibel - Mortgage calculator</title>
@@ -65,24 +67,27 @@ export const Calculator = () => {
   )
 }
 const Div_Wrapper = styled.div`
-  width: 100vw;
-  min-height: 100vh;
+  width: 80vw;
+  min-height: 80vh;
   font-size: ${theme.fonts.small};
   color: ${theme.colors.blue2};
   text-align: center;
   justify-content: center;
-  max-width: 560px;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
   margin: 3rem auto;
   padding-top: 3rem;
 `
 const Div_TodoContainer = styled.div`
+  padding: 4rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   box-shadow: ${theme.colors.boxShadow};
   border: 1px solid ${theme.colors.green};
   border-radius: 20px;
-  padding-top: 5rem;
 `
 
 export const Div_Title = styled.div`
@@ -105,10 +110,9 @@ const Input_Input = styled.input`
 `
 const Div_Form = styled.div`
   font-size: ${theme.fonts.sMedium};
-  margin: 4rem auto;
+  margin: 1rem auto;
   display: block;
   align-items: center;
-  gap: 3rem;
 `
 const Div_Total = styled.div`
   font-size: ${theme.fonts.medium};
