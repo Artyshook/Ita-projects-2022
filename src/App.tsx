@@ -40,6 +40,6 @@ const GlobalStyle = createGlobalStyle`
     display: none;
   }
   html {
-    font-size: 65%;
+    font-size: 60%;
   }
 `

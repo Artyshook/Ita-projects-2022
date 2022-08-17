@@ -1,3 +1,4 @@
+import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import React from 'react'
@@ -7,6 +8,7 @@ import styled from 'styled-components'
 export const WebPageApp = () => {
   return (
     <HelmetProvider>
+      <GoBackButton />
       <Div_Global>
         <meta charSet='UTF-8' />
         <meta

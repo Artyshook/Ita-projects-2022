@@ -1,6 +1,7 @@
 import { Card } from './Card'
 import { CardType } from './Images'
 import { CgSmileMouthOpen } from 'react-icons/cg'
+import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { IoFootstepsSharp } from 'react-icons/io5'
 import { createCardsBoard } from './Images'
@@ -70,6 +71,7 @@ export const MemoryGame = () => {
 
   return (
     <HelmetProvider>
+      <GoBackButton />
       <Div_GridWrapper>
         <Helmet>
           <title>Artem Saibel - Memory game</title>
@@ -106,11 +108,15 @@ export const MemoryGame = () => {
 }
 
 const Div_GridWrapper = styled.div`
-  height: 100vh;
+  width: 80vw;
+  height: 80vh;
+  align-items: start;
+  display: flex;
+  flex-direction: column;
   font-size: ${theme.fonts.small};
   color: ${theme.colors.blue2};
   text-align: center;
-  max-width: 860px;
+  max-width: 550px;
   margin: 3rem auto;
 `
 const Div_Card = styled.div`
@@ -133,7 +139,7 @@ const Button_MyButton = styled.button`
   }
 `
 export const Div_Title = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   font-size: ${theme.fonts.medium};
   letter-spacing: 0.02em;

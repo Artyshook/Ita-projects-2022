@@ -1,5 +1,6 @@
 import { CgCloseO } from 'react-icons/cg'
 import { Div_Button } from '../../components/Button'
+import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import React from 'react'
@@ -49,6 +50,7 @@ export class CounterApp extends React.Component<Props, State> {
   render() {
     return (
       <HelmetProvider>
+        <GoBackButton />
         <Div_Wrapper>
           <Helmet>
             <title>Artem Saibel - Counter App</title>

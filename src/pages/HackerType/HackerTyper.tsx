@@ -1,3 +1,4 @@
+import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { TbHandClick } from 'react-icons/tb'
 import { code } from './code'
@@ -69,6 +70,7 @@ export const HackerTyper = () => {
 
   return (
     <HelmetProvider>
+      <GoBackButton />
       <Div_Wrapper>
         <Helmet>
           <title>Artem Saibel - Hacker Typer</title>
@@ -85,24 +87,25 @@ export const HackerTyper = () => {
 }
 
 export const Div_Wrapper = styled.div`
-  padding: 0;
-  margin: 0;
-  padding-top: 5rem;
+  width: 100vw;
+  height: 100vh;
+  gap: 2rem;
   align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
   background: ${theme.background.backgroundColor};
 `
 const TextArea_Code = styled.textarea`
-  border: none;
+  border: 2px solid ${theme.colors.green};
   width: 70%;
   height: 50vh;
   background: ${theme.background.backgroundColor}
   padding: 2rem;
   font-size: ${theme.fonts.small};
 '&:focus': {
-  outline: none
+  outline: none;
 }
 `
 const Div_DeniedMessage = styled.div`

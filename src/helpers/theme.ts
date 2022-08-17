@@ -23,6 +23,8 @@ export const theme = {
     green: '#00ff7f',
     yellow: '#F3C84B',
     black: '#1c1c1c',
+    grey: '#dcdcdc',
+    darkGrey: '#818589',
     boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
   },
   background: {
@@ -35,5 +37,10 @@ export const theme = {
     tablet: '1024px',
     desktop: '1280px',
     desktopBig: '1600px',
+  },
+  breakpoint: {
+    mobileS: '@media (max-width: 479.98px)',
+    mobileL: '@media (max-width: 767.98px)',
+    tablet: '@media (max-width: 991.98px)',
   },
 } as const
