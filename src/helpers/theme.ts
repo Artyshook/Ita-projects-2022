@@ -26,6 +26,7 @@ export const theme = {
     grey: '#dcdcdc',
     darkGrey: '#818589',
     boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
+    boxShadow2: `6px 4px 15px 3px rgba(33, 60, 70, 0.2)`,
   },
   background: {
     backgroundColor: '#fffff',

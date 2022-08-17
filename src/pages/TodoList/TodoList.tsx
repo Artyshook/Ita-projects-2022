@@ -122,7 +122,7 @@ export const TodoList = () => {
 
 export const Div_Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -132,6 +132,10 @@ export const Div_Wrapper = styled.div`
   color: ${theme.colors.blue};
 `
 const Div_Card = styled.div`
+  border: 1px solid white;
+  border-radius: 20px;
+  box-shadow: ${theme.colors.boxShadow2};
+  padding: 6rem;
   max-width: 650px;
   margin: 2rem auto;
   gap: 1rem;
@@ -165,7 +169,7 @@ export const Li_Tasks = styled.li`
 `
 
 export const Div_Input = styled.div`
-  border: 2px solid ${theme.colors.blue};
+  border: 1px solid ${theme.colors.blue};
   border-radius: 40px;
   display: flex;
   flex-direction: row;
@@ -219,10 +223,9 @@ export const Button_MyButton = styled.button`
   }
 `
 export const Div_Title = styled.div`
-  margin-right: 3rem;
   display: block;
   font-size: ${theme.fonts.large};
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
   margin-bottom: 2rem;
   color: ${theme.colors.grey};
   &:hover {

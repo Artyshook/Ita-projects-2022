@@ -85,8 +85,8 @@ const Div_TodoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: ${theme.colors.boxShadow};
-  border: 1px solid ${theme.colors.green};
+  box-shadow: ${theme.colors.boxShadow2};
+  border: 1px solid ${theme.colors.grey};
   border-radius: 20px;
 `
 
