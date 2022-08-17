@@ -88,10 +88,6 @@ const Div_TodoContainer = styled.div`
   box-shadow: ${theme.colors.boxShadow};
   border: 1px solid ${theme.colors.green};
   border-radius: 20px;
-  ${theme.breakpoint.mobileS} {
-    margin: 0.5rem auto;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-  }
 `
 
 export const Div_Title = styled.div`

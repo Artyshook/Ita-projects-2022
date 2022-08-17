@@ -38,9 +38,4 @@ export const theme = {
     desktop: '1280px',
     desktopBig: '1600px',
   },
-  breakpoint: {
-    mobileS: '@media (max-width: 479.98px)',
-    mobileL: '@media (max-width: 767.98px)',
-    tablet: '@media (max-width: 991.98px)',
-  },
 } as const

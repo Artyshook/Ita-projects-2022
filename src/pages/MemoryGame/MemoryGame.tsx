@@ -80,7 +80,7 @@ export const MemoryGame = () => {
         <Div_Title>
           <Div_Counter>
             <CgSmileMouthOpen size='3rem' />
-            Matching pairs total: {matchedPairs}
+            Total matches: {matchedPairs}
           </Div_Counter>
           <Div_Counter>
             <IoFootstepsSharp />
