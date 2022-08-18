@@ -1,7 +1,7 @@
-import { CgCloseO } from 'react-icons/cg'
 import { Div_Button } from '../../components/Button'
 import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { VscDebugRestart } from 'react-icons/vsc'
 import { theme } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
@@ -56,18 +56,20 @@ export class CounterApp extends React.Component<Props, State> {
             <title>Artem Saibel - Counter App</title>
             <meta name='description' content='Simple Counter App in React JS' />
           </Helmet>
-          <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
-          <Div_Config>
-            <Div_MyContainer>
-              <Div_Button onClick={this.increment}>Increase</Div_Button>
-            </Div_MyContainer>
-            <Div_MyContainer>
-              <Div_Button onClick={this.decrement}>Decrease</Div_Button>
-            </Div_MyContainer>
-          </Div_Config>
-          <Div_Icon>
-            <CgCloseO onClick={this.reset} size='5rem' />
-          </Div_Icon>
+          <Div_TodoContainer>
+            <Div_Value>{this.state.error ?? `My count: ${this.state.count}`}</Div_Value>
+            <Div_Config>
+              <Div_MyContainer>
+                <Div_Button onClick={this.increment}>INCREASE</Div_Button>
+              </Div_MyContainer>
+              <Div_MyContainer>
+                <Div_Button onClick={this.decrement}>DECREASE</Div_Button>
+              </Div_MyContainer>
+            </Div_Config>
+            <Div_Icon>
+              <VscDebugRestart onClick={this.reset} size='3rem' />
+            </Div_Icon>
+          </Div_TodoContainer>
         </Div_Wrapper>
       </HelmetProvider>
     )
@@ -76,7 +78,7 @@ export class CounterApp extends React.Component<Props, State> {
 
 export const Div_Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   gap: 2rem;
   align-items: center;
   justify-content: center;
@@ -84,6 +86,18 @@ export const Div_Wrapper = styled.div`
   flex-direction: column;
   color: ${theme.colors.blue};
   background: ${theme.background.backgroundColor};
+`
+const Div_TodoContainer = styled.div`
+  max-width: 550px;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: ${theme.colors.boxShadow2};
+  border: 1px solid ${theme.colors.grey};
+  border-radius: 20px;
 `
 
 export const Div_Value = styled.div`
@@ -102,6 +116,7 @@ export const Div_MyContainer = styled.div`
 `
 export const Div_Icon = styled.div`
   display: flex;
+  color: ${theme.colors.blue};
   justify-content: center;
   &:hover {
     color: ${theme.colors.green};

@@ -80,6 +80,7 @@ const Div_Wrapper = styled.div`
   padding-top: 3rem;
 `
 const Div_TodoContainer = styled.div`
+  width: 370px;
   padding: 4rem;
   display: flex;
   flex-direction: column;
@@ -100,23 +101,22 @@ export const Div_Title = styled.div`
 `
 const Input_Input = styled.input`
   padding: 1.5rem;
-  border: 0.3rem solid ${theme.colors.green};
+  border: 0.2rem solid ${theme.colors.green};
   outline: none;
   border-radius: 30px;
-  width: 15rem;
+  width: 19rem;
   height: 1.5rem;
   color: ${theme.colors.blue};
   font-size: ${theme.fonts.small};
 `
 const Div_Form = styled.div`
-  font-size: ${theme.fonts.sMedium};
+  font-size: ${theme.fonts.small};
   margin: 1rem auto;
   display: block;
   align-items: center;
 `
 const Div_Total = styled.div`
-  font-size: ${theme.fonts.medium};
-  margin: 7rem auto;
+  font-size: ${theme.fonts.sMedium};
   display: block;
   align-items: center;
 `

@@ -159,7 +159,7 @@ export const Li_Tasks = styled.li`
     margin: 0;
     width: 3rem;
   }
-  border: 2px solid ${theme.colors.grey};
+  border: 0.2rem solid ${theme.colors.grey};
   border-radius: 20px;
   margin: 0.5rem;
   box-shadow: ${theme.colors.boxShadow};
@@ -185,7 +185,7 @@ export const Div_Filter = styled.div`
   margin-top: 1.5rem;
 `
 export const Button_FilterButton = styled.button`
-  border: 0.2rem solid ${theme.colors.green};
+  border: 0.1rem solid ${theme.colors.green};
   border-radius: 40px;
   padding: 1.5rem;
   color: ${theme.colors.blue};
@@ -211,9 +211,9 @@ export const Button_MyButton = styled.button`
   letter-spacing: 1px;
   font-size: 1.5rem;
   border-radius: 60px;
+  border: none;
   color: #00ff7f;
   background-color: ${theme.colors.blue};
-  border: none;
   height: 5rem;
   width: 7rem;
   justify-content: center;
