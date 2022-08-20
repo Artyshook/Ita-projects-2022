@@ -123,7 +123,7 @@ export const MortgageCalculator = () => {
             <Input_GridItemRangeSlider
               type='range'
               min='0.1'
-              max='8'
+              max='15'
               step='0.1'
               value={interest}
               onChange={event => setInterest(+event.target.value)}

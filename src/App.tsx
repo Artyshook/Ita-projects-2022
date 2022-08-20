@@ -3,18 +3,14 @@ import { FilterByName } from './pages/Filter/FilterByName'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
 import { Layout } from './pages/Layouts/Layout'
 import { MemoryGame } from './pages/MemoryGame/MemoryGame'
-import { MortgageCalculator } from './pages/MortgageCalcNew/MortgageCalculator'
+import { MortgageCalculator } from './pages/MortgageCalculator/MortgageCalculator'
 import { NewTodoList } from './pages/TodoList/TodoList'
 import { Route, Routes } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
 import { urls } from './helpers/urls'
 import React from 'react'
-import ReactGA from 'react-ga'
 import WebPageApp from './pages/WebPage/WebPageApp'
-
-ReactGA.initialize('UA-179516420-1')
-ReactGA.pageview(window.location.pathname + window.location.search)
 
 export const App = () => {
   return (
