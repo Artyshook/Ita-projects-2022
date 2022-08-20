@@ -35,19 +35,15 @@ export const Layout = () => {
           <BiCalculator size='2.5rem' />
           <Link to={urls.calculator}>Mortgage calculator</Link>
         </Li>
+        <Li>
+          <BiCalculator size='2.5rem' />
+          <Link to={urls.blog}>Blog</Link>
+        </Li>
       </Div_Nav>
       <Outlet />
     </>
   )
 }
-
-const StyledHomePage = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
 
 export const Div_Nav = styled.div`
   height: 100vh;

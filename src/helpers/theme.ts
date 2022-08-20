@@ -25,6 +25,7 @@ export const theme = {
     black: '#1c1c1c',
     grey: '#dcdcdc',
     darkGrey: '#818589',
+    whiteGrey: 'gainsboro',
     boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
     boxShadow2: `6px 4px 15px 3px rgba(33, 60, 70, 0.2)`,
   },
