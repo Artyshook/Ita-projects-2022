@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]
+
 const localeOptions = {
   style: 'currency',
   currency: 'EUR',
@@ -159,9 +160,9 @@ const Div_GridItem = styled.div`
   margin: 5px;
   border-radius: 10px;
   &:hover {
-    background-color: #d8edff;
+    background-color: ${theme.colors.lightBlue};
     box-shadow: 0 10px gainsboro;
-    transition: box-shadow 0.7s;
+    transition: box-shadow 0.3s;
   }
 `
 const Span_GridItemHeader = styled.span`
@@ -173,8 +174,7 @@ const Input_GridItemRangeSlider = styled.input`
   margin-bottom: 10px;
 `
 const Label_GridItemLabel = styled.label`
-  font-style: italic;
-  font-size: 0.8em;
+  font-size: ${theme.fonts.xs};
 `
 
 const H1_Header = styled.h1`

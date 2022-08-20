@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const theme = {
   fonts: {
+    xs: '1rem',
     small: '1.5rem',
     sMedium: '2.5rem',
     medium: '3rem',
@@ -20,6 +21,7 @@ export const theme = {
     white: '#f5f5f5',
     blue: '#507CFB',
     blue2: '#7A4BDD',
+    lightBlue: '#d8edff',
     green: '#00ff7f',
     yellow: '#F3C84B',
     black: '#1c1c1c',

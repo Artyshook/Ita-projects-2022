@@ -64,6 +64,6 @@ const Table_Container = styled.table`
     padding: 15px 5px;
   }
   & tr:nth-of-type(even) {
-    background-color: #d8edff;
+    background-color: ${theme.colors.lightBlue};
   }
 `
