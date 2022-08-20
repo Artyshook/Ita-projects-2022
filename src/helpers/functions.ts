@@ -1,3 +1,4 @@
+import { createCardsBoard } from '../pages/MemoryGame/Images'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 export const useLocalStorage = <T>(key: string, defaultValue: T) => {
@@ -34,10 +35,9 @@ export const handleMortgageDataChange = (
   mortgageTerm: number,
   monthlyRate: number
 ) => {
-  //Set initial values for loop to calculate yearly figures
-  let yearDataObject = [
+  let monthDataObject = [
     {
-      year: 0,
+      month: 0,
       outstandingBalance: amountToBorrow,
       interestPaid: 0,
       interestPaidToDate: 0,
@@ -50,7 +50,7 @@ export const handleMortgageDataChange = (
   let principalRepaidToDate = 0
   mortgageTerm = mortgageTerm * 12
 
-  //Loop each year of the mortgage term
+  //Loop each month of the mortgage term
   for (let i = 1; i <= mortgageTerm; i++) {
     let monthInterestPaid = 0
     let interestPaidMonthlyToMonthIncrementer = 0
@@ -65,25 +65,15 @@ export const handleMortgageDataChange = (
     monthlyPrincipalRepaidToMonthIncrementer =
       monthlyPrincipalRepaidToMonthIncrementer + monthPrincipalPaid
 
-    // //loop each month of the year as interest is calculated monthly
-    // for(let j = 0; j < 12; j++) {
-    //     monthInterestPaid = outstandingBalance * interestRate / 100 / 12; // мес процент кр
-    //     interestPaidMonthlyToYearlyIncrementer = interestPaidMonthlyToYearlyIncrementer + monthInterestPaid;
-    //     monthPrincipalPaid = monthlyPayment - monthInterestPaid;
-    //     monthlyPrincipalRepaidToYearlyIncrementer = monthlyPrincipalRepaidToYearlyIncrementer + monthPrincipalPaid;
-    //     outstandingBalance = outstandingBalance - monthPrincipalPaid;
-    // }
-
     interestPaidToDate = interestPaidToDate + interestPaidMonthlyToMonthIncrementer
     principalRepaidToDate = principalRepaidToDate + monthlyPrincipalRepaidToMonthIncrementer
 
-    //There's always around £10 left at the end which forces the fraph to go into minus. This just rounds the last figure off at £0.00.
     if (i === mortgageTerm) {
       outstandingBalance = 0
     }
 
-    yearDataObject.push({
-      year: i,
+    monthDataObject.push({
+      month: i,
       outstandingBalance: parseFloat(outstandingBalance.toFixed(2)),
       interestPaid: parseFloat(interestPaidMonthlyToMonthIncrementer.toFixed(2)),
       interestPaidToDate: parseFloat(interestPaidToDate.toFixed(2)),
@@ -91,5 +81,7 @@ export const handleMortgageDataChange = (
       principalRepaidToDate: parseFloat(principalRepaidToDate.toFixed(2)),
     })
   }
-  return yearDataObject
+  return monthDataObject
 }
+
+// export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]

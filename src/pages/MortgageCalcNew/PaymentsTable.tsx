@@ -1,3 +1,4 @@
+import { MortgageDataType } from './MortgageCalculator'
 import { theme } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
@@ -10,23 +11,15 @@ const localeOptions = {
 }
 
 type PropsType = {
-  monthlyPayments: Array[]
-}
-type Array = {
-  interestPaidToDate: number
-  year: number
-  principalRepaidToDate: number
-  principalRepaid: number
-  outstandingBalance: number
-  interestPaid: number
+  monthlyPayments: MortgageDataType[]
 }
 
 export const PaymentsTable = (props: PropsType) => {
   let paymentMonthsArr = []
   for (let i = 0; i < props.monthlyPayments.length; i++) {
     paymentMonthsArr.push(
-      <tr key={props.monthlyPayments[i].year}>
-        <td>{props.monthlyPayments[i].year}</td>
+      <tr key={props.monthlyPayments[i].month}>
+        <td>{props.monthlyPayments[i].month}</td>
         <td>{props.monthlyPayments[i].interestPaid.toLocaleString('de-DE', localeOptions)}</td>
         <td>
           {props.monthlyPayments[i].interestPaidToDate.toLocaleString('de-DE', localeOptions)}
