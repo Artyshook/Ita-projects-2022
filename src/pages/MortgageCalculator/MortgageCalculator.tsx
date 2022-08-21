@@ -11,13 +11,6 @@ import styled from 'styled-components'
 
 export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]
 
-// const localeOptions = {
-//   style: 'currency',
-//   currency: 'EUR',
-//   minimumFractionDigits: 0,
-//   maximumFractionDigits: 0,
-// }
-
 export const currency = (value: number) => {
   return Intl.NumberFormat('de-DE', {
     style: 'currency',

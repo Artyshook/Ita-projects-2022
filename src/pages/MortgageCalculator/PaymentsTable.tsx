@@ -3,13 +3,6 @@ import { theme } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
 
-const localeOptions = {
-  style: 'currency',
-  currency: 'EUR',
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-}
-
 type PropsType = {
   monthlyPayments: MortgageDataType[]
 }
