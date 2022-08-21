@@ -1,8 +1,9 @@
-import { Calculator } from './pages/MortgageCalculator/Mortgage calculator'
 import { CounterApp } from './pages/Counter/CounterApp'
+import { FilterByName } from './pages/Filter/FilterByName'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
 import { Layout } from './pages/Layouts/Layout'
 import { MemoryGame } from './pages/MemoryGame/MemoryGame'
+import { MortgageCalculator } from './pages/MortgageCalculator/MortgageCalculator'
 import { NewTodoList } from './pages/TodoList/TodoList'
 import { Route, Routes } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
@@ -21,7 +22,8 @@ export const App = () => {
         <Route path={urls.todolist} element={<NewTodoList />} />
         <Route path={urls.hackerTyper} element={<HackerTyper />} />
         <Route path={urls.memoryGame} element={<MemoryGame />} />
-        <Route path={urls.calculator} element={<Calculator />} />
+        <Route path={urls.calculator} element={<MortgageCalculator />} />
+        <Route path={urls.filter} element={<FilterByName />} />
       </Routes>
       <GlobalStyle />
     </div>
@@ -40,6 +42,6 @@ const GlobalStyle = createGlobalStyle`
     display: none;
   }
   html {
-    font-size: 60%;
+    font-size: 70%;
   }
 `

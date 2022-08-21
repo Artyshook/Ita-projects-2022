@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const theme = {
   fonts: {
+    xs: '1rem',
     small: '1.5rem',
     sMedium: '2.5rem',
     medium: '3rem',
@@ -20,12 +21,15 @@ export const theme = {
     white: '#f5f5f5',
     blue: '#507CFB',
     blue2: '#7A4BDD',
+    lightBlue: '#d8edff',
     green: '#00ff7f',
     yellow: '#F3C84B',
     black: '#1c1c1c',
     grey: '#dcdcdc',
     darkGrey: '#818589',
+    whiteGrey: 'gainsboro',
     boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
+    boxShadow2: `6px 4px 15px 3px rgba(33, 60, 70, 0.2)`,
   },
   background: {
     backgroundColor: '#fffff',

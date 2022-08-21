@@ -41,14 +41,6 @@ export const Layout = () => {
   )
 }
 
-const StyledHomePage = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
 export const Div_Nav = styled.div`
   height: 100vh;
   display: flex;

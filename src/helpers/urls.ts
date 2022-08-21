@@ -6,4 +6,7 @@ export const urls = {
   hackerTyper: '/hacker-typer',
   memoryGame: '/memory-game',
   calculator: '/calculator',
+  filter: '/filter',
+  blog: 'blog',
+  newPost: '/blog/new-article',
 }
