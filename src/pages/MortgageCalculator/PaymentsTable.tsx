@@ -1,4 +1,4 @@
-import { MortgageDataType, currency } from './MortgageCalculator'
+import { MortgageDataType, formatCurrency } from './MortgageCalculator'
 import { theme } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
@@ -25,11 +25,11 @@ export const PaymentsTable = (props: PropsType) => {
         {props.monthlyPayments.map(el => (
           <tr key={el.month}>
             <td>{el.month}</td>
-            <td>{currency(el.interestPaid)}</td>
-            <td>{currency(el.interestPaidToDate)}</td>
-            <td>{currency(el.principalRepaid)}</td>
-            <td>{currency(el.principalRepaidToDate)}</td>
-            <td>{currency(el.outstandingBalance)}</td>
+            <td>{formatCurrency(el.interestPaid)}</td>
+            <td>{formatCurrency(el.interestPaidToDate)}</td>
+            <td>{formatCurrency(el.principalRepaid)}</td>
+            <td>{formatCurrency(el.principalRepaidToDate)}</td>
+            <td>{formatCurrency(el.outstandingBalance)}</td>
           </tr>
         ))}
       </tbody>

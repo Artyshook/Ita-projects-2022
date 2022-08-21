@@ -11,7 +11,7 @@ import styled from 'styled-components'
 
 export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]
 
-export const currency = (value: number) => {
+export const formatCurrency = (value: number) => {
   return Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -31,12 +31,13 @@ export const MortgageCalculator = () => {
   const totalAmountRepaid = monthlyRate * 12 * mortgageTerm
   const totalInterestPaid = totalAmountRepaid - amountToBorrow
 
-  const monthlyPayments = handleMortgageDataChange(
-    amountToBorrow,
-    interest,
-    mortgageTerm,
-    monthlyRate
-  )
+  let arg = {
+    amountToBorrow: amountToBorrow,
+    interest: interest,
+    mortgageTerm: mortgageTerm,
+    monthlyRate: monthlyRate,
+  }
+  const monthlyPayments = handleMortgageDataChange(arg)
 
   return (
     <div>
@@ -47,19 +48,19 @@ export const MortgageCalculator = () => {
         </header>
         <Div_GridContainer>
           <Div_GridItem>
-            <Span_GridItemHeader>{currency(amountToBorrow)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(amountToBorrow)}</Span_GridItemHeader>
             <Label_GridItemLabel>Amount To Borrow</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>{currency(monthlyRate)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(monthlyRate)}</Span_GridItemHeader>
             <Label_GridItemLabel>Monthly Payment</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>{currency(totalAmountRepaid)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(totalAmountRepaid)}</Span_GridItemHeader>
             <Label_GridItemLabel>Total Repaid</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>{currency(totalInterestPaid)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(totalInterestPaid)}</Span_GridItemHeader>
             <Label_GridItemLabel>Total Interest Paid</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
@@ -75,7 +76,7 @@ export const MortgageCalculator = () => {
             <Label_GridItemLabel>Loan To Value</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>{currency(propertyValue)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(propertyValue)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
               min='50000'
@@ -89,7 +90,7 @@ export const MortgageCalculator = () => {
             </Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>{currency(depositAmount)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(depositAmount)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
               min='1000'
