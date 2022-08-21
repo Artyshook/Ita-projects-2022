@@ -1,22 +1,35 @@
 import { GoBackButton } from '../../components/GoBackButton'
 import { PaymentsTable } from './PaymentsTable'
-import { handleMortgageDataChange, mortgageCalculation } from '../../helpers/functions'
+import {
+  formatToPercent,
+  handleMortgageDataChange,
+  mortgageCalculation,
+} from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
 export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]
 
-const localeOptions = {
-  style: 'currency',
-  currency: 'EUR',
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 0,
+// const localeOptions = {
+//   style: 'currency',
+//   currency: 'EUR',
+//   minimumFractionDigits: 0,
+//   maximumFractionDigits: 0,
+// }
+
+export const currency = (value: number) => {
+  return Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(value)
 }
 
 export const MortgageCalculator = () => {
-  const [depositAmount, setDepositAmount] = useState(70000)
-  const [propertyValue, setPropertyValue] = useState(250000)
+  const [depositAmount, setDepositAmount] = useState(70_000)
+  const [propertyValue, setPropertyValue] = useState(250_000)
   const [mortgageTerm, setMortgageTerm] = useState(30)
   const [interest, setInterest] = useState(2.5)
 
@@ -41,45 +54,35 @@ export const MortgageCalculator = () => {
         </header>
         <Div_GridContainer>
           <Div_GridItem>
-            <Span_GridItemHeader>
-              {amountToBorrow.toLocaleString('de-DE', localeOptions)}
-            </Span_GridItemHeader>
+            <Span_GridItemHeader>{currency(amountToBorrow)}</Span_GridItemHeader>
             <Label_GridItemLabel>Amount To Borrow</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>
-              {monthlyRate.toLocaleString('de-DE', localeOptions)}
-            </Span_GridItemHeader>
+            <Span_GridItemHeader>{currency(monthlyRate)}</Span_GridItemHeader>
             <Label_GridItemLabel>Monthly Payment</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>
-              {totalAmountRepaid.toLocaleString('de-DE', localeOptions)}
-            </Span_GridItemHeader>
+            <Span_GridItemHeader>{currency(totalAmountRepaid)}</Span_GridItemHeader>
             <Label_GridItemLabel>Total Repaid</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>
-              {totalInterestPaid.toLocaleString('de-DE', localeOptions)}
-            </Span_GridItemHeader>
+            <Span_GridItemHeader>{currency(totalInterestPaid)}</Span_GridItemHeader>
             <Label_GridItemLabel>Total Interest Paid</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
             <Span_GridItemHeader>
-              {((depositAmount / propertyValue) * 100).toFixed(1)}%
+              {formatToPercent(depositAmount, propertyValue)}
             </Span_GridItemHeader>
             <Label_GridItemLabel>Deposit</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
             <Span_GridItemHeader>
-              {((amountToBorrow / propertyValue) * 100).toFixed(1)}%
+              {formatToPercent(amountToBorrow, propertyValue)}
             </Span_GridItemHeader>
             <Label_GridItemLabel>Loan To Value</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>
-              {parseInt(String(propertyValue)).toLocaleString('de-DE', localeOptions)}
-            </Span_GridItemHeader>
+            <Span_GridItemHeader>{currency(propertyValue)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
               min='50000'
@@ -93,9 +96,7 @@ export const MortgageCalculator = () => {
             </Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>
-              {parseInt(String(depositAmount)).toLocaleString('de-DE', localeOptions)}
-            </Span_GridItemHeader>
+            <Span_GridItemHeader>{currency(depositAmount)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
               min='1000'

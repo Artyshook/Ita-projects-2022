@@ -1,4 +1,4 @@
-import { MortgageDataType } from './MortgageCalculator'
+import { MortgageDataType, currency } from './MortgageCalculator'
 import { theme } from '../../helpers/theme'
 import React from 'react'
 import styled from 'styled-components'
@@ -15,26 +15,6 @@ type PropsType = {
 }
 
 export const PaymentsTable = (props: PropsType) => {
-  let paymentMonthsArr = []
-  for (let i = 0; i < props.monthlyPayments.length; i++) {
-    paymentMonthsArr.push(
-      <tr key={props.monthlyPayments[i].month}>
-        <td>{props.monthlyPayments[i].month}</td>
-        <td>{props.monthlyPayments[i].interestPaid.toLocaleString('de-DE', localeOptions)}</td>
-        <td>
-          {props.monthlyPayments[i].interestPaidToDate.toLocaleString('de-DE', localeOptions)}
-        </td>
-        <td>{props.monthlyPayments[i].principalRepaid.toLocaleString('de-DE', localeOptions)}</td>
-        <td>
-          {props.monthlyPayments[i].principalRepaidToDate.toLocaleString('de-DE', localeOptions)}
-        </td>
-        <td>
-          {props.monthlyPayments[i].outstandingBalance.toLocaleString('en-GB', localeOptions)}
-        </td>
-      </tr>
-    )
-  }
-
   return (
     <Table_Container>
       <thead>
@@ -47,7 +27,19 @@ export const PaymentsTable = (props: PropsType) => {
           <th>Mortgage Balance</th>
         </tr>
       </thead>
-      <tbody>{paymentMonthsArr}</tbody>
+      <tbody>
+        {' '}
+        {props.monthlyPayments.map(el => (
+          <tr key={el.month}>
+            <td>{el.month}</td>
+            <td>{currency(el.interestPaid)}</td>
+            <td>{currency(el.interestPaidToDate)}</td>
+            <td>{currency(el.principalRepaid)}</td>
+            <td>{currency(el.principalRepaidToDate)}</td>
+            <td>{currency(el.outstandingBalance)}</td>
+          </tr>
+        ))}
+      </tbody>
     </Table_Container>
   )
 }

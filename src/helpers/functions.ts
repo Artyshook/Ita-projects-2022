@@ -29,12 +29,17 @@ export const mortgageCalculation = (amount: number, interest: number, year: numb
   return (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
 }
 
+export const formatToPercent = (depositAmount: number, propertyValue: number) => {
+  return `${((depositAmount / propertyValue) * 100).toFixed()}%`
+}
+
 export const handleMortgageDataChange = (
   amountToBorrow: number,
   interest: number,
   mortgageTerm: number,
   monthlyRate: number
 ) => {
+  //Set initial values for loop to calculate monthly figures
   let monthDataObject = [
     {
       month: 0,
@@ -50,38 +55,37 @@ export const handleMortgageDataChange = (
   let principalRepaidToDate = 0
   mortgageTerm = mortgageTerm * 12
 
-  //Loop each month of the mortgage term
+  //Loop each year of the mortgage term
   for (let i = 1; i <= mortgageTerm; i++) {
-    let monthInterestPaid = 0
-    let interestPaidMonthlyToMonthIncrementer = 0
-    let monthPrincipalPaid = 0
-    let monthlyPrincipalRepaidToMonthIncrementer = 0
-
-    monthInterestPaid = (outstandingBalance * interest) / 100 / 12
-    monthPrincipalPaid = monthlyRate - monthInterestPaid
+    //monthly interest paid
+    const getMonthInterestPaid = (interest: number, outstandingBalance: number) => {
+      return (outstandingBalance * interest) / 100 / 12
+    }
+    let monthInterestPaid = getMonthInterestPaid(interest, outstandingBalance)
+    //accumulative monthly interest paid
+    interestPaidToDate = interestPaidToDate + monthInterestPaid
+    //monthly principal
+    const getMonthPrincipalPaid = (monthlyRate: number, monthInterestPaid: number) => {
+      return monthlyRate - monthInterestPaid
+    }
+    let monthPrincipalPaid = getMonthPrincipalPaid(monthlyRate, monthInterestPaid)
+    //accumulative monthly principal
+    principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
+    //loan left to pay
     outstandingBalance = outstandingBalance - monthPrincipalPaid
-    interestPaidMonthlyToMonthIncrementer =
-      interestPaidMonthlyToMonthIncrementer + monthInterestPaid
-    monthlyPrincipalRepaidToMonthIncrementer =
-      monthlyPrincipalRepaidToMonthIncrementer + monthPrincipalPaid
 
-    interestPaidToDate = interestPaidToDate + interestPaidMonthlyToMonthIncrementer
-    principalRepaidToDate = principalRepaidToDate + monthlyPrincipalRepaidToMonthIncrementer
-
+    //There's always around £10 left at the end which forces the fraph to go into minus. This just rounds the last figure off at £0.00.
     if (i === mortgageTerm) {
       outstandingBalance = 0
     }
-
     monthDataObject.push({
       month: i,
-      outstandingBalance: parseFloat(outstandingBalance.toFixed(2)),
-      interestPaid: parseFloat(interestPaidMonthlyToMonthIncrementer.toFixed(2)),
-      interestPaidToDate: parseFloat(interestPaidToDate.toFixed(2)),
-      principalRepaid: parseFloat(monthlyPrincipalRepaidToMonthIncrementer.toFixed(2)),
-      principalRepaidToDate: parseFloat(principalRepaidToDate.toFixed(2)),
+      outstandingBalance: outstandingBalance,
+      interestPaid: monthInterestPaid,
+      interestPaidToDate: interestPaidToDate,
+      principalRepaid: monthPrincipalPaid,
+      principalRepaidToDate: principalRepaidToDate,
     })
   }
   return monthDataObject
 }
-
-// export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]
