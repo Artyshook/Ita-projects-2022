@@ -1,4 +1,5 @@
 import { GoBackButton } from '../../components/GoBackButton'
+import { Graph } from './Graph'
 import { PaymentsTable } from './PaymentsTable'
 import {
   formatToPercent,
@@ -126,6 +127,7 @@ export const MortgageCalculator = () => {
             <Label_GridItemLabel>Interest Rate</Label_GridItemLabel>
           </Div_GridItem>
         </Div_GridContainer>
+        <Graph calculatedMortgage={monthlyPayments} />
         <PaymentsTable monthlyPayments={monthlyPayments} />
       </Div_Global>
     </div>
