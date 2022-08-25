@@ -6,6 +6,7 @@ import { MemoryGame } from './pages/MemoryGame/MemoryGame'
 import { MortgageCalculator } from './pages/MortgageCalculator/MortgageCalculator'
 import { NewTodoList } from './pages/TodoList/TodoList'
 import { Route, Routes } from 'react-router-dom'
+import { SimpleHttpRequest } from './pages/SimpleHttpRequest'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
 import { urls } from './helpers/urls'
@@ -24,6 +25,7 @@ export const App = () => {
         <Route path={urls.memoryGame} element={<MemoryGame />} />
         <Route path={urls.calculator} element={<MortgageCalculator />} />
         <Route path={urls.filter} element={<FilterByName />} />
+        <Route path={urls.httpFilter} element={<SimpleHttpRequest />} />
       </Routes>
       <GlobalStyle />
     </div>
