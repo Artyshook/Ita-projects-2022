@@ -18,7 +18,7 @@ export const PaymentsTable = (props: PropsType) => {
           <th>Month Principal Repaid</th>
           <th>Total Principal Repaid</th>
           <th>Mortgage Balance</th>
-          <th>Inflation</th>
+          <th>Money value after inflation</th>
           <th>Inflation by month</th>
         </tr>
       </thead>
