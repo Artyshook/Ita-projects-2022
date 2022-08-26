@@ -35,6 +35,10 @@ export const Layout = () => {
           <BiCalculator size='2.5rem' />
           <Link to={urls.calculator}>Mortgage calculator</Link>
         </Li>
+        <Li>
+          <BiCalculator size='2.5rem' />
+          <Link to={urls.httpFilter}>Http request</Link>
+        </Li>
       </Div_Nav>
       <Outlet />
     </>
