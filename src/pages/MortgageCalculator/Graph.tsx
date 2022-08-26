@@ -29,18 +29,18 @@ export const Graph = (props: PropsType) => {
       <Div_Container>
         <Div_Item>
           <LineChart
-            width={600}
-            height={300}
+            width={700}
+            height={400}
             data={chartData}
             margin={{
-              top: 15,
+              top: 5,
               right: 30,
-              left: 10,
-              bottom: 15,
+              left: 20,
+              bottom: 5,
             }}
           >
             <CartesianGrid stroke='#eee' strokeDasharray='3 3' />
-            <XAxis dataKey='index' interval={10} />
+            <XAxis dataKey='XAxis' interval={10} />
             <YAxis />
             <Tooltip />
             <Legend />
@@ -49,24 +49,26 @@ export const Graph = (props: PropsType) => {
               dataKey='remain'
               fill='#82ca9d'
               stroke='#82ca9d'
+              activeDot={{ r: 8 }}
               name='Remain to pay by Month'
             />
             <Line
               type='monotone'
               dataKey='outstandingBalanceInflation'
-              stroke='red'
+              stroke='#F3C84B'
+              activeDot={{ r: 8 }}
               name='Overall inflation'
             />
           </LineChart>
           <LineChart
-            width={600}
-            height={300}
+            width={700}
+            height={400}
             data={chartData}
             margin={{
-              top: 15,
+              top: 5,
               right: 30,
-              left: 10,
-              bottom: 15,
+              left: 20,
+              bottom: 5,
             }}
           >
             <CartesianGrid stroke='#eee' strokeDasharray='3 3' />
@@ -80,6 +82,7 @@ export const Graph = (props: PropsType) => {
               strokeWidth={1}
               fill='#82ca9d'
               stroke='#82ca9d'
+              activeDot={{ r: 8 }}
               name='Interest paid by Month'
             />
             <Line
@@ -96,8 +99,8 @@ export const Graph = (props: PropsType) => {
               dataKey='inflationByMonth'
               strokeWidth={1}
               activeDot={{ r: 8 }}
-              fill='#8884d8'
-              stroke='red'
+              fill='#eeee'
+              stroke='#F3C84B'
               name='Inflation by Month'
             />
           </LineChart>
