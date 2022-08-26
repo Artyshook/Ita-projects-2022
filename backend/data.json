@@ -1,6 +1,6 @@
 {
   "users" : [
-    [{"id":"f656de2e-5b8f-4a2f-a0ef-a22d50a32815","name":"Andriette","city":"Ji’an","gender":"F"},
+    {"id":"f656de2e-5b8f-4a2f-a0ef-a22d50a32815","name":"Andriette","city":"Ji’an","gender":"F"},
       {"id":"ea2b3510-907b-4d51-90a3-2a61016baec6","name":"Ethe","city":"Klutuk","gender":"M"},
       {"id":"feca0334-6d38-42d1-ae01-3eb528560c41","name":"Hazel","city":"Thị Trấn Kim Tân","gender":"F"},
       {"id":"f3bb1809-77d3-41b8-a105-e4d0b492d842","name":"Marc","city":"Tambong","gender":"M"},
@@ -24,6 +24,6 @@
       {"id":"612efc01-258e-4e5f-978d-6a7bf2d13e8f","name":"Conrade","city":"Stockholm","gender":"M"},
       {"id":"006013f6-4f66-47fc-b693-23372c6d16e3","name":"Joanna","city":"Thị Trấn Yên Phú","gender":"F"},
       {"id":"9a4d7e64-10ad-4a04-a96f-6acbc86255b4","name":"Andie","city":"Pā’īn-e Bāzār-e Rūdbār","gender":"M"},
-      {"id":"25bb6e00-bf04-4784-b276-699009fa1269","name":"Fanny","city":"Zrenjanin","gender":"F"}]
+      {"id":"25bb6e00-bf04-4784-b276-699009fa1269","name":"Fanny","city":"Zrenjanin","gender":"F"}
   ]
 }
