@@ -38,6 +38,7 @@ export const handleMortgageDataChange = (arg: {
   interest: number
   mortgageTerm: number
   monthlyRate: number
+  inflationMonthlyRate: number
 }) => {
   //Set initial values for loop to calculate monthly figures
   let monthDataObject = [
@@ -48,27 +49,43 @@ export const handleMortgageDataChange = (arg: {
       interestPaidToDate: 0,
       principalRepaid: 0,
       principalRepaidToDate: 0,
+      outstandingBalanceInflation: 0,
+      inflationByMonth: 0,
     },
   ]
   let outstandingBalance = arg.amountToBorrow
   let interestPaidToDate = 0
   let principalRepaidToDate = 0
+  let outstBalalceInflation = 0
+  let inflationByMonth = 0
+  let previousOutstBalanceInflation = arg.amountToBorrow
+
+  let coefficientOfInflation = 1
   arg.mortgageTerm = arg.mortgageTerm * 12
 
   //Loop each year of the mortgage term
   for (let i = 1; i <= arg.mortgageTerm; i++) {
+    // inflation by month decreasing
+    coefficientOfInflation = coefficientOfInflation * (1 + arg.inflationMonthlyRate)
+    outstBalalceInflation = arg.amountToBorrow * coefficientOfInflation
+    inflationByMonth = previousOutstBalanceInflation - outstBalalceInflation
+    previousOutstBalanceInflation = outstBalalceInflation
+
     //monthly interest paid
     const getMonthInterestPaid = (interest: number, outstandingBalance: number) => {
       return (outstandingBalance * interest) / 100 / 12
     }
     let monthInterestPaid = getMonthInterestPaid(arg.interest, outstandingBalance)
+
     //accumulative monthly interest paid
     interestPaidToDate = interestPaidToDate + monthInterestPaid
+
     //monthly principal
     const getMonthPrincipalPaid = (monthlyRate: number, monthInterestPaid: number) => {
       return monthlyRate - monthInterestPaid
     }
     let monthPrincipalPaid = getMonthPrincipalPaid(arg.monthlyRate, monthInterestPaid)
+
     //accumulative monthly principal
     principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
     //loan left to pay
@@ -85,6 +102,8 @@ export const handleMortgageDataChange = (arg: {
       interestPaidToDate: interestPaidToDate,
       principalRepaid: monthPrincipalPaid,
       principalRepaidToDate: principalRepaidToDate,
+      outstandingBalanceInflation: parseFloat(outstBalalceInflation.toFixed(2)),
+      inflationByMonth: parseFloat(inflationByMonth.toFixed(2)),
     })
   }
   return monthDataObject

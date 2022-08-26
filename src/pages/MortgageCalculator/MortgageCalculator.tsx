@@ -26,17 +26,20 @@ export const MortgageCalculator = () => {
   const [propertyValue, setPropertyValue] = useState(250_000)
   const [mortgageTerm, setMortgageTerm] = useState(30)
   const [interest, setInterest] = useState(2.5)
+  const [inflationInterest, setInflationInterest] = useState(10)
 
   const amountToBorrow = propertyValue - depositAmount
   const monthlyRate = mortgageCalculation(amountToBorrow, interest, mortgageTerm)
   const totalAmountRepaid = monthlyRate * 12 * mortgageTerm
   const totalInterestPaid = totalAmountRepaid - amountToBorrow
+  const inflationMonthlyRate = (1 + -(inflationInterest / 100)) ** (1 / 12) - 1
 
   let arg = {
     amountToBorrow: amountToBorrow,
     interest: interest,
     mortgageTerm: mortgageTerm,
     monthlyRate: monthlyRate,
+    inflationMonthlyRate: inflationMonthlyRate,
   }
   const monthlyPayments = handleMortgageDataChange(arg)
 
@@ -124,7 +127,17 @@ export const MortgageCalculator = () => {
               value={interest}
               onChange={event => setInterest(+event.target.value)}
             />
-            <Label_GridItemLabel>Interest Rate</Label_GridItemLabel>
+            <Label_GridItemLabel>Interest rate</Label_GridItemLabel>
+            <Span_GridItemHeader>{inflationInterest}%</Span_GridItemHeader>
+            <Input_GridItemRangeSlider
+              value={Math.max(0, inflationInterest)}
+              type='range'
+              min='0.1'
+              max='20'
+              step='0.1'
+              onChange={e => setInflationInterest(+e.currentTarget.value)}
+            />
+            <Label_GridItemLabel>Inflation rate</Label_GridItemLabel>
           </Div_GridItem>
         </Div_GridContainer>
         <Graph calculatedMortgage={monthlyPayments} />
