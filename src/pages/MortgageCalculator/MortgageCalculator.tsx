@@ -84,8 +84,8 @@ export const MortgageCalculator = () => {
             <Span_GridItemHeader>{formatCurrency(propertyPrice)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
-              min='50000'
-              max='750000'
+              min='500000'
+              max='10000000'
               step='1000'
               value={propertyPrice}
               onChange={event => setPropertyPrice(+event.target.value)}
@@ -98,8 +98,8 @@ export const MortgageCalculator = () => {
             <Span_GridItemHeader>{formatCurrency(depositAmount)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
-              min='1000'
-              max='150000'
+              min='500000'
+              max='10000000'
               step='1000'
               value={depositAmount}
               onChange={event => setDepositAmount(+event.target.value)}

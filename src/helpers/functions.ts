@@ -1,5 +1,4 @@
-import { createCardsBoard } from '../pages/MemoryGame/Images'
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const useLocalStorage = <T>(key: string, defaultValue: T) => {
   const [value, setValue] = useState<T>(() => {
