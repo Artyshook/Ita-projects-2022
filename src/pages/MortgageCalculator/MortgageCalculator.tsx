@@ -6,6 +6,7 @@ import {
   handleMortgageDataChange,
   mortgageCalculation,
 } from '../../helpers/functions'
+import { inflationMonthlyRate } from '../../helpers/inflationMonthlyRate'
 import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -13,33 +14,33 @@ import styled from 'styled-components'
 export type MortgageDataType = ReturnType<typeof handleMortgageDataChange>[number]
 
 export const formatCurrency = (value: number) => {
-  return Intl.NumberFormat('de-DE', {
+  return Intl.NumberFormat('cs-CZ', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'CZK',
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(value)
 }
 
 export const MortgageCalculator = () => {
-  const [depositAmount, setDepositAmount] = useState(70_000)
-  const [propertyValue, setPropertyValue] = useState(250_000)
+  const [depositAmount, setDepositAmount] = useState(1_000_000)
+  const [propertyPrice, setPropertyPrice] = useState(3_000_000)
   const [mortgageTerm, setMortgageTerm] = useState(30)
-  const [interest, setInterest] = useState(2.5)
-  const [inflationInterest, setInflationInterest] = useState(10)
+  const [interest, setInterest] = useState(4.99)
+  const [inflationInterest, setInflationInterest] = useState(5)
 
-  const amountToBorrow = propertyValue - depositAmount
+  const amountToBorrow = propertyPrice - depositAmount
   const monthlyRate = mortgageCalculation(amountToBorrow, interest, mortgageTerm)
   const totalAmountRepaid = monthlyRate * 12 * mortgageTerm
   const totalInterestPaid = totalAmountRepaid - amountToBorrow
-  const inflationMonthlyRate = (1 + -(inflationInterest / 100)) ** (1 / 12) - 1
+  const inflationByMonth = inflationMonthlyRate(inflationInterest)
 
   let arg = {
     amountToBorrow: amountToBorrow,
     interest: interest,
     mortgageTerm: mortgageTerm,
     monthlyRate: monthlyRate,
-    inflationMonthlyRate: inflationMonthlyRate,
+    inflationMonthlyRate: inflationByMonth,
   }
   const monthlyPayments = handleMortgageDataChange(arg)
 
@@ -69,25 +70,25 @@ export const MortgageCalculator = () => {
           </Div_GridItem>
           <Div_GridItem>
             <Span_GridItemHeader>
-              {formatToPercent(depositAmount, propertyValue)}
+              {formatToPercent(depositAmount, propertyPrice)}
             </Span_GridItemHeader>
             <Label_GridItemLabel>Deposit</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
             <Span_GridItemHeader>
-              {formatToPercent(amountToBorrow, propertyValue)}
+              {formatToPercent(amountToBorrow, propertyPrice)}
             </Span_GridItemHeader>
             <Label_GridItemLabel>Loan To Value</Label_GridItemLabel>
           </Div_GridItem>
           <Div_GridItem>
-            <Span_GridItemHeader>{formatCurrency(propertyValue)}</Span_GridItemHeader>
+            <Span_GridItemHeader>{formatCurrency(propertyPrice)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
               min='50000'
               max='750000'
               step='1000'
-              value={propertyValue}
-              onChange={event => setPropertyValue(+event.target.value)}
+              value={propertyPrice}
+              onChange={event => setPropertyPrice(+event.target.value)}
             />
             <Label_GridItemLabel htmlFor='purchasingHousePrice'>
               Real estate price

@@ -102,8 +102,8 @@ export const handleMortgageDataChange = (arg: {
       interestPaidToDate: interestPaidToDate,
       principalRepaid: monthPrincipalPaid,
       principalRepaidToDate: principalRepaidToDate,
-      outstandingBalanceInflation: parseFloat(outstBalalceInflation.toFixed(2)),
-      inflationByMonth: parseFloat(inflationByMonth.toFixed(2)),
+      outstandingBalanceInflation: outstBalalceInflation,
+      inflationByMonth: inflationByMonth,
     })
   }
   return monthDataObject
