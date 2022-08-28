@@ -18,7 +18,7 @@ export const coverArr: { [index: string]: string } = {
     'https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 }
 
-export const options = Object.entries(coverArr).map(([key]) => ({
+export const options = Object.keys(coverArr).map(key => ({
   value: key,
   label: key,
 }))
