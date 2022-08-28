@@ -27,6 +27,7 @@ export const theme = {
     black: '#1c1c1c',
     grey: '#dcdcdc',
     darkGrey: '#818589',
+    link: '#a9a9a9',
     whiteGrey: 'gainsboro',
     boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
     boxShadow2: `6px 4px 15px 3px rgba(33, 60, 70, 0.2)`,
@@ -35,6 +36,8 @@ export const theme = {
     backgroundColor: '#fffff',
     backgroungColorHome:
       'linear-gradient(34deg, rgba(255,255,255,1) 25%, rgba(186,203,254,1) 93%, rgba(161,184,253,1) 100%, rgba(104,209,209,1) 100%);',
+    lightBlue: '#0080ff',
+    tagBackground: 'linear-gradient(to right, #6190e8, #a7bfe8)',
   },
   mediaMaxSizes: {
     mobile: '480px',
