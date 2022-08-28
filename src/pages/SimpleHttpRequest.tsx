@@ -1,5 +1,5 @@
 import { BiSearchAlt2 } from 'react-icons/bi'
-import { filterByName } from '../helpers/urls'
+import { filterByName } from '../helpers/services'
 import { theme } from '../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'

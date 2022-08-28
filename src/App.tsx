@@ -1,3 +1,5 @@
+import { BlogPage } from './pages/Blog/BlogPage'
+import { BlogUseContext } from './pages/Blog/Blog'
 import { CounterApp } from './pages/Counter/CounterApp'
 import { FilterByName } from './pages/Filter/FilterByName'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
@@ -24,6 +26,8 @@ export const App = () => {
         <Route path={urls.hackerTyper} element={<HackerTyper />} />
         <Route path={urls.memoryGame} element={<MemoryGame />} />
         <Route path={urls.calculator} element={<MortgageCalculator />} />
+        <Route path={urls.blog} element={<BlogUseContext />} />
+        <Route path={urls.blogPage} element={<BlogPage />} />
         <Route path={urls.filter} element={<FilterByName />} />
         <Route path={urls.httpFilter} element={<SimpleHttpRequest />} />
       </Routes>
@@ -36,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     box-sizing: border-box;
     background-color: ${theme.background.backgroundColor};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
