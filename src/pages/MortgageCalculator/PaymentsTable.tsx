@@ -18,10 +18,11 @@ export const PaymentsTable = (props: PropsType) => {
           <th>Month Principal Repaid</th>
           <th>Total Principal Repaid</th>
           <th>Mortgage Balance</th>
+          <th>Money value after inflation</th>
+          <th>Inflation by month</th>
         </tr>
       </thead>
       <tbody>
-        {' '}
         {props.monthlyPayments.map(el => (
           <tr key={el.month}>
             <td>{el.month}</td>
@@ -30,6 +31,8 @@ export const PaymentsTable = (props: PropsType) => {
             <td>{formatCurrency(el.principalRepaid)}</td>
             <td>{formatCurrency(el.principalRepaidToDate)}</td>
             <td>{formatCurrency(el.outstandingBalance)}</td>
+            <td>{formatCurrency(el.outstandingBalanceInflation)}</td>
+            <td>{formatCurrency(el.inflationByMonth)}</td>
           </tr>
         ))}
       </tbody>
