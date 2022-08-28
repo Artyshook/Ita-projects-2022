@@ -6,7 +6,7 @@ import {
   handleMortgageDataChange,
   mortgageCalculation,
 } from '../../helpers/functions'
-import { inflationMonthlyRate } from '../../helpers/InflationMonthlyRate'
+import { inflationMonthlyRate } from '../../helpers/inflationMonthlyRate'
 import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
