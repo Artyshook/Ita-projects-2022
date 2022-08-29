@@ -1,0 +1,84 @@
+import { AddPostContext } from './AddPostContext'
+import { Button_MyButton } from '../listPosts/ListPosts'
+import { CgAddR } from 'react-icons/cg'
+import { options } from '../../../helpers/data'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
+import React, { useContext } from 'react'
+import Select from 'react-select'
+import styled from 'styled-components'
+
+export const AddPost = () => {
+  const logic = useContext(AddPostContext)
+  return (
+    <div>
+      <h1>All Articles</h1>
+      <p>an amazing place to make yourself productive and have fun with daily updates.</p>
+      <Button_MyButton onClick={() => logic.setFormShown(true)}>
+        <CgAddR size='2rem' />
+        <div>Add your post</div>
+      </Button_MyButton>
+      <Modal
+        show={logic.formShown}
+        onHide={() => {
+          logic.resetStates()
+          logic.setFormShown(false)
+          logic.setError(null)
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Start your new story</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Enter a title for your post</Form.Label>
+              <Form.Control
+                as='textarea'
+                rows={1}
+                value={logic.title}
+                onChange={event => {
+                  logic.setTitle(event.currentTarget.value)
+                  logic.setError(null)
+                }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Choose category</Form.Label>
+              <Select
+                options={options}
+                value={options.filter(option => option.value === logic.category)}
+                onChange={e => {
+                  e !== null && logic.setCategory(e.value)
+                }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Add text, We support Markdown :)</Form.Label>
+              <Form.Control
+                value={logic.postText}
+                as='textarea'
+                rows={10}
+                onChange={event => {
+                  logic.setPostText(event.currentTarget.value)
+                }}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          {logic.error ? <ErrorMessage>{logic.error}</ErrorMessage> : null}
+          <Button variant='primary' onClick={logic.inputCheck}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  )
+}
+
+const ErrorMessage = styled.div`
+  text-align: center;
+  color: red;
+`

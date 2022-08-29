@@ -1,6 +1,6 @@
-import { BlogPage } from './pages/Blog/BlogPage'
-import { BlogUseContext } from './pages/Blog/Blog'
+import { BlogWithServer } from './pages/BlogWithServer/BlogWithServer'
 import { CounterApp } from './pages/Counter/CounterApp'
+import { DetailPostUseContext } from './pages/BlogWithServer/postDatail/PostDetailContext'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
 import { Layout } from './pages/Layouts/Layout'
 import { MemoryGame } from './pages/MemoryGame/MemoryGame'
@@ -25,8 +25,8 @@ export const App = () => {
         <Route path={urls.hackerTyper} element={<HackerTyper />} />
         <Route path={urls.memoryGame} element={<MemoryGame />} />
         <Route path={urls.calculator} element={<MortgageCalculator />} />
-        <Route path={urls.blog} element={<BlogUseContext />} />
-        <Route path={urls.blogPage} element={<BlogPage />} />
+        <Route path={urls.blog} element={<BlogWithServer />} />
+        <Route path={urls.blogPage} element={<DetailPostUseContext />} />
         <Route path={urls.httpFilter} element={<SimpleHttpRequest />} />
       </Routes>
       <GlobalStyle />
