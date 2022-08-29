@@ -41,6 +41,7 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 0,
     // "comma-dangle": ["warn", "always-multiline"],
     eqeqeq: 'error',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'max-len': 'off',
     'new-parens': 'error',
     'no-bitwise': 'error',
