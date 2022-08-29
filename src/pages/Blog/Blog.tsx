@@ -54,7 +54,7 @@ const useLogicState = () => {
   }
 
   const inputCheck = () => {
-    if (formData.find(el => el.url === url) && !title.trim()) {
+    if (formData.find(el => el.url === title.trim())) {
       setError('a similar title already exists, please type another')
     } else if (!category) {
       setError('please select a category')
