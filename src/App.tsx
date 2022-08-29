@@ -1,7 +1,6 @@
 import { BlogPage } from './pages/Blog/BlogPage'
 import { BlogUseContext } from './pages/Blog/Blog'
 import { CounterApp } from './pages/Counter/CounterApp'
-import { FilterByName } from './pages/Filter/FilterByName'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
 import { Layout } from './pages/Layouts/Layout'
 import { MemoryGame } from './pages/MemoryGame/MemoryGame'
@@ -28,7 +27,6 @@ export const App = () => {
         <Route path={urls.calculator} element={<MortgageCalculator />} />
         <Route path={urls.blog} element={<BlogUseContext />} />
         <Route path={urls.blogPage} element={<BlogPage />} />
-        <Route path={urls.filter} element={<FilterByName />} />
         <Route path={urls.httpFilter} element={<SimpleHttpRequest />} />
       </Routes>
       <GlobalStyle />
