@@ -1,20 +1,31 @@
-import { BlogData } from '../../Blog/Blog'
+import { BlogData } from '../addPost/PostContext'
 import { DetailPost } from './PostDetail'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
-import { useLocalStorage } from '../../../helpers/functions'
+import { getPostBySlug } from '../../../helpers/services'
+import { useAsyncComponentDidMount } from '../../../helpers/UseComponentDidMount'
 import { useParams } from 'react-router'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 
 const useLogicState = () => {
   const params = useParams()
-  const [blogData, setBlogData] = useLocalStorage('blog', [] as BlogData[])
+  const [data, setData] = useState({} as BlogData)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null as string | null)
 
-  const blog = blogData?.find(post => post.url === params.blogSlug)
+  useAsyncComponentDidMount(async () => {
+    try {
+      setLoading(true)
+      const response = await getPostBySlug(params.blogSlug)
+      setError(null)
+      setData(response[0])
+    } catch (error) {
+      setError(`fetching error`)
+    }
+    setLoading(false)
+  })
 
   return {
-    blogData,
-    setBlogData,
-    blog,
+    data,
   }
 }
 

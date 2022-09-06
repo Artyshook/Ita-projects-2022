@@ -108,7 +108,7 @@ export const handleMortgageDataChange = (arg: {
   return monthDataObject
 }
 
-export const convertToSlug = (title: string) => {
+export let convertToSlug = (title: string) => {
   return title
     .toLowerCase()
     .trim()

@@ -1,4 +1,4 @@
-import { BlogData } from '../../Blog/Blog'
+import { BlogData } from './PostContext'
 import { Link } from 'react-router-dom'
 import { avatar } from '../../../helpers/data'
 import { blogIdUrl } from '../../../helpers/urls'
@@ -9,20 +9,23 @@ import styled from 'styled-components'
 
 type PropsType = {
   post: BlogData
+  deleteBySlug: (id: string) => void
 }
-export const PostCard = (props: PropsType) => {
+
+export const PostCard2 = (props: PropsType) => {
   return (
     <Div_Container>
       <Img_Cover src={props.post.cover} alt='cover' />
       <H3>{props.post.title}</H3>
       <P_Post>
         <Markdown>{props.post.post}</Markdown>
+        <Button_Delete onClick={() => props.deleteBySlug(props.post.slug)}>X</Button_Delete>
       </P_Post>
       <Footer>
         <Div_Author>
           <Img_AuthorImg src={avatar} alt='avatar' />
         </Div_Author>
-        <Link_Link to={blogIdUrl(props.post.url)}>Discover ➝</Link_Link>
+        <Link_Link to={blogIdUrl(props.post.slug)}>Discover ➝</Link_Link>
       </Footer>
     </Div_Container>
   )
@@ -56,10 +59,12 @@ const H3 = styled.h3`
 const P_Post = styled.p`
   :before {
     position: absolute;
-    content: '...';
     bottom: 0;
     right: 0;
   }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
   max-height: 50px;
   max-width: 300px;
@@ -82,4 +87,16 @@ const Link_Link = styled(Link)`
   text-decoration: none;
   color: inherit;
   font-size: ${theme.fonts.xs};
+`
+const Button_Delete = styled.button`
+  font-size: 0.7rem;
+  background: ${theme.background.tagBackground};
+  border: none;
+  color: #fff;
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
+  width: fit-content;
+  text-transform: capitalize;
+  align-items: start;
+  justify-content: start;
 `

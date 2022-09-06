@@ -11,22 +11,20 @@ export const DetailPost = () => {
 
   return (
     <>
-      <Link_GoBack to={urls.blog}>
+      <Link_GoBack to={urls?.blog}>
         <span> ← </span> <span>Go Back</span>
       </Link_GoBack>
       <Div_Wrapper>
-        {logic.blog && (
-          <div>
-            <Header>
-              <H1>{logic.blog.title}</H1>
-              <P_Category>{logic.blog.category}</P_Category>
-            </Header>
-            <Img_Cover src={logic.blog.cover} alt='cover' />
-            <P_Post>
-              <Markdown>{logic.blog.post}</Markdown>
-            </P_Post>
-          </div>
-        )}
+        <div>
+          <Header>
+            <H1>{logic.data.title || ''}</H1>
+            <P_Category>{logic.data.category || ''}</P_Category>
+          </Header>
+          <Img_Cover src={logic.data.cover || ''} alt='cover' />
+          <P_Post>
+            <Markdown>{logic.data.post || ''}</Markdown>
+          </P_Post>
+        </div>
       </Div_Wrapper>
     </>
   )

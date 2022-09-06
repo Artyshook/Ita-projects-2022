@@ -11,8 +11,10 @@ export const urls = {
   httpFilter: '/http-filter',
   blog: '/blog',
   blogPage: '/blog/:blogSlug',
+  blogNewArticle: '/blog/newArticle',
+  listBlogs: '/blog/list',
 }
 
-export const blogIdUrl = (blogId: string) => {
-  return `/blog/${blogId}`
+export const blogIdUrl = (blogSlug: string) => {
+  return `/blog/${blogSlug}`
 }

@@ -1,67 +1,71 @@
-// import * as dotenv from 'dotenv'
+import { convertToSlug } from '../../src/helpers/functions'
+import { coverArr } from '../../src/helpers/data'
+import { v1 } from 'uuid'
+import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import fs from 'fs'
-// import mongoose from 'mongoose'
 
 const app = express()
 const port = 1234
-const dotenv = require('dotenv')
-const mongoose = require('mongoose')
-
-dotenv.config()
-
-mongoose
-  .connect(process.env.MONGO_URL, {
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .then(console.log('Connected to MongoDB'))
-  .catch((err: any) => console.log(err))
 
 app.use(cors())
+app.use(bodyParser.json())
 
-type Users = {
+type Post = {
   id: string
-  name: string
-  city: string
-  gender: string
+  title: string
+  post: string
+  slug: string
+  category: string
+  cover: string
 }
+
 const unification = (name: string) =>
   name.toLowerCase().trim().replace(/ +/g, '').replace(/[y]/g, 'i')
 
-// app.get('/', (req, res, next) => {
-//   try {
-//     const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
-//     const data = JSON.parse(dataString).users
-//
-//     res.send(
-//       data.filter((user: Users) =>
-//         unification(user.name).includes(unification(req.query.search!.toString()))
-//       )
-//     )
-//   } catch (error) {
-//     console.log(error)
-//     res.sendStatus(400)
-//   }
-// })
+const getDataFromStorage = () => {
+  const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
+  return JSON.parse(dataString).posts
+}
 
-// app.post('/articles/', (req, res) => {
-//   const newPost = new Post(req.body)
-//   try {
-//   } catch (error) {
-//     console.log(error)
-//     res.sendStatus(400)
-//   }
-// })
+const putDataToStorage = (posts: Post[]) => {
+  fs.writeFileSync(`${__dirname}/../data.json`, JSON.stringify({ posts }), 'utf-8')
+}
 
-app.post('/', (req, res, next) => {
-  try {
-    const data = req.body
-  } catch (error) {
-    console.log(error)
-    res.sendStatus(400)
+//list articles
+app.get('/articles', (req, res) => {
+  res.send(getDataFromStorage())
+})
+
+//add article
+app.post('/articles', (req, res) => {
+  const newPost: Post = {
+    title: req.body.title,
+    id: v1(),
+    post: req.body.postText,
+    slug: convertToSlug(req.body.title),
+    category: req.body.category,
+    cover: coverArr[req.body.category],
   }
+  const posts = getDataFromStorage()
+  putDataToStorage([newPost, ...posts])
+  res.send(newPost)
+})
+
+//get article detail
+app.get('/articles/:blogSlug', (req, res) => {
+  const posts = getDataFromStorage()
+  const findPostBySlug = posts.filter((post: Post) => post.slug === req.params.blogSlug)
+  res.send(findPostBySlug)
+})
+
+//delete post
+app.delete('/articles/:blogSlug', (req, res) => {
+  const postsFromStorage = getDataFromStorage()
+  const findPostById = postsFromStorage.filter((post: Post) => post.slug !== req.params.blogSlug)
+  putDataToStorage(findPostById)
+  res.send(findPostById)
 })
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -73,5 +77,3 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-export {}

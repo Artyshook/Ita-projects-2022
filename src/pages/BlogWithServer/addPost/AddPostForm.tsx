@@ -1,7 +1,5 @@
-import { AddPostContext } from './AddPostContext'
-import { Button_MyButton } from '../listPosts/ListPosts'
-import { CgAddR } from 'react-icons/cg'
-import { options } from '../../../helpers/data'
+import { AddPostContext } from './PostContext'
+import { optionsArr } from '../../../helpers/data'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -9,16 +7,10 @@ import React, { useContext } from 'react'
 import Select from 'react-select'
 import styled from 'styled-components'
 
-export const AddPost = () => {
+export const AddPostForm = () => {
   const logic = useContext(AddPostContext)
   return (
     <div>
-      <h1>All Articles</h1>
-      <p>an amazing place to make yourself productive and have fun with daily updates.</p>
-      <Button_MyButton onClick={() => logic.setFormShown(true)}>
-        <CgAddR size='2rem' />
-        <div>Add your post</div>
-      </Button_MyButton>
       <Modal
         show={logic.formShown}
         onHide={() => {
@@ -47,8 +39,8 @@ export const AddPost = () => {
             <Form.Group>
               <Form.Label>Choose category</Form.Label>
               <Select
-                options={options}
-                value={options.filter(option => option.value === logic.category)}
+                options={optionsArr}
+                value={optionsArr.filter(option => option.value === logic.category)}
                 onChange={e => {
                   e !== null && logic.setCategory(e.value)
                 }}

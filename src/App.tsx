@@ -1,4 +1,4 @@
-import { BlogWithServer } from './pages/BlogWithServer/BlogWithServer'
+import { AddPostUseContext } from './pages/BlogWithServer/addPost/PostContext'
 import { CounterApp } from './pages/Counter/CounterApp'
 import { DetailPostUseContext } from './pages/BlogWithServer/postDatail/PostDetailContext'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
@@ -7,7 +7,6 @@ import { MemoryGame } from './pages/MemoryGame/MemoryGame'
 import { MortgageCalculator } from './pages/MortgageCalculator/MortgageCalculator'
 import { NewTodoList } from './pages/TodoList/TodoList'
 import { Route, Routes } from 'react-router-dom'
-import { SimpleHttpRequest } from './pages/SimpleHttpRequest'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
 import { urls } from './helpers/urls'
@@ -25,9 +24,8 @@ export const App = () => {
         <Route path={urls.hackerTyper} element={<HackerTyper />} />
         <Route path={urls.memoryGame} element={<MemoryGame />} />
         <Route path={urls.calculator} element={<MortgageCalculator />} />
-        <Route path={urls.blog} element={<BlogWithServer />} />
+        <Route path={urls.blog} element={<AddPostUseContext />} />
         <Route path={urls.blogPage} element={<DetailPostUseContext />} />
-        <Route path={urls.httpFilter} element={<SimpleHttpRequest />} />
       </Routes>
       <GlobalStyle />
     </div>

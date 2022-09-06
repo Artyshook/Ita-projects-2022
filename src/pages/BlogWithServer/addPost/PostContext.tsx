@@ -1,13 +1,12 @@
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
-import { Link_GoBack } from './BlogPage'
-import { PostCard } from './PostCard'
-import { convertToSlug, useLocalStorage } from '../../helpers/functions'
-import { coverArr } from '../../helpers/data'
-import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
-import { theme } from '../../helpers/theme'
-import { urls } from '../../helpers/urls'
-import { v1 } from 'uuid'
+import { Link_GoBack } from '../../Blog/BlogPage'
+import { PostCard2 } from './PostCard'
+import { addNewPost, deletePostBySlug, listAllPosts } from '../../../helpers/services'
+import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
+import { theme } from '../../../helpers/theme'
+import { urls } from '../../../helpers/urls'
+import { useAsyncComponentDidMount } from '../../../helpers/UseComponentDidMount'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
@@ -15,21 +14,30 @@ export type BlogData = {
   id: string
   title: string
   post: string
-  url: string
+  slug: string
   category: string
   cover: string
 }
 
 const useLogicState = () => {
   const [formShown, setFormShown] = useState(false)
-  const [formData, setFormData] = useLocalStorage('blog', [] as BlogData[])
+  const [data, setData] = useState([] as BlogData[])
   const [title, setTitle] = useState('')
   const [postText, setPostText] = useState('')
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
+  const [loading, setLoading] = useState(false)
 
-  const slug = convertToSlug(title)
-  const cover2 = coverArr[category]
+  useAsyncComponentDidMount(async () => {
+    setLoading(true)
+    try {
+      setData(await listAllPosts())
+      setError(null)
+      setLoading(false)
+    } catch (error) {
+      setError(`fetching error`)
+    }
+  })
 
   const resetStates = () => {
     setTitle('')
@@ -37,37 +45,49 @@ const useLogicState = () => {
     setCategory('')
   }
 
-  const setData = () => {
-    setFormData(prevData => [
-      {
-        id: v1(),
-        title: title,
-        url: slug,
-        post: postText,
-        category: category,
-        cover: cover2,
-      },
-      ...prevData,
-    ])
-    setFormShown(false)
-    resetStates()
+  const addPost = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const postData = { title, postText, category }
+      const response = await addNewPost(postData)
+      setData(await listAllPosts())
+    } catch (err) {
+      if (err) setError('Can`t fetch data')
+    } finally {
+      setLoading(false)
+      setFormShown(false)
+      resetStates()
+    }
+  }
+
+  const deleteBySlug = async (slug: string) => {
+    try {
+      setLoading(true)
+      const response = await deletePostBySlug(slug)
+      setError(null)
+      setLoading(false)
+      setData(await listAllPosts())
+    } catch (error) {
+      setError(`fetching error`)
+    }
   }
 
   const inputCheck = () => {
-    if (formData.find(el => el.url === title.trim())) {
+    if (data.find(el => el.slug === title.trim())) {
       setError('a similar title already exists, please type another')
     } else if (!category) {
       setError('please select a category')
     } else if (!postText.trim()) {
       setError('the article was not entered ')
     } else {
-      setData()
+      addPost()
     }
   }
 
   return {
-    formData,
-    setFormData,
+    data,
+    setData,
     formShown,
     setFormShown,
     title,
@@ -80,22 +100,23 @@ const useLogicState = () => {
     error,
     setError,
     resetStates,
+    deleteBySlug,
   }
 }
 
-export const { ContextProvider: BlogContextProvider, Context: BlogContext } =
+export const { ContextProvider: AddBlogContextProvider, Context: AddPostContext } =
   genericHookContextBuilder(useLogicState)
 
-export const BlogUseContext = () => {
+export const AddPostUseContext = () => {
   return (
-    <BlogContextProvider>
-      <Blog />
-    </BlogContextProvider>
+    <AddBlogContextProvider>
+      <BlogWithServer />
+    </AddBlogContextProvider>
   )
 }
 
-export const Blog = () => {
-  const logic = useContext(BlogContext)
+export const BlogWithServer = () => {
+  const logic = useContext(AddPostContext)
 
   return (
     <>
@@ -109,11 +130,13 @@ export const Blog = () => {
           <CgAddR size='2rem' />
           <div>Add your post</div>
         </Button_MyButton>
-        {/*<AddPostForm />*/}
+        <AddPostForm />
         <GridContainer>
-          {logic.formData.map(post => (
-            <PostCard key={post.id} post={post} />
-          ))}
+          {logic.data
+            ? logic.data.map(post => (
+                <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
+              ))
+            : null}
         </GridContainer>
       </Div_Wrapper>
     </>
