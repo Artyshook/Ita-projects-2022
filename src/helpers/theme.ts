@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const theme = {
   fonts: {
+    xxs: '0.7rem',
     xs: '1rem',
     small: '1.5rem',
     sMedium: '2.5rem',

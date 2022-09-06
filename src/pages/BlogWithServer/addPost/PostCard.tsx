@@ -89,10 +89,10 @@ const Link_Link = styled(Link)`
   font-size: ${theme.fonts.xs};
 `
 const Button_Delete = styled.button`
-  font-size: 0.7rem;
+  font-size: ${theme.fonts.xxs};
   background: ${theme.background.tagBackground};
   border: none;
-  color: #fff;
+  color: ${theme.colors.white};
   padding: 0.5rem 0.7rem;
   border-radius: 5px;
   width: fit-content;
