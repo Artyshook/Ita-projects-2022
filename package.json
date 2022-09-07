@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/select": "^2.0.10",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
@@ -16,7 +15,6 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/uuid": "^8.3.4",
-    "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "cors": "^2.8.5",
     "eslint": "^7.32.0",
