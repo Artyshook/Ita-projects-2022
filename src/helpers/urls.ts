@@ -10,9 +10,10 @@ export const urls = {
   newPost: '/blog/new-article',
   httpFilter: '/http-filter',
   blog: '/blog',
-  blogPage: '/blog/:blogSlug',
-  blogNewArticle: '/blog/newArticle',
-  listBlogs: '/blog/list',
+  blogWithServer: {
+    blogList: '/blog/list',
+    blogPage: '/blog/:blogSlug',
+  },
 }
 
 export const blogIdUrl = (blogSlug: string) => {

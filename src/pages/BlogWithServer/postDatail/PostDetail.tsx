@@ -11,7 +11,7 @@ export const DetailPost = () => {
 
   return (
     <>
-      <Link_GoBack to={urls.blog}>
+      <Link_GoBack to={urls.blogWithServer.blogList}>
         <span> ← </span> <span>Go Back</span>
       </Link_GoBack>
       <Div_Wrapper>

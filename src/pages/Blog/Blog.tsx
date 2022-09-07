@@ -109,7 +109,7 @@ export const Blog = () => {
           <CgAddR size='2rem' />
           <div>Add your post</div>
         </Button_MyButton>
-        {/*<AddPostForm />*/}
+        <AddPostForm />
         <GridContainer>
           {logic.formData.map(post => (
             <PostCard key={post.id} post={post} />

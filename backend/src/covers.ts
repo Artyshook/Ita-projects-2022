@@ -1,4 +1,4 @@
-export const coverArr: { [index: string]: string } = {
+export const coverArr = {
   travel:
     'https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   nature:

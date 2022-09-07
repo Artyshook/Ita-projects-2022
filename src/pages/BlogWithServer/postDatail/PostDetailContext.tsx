@@ -15,7 +15,7 @@ const useLogicState = () => {
   useAsyncComponentDidMount(async () => {
     try {
       setLoading(true)
-      const response = await getPostBySlug(params.blogSlug)
+      const response = await getPostBySlug(params.blogSlug!)
       setError(null)
       setData(response[0])
     } catch (error) {

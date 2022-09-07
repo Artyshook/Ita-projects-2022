@@ -18,6 +18,8 @@ export const coverArr: { [index: string]: string } = {
     'https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 }
 
+export type OptionType = typeof optionsArr
+
 export const optionsArr = [
   { value: 'travel', label: 'travel' },
   { value: 'nature', label: 'nature' },
@@ -38,11 +40,3 @@ export const options = Object.keys(coverArr).map(key => ({
 
 export const avatar =
   'https://media.istockphoto.com/vectors/woman-with-laptop-sitting-in-nature-and-leaves-concept-illustration-vector-id1139913278?k=20&m=1139913278&s=612x612&w=0&h=Ue0Nh74fYCnNd5hfwBCLwJ2VeZqjXxnI5iEXqqTLXb8='
-
-// 'art'
-//   'coding'
-//   'design'
-//   'home'
-//   'sky'
-//   'abstract'
-//   'background'

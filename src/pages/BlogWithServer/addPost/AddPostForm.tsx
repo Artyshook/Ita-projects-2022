@@ -7,8 +7,11 @@ import React, { useContext } from 'react'
 import Select from 'react-select'
 import styled from 'styled-components'
 
+export const options1 = ['1', '2', '3', '4']
+
 export const AddPostForm = () => {
   const logic = useContext(AddPostContext)
+
   return (
     <div>
       <Modal

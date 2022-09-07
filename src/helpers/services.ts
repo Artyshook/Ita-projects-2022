@@ -1,10 +1,12 @@
-type postArr = {
+import { BlogData } from '../pages/BlogWithServer/addPost/PostContext'
+
+type InputData = {
   title: string
   postText: string
   category: string
 }
 
-export const addNewPost = async (post: postArr) => {
+export const addNewPost = async (post: InputData): Promise<BlogData> => {
   const response = await fetch(`${process.env.REACT_APP_URL_GET_ARTICLES}`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -14,19 +16,19 @@ export const addNewPost = async (post: postArr) => {
   return await response.json()
 }
 
-export const listAllPosts = async () => {
+export const listAllPosts = async (): Promise<BlogData[]> => {
   const response = await fetch(`${process.env.REACT_APP_URL_GET_ARTICLES}`)
   if (!response.ok) throw new Error('Server side error')
   return await response.json()
 }
 
-export const getPostBySlug = async (blogSlug: string | undefined) => {
+export const getPostBySlug = async (blogSlug: string): Promise<BlogData[]> => {
   const response = await fetch(`${process.env.REACT_APP_URL_GET_ARTICLES_DETAIL}${blogSlug}`)
   if (!response.ok) throw new Error('Server side error')
   return await response.json()
 }
 
-export const deletePostBySlug = async (blogSlug: string) => {
+export const deletePostBySlug = async (blogSlug: string): Promise<BlogData> => {
   const response = await fetch(`${process.env.REACT_APP_URL_GET_ARTICLES_DETAIL}${blogSlug}`, {
     method: 'DELETE',
     headers: {

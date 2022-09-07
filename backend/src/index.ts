@@ -24,7 +24,7 @@ type Post = {
 const unification = (name: string) =>
   name.toLowerCase().trim().replace(/ +/g, '').replace(/[y]/g, 'i')
 
-const getDataFromStorage = () => {
+const getDataFromStorage = (): Post[] => {
   const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
   return JSON.parse(dataString).posts
 }
@@ -33,12 +33,10 @@ const putDataToStorage = (posts: Post[]) => {
   fs.writeFileSync(`${__dirname}/../data.json`, JSON.stringify({ posts }), 'utf-8')
 }
 
-//list articles
 app.get('/articles', (req, res) => {
   res.send(getDataFromStorage())
 })
 
-//add article
 app.post('/articles', (req, res) => {
   const newPost: Post = {
     title: req.body.title,
@@ -53,17 +51,15 @@ app.post('/articles', (req, res) => {
   res.send(newPost)
 })
 
-//get article detail
 app.get('/articles/:blogSlug', (req, res) => {
   const posts = getDataFromStorage()
-  const findPostBySlug = posts.filter((post: Post) => post.slug === req.params.blogSlug)
+  const findPostBySlug = posts.filter(post => post.slug === req.params.blogSlug)
   res.send(findPostBySlug)
 })
 
-//delete post
 app.delete('/articles/:blogSlug', (req, res) => {
   const postsFromStorage = getDataFromStorage()
-  const findPostById = postsFromStorage.filter((post: Post) => post.slug !== req.params.blogSlug)
+  const findPostById = postsFromStorage.filter(post => post.slug !== req.params.blogSlug)
   putDataToStorage(findPostById)
   res.send(findPostById)
 })

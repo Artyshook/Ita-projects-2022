@@ -1,4 +1,4 @@
-import { AddPostUseContext } from './pages/BlogWithServer/addPost/PostContext'
+import { BlogUseContext } from './pages/BlogWithServer/addPost/PostContext'
 import { CounterApp } from './pages/Counter/CounterApp'
 import { DetailPostUseContext } from './pages/BlogWithServer/postDatail/PostDetailContext'
 import { HackerTyper } from './pages/HackerType/HackerTyper'
@@ -24,8 +24,8 @@ export const App = () => {
         <Route path={urls.hackerTyper} element={<HackerTyper />} />
         <Route path={urls.memoryGame} element={<MemoryGame />} />
         <Route path={urls.calculator} element={<MortgageCalculator />} />
-        <Route path={urls.blog} element={<AddPostUseContext />} />
-        <Route path={urls.blogPage} element={<DetailPostUseContext />} />
+        <Route path={urls.blogWithServer.blogList} element={<BlogUseContext />} />
+        <Route path={urls.blogWithServer.blogPage} element={<DetailPostUseContext />} />
       </Routes>
       <GlobalStyle />
     </div>

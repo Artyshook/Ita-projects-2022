@@ -36,6 +36,8 @@ const useLogicState = () => {
       setLoading(false)
     } catch (error) {
       setError(`fetching error`)
+    } finally {
+      setLoading(false)
     }
   })
 
@@ -49,11 +51,10 @@ const useLogicState = () => {
     try {
       setLoading(true)
       setError(null)
-      const postData = { title, postText, category }
-      const response = await addNewPost(postData)
+      const response = await addNewPost({ title, postText, category })
       setData(await listAllPosts())
     } catch (err) {
-      if (err) setError('Can`t fetch data')
+      setError('Can`t fetch data')
     } finally {
       setLoading(false)
       setFormShown(false)
@@ -70,6 +71,8 @@ const useLogicState = () => {
       setData(await listAllPosts())
     } catch (error) {
       setError(`fetching error`)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -107,7 +110,7 @@ const useLogicState = () => {
 export const { ContextProvider: AddBlogContextProvider, Context: AddPostContext } =
   genericHookContextBuilder(useLogicState)
 
-export const AddPostUseContext = () => {
+export const BlogUseContext = () => {
   return (
     <AddBlogContextProvider>
       <BlogWithServer />
