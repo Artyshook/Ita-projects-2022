@@ -18,9 +18,7 @@ export const coverArr: { [index: string]: string } = {
     'https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 }
 
-export type OptionType = typeof optionsArr
-
-export const optionsArr = [
+export const options2 = [
   { value: 'travel', label: 'travel' },
   { value: 'nature', label: 'nature' },
   { value: 'art', label: 'art' },

@@ -15,16 +15,18 @@ export const DetailPost = () => {
         <span> ← </span> <span>Go Back</span>
       </Link_GoBack>
       <Div_Wrapper>
-        <div>
-          <Header>
-            <H1>{logic.data.title || ''}</H1>
-            <P_Category>{logic.data.category || ''}</P_Category>
-          </Header>
-          <Img_Cover src={logic.data.cover || ''} alt='cover' />
-          <P_Post>
-            <Markdown>{logic.data.post || ''}</Markdown>
-          </P_Post>
-        </div>
+        {logic.blogData && (
+          <div>
+            <Header>
+              <H1>{logic.blogData.title ?? ''}</H1>
+              <P_Category>{logic.blogData.category ?? ''}</P_Category>
+            </Header>
+            <Img_Cover src={logic.blogData.cover ?? ''} alt='cover' />
+            <P_Post>
+              <Markdown>{logic.blogData.post ?? ''}</Markdown>
+            </P_Post>
+          </div>
+        )}
       </Div_Wrapper>
     </>
   )

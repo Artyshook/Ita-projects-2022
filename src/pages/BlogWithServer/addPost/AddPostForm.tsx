@@ -1,5 +1,5 @@
 import { AddPostContext } from './PostContext'
-import { optionsArr } from '../../../helpers/data'
+import { options2 } from '../../../helpers/data'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -39,10 +39,10 @@ export const AddPostForm = () => {
             <Form.Group>
               <Form.Label>Choose category</Form.Label>
               <Select
-                options={optionsArr}
-                value={optionsArr.filter(option => option.value === logic.category)}
+                options={options2}
+                value={options2.filter(option => option.value === logic.category)}
                 onChange={e => {
-                  e !== null && logic.setCategory(e.value)
+                  if (e !== null) logic.setCategory(e.value)
                 }}
               />
             </Form.Group>

@@ -2,8 +2,8 @@ import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
 import { Link_GoBack } from '../../Blog/BlogPage'
 import { PostCard2 } from './PostCard'
-import { addNewPost, deletePostBySlug, listAllPosts } from '../../../helpers/services'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
+import { services } from '../../../helpers/services'
 import { theme } from '../../../helpers/theme'
 import { urls } from '../../../helpers/urls'
 import { useAsyncComponentDidMount } from '../../../helpers/UseComponentDidMount'
@@ -31,7 +31,7 @@ const useLogicState = () => {
   useAsyncComponentDidMount(async () => {
     setLoading(true)
     try {
-      setData(await listAllPosts())
+      setData(await services.blog.list())
       setError(null)
       setLoading(false)
     } catch (error) {
@@ -51,8 +51,8 @@ const useLogicState = () => {
     try {
       setLoading(true)
       setError(null)
-      const response = await addNewPost({ title, postText, category })
-      setData(await listAllPosts())
+      const response = await services.blog.addNewPost({ title, postText, category })
+      setData(await services.blog.list())
     } catch (err) {
       setError('Can`t fetch data')
     } finally {
@@ -65,10 +65,10 @@ const useLogicState = () => {
   const deleteBySlug = async (slug: string) => {
     try {
       setLoading(true)
-      const response = await deletePostBySlug(slug)
+      const response = await services.blog.deletePost(slug)
       setError(null)
       setLoading(false)
-      setData(await listAllPosts())
+      setData(await services.blog.list())
     } catch (error) {
       setError(`fetching error`)
     } finally {
@@ -135,11 +135,9 @@ export const BlogWithServer = () => {
         </Button_MyButton>
         <AddPostForm />
         <GridContainer>
-          {logic.data
-            ? logic.data.map(post => (
-                <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
-              ))
-            : null}
+          {logic.data?.map(post => (
+            <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
+          ))}
         </GridContainer>
       </Div_Wrapper>
     </>
