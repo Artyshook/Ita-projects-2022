@@ -4,14 +4,11 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
 import React, { useContext } from 'react'
-import Select from 'react-select'
+import Select, { ActionMeta, SingleValue } from 'react-select'
 import styled from 'styled-components'
-
-export const options1 = ['1', '2', '3', '4']
 
 export const AddPostForm = () => {
   const logic = useContext(AddPostContext)
-
   return (
     <div>
       <Modal
