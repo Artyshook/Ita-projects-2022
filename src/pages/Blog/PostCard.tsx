@@ -1,8 +1,8 @@
 import { BlogData } from './Blog'
 import { Link } from 'react-router-dom'
 import { avatar } from '../../helpers/data'
-import { blogIdUrl } from '../../helpers/urls'
 import { theme } from '../../helpers/theme'
+import { urls } from '../../helpers/urls'
 import Markdown from 'markdown-to-jsx'
 import React from 'react'
 import styled from 'styled-components'
@@ -22,7 +22,7 @@ export const PostCard = (props: PropsType) => {
         <Div_Author>
           <Img_AuthorImg src={avatar} alt='avatar' />
         </Div_Author>
-        <Link_Link to={blogIdUrl(props.post.url)}>Discover ➝</Link_Link>
+        <Link_Link to={urls.blogWithServer.getBlogSlug(props.post.url)}>Discover ➝</Link_Link>
       </Footer>
     </Div_Container>
   )

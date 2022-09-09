@@ -13,9 +13,8 @@ export const urls = {
   blogWithServer: {
     blogList: '/blog/list',
     blogPage: '/blog/:blogSlug',
+    getBlogSlug: (blogSlug: string) => {
+      return `/blog/${blogSlug}`
+    },
   },
-}
-
-export const blogIdUrl = (blogSlug: string) => {
-  return `/blog/${blogSlug}`
 }

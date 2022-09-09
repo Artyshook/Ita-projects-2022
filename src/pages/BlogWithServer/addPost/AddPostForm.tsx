@@ -42,7 +42,8 @@ export const AddPostForm = () => {
                 options={options2}
                 value={options2.filter(option => option.value === logic.category)}
                 onChange={e => {
-                  if (e !== null) logic.setCategory(e.value)
+                  if (e === null) return
+                  logic.setCategory(e.value)
                 }}
               />
             </Form.Group>
@@ -60,7 +61,7 @@ export const AddPostForm = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {logic.error ? <ErrorMessage>{logic.error}</ErrorMessage> : null}
+          {logic.error && <ErrorMessage>{logic.error}</ErrorMessage>}
           <Button variant='primary' onClick={logic.inputCheck}>
             Save
           </Button>
