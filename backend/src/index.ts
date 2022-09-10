@@ -59,9 +59,9 @@ app.get('/articles/:blogSlug', (req, res) => {
 
 app.delete('/articles/:blogSlug', (req, res) => {
   const postsFromStorage = getDataFromStorage()
-  const deleteBySlug = postsFromStorage.filter(post => post.slug !== req.params.blogSlug)
-  putDataToStorage(deleteBySlug)
-  res.send(deleteBySlug)
+  const newData = postsFromStorage.filter(post => post.slug !== req.params.blogSlug)
+  putDataToStorage(newData)
+  res.send(newData)
 })
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
