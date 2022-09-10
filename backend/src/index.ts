@@ -53,15 +53,15 @@ app.post('/articles', (req, res) => {
 
 app.get('/articles/:blogSlug', (req, res) => {
   const posts = getDataFromStorage()
-  const findPostBySlug = posts.filter(post => post.slug === req.params.blogSlug)
+  const findPostBySlug = posts.find(post => post.slug === req.params.blogSlug)
   res.send(findPostBySlug)
 })
 
 app.delete('/articles/:blogSlug', (req, res) => {
   const postsFromStorage = getDataFromStorage()
-  const findPostById = postsFromStorage.filter(post => post.slug !== req.params.blogSlug)
-  putDataToStorage(findPostById)
-  res.send(findPostById)
+  const deleteBySlug = postsFromStorage.filter(post => post.slug !== req.params.blogSlug)
+  putDataToStorage(deleteBySlug)
+  res.send(deleteBySlug)
 })
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

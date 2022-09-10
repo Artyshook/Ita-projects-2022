@@ -43,7 +43,8 @@ export const AddPostForm = () => {
                 options={options}
                 value={options.filter(option => option.value === logic.category)}
                 onChange={e => {
-                  if (e !== null) logic.setCategory(e.value)
+                  if (e === null) return
+                  logic.setCategory(e.value)
                 }}
               />
             </Form.Group>
