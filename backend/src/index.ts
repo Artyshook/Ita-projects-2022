@@ -53,7 +53,7 @@ app.post('/articles', (req, res) => {
 
 app.get('/articles/:blogSlug', (req, res) => {
   const posts = getDataFromStorage()
-  const findPostBySlug = posts.find(post => post.slug === req.params.blogSlug)
+  const findPostBySlug = posts.filter(post => post.slug === req.params.blogSlug)
   res.send(findPostBySlug)
 })
 

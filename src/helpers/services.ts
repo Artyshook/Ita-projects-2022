@@ -6,8 +6,8 @@ type InputData = {
   category: string
 }
 
-const getPosts = `${process.env.REACT_APP_URL_BLOG}articles`
-const getPostDetail = `${process.env.REACT_APP_URL_BLOG}articles/`
+export const getPosts = `${process.env.REACT_APP_URL_BLOG}articles`
+export const getPostDetail = process.env.REACT_APP_URL_BLOG
 
 export const services = {
   blog: {
@@ -26,12 +26,12 @@ export const services = {
       return await response.json()
     },
     getPost: async (blogSlug: string): Promise<BlogData[]> => {
-      const response = await fetch(getPostDetail)
+      const response = await fetch(`${getPostDetail}articles/${blogSlug}`)
       if (!response.ok) throw new Error('Server side error')
       return await response.json()
     },
     deletePost: async (blogSlug: string): Promise<BlogData> => {
-      const response = await fetch(getPostDetail, {
+      const response = await fetch(`${getPostDetail}articles/${blogSlug}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

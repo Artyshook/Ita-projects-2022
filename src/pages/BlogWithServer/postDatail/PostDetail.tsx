@@ -18,8 +18,8 @@ export const DetailPost = () => {
         {logic.blogData && (
           <div>
             <Header>
-              <H1>{logic.blogData.title ?? ''}</H1>
-              <P_Category>{logic.blogData.category ?? ''}</P_Category>
+              <H1>{logic.blogData.title}</H1>
+              <P_Category>{logic.blogData.category}</P_Category>
             </Header>
             <Img_Cover src={logic.blogData.cover ?? ''} alt='cover' />
             <P_Post>
