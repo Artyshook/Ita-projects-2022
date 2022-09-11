@@ -17,12 +17,14 @@ const useLogicState = () => {
       setLoading(true)
       const response = await services.blog.getPost(params.blogSlug!)
       setError(null)
-      setBlogData(response[0])
+      setBlogData(response)
     } catch (error) {
       setError(`fetching error`)
     }
     setLoading(false)
   })
+
+  console.log(blogData)
 
   return {
     blogData,

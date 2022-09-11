@@ -25,7 +25,7 @@ export const services = {
       if (!response.ok) throw Error('Server side error')
       return await response.json()
     },
-    getPost: async (blogSlug: string): Promise<BlogData[]> => {
+    getPost: async (blogSlug: string): Promise<BlogData> => {
       const response = await fetch(`${getPostDetail}articles/${blogSlug}`)
       if (!response.ok) throw new Error('Server side error')
       return await response.json()
