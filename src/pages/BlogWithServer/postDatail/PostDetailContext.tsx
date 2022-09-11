@@ -24,8 +24,6 @@ const useLogicState = () => {
     setLoading(false)
   })
 
-  console.log(blogData)
-
   return {
     blogData,
   }
