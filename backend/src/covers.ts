@@ -1,4 +1,4 @@
-export const coverArr: { [index: string]: string } = {
+export const coverArr = {
   travel:
     'https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   nature:
@@ -17,24 +17,3 @@ export const coverArr: { [index: string]: string } = {
   background:
     'https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 }
-
-export const options2 = [
-  { value: 'travel', label: 'travel' },
-  { value: 'nature', label: 'nature' },
-  { value: 'art', label: 'art' },
-  { value: 'vacation', label: 'vacation' },
-  { value: 'coding', label: 'coding' },
-  { value: 'design', label: 'design' },
-  { value: 'home', label: 'home' },
-  { value: 'abstract', label: 'abstract' },
-  { value: 'sky', label: 'sky' },
-  { value: 'background', label: 'background' },
-]
-
-export const options = Object.keys(coverArr).map(key => ({
-  value: key,
-  label: key,
-}))
-
-export const avatar =
-  'https://media.istockphoto.com/vectors/woman-with-laptop-sitting-in-nature-and-leaves-concept-illustration-vector-id1139913278?k=20&m=1139913278&s=612x612&w=0&h=Ue0Nh74fYCnNd5hfwBCLwJ2VeZqjXxnI5iEXqqTLXb8='

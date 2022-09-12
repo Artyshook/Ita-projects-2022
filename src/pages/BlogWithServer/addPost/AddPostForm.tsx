@@ -1,5 +1,5 @@
-import { BlogContext } from './Blog'
-import { options } from '../../helpers/data'
+import { AddPostContext } from './PostContext'
+import { options2 } from '../../../helpers/data'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -8,8 +8,7 @@ import Select from 'react-select'
 import styled from 'styled-components'
 
 export const AddPostForm = () => {
-  const logic = useContext(BlogContext)
-
+  const logic = useContext(AddPostContext)
   return (
     <div>
       <Modal
@@ -40,8 +39,8 @@ export const AddPostForm = () => {
             <Form.Group>
               <Form.Label>Choose category</Form.Label>
               <Select
-                options={options}
-                value={options.filter(option => option.value === logic.category)}
+                options={options2}
+                value={options2.filter(option => option.value === logic.category)}
                 onChange={e => {
                   if (e === null) return
                   logic.setCategory(e.value)
@@ -62,7 +61,7 @@ export const AddPostForm = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {logic.error ? <ErrorMessage>{logic.error}</ErrorMessage> : null}
+          {logic.error && <ErrorMessage>{logic.error}</ErrorMessage>}
           <Button variant='primary' onClick={logic.inputCheck}>
             Save
           </Button>
