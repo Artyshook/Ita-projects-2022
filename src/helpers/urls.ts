@@ -11,8 +11,8 @@ export const urls = {
   httpFilter: '/http-filter',
   blog: '/blog',
   blogWithServer: {
-    blogList: '/blog/list',
-    blogPage: '/blog/:blogSlug',
+    list: '/blog/list',
+    page: '/blog/:blogSlug',
     getBlogSlug: (blogSlug: string) => {
       return `/blog/${blogSlug}`
     },

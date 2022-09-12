@@ -11,34 +11,34 @@ export const getPostDetail = process.env.REACT_APP_URL_BLOG
 
 export const services = {
   blog: {
-    list: async (): Promise<BlogData[]> => {
+    list: async () => {
       const response = await fetch(getPosts)
       if (!response.ok) throw new Error('Server side error')
-      return await response.json()
+      return (await response.json()) as BlogData[]
     },
-    addNewPost: async (post: InputData): Promise<BlogData> => {
+    addNewPost: async (post: InputData) => {
       const response = await fetch(getPosts, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(post),
       })
-      if (!response.ok) throw Error('Server side error')
-      return await response.json()
+      if (!response.ok) throw new Error('Server side error')
+      return (await response.json()) as BlogData
     },
-    getPost: async (blogSlug: string): Promise<BlogData> => {
+    getPost: async (blogSlug: string) => {
       const response = await fetch(`${getPostDetail}articles/${blogSlug}`)
       if (!response.ok) throw new Error('Server side error')
-      return await response.json()
+      return (await response.json()) as BlogData
     },
-    deletePost: async (blogSlug: string): Promise<BlogData> => {
+    deletePost: async (blogSlug: string) => {
       const response = await fetch(`${getPostDetail}articles/${blogSlug}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      if (!response.ok) throw Error('Server side error')
-      return await response.json()
+      if (!response.ok) throw new Error('Server side error')
+      return (await response.json()) as BlogData
     },
   },
 }

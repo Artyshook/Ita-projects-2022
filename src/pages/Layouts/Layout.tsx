@@ -38,7 +38,7 @@ export const Layout = () => {
           </Div_GridItem>
           <Div_GridItem>
             <BiCalculator size='2.5rem' />
-            <Link to={urls.blogWithServer.blogList}>Blog</Link>
+            <Link to={urls.blogWithServer.list}>Blog</Link>
           </Div_GridItem>
           <Div_GridItem>
             <BiCalculator size='2.5rem' />
