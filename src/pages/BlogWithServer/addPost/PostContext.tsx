@@ -77,7 +77,9 @@ const useLogicState = () => {
   }
 
   const inputCheck = () => {
-    if (data.find(el => el.slug === title.trim())) {
+    if (!title.trim()) {
+      setError('title is required')
+    } else if (data.find(el => el.slug === title)) {
       setError('a similar title already exists, please type another')
     } else if (!category) {
       setError('please select a category')
