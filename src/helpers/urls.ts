@@ -1,5 +1,5 @@
 export const urls = {
-  home: '/',
+  home: '*',
   web: '/web',
   counter: '/counter',
   todolist: '/todolist',
