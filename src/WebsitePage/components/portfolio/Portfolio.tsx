@@ -8,9 +8,9 @@ export function Portfolio() {
     <Box>
       <Wrapper id={'ddddd'}>
         {' '}
-        <Grid container display={'flex'} justifyContent={'center'} width={'100%'}>
+        <Grid sx={{ maxWidth: '1440px' }} container>
           {info.portfolio.map((project, index) => (
-            <Grid item xs={12} md={6} key={index}>
+            <Grid item sx={{}} xs={12} md={6} key={index}>
               <PortfolioBlock
                 image={project.image}
                 live={project.live}
@@ -34,7 +34,7 @@ type PortfolioBlockType = {
 export function PortfolioBlock({ image, live, source, title }: PortfolioBlockType) {
   return (
     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-      <Box component={'img'} src={image} alt={'mockup'} />
+      <Box component={'img'} src={image} alt={'mockup'} width={'100%'} />
       <h1 style={{ fontSize: '2rem' }}>{title}</h1>
       <Box
         className={'portfolio'}
