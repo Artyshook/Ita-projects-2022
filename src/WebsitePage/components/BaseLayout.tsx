@@ -1,4 +1,5 @@
 import { Box, Grid } from '@mui/material'
+import { Portfolio } from './portfolio/Portfolio'
 import { Route, Routes } from 'react-router-dom'
 import { TodoList } from '../../pages/TodoList/TodoList'
 import { theme } from '../theme'
@@ -34,7 +35,7 @@ export default function BaseLayout() {
               <Route path={'/about'} element={<About />}>
                 {/*<Route path={'/todo'} element={<TodoList />} />*/}
               </Route>
-              {/*  /!*<Route exact path={'/portfolio'} element={<Portfolio />} />*!/*/}
+              <Route path={'/portfolio'} element={<Portfolio />} />
             </Routes>
           </Grid>
           <Grid item>
@@ -48,7 +49,6 @@ export default function BaseLayout() {
               width={'100%'}
             >
               <p>&hearts; Artem Saibel &copy; 2022</p>
-              {/*<p>&copy; 2022</p>*/}
             </Box>
           </Grid>
         </Grid>
@@ -72,12 +72,11 @@ const GlobalBox = styled(Box)<{ darkMode: boolean }>`
   ul {
     list-style-type: none;
   }
-  li {
 
+  li {
     &:hover {
       transform: translateY(-3px);
       transition: all 250ms ease;
     }
-    
-
+  }
 `
