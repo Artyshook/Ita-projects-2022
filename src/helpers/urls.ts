@@ -1,5 +1,5 @@
 export const urls = {
-  home: '*',
+  home: '/',
   web: '/web',
   counter: '/counter',
   todolist: '/todolist',
@@ -7,7 +7,6 @@ export const urls = {
   memoryGame: '/memory-game',
   calculator: '/calculator',
   filter: '/filter',
-  newPost: '/blog/new-article',
   httpFilter: '/http-filter',
   blog: '/blog',
   blogWithServer: {

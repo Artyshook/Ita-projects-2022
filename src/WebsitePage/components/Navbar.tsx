@@ -109,7 +109,7 @@ const BoxWrapper = styled(Box)`
   justify-content: center;
   align-items: center;
   text-transform: lowercase;
-  font-size: 1rem;
+  font-size: 1.5rem;
   list-style-type: none;
 `
 // const My_Box = styled(Box)<{ link: string; active: string; linkType: string | undefined }>`

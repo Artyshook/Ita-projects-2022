@@ -1,13 +1,21 @@
+import { Blog, BlogUseContext1 } from '../../pages/Blog/Blog'
+import { BlogPage } from '../../pages/Blog/BlogPage'
+import { BlogUseContext } from '../../pages/BlogWithServer/addPost/PostContext'
 import { Box, Grid } from '@mui/material'
+import { CounterApp } from '../../pages/Counter/CounterApp'
+import { DetailPostUseContext } from '../../pages/BlogWithServer/postDatail/PostDetailContext'
+import { HackerTyper } from '../../pages/HackerType/HackerTyper'
+import { MemoryGame } from '../../pages/MemoryGame/MemoryGame'
+import { MortgageCalculator } from '../../pages/MortgageCalculator/MortgageCalculator'
 import { Portfolio } from './portfolio/Portfolio'
 import { Route, Routes } from 'react-router-dom'
 import { TodoList } from '../../pages/TodoList/TodoList'
 import { theme } from '../theme'
 import { urls } from '../../helpers/urls'
-import { useState } from 'react'
 import About from './about/About'
 import Home from './home/Home'
 import Navbar from './Navbar'
+import React, { useState } from 'react'
 import Style from './BaseLayout.module.scss'
 import styled from 'styled-components'
 
@@ -32,10 +40,17 @@ export default function BaseLayout() {
           <Grid item flexGrow={1}>
             <Routes>
               <Route path={'/'} element={<Home />} />
-              <Route path={'/about'} element={<About />}>
-                {/*<Route path={'/todo'} element={<TodoList />} />*/}
+              <Route path='about' element={<About />} />
+              <Route path='portfolio'>
+                <Route index element={<Portfolio />} />
+                <Route path='todolist' element={<TodoList />} />
+                <Route path='memory-game' element={<MemoryGame />} />
+                <Route path='calculator' element={<MortgageCalculator />} />
+                <Route path='counter' element={<CounterApp />} />
+                <Route path='hacker-typer' element={<HackerTyper />} />
               </Route>
-              <Route path={'/portfolio'} element={<Portfolio />} />
+              <Route path='blog' element={<BlogUseContext1 />} />
+              <Route path='blog/:blogSlug' element={<BlogPage />} />
             </Routes>
           </Grid>
           <Grid item>

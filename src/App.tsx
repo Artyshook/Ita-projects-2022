@@ -28,8 +28,8 @@ export const App = () => {
       {/*  /!*<Route path={urls.hackerTyper} element={<HackerTyper />} />*!/*/}
       {/*  /!*<Route path={urls.memoryGame} element={<MemoryGame />} />*!/*/}
       {/*  /!*<Route path={urls.calculator} element={<MortgageCalculator />} />*!/*/}
-      {/*  /!*<Route path={urls.blogWithServer.list} element={<BlogUseContext />} />*!/*/}
-      {/*  /!*<Route path={urls.blogWithServer.page} element={<DetailPostUseContext />} />*!/*/}
+      {/*  <Route path={urls.blogWithServer.list} element={<BlogUseContext />} />*/}
+      {/*  <Route path={urls.blogWithServer.page} element={<DetailPostUseContext />} />*/}
       {/*</Routes>*/}
       <GlobalStyle />
     </div>

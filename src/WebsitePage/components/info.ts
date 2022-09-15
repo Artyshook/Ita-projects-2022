@@ -85,33 +85,39 @@ export const info = {
   ],
   portfolio: [
     {
-      title: 'Project 1',
-      live: 'https://paytonpierce.dev', //this should be a link to the live version of your project, think github pages, netlify, heroku, etc. Or your own domain, if you have it.
+      title: 'Todo List',
+      live: '/portfolio/todolist', //this should be a link to the live version of your project, think github pages, netlify, heroku, etc. Or your own domain, if you have it.
       source: 'https://github.com/paytonjewell', // this should be a link to the **repository** of the project, where the code is hosted.
       image: mock1,
     },
     {
-      title: 'Project 2',
-      live: 'https://paytonpierce.dev',
-      source: 'https://github.com/paytonjewell',
+      title: 'Memory Game',
+      live: '/portfolio/memory-game',
+      source: 'https://github.com/Artyshook',
       image: mock2,
     },
     {
-      title: 'Project 3',
-      live: 'https://paytonpierce.dev',
-      source: 'https://github.com/paytonjewell',
+      title: 'Mortgage Calculator',
+      live: '/portfolio/calculator',
+      source: 'https://github.com/Artyshook',
       image: mock3,
     },
     {
-      title: 'Project 4',
-      live: 'https://paytonpierce.dev',
-      source: 'https://github.com/paytonjewell',
+      title: 'Hacker Typer',
+      live: '/portfolio/hacker-typer',
+      source: 'https://github.com/Artyshook',
       image: mock4,
     },
     {
-      title: 'Project 5',
-      live: 'https://paytonpierce.dev',
-      source: 'https://github.com/paytonjewell',
+      title: 'Blog',
+      live: '/blog',
+      source: 'https://github.com/Artyshook',
+      image: mock5,
+    },
+    {
+      title: 'Blog with Server',
+      live: '',
+      source: 'https://github.com/Artyshook',
       image: mock5,
     },
   ],

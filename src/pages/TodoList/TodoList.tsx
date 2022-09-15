@@ -46,7 +46,6 @@ export const TodoList = () => {
 
   return (
     <HelmetProvider>
-      <GoBackButton />
       <Div_Wrapper>
         <Helmet>
           <title>Artem Saibel - TodoList app</title>

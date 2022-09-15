@@ -1,9 +1,9 @@
 import { Card } from './Card'
 import { CardType } from './Images'
 import { CgSmileMouthOpen } from 'react-icons/cg'
-import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { IoFootstepsSharp } from 'react-icons/io5'
+import { VscDebugRestart } from 'react-icons/vsc'
 import { createCardsBoard } from './Images'
 import { mixCards } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
@@ -71,7 +71,6 @@ export const MemoryGame = () => {
 
   return (
     <HelmetProvider>
-      <GoBackButton />
       <Div_GridWrapper>
         <Helmet>
           <title>Artem Saibel - Memory game</title>
@@ -151,4 +150,14 @@ export const Div_Counter = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+`
+export const Div_Icon = styled.div`
+  display: grid;
+  color: ${theme.colors.blue};
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  &:hover {
+    color: ${theme.colors.green};
+  }
 `
