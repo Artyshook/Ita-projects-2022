@@ -38,6 +38,8 @@ export const handleMortgageDataChange = (arg: {
   mortgageTerm: number
   monthlyRate: number
   inflationMonthlyRate: number
+  inflationInterest: number
+  propertyValue: number
 }) => {
   //Set initial values for loop to calculate monthly figures
   let monthDataObject = [
@@ -50,6 +52,7 @@ export const handleMortgageDataChange = (arg: {
       principalRepaidToDate: 0,
       outstandingBalanceInflation: 0,
       inflationByMonth: 0,
+      propertyValue: arg.propertyValue,
     },
   ]
   let outstandingBalance = arg.amountToBorrow
@@ -58,6 +61,7 @@ export const handleMortgageDataChange = (arg: {
   let outstBalalceInflation = 0
   let inflationByMonth = 0
   let previousOutstBalanceInflation = arg.amountToBorrow
+  let propertyValue = arg.propertyValue
 
   let coefficientOfInflation = 1
   arg.mortgageTerm = arg.mortgageTerm * 12
@@ -90,7 +94,10 @@ export const handleMortgageDataChange = (arg: {
     //loan left to pay
     outstandingBalance = outstandingBalance - monthPrincipalPaid
 
-    //There's always around £10 left at the end which forces the fraph to go into minus. This just rounds the last figure off at £0.00.
+    //increased property value
+    propertyValue = propertyValue + propertyValue * (arg.inflationInterest / 100 / 12)
+
+    //This just rounds the last figure off at 0.00.
     if (i === arg.mortgageTerm) {
       outstandingBalance = 0
     }
@@ -103,6 +110,7 @@ export const handleMortgageDataChange = (arg: {
       principalRepaidToDate: principalRepaidToDate,
       outstandingBalanceInflation: outstBalalceInflation,
       inflationByMonth: inflationByMonth,
+      propertyValue: propertyValue,
     })
   }
   return monthDataObject

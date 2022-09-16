@@ -41,6 +41,8 @@ export const MortgageCalculator = () => {
     mortgageTerm: mortgageTerm,
     monthlyRate: monthlyRate,
     inflationMonthlyRate: inflationByMonth,
+    inflationInterest: inflationInterest,
+    propertyValue: propertyPrice,
   }
   const monthlyPayments = handleMortgageDataChange(arg)
 
@@ -186,7 +188,6 @@ const Input_GridItemRangeSlider = styled.input`
 const Label_GridItemLabel = styled.label`
   font-size: ${theme.fonts.xs};
 `
-
 const H1_Header = styled.h1`
   text-align: center;
   padding-top: 2rem;
