@@ -49,7 +49,7 @@ const Img_Cover = styled.img`
 const H3 = styled.h3`
   margin: 0.5rem 0 1rem 0;
   flex: 1;
-  max-width: 100px;
+  max-width: 300px;
   overflow: hidden;
 `
 

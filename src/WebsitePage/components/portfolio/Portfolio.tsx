@@ -1,27 +1,40 @@
 import { Box, Grid } from '@mui/material'
+import { Link } from 'react-router-dom'
 import { info } from '../info'
+import { motion } from 'framer-motion'
+import { theme } from '../../theme'
 import React from 'react'
 import styled from 'styled-components'
 
-export function Portfolio() {
+export const Portfolio = () => {
   return (
-    <Box>
-      <Wrapper id={'ddddd'}>
-        {' '}
-        <Grid sx={{ maxWidth: '1440px' }} container>
-          {info.portfolio.map((project, index) => (
-            <Grid item sx={{}} xs={12} md={6} key={index}>
-              <PortfolioBlock
-                image={project.image}
-                live={project.live}
-                source={project.source}
-                title={project.title}
-              />
+    <>
+      <motion.div
+        initial='out'
+        animate='in'
+        exit='out'
+        variants={theme.animation}
+        transition={theme.transition}
+      >
+        <Box>
+          <Wrapper>
+            {' '}
+            <Grid sx={{ maxWidth: '1440px' }} container>
+              {info.portfolio.map((project, index) => (
+                <Grid item sx={{}} xs={12} md={6} key={index}>
+                  <PortfolioBlock
+                    image={project.image}
+                    live={project.live}
+                    source={project.source}
+                    title={project.title}
+                  />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Wrapper>
-    </Box>
+          </Wrapper>
+        </Box>
+      </motion.div>
+    </>
   )
 }
 
@@ -63,9 +76,9 @@ type IconLink = {
 }
 export function IconLink({ link, title, icon }: IconLink) {
   return (
-    <a href={link} target={'_blank'} rel='noopener noreferrer'>
+    <Link to={link} rel='noopener noreferrer'>
       <i className={icon} /> {title}
-    </a>
+    </Link>
   )
 }
 

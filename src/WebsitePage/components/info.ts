@@ -1,22 +1,21 @@
-import mock1 from './img/mock1.png'
-import mock2 from './img/mock2.png'
-import mock3 from './img/mock3.png'
-import mock4 from './img/mock4.png'
-import mock5 from './img/mock5.png'
+import blog from './img/blog.png'
+import calculator from './img/calculator.png'
+import game from './img/game.png'
+import hacker from './img/hacker.png'
 import self from './img/self.png'
+import todo from './img/todo.png'
 
 export let colors = ['rgb(0,255,164)', 'rgb(166,104,255)']
 
 export const info = {
   firstName: 'Artem',
   lastName: 'Saibel',
-  initials: 'AS', // the example uses first and last, but feel free to use three or more if you like.
+  initials: 'AS',
   position: 'a Software Developer',
-  selfPortrait: self, // don't change this unless you want to name your self-portrait in the "img" folder something else!
+  selfPortrait: self,
   gradient: `-webkit-linear-gradient(135deg, ${colors})`, // don't change this either
   baseColor: colors[0],
   miniBio: [
-    // these are just some "tidbits" about yourself. You can look at mine https://paytonjewell.github.io/#/ for an example if you'd like
     {
       emoji: '☕',
       text: 'fueled by coffee',
@@ -36,17 +35,17 @@ export const info = {
   ],
   socials: [
     {
-      link: 'https://instagram.com',
+      link: 'https://www.instagram.com/artem.saibel',
       icon: ' fa fa-instagram',
       label: 'instagram',
     },
     {
-      link: 'https://github.com',
+      link: 'https://github.com/Artyshook',
       icon: ' fa fa-github',
       label: 'github',
     },
     {
-      link: 'https://linkedin.com',
+      link: 'https://www.linkedin.com/in/saibel-artem/',
       icon: ' fa fa-linkedin',
       label: 'linkedin',
     },
@@ -85,40 +84,41 @@ export const info = {
   ],
   portfolio: [
     {
-      title: 'Todo List',
-      live: '/portfolio/todolist', //this should be a link to the live version of your project, think github pages, netlify, heroku, etc. Or your own domain, if you have it.
-      source: 'https://github.com/paytonjewell', // this should be a link to the **repository** of the project, where the code is hosted.
-      image: mock1,
+      title: 'Blog with local storage',
+      live: '/blog', //this should be a link to the live version of your project, think github pages, netlify, heroku, etc. Or your own domain, if you have it.
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/Blog', // this should be a link to the **repository** of the project, where the code is hosted.
+      image: blog,
     },
     {
-      title: 'Memory Game',
-      live: '/portfolio/memory-game',
-      source: 'https://github.com/Artyshook',
-      image: mock2,
-    },
-    {
-      title: 'Mortgage Calculator',
+      title: 'Mortgage calculator',
       live: '/portfolio/calculator',
-      source: 'https://github.com/Artyshook',
-      image: mock3,
+      source:
+        'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/MortgageCalculator',
+      image: calculator,
+    },
+    {
+      title: 'Memory game',
+      live: '/portfolio/memory-game',
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/MemoryGame',
+      image: game,
     },
     {
       title: 'Hacker Typer',
       live: '/portfolio/hacker-typer',
-      source: 'https://github.com/Artyshook',
-      image: mock4,
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/HackerType',
+      image: hacker,
     },
     {
-      title: 'Blog',
-      live: '/blog',
-      source: 'https://github.com/Artyshook',
-      image: mock5,
+      title: 'Todo List',
+      live: '/portfolio/todolist',
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/TodoList',
+      image: todo,
     },
     {
       title: 'Blog with Server',
-      live: '',
-      source: 'https://github.com/Artyshook',
-      image: mock5,
+      live: '/blog-server',
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer',
+      image: blog,
     },
   ],
 }

@@ -22,15 +22,21 @@ export const theme = {
     text: '#f8f8f8',
     transition: 'all 400ms',
   },
-}
-export const lightTheme = {
-  body: '#f8f8f8',
-  text: '#1f1f1f',
-  transition: 'all 400ms',
-}
-
-export const darkTheme = {
-  body: '#1f1f1f',
-  text: '#f8f8f8',
-  transition: 'all 400ms',
+  animation: {
+    in: {
+      opacity: 1,
+      x: 0,
+    },
+    out: {
+      opacity: 0,
+      x: 40,
+    },
+    end: {
+      x: 0,
+      opacity: 1,
+    },
+  },
+  transition: {
+    duration: 0.3,
+  },
 }

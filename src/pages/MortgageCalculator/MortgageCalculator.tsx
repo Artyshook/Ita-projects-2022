@@ -46,7 +46,6 @@ export const MortgageCalculator = () => {
 
   return (
     <div>
-      <GoBackButton />
       <Div_Global>
         <header>
           <H1_Header>Mortgage Calculator</H1_Header>

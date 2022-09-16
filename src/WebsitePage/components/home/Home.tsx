@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { info } from '../info'
+import { motion } from 'framer-motion'
 import { theme } from '../../theme'
 import EmojiBullet from './EmojiBullet'
 import React from 'react'
@@ -9,58 +10,73 @@ import classNames from 'classnames'
 import me from '../img/self.png'
 import styled from 'styled-components'
 
-export default function Home() {
+export const Home = () => {
   return (
-    <Box_Wrapper
-      component={'main'}
-      flexDirection={{ xs: 'column', md: 'row' }}
-      minHeight={'calc(100vh - 175px)'}
-    >
-      <Box
-        alt={'image of developer'}
-        style={{ background: info.gradient }}
-        component={'img'}
-        src={me}
-        width={{ xs: '35vh', md: '40vh' }}
-        height={{ xs: '35vh', md: '40vh' }}
-        borderRadius={'50%'}
-        p={'0.5rem'}
-        mb={{ xs: '1rem', sm: 0 }}
-        mr={{ xs: 0, md: '2rem' }}
-        boxShadow={'2px 2px 8px 4px rgba(34, 10, 11, 0.2)'}
-      />
-      <Box>
-        <H1>
-          Hi, I&apos;m{' '}
-          <span
-            style={{
-              background: info.gradient,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            {info.firstName}
-          </span>
-          <Hand>🤚</Hand>
-        </H1>
-        <H2>I&apos;m {info.position}.</H2>
-        <Box component={'ul'} p={'0.8rem'}>
-          {info.miniBio.map((bio, index) => (
-            <EmojiBullet key={index} emoji={bio.emoji} text={bio.text} />
-          ))}
-        </Box>
-        <Box
-          display={'flex'}
-          gap={'1.5rem'}
-          justifyContent={'center'}
-          fontSize={{ xs: '2rem', md: '2.5rem' }}
+    <>
+      <motion.div
+        initial='out'
+        animate='in'
+        exit='out'
+        variants={theme.animation}
+        transition={theme.transition}
+      >
+        <Box_Wrapper
+          component={'main'}
+          flexDirection={{ xs: 'column', md: 'row' }}
+          minHeight={'calc(100vh - 175px)'}
         >
-          {info.socials.map((social, index) => (
-            <SocialIcon key={index} link={social.link} icon={social.icon} label={social.label} />
-          ))}
-        </Box>
-      </Box>
-    </Box_Wrapper>
+          <Box
+            alt={'image of developer'}
+            style={{ background: info.gradient }}
+            component={'img'}
+            src={me}
+            width={{ xs: '35vh', md: '40vh' }}
+            height={{ xs: '35vh', md: '40vh' }}
+            borderRadius={'50%'}
+            p={'0.5rem'}
+            mb={{ xs: '1rem', sm: 0 }}
+            mr={{ xs: 0, md: '2rem' }}
+            boxShadow={'2px 2px 8px 4px rgba(34, 10, 11, 0.2)'}
+          />
+          <Box>
+            <H1>
+              Hi, I&apos;m{' '}
+              <span
+                style={{
+                  background: info.gradient,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {info.firstName}
+              </span>
+              <Hand>🤚</Hand>
+            </H1>
+            <H2>I&apos;m {info.position}.</H2>
+            <Box component={'ul'} p={'0.8rem'}>
+              {info.miniBio.map((bio, index) => (
+                <EmojiBullet key={index} emoji={bio.emoji} text={bio.text} />
+              ))}
+            </Box>
+            <Box
+              display={'flex'}
+              gap={'1.5rem'}
+              justifyContent={'center'}
+              fontSize={{ xs: '2rem', md: '2.5rem' }}
+            >
+              {info.socials.map((social, index) => (
+                <SocialIcon
+                  key={index}
+                  link={social.link}
+                  icon={social.icon}
+                  label={social.label}
+                />
+              ))}
+            </Box>
+          </Box>
+        </Box_Wrapper>
+      </motion.div>
+    </>
   )
 }
 

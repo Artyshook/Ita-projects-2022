@@ -1,11 +1,12 @@
 import { Box } from '@mui/material'
 import { baseColor, theme } from '../../theme'
 import { info } from '../info'
+import { motion } from 'framer-motion'
 import React from 'react'
 import Terminal from './Terminal'
 import styled from 'styled-components'
 
-export default function About() {
+export const About = () => {
   const firstName = info.firstName.toLowerCase()
 
   function aboutMeText() {
@@ -91,11 +92,21 @@ export default function About() {
   }
 
   return (
-    <Box display={'flex'} flexDirection={'column'} alignItems={'center'} mt={'3rem'}>
-      <Terminal text={aboutMeText()} />
-      <Terminal text={skillsText()} />
-      <Terminal text={miscText()} />
-    </Box>
+    <>
+      <motion.div
+        initial='out'
+        animate='in'
+        exit='out'
+        variants={theme.animation}
+        transition={theme.transition}
+      >
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'} mt={'3rem'}>
+          <Terminal text={aboutMeText()} />
+          <Terminal text={skillsText()} />
+          <Terminal text={miscText()} />
+        </Box>
+      </motion.div>
+    </>
   )
 }
 

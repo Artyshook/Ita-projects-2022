@@ -67,15 +67,6 @@ export default function Navbar({ darkMode, handleClick }: PropsType) {
 }
 
 const BoxGlobal = styled(Box)`
-  // li {
-  //   transition: all 250ms ease;
-  //
-  //   &:hover {
-  //     transform: translateY(-3px);
-  //     transition: all 250ms ease;
-  //     color: ${info.baseColor};
-  //   }
-  // }
   a,
   a:link,
   a:hover,
@@ -98,11 +89,6 @@ const BoxGlobal = styled(Box)`
 const Li = styled.li`
   transition: all 250ms ease;
   color: ${theme.colors.dark};
-
-  //&:hover {
-  //  transform: translateY(-3px);
-  //  transition: all 250ms ease;
-  //}
 `
 const BoxWrapper = styled(Box)`
   display: flex;
@@ -112,13 +98,6 @@ const BoxWrapper = styled(Box)`
   font-size: 1.5rem;
   list-style-type: none;
 `
-// const My_Box = styled(Box)<{ link: string; active: string; linkType: string | undefined }>`
-//   border-bottom: ${props => (props.link === props.active ? '#5px solid green' : undefined)}
-//   border-image-slice: ${props => (props.link === props.active ? '1' : undefined)};
-// ;
-//
-// `
-
 const P = styled.p`
   padding-bottom: 0.5rem;
 `

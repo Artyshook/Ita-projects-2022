@@ -1,22 +1,20 @@
-import { Blog, BlogUseContext1 } from '../../pages/Blog/Blog'
+import { About } from './about/About'
+import { AnimatePresence } from 'framer-motion'
 import { BlogPage } from '../../pages/Blog/BlogPage'
 import { BlogUseContext } from '../../pages/BlogWithServer/addPost/PostContext'
+import { BlogUseContext1 } from '../../pages/Blog/Blog'
 import { Box, Grid } from '@mui/material'
 import { CounterApp } from '../../pages/Counter/CounterApp'
 import { DetailPostUseContext } from '../../pages/BlogWithServer/postDatail/PostDetailContext'
 import { HackerTyper } from '../../pages/HackerType/HackerTyper'
+import { Home } from './home/Home'
 import { MemoryGame } from '../../pages/MemoryGame/MemoryGame'
 import { MortgageCalculator } from '../../pages/MortgageCalculator/MortgageCalculator'
 import { Portfolio } from './portfolio/Portfolio'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { TodoList } from '../../pages/TodoList/TodoList'
-import { theme } from '../theme'
-import { urls } from '../../helpers/urls'
-import About from './about/About'
-import Home from './home/Home'
 import Navbar from './Navbar'
 import React, { useState } from 'react'
-import Style from './BaseLayout.module.scss'
 import styled from 'styled-components'
 
 export default function BaseLayout() {
@@ -25,6 +23,7 @@ export default function BaseLayout() {
   function handleClick() {
     setDarkMode(!darkMode)
   }
+  const location = useLocation()
 
   return (
     <div id={'bla'}>
@@ -38,20 +37,24 @@ export default function BaseLayout() {
         >
           <Grid item>{<Navbar darkMode={darkMode} handleClick={handleClick} />}</Grid>
           <Grid item flexGrow={1}>
-            <Routes>
-              <Route path={'/'} element={<Home />} />
-              <Route path='about' element={<About />} />
-              <Route path='portfolio'>
-                <Route index element={<Portfolio />} />
-                <Route path='todolist' element={<TodoList />} />
-                <Route path='memory-game' element={<MemoryGame />} />
-                <Route path='calculator' element={<MortgageCalculator />} />
-                <Route path='counter' element={<CounterApp />} />
-                <Route path='hacker-typer' element={<HackerTyper />} />
-              </Route>
-              <Route path='blog' element={<BlogUseContext1 />} />
-              <Route path='blog/:blogSlug' element={<BlogPage />} />
-            </Routes>
+            <AnimatePresence mode='wait'>
+              <Routes key={location.pathname} location={location}>
+                <Route path={'/'} element={<Home />} />
+                <Route path='about' element={<About />} />
+                <Route path='portfolio'>
+                  <Route index element={<Portfolio />} />
+                  <Route path='todolist' element={<TodoList />} />
+                  <Route path='memory-game' element={<MemoryGame />} />
+                  <Route path='calculator' element={<MortgageCalculator />} />
+                  <Route path='counter' element={<CounterApp />} />
+                  <Route path='hacker-typer' element={<HackerTyper />} />
+                </Route>
+                <Route path='blog' element={<BlogUseContext1 />} />
+                <Route path='blog/:blogSlug' element={<BlogPage />} />
+                <Route path='blog-server' element={<BlogUseContext />} />
+                <Route path='blog-server/:blogSlug' element={<DetailPostUseContext />} />
+              </Routes>
+            </AnimatePresence>
           </Grid>
           <Grid item>
             <Box
