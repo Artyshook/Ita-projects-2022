@@ -44,11 +44,11 @@ type PortfolioBlockType = {
   live: string
   image: string
 }
-export function PortfolioBlock({ image, live, source, title }: PortfolioBlockType) {
+export const PortfolioBlock = (props: PortfolioBlockType) => {
   return (
     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-      <Box component={'img'} src={image} alt={'mockup'} width={'100%'} />
-      <h1 style={{ fontSize: '2rem' }}>{title}</h1>
+      <Box component={'img'} src={props.image} alt={'mockup'} width={'100%'} />
+      <h1 style={{ fontSize: '2rem' }}>{props.title}</h1>
       <Box
         className={'portfolio'}
         display={'flex'}
@@ -59,25 +59,25 @@ export function PortfolioBlock({ image, live, source, title }: PortfolioBlockTyp
         py={'2rem'}
       >
         <Box p={1} border={'2px solid black'} borderRadius={'25px'}>
-          <IconLink link={live} title={'Live Demo'} icon={'fa fa-safari'} />
+          <IconLink link={props.live} title={'Live Demo'} icon={'fa fa-safari'} />
         </Box>
         <Box p={1} border={'2px solid black'} borderRadius={'25px'}>
-          <IconLink link={source} title={'Source Code'} icon={'fa fa-code'} />
+          <IconLink link={props.source} title={'Source Code'} icon={'fa fa-code'} />
         </Box>
       </Box>
     </Box>
   )
 }
 
-type IconLink = {
+type IconLinkProps = {
   link: string
   title: string
   icon: string
 }
-export function IconLink({ link, title, icon }: IconLink) {
+export const IconLink = (props: IconLinkProps) => {
   return (
-    <Link to={link} rel='noopener noreferrer'>
-      <i className={icon} /> {title}
+    <Link to={props.link} rel='noopener noreferrer'>
+      <i className={props.icon} /> {props.title}
     </Link>
   )
 }

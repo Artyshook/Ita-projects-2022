@@ -1,5 +1,3 @@
-export let baseColor = ['rgb(0,255,164)', 'rgb(166,104,255)']
-
 export const theme = {
   colors: {
     purple: '#8D53FF',
@@ -10,17 +8,17 @@ export const theme = {
     yellow: '#FFBD2E',
     green: '#27C93F',
     lightgray: '#c9c9c9',
-    // baseColor: 'rgb(0,255,164)', 'rgb(166,104,255)',
+    boxShadow: '0px 8px 10px 0px rgba(0, 0, 0, 0.4)',
+    backgroundColor: {
+      gray: '#8c8c8c',
+      black: '#27242f',
+    },
+    border: '',
   },
-  lightTheme: {
-    body: '#f8f8f8',
-    text: '#1f1f1f',
-    transition: 'all 400ms',
-  },
-  darkTheme: {
-    body: '#1f1f1f',
-    text: '#f8f8f8',
-    transition: 'all 400ms',
+  borderRadius: {
+    border1: '0.5rem 0.5rem 0 0',
+    border2: '0 0 0.5rem 0.5rem',
+    border3: '0.5rem ',
   },
   animation: {
     in: {
@@ -36,7 +34,15 @@ export const theme = {
       opacity: 1,
     },
   },
+
   transition: {
     duration: 0.3,
   },
-}
+
+  breakpoint: {
+    minWidth: {
+      mobile: '@media (min-width: 414px)',
+      tablet: '@media (min-width:  940px)',
+    },
+  },
+} as const

@@ -1,7 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook'
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons'
-
 import React from 'react'
 
 type PropsType = {
@@ -10,12 +6,10 @@ type PropsType = {
   label: string
 }
 
-function SocialIcon({ link, icon, label }: PropsType) {
+export const SocialIcon = (props: PropsType) => {
   return (
-    <a target='_blank' aria-label={label} rel='noopener noreferrer' href={link}>
-      <i className={icon} aria-hidden='true' />
+    <a target='_blank' aria-label={props.label} rel='noopener noreferrer' href={props.link}>
+      <i className={props.icon} aria-hidden='true' />
     </a>
   )
 }
-
-export default SocialIcon

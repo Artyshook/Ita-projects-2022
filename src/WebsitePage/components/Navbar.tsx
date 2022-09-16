@@ -1,10 +1,9 @@
 import { Box } from '@mui/material'
 import { H1 } from './home/Home'
 import { Link, useLocation } from 'react-router-dom'
+import { Toggler } from './home/Toggler'
 import { info } from './info'
 import { theme } from '../theme'
-import { useState } from 'react'
-import Toggler from './home/Toggler'
 import styled from 'styled-components'
 
 const links = [
@@ -43,24 +42,21 @@ type Link = {
   type?: undefined
 }
 
-export default function Navbar({ darkMode, handleClick }: PropsType) {
+export const Navbar = (props: PropsType) => {
   const location = useLocation()
-  const [active, setActive] = useState(
-    location.pathname === '/' ? 'home' : location.pathname.slice(1, location.pathname.length)
-  )
 
   return (
     <BoxGlobal component={'nav'}>
       <BoxWrapper component={'ul'} gap={{ xs: '2rem', md: '8rem' }}>
         {links.map((link, index) => (
           <Box key={index} component={'li'}>
-            <Link to={link.to} onClick={() => setActive(link.active)}>
+            <Link to={link.to}>
               {!link.type && <P>{link.name}</P>}
               {link.type && <H1>{link.name}</H1>}
             </Link>
           </Box>
         ))}
-        <Li>{<Toggler darkMode={darkMode} handleClick={handleClick} />}</Li>
+        <Li>{<Toggler darkMode={props.darkMode} handleClick={props.handleClick} />}</Li>
       </BoxWrapper>
     </BoxGlobal>
   )

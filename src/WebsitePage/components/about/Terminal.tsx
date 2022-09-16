@@ -1,21 +1,18 @@
 import { Box } from '@mui/material'
 import { theme } from '../../theme'
 import React from 'react'
-import Style from './Terminal.module.scss'
 import classNames from 'classnames'
 import styled from 'styled-components'
 
 const iconClass = 'fa fa-circle'
 
-function Terminal(PropsType: { text: any }) {
-  const { text } = PropsType
-
+export const Terminal = (props: { text: any }) => {
   return (
     <Box_Wrapper component={'section'} width={{ xs: '80%', md: '50%' }} mb={'4rem'}>
       <Box
-        sx={{ backgroundColor: '#8c8c8c' }}
+        sx={{ backgroundColor: theme.colors.backgroundColor.gray }}
         p={'0.5rem'}
-        borderRadius={'0.5rem 0.5rem 0 0'}
+        borderRadius={theme.borderRadius.border1}
         fontSize={'1rem'}
       >
         <I className={classNames(iconClass, 'red')} />
@@ -25,18 +22,16 @@ function Terminal(PropsType: { text: any }) {
       <Box
         py={{ xs: '1rem', md: '2rem' }}
         px={{ xs: '2rem', md: '3rem' }}
-        borderRadius={'0 0 0.5rem 0.5rem'}
-        sx={{ backgroundColor: '#27242f' }}
+        borderRadius={theme.borderRadius.border2}
+        sx={{ backgroundColor: theme.colors.backgroundColor.black }}
         fontSize={'1.5rem'}
         fontFamily={'Courier New, Courier, monospace'}
       >
-        {text}
+        {props.text}
       </Box>
     </Box_Wrapper>
   )
 }
-
-export default Terminal
 
 const Box_Wrapper = styled(Box)`
   p,
@@ -46,26 +41,10 @@ const Box_Wrapper = styled(Box)`
   }
   a,
   a:visited {
-    animation: changeColors 3s infinite;
     font-weight: bold;
   }
-  @keyframes changeColors {
-    0% {
-      color: #00a47f;
-    }
-    33.3% {
-      color: #1d91e3;
-    }
-    66.6% {
-      color: #d419fe;
-    }
-    100% {
-      color: #00a47f;
-    }
-  }
-
-  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.4);
-  border-radius: 0.5rem;
+  box-shadow: ${theme.colors.boxShadow};
+  border-radius: ${theme.borderRadius.border3};
 `
 const I = styled.i`
   padding-left: 0.5rem;

@@ -1,15 +1,15 @@
 import { Box } from '@mui/material'
-import { baseColor, theme } from '../../theme'
+import { Terminal } from './Terminal'
 import { info } from '../info'
 import { motion } from 'framer-motion'
+import { theme } from '../../theme'
 import React from 'react'
-import Terminal from './Terminal'
 import styled from 'styled-components'
 
 export const About = () => {
   const firstName = info.firstName.toLowerCase()
 
-  function aboutMeText() {
+  const aboutMeText = () => {
     return (
       <>
         <p>
@@ -29,7 +29,7 @@ export const About = () => {
     )
   }
 
-  function skillsText() {
+  const skillsText = () => {
     return (
       <>
         <p>
@@ -61,7 +61,7 @@ export const About = () => {
     )
   }
 
-  function miscText() {
+  const miscText = () => {
     return (
       <>
         <p>
@@ -112,7 +112,7 @@ export const About = () => {
 
 const Skills_Ul = styled.ul`
   columns: 1;
-  @media only screen and (min-width: 940px) {
+  ${theme.breakpoint.minWidth} {
     columns: 2;
   }
   li {

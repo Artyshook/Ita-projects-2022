@@ -6,7 +6,7 @@ type PropsTyp = {
   handleClick: () => void
 }
 
-export default function Toggler({ darkMode, handleClick }: PropsTyp) {
+export const Toggler = (props: PropsTyp) => {
   return (
     <Box
       fontSize={'1.5rem'}
@@ -14,12 +14,12 @@ export default function Toggler({ darkMode, handleClick }: PropsTyp) {
         cursor: 'pointer',
       }}
     >
-      {darkMode ? (
-        <span onClick={handleClick} aria-label='Full Moon' role='img'>
+      {props.darkMode ? (
+        <span onClick={props.handleClick} aria-label='Full Moon' role='img'>
           🌜
         </span>
       ) : (
-        <span onClick={handleClick} aria-label='New Moon' role='img'>
+        <span onClick={props.handleClick} aria-label='New Moon' role='img'>
           🌞
         </span>
       )}

@@ -1,7 +1,7 @@
+import { BaseLayout } from './WebsitePage/components/BaseLayout'
 import { BrowserRouter } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/theme'
-import BaseLayout from './WebsitePage/components/BaseLayout'
 import React from 'react'
 
 export const App = () => {

@@ -1,14 +1,12 @@
 import { Box } from '@mui/material'
+import { EmojiBullet } from './EmojiBullet'
+import { SocialIcon } from './SocialIcon'
 import { info } from '../info'
 import { motion } from 'framer-motion'
 import { theme } from '../../theme'
-import EmojiBullet from './EmojiBullet'
 import React from 'react'
-import SocialIcon from './SocialIcon'
-import Style from './Home.module.scss'
-import classNames from 'classnames'
 import me from '../img/self.png'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const Home = () => {
   return (
@@ -94,7 +92,7 @@ const Box_Wrapper = styled(Box)`
 export const H1 = styled.h1`
   font-size: 2rem;
   text-align: center;
-  @media only screen and (min-width: 940px) {
+  ${theme.breakpoint.minWidth} {
     font-size: 3rem;
     text-align: left;
   }
@@ -104,43 +102,43 @@ export const H1 = styled.h1`
 export const H2 = styled.h2`
   font-size: 1.25rem;
   text-align: center;
-  @media only screen and (min-width: 940px) {
+  ${theme.breakpoint.minWidth} {
     font-size: 2rem;
     text-align: left;
   }
 `
 
+export const wave = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`
+
 export const Hand = styled.span`
-  animation-name: wave;
+  animation-name: ${wave};
   animation-duration: 2.5s;
   animation-iteration-count: infinite;
   transform-origin: 70% 70%;
   display: inline-block;
-
-  @keyframes wave {
-    0% {
-      transform: rotate(0deg);
-    }
-    10% {
-      transform: rotate(14deg);
-    }
-    20% {
-      transform: rotate(-8deg);
-    }
-    30% {
-      transform: rotate(14deg);
-    }
-    40% {
-      transform: rotate(-4deg);
-    }
-    50% {
-      transform: rotate(10deg);
-    }
-    60% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
 `

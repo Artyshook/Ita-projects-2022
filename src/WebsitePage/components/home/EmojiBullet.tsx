@@ -5,7 +5,7 @@ type PropsType = {
   emoji: string
   text: string
 }
-function EmojiBullet({ emoji, text }: PropsType) {
+export const EmojiBullet = (props: PropsType) => {
   return (
     <Box component={'li'} fontSize={'1.3rem'} lineHeight={1.5} style={{ cursor: 'default' }}>
       <Box
@@ -15,11 +15,9 @@ function EmojiBullet({ emoji, text }: PropsType) {
         mr={{ xs: '0.5rem', md: '1rem' }}
         fontSize={'1.5rem'}
       >
-        {emoji}
+        {props.emoji}
       </Box>{' '}
-      {text}
+      {props.text}
     </Box>
   )
 }
-
-export default EmojiBullet

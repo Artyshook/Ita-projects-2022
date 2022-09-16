@@ -85,8 +85,8 @@ export const info = {
   portfolio: [
     {
       title: 'Blog with local storage',
-      live: '/blog', //this should be a link to the live version of your project, think github pages, netlify, heroku, etc. Or your own domain, if you have it.
-      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/Blog', // this should be a link to the **repository** of the project, where the code is hosted.
+      live: '/blog',
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/Blog',
       image: blog,
     },
     {
