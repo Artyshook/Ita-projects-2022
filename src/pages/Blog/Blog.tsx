@@ -86,7 +86,7 @@ const useLogicState = () => {
 export const { ContextProvider: BlogContextProvider, Context: BlogContext } =
   genericHookContextBuilder(useLogicState)
 
-export const BlogUseContext = () => {
+export const BlogUseContext1 = () => {
   return (
     <BlogContextProvider>
       <Blog />
@@ -99,9 +99,6 @@ export const Blog = () => {
 
   return (
     <>
-      <Link_GoBack to={urls.home}>
-        <span> ← </span> <span>Go Back</span>
-      </Link_GoBack>
       <Div_Wrapper>
         <H1>All Articles</H1>
         <p>an amazing place to make yourself productive and have fun with daily updates.</p>

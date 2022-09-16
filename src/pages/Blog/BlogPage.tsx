@@ -16,7 +16,7 @@ export const BlogPage = () => {
 
   return (
     <>
-      <Link_GoBack to={urls.blog}>
+      <Link_GoBack to={urls.blog.list}>
         <span> ← </span> <span>Go Back</span>
       </Link_GoBack>
       <Div_Wrapper>
