@@ -13,6 +13,7 @@ import { MortgageCalculator } from '../../pages/MortgageCalculator/MortgageCalcu
 import { Portfolio } from './portfolio/Portfolio'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { TodoList } from '../../pages/TodoList/TodoList'
+import { urls } from '../../helpers/urls'
 import Navbar from './Navbar'
 import React, { useState } from 'react'
 import styled from 'styled-components'
@@ -39,20 +40,19 @@ export default function BaseLayout() {
           <Grid item flexGrow={1}>
             <AnimatePresence mode='wait'>
               <Routes key={location.pathname} location={location}>
-                <Route path={'/'} element={<Home />} />
-                <Route path='about' element={<About />} />
-                <Route path='portfolio'>
+                <Route path={urls.home} element={<Home />} />
+                <Route path={urls.about} element={<About />} />
+                <Route path={urls.portfolio}>
                   <Route index element={<Portfolio />} />
-                  <Route path='todolist' element={<TodoList />} />
-                  <Route path='memory-game' element={<MemoryGame />} />
-                  <Route path='calculator' element={<MortgageCalculator />} />
-                  <Route path='counter' element={<CounterApp />} />
-                  <Route path='hacker-typer' element={<HackerTyper />} />
+                  <Route path={urls.todolist} element={<TodoList />} />
+                  <Route path={urls.memoryGame} element={<MemoryGame />} />
+                  <Route path={urls.calculator} element={<MortgageCalculator />} />
+                  <Route path={urls.hackerTyper} element={<HackerTyper />} />
                 </Route>
-                <Route path='blog' element={<BlogUseContext1 />} />
-                <Route path='blog/:blogSlug' element={<BlogPage />} />
-                <Route path='blog-server' element={<BlogUseContext />} />
-                <Route path='blog-server/:blogSlug' element={<DetailPostUseContext />} />
+                <Route path={urls.blog.list} element={<BlogUseContext1 />} />
+                <Route path={urls.blog.page} element={<BlogPage />} />
+                <Route path={urls.blogWithServer.list} element={<BlogUseContext />} />
+                <Route path={urls.blogWithServer.page} element={<DetailPostUseContext />} />
               </Routes>
             </AnimatePresence>
           </Grid>

@@ -22,7 +22,7 @@ export const PostCard = (props: PropsType) => {
         <Div_Author>
           <Img_AuthorImg src={avatar} alt='avatar' />
         </Div_Author>
-        <Link_Link to={urls.blogWithServer.getBlogSlug(props.post.url)}>Discover ➝</Link_Link>
+        <Link_Link to={urls.blog.getBlogSlug(props.post.url)}>Discover ➝</Link_Link>
       </Footer>
     </Div_Container>
   )

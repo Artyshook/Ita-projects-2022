@@ -1,19 +1,27 @@
 export const urls = {
   home: '/',
+  about: '/about',
+  portfolio: '/portfolio',
   web: '/web',
   counter: '/counter',
-  todolist: '/todolist',
-  hackerTyper: '/hacker-typer',
-  memoryGame: '/memory-game',
-  calculator: '/calculator',
+  todolist: '/portfolio/todolist',
+  hackerTyper: '/portfolio/hacker-typer',
+  memoryGame: '/portfolio/memory-game',
+  calculator: '/portfolio/calculator',
   filter: '/filter',
   httpFilter: '/http-filter',
-  blog: '/blog',
-  blogWithServer: {
-    list: '/blog/list',
+  blog: {
+    list: '/blog',
     page: '/blog/:blogSlug',
     getBlogSlug: (blogSlug: string) => {
       return `/blog/${blogSlug}`
+    },
+  },
+  blogWithServer: {
+    list: '/blog-server',
+    page: '/blog-server/:blogSlug',
+    getBlogSlug: (blogSlug: string) => {
+      return `/blog-server/${blogSlug}`
     },
   },
 }
