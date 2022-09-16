@@ -92,21 +92,19 @@ export const About = () => {
   }
 
   return (
-    <>
-      <motion.div
-        initial='out'
-        animate='in'
-        exit='out'
-        variants={theme.animation}
-        transition={theme.transition}
-      >
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'} mt={'3rem'}>
-          <Terminal text={aboutMeText()} />
-          <Terminal text={skillsText()} />
-          <Terminal text={miscText()} />
-        </Box>
-      </motion.div>
-    </>
+    <motion.div
+      initial='out'
+      animate='in'
+      exit='out'
+      variants={theme.animation}
+      transition={theme.transition}
+    >
+      <Box display={'flex'} flexDirection={'column'} alignItems={'center'} mt={'3rem'}>
+        <Terminal text={aboutMeText()} />
+        <Terminal text={skillsText()} />
+        <Terminal text={miscText()} />
+      </Box>
+    </motion.div>
   )
 }
 
