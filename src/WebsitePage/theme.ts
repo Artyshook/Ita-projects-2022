@@ -9,6 +9,7 @@ export const theme = {
     green: '#27C93F',
     lightgray: '#c9c9c9',
     boxShadow: '0px 8px 10px 0px rgba(0, 0, 0, 0.4)',
+    boxShadow2: '2px 2px 8px 4px rgba(34, 10, 11, 0.2)',
     backgroundColor: {
       gray: '#8c8c8c',
       black: '#27242f',

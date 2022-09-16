@@ -34,7 +34,7 @@ export const Home = () => {
             p={'0.5rem'}
             mb={{ xs: '1rem', sm: 0 }}
             mr={{ xs: 0, md: '2rem' }}
-            boxShadow={'2px 2px 8px 4px rgba(34, 10, 11, 0.2)'}
+            boxShadow={theme.colors.boxShadow2}
           />
           <Box>
             <H1>
