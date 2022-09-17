@@ -42,6 +42,7 @@ export const MortgageCalculator = () => {
     monthlyRate: monthlyRate,
     inflationMonthlyRate: inflationByMonth,
     propertyValue: propertyPrice,
+    inflationInterest: inflationInterest,
   }
   const monthlyPayments = handleMortgageDataChange(arg)
 

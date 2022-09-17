@@ -39,6 +39,7 @@ export const handleMortgageDataChange = (arg: {
   monthlyRate: number
   inflationMonthlyRate: number
   propertyValue: number
+  inflationInterest: number
 }) => {
   //Set initial values for loop to calculate monthly figures
   let monthDataObject = [
@@ -94,7 +95,7 @@ export const handleMortgageDataChange = (arg: {
     outstandingBalance = outstandingBalance - monthPrincipalPaid
 
     //increased property value
-    propertyValue = propertyValue + propertyValue * -arg.inflationMonthlyRate
+    propertyValue = propertyValue * (1 + arg.inflationInterest / 100 / 12)
 
     //This just rounds the last figure off at 0.00.
     if (i === arg.mortgageTerm) {
