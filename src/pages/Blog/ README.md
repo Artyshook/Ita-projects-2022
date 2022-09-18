@@ -1,6 +1,6 @@
-## Blog with local storage
+# Blog with local storage
 
-##A beautiful prototype of a blog for posting articles with Markdown support
+## A beautiful prototype of a blog for posting articles with Markdown support
 
 > #### what is implemented:
 >
