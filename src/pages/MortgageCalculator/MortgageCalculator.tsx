@@ -1,4 +1,3 @@
-import { GoBackButton } from '../../components/GoBackButton'
 import { Graph } from './Graph'
 import { PaymentsTable } from './PaymentsTable'
 import {

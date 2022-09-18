@@ -1,5 +1,3 @@
-import { Div_Button } from '../../components/Button'
-import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { VscDebugRestart } from 'react-icons/vsc'
 import { theme } from '../../helpers/theme'
@@ -50,7 +48,6 @@ export class CounterApp extends React.Component<Props, State> {
   render() {
     return (
       <HelmetProvider>
-        <GoBackButton />
         <Div_Wrapper>
           <Helmet>
             <title>Artem Saibel - Counter App</title>
@@ -119,6 +116,20 @@ export const Div_Icon = styled.div`
   color: ${theme.colors.blue};
   justify-content: center;
   &:hover {
+    color: ${theme.colors.green};
+  }
+`
+export const Div_Button = styled.button`
+  letter-spacing: 1px;
+  font-size: 2rem;
+  border: 2px solid ${theme.colors.green};
+  border-radius: 70px;
+  color: ${theme.colors.blue};
+  background-color: white;
+  padding: 25px;
+  box-shadow: ${theme.colors.boxShadow};
+  &:hover {
+    background: ${theme.colors.blue2};
     color: ${theme.colors.green};
   }
 `

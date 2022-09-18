@@ -1,4 +1,3 @@
-import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { TbHandClick } from 'react-icons/tb'
 import { code } from './code'
@@ -70,7 +69,6 @@ export const HackerTyper = () => {
 
   return (
     <HelmetProvider>
-      <GoBackButton />
       <Div_Wrapper>
         <Helmet>
           <title>Artem Saibel - Hacker Typer</title>

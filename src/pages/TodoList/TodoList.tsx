@@ -1,6 +1,5 @@
 import { AppRootStateType, addTaskAC, changeTaskStatusAC, removeTaskAC } from './store'
 import { CgTrash } from 'react-icons/cg'
-import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import { useDispatch, useSelector } from 'react-redux'
