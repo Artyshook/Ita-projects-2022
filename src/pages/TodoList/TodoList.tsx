@@ -1,10 +1,15 @@
-import { AppRootStateType, addTaskAC, changeTaskStatusAC, removeTaskAC } from './store'
+import {
+  AppRootStateType,
+  addTaskAC,
+  changeOrderAC,
+  changeTaskStatusAC,
+  removeTaskAC,
+} from './store'
 import { CgTrash } from 'react-icons/cg'
 import { GoBackButton } from '../../components/GoBackButton'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocalStorage } from '../../helpers/functions'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -18,6 +23,8 @@ export const TodoList = () => {
   const [newTask, setNewTask] = useState('')
   const [error, setError] = useState(null as string | null)
   const [filter, setFilter] = useState('all' as FilterValuesType)
+  const [dragStart, setDragStart] = useState(0)
+  const [dragEnd, setDragEnd] = useState(0)
 
   const addTask = () => {
     if (newTask.trim() !== '') {
@@ -42,6 +49,17 @@ export const TodoList = () => {
       : filter === 'completed'
       ? tasks.filter(t => t.isDone)
       : tasks
+  }
+
+  const onDragStart = (e: React.DragEvent<HTMLLIElement>, id: string) => {
+    setDragStart(tasks.findIndex(task => task.id === id))
+  }
+  const onDragOver = (e: React.DragEvent<HTMLLIElement>, id: string) => {
+    setDragEnd(tasks.findIndex(task => task.id === id))
+  }
+
+  const drop = () => {
+    dispatch(changeOrderAC(dragStart, dragEnd))
   }
 
   return (
@@ -69,7 +87,13 @@ export const TodoList = () => {
           <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
           <Div_Tasks>
             {filteredTodolist(filter).map(task => (
-              <Li_Tasks key={task.id}>
+              <Li_Tasks
+                key={task.id}
+                draggable
+                onDragStart={event => onDragStart(event, task.id)}
+                onDragEnter={event => onDragOver(event, task.id)}
+                onDragEnd={drop}
+              >
                 <input
                   type='checkbox'
                   onClick={() => statusTodoList(task.id, task.isDone)}
@@ -95,7 +119,7 @@ export const TodoList = () => {
 
 export const Div_Wrapper = styled.div`
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   align-items: center;
   display: flex;
   justify-content: center;

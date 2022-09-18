@@ -3,23 +3,66 @@ import { legacy_createStore } from 'redux'
 import { v1 } from 'uuid'
 export type Task = { id: string; task: string; isDone: boolean }
 
-export const initialState: Task[] = [{ id: v1(), task: 'task1', isDone: false }]
+export const loadState = (key: string): Task[] | [] => {
+  try {
+    const serializedState = localStorage.getItem(key)
+
+    if (serializedState === null) {
+      return []
+    }
+
+    return JSON.parse(serializedState)
+  } catch (err) {
+    return []
+  }
+}
+
+export const saveState = (key: string, state: Task[]) => {
+  try {
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem('state', serializedState)
+  } catch (err) {
+    return err
+  }
+}
+
+const initialState: Task[] = loadState('state')
 export const tasksReducer = (state = initialState, action: ActionTypes): Task[] => {
   switch (action.type) {
     case 'ADD-TASK':
-      return [...state, { id: v1(), task: action.title, isDone: false }]
+      const addTaskState = [...state, { id: v1(), task: action.title, isDone: false }]
+      saveState('state', addTaskState)
+      return addTaskState
     case 'REMOVE-TASK':
-      return state.filter(task => task.id !== action.id)
+      const filterTaskState = state.filter(task => task.id !== action.id)
+      saveState('state', filterTaskState)
+      return filterTaskState
 
     case 'CHANGE-STATUS':
-      return state.map(task => (task.id === action.id ? { ...task, isDone: !action.status } : task))
+      const changeStatusState = state.map(task =>
+        task.id === action.id ? { ...task, isDone: !action.status } : task
+      )
+      saveState('state', changeStatusState)
+      return changeStatusState
+
+    case 'CHANGE-ORDER':
+      const dragItem = state[action.start]
+      state.splice(action.start, 1)
+      state.splice(action.end, 0, dragItem)
+      saveState('state', state)
+      return loadState('state')
 
     default:
       return state
   }
 }
 
-type ActionTypes = addTaskACType | removeTaskACType | changeTaskStatusACType | changeFilterACType
+type ActionTypes =
+  | addTaskACType
+  | removeTaskACType
+  | changeTaskStatusACType
+  | changeFilterACType
+  | changeOrderACType
 
 type addTaskACType = ReturnType<typeof addTaskAC>
 export const addTaskAC = (title: string) => {
@@ -50,6 +93,15 @@ export const changeFilterAC = (filter: FilterValuesType) => {
   return {
     type: 'CHANGE-FILTER',
     filter,
+  } as const
+}
+
+type changeOrderACType = ReturnType<typeof changeOrderAC>
+export const changeOrderAC = (start: number, end: number) => {
+  return {
+    type: 'CHANGE-ORDER',
+    start,
+    end,
   } as const
 }
 
