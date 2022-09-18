@@ -9,7 +9,7 @@ A simple application for organizing your daily tasks with Redux.
 > - Local storage
 > - Draggable elements
 
-[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/TodoList)
+![mock1](https://user-images.githubusercontent.com/100515756/190504169-e58d20fe-0572-4a01-b42d-e7daea5b58ab.png)
 
 
 
