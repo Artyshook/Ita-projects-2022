@@ -50,7 +50,7 @@ export const tasksReducer = (state = initialState, action: ActionTypes): Task[] 
       state.splice(action.start, 1)
       state.splice(action.end, 0, dragItem)
       saveState('state', state)
-      return loadState('state')
+      return [...state]
 
     default:
       return state
