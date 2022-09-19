@@ -83,7 +83,6 @@ export const handleMortgageDataChange = (arg: {
     //accumulative monthly principal
     principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
     //loan left to pay
-    // outstandingBalance = outstandingBalance - monthPrincipalPaid
 
     //increased property value
     propertyValue = propertyValue * (1 + arg.inflationInterest / 100 / 12)
