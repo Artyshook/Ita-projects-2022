@@ -27,14 +27,19 @@ export const MortgageCalculator = () => {
   const [mortgageTerm, setMortgageTerm] = useState(30)
   const [interest, setInterest] = useState(4.99)
   const [inflationInterest, setInflationInterest] = useState(5)
-
   const amountToBorrow = propertyPrice - depositAmount
-  const monthlyRate = monthlyRateCalculation(amountToBorrow, interest, mortgageTerm)
+
+  let monthlyRateArgs = {
+    amount: amountToBorrow,
+    interest: interest,
+    year: mortgageTerm,
+  }
+  const monthlyRate = monthlyRateCalculation(monthlyRateArgs)
   const totalAmountRepaid = monthlyRate * 12 * mortgageTerm
   const totalInterestPaid = totalAmountRepaid - amountToBorrow
   const inflationByMonth = inflationMonthlyRate(inflationInterest)
 
-  let arg = {
+  let MortgageDataChangeArgs = {
     amountToBorrow: amountToBorrow,
     interest: interest,
     mortgageTerm: mortgageTerm,
@@ -43,7 +48,7 @@ export const MortgageCalculator = () => {
     propertyValue: propertyPrice,
     inflationInterest: inflationInterest,
   }
-  const monthlyPayments = handleMortgageDataChange(arg)
+  const monthlyPayments = handleMortgageDataChange(MortgageDataChangeArgs)
 
   return (
     <div>

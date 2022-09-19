@@ -24,9 +24,12 @@ export const mixCards = <T>(array: T[]) => {
   return array.sort(() => Math.random() - 0.5)
 }
 
-export const monthlyRateCalculation = (amount: number, interest: number, year: number) => {
-  return (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
-  // (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
+export const monthlyRateCalculation = (arg: { amount: number; interest: number; year: number }) => {
+  const amountToBorrow = arg.amount
+  const monthlyInterest = arg.interest / 100 / 12
+  const yearsToMonths = arg.year * 12
+
+  return (amountToBorrow * monthlyInterest) / (1 - (1 + monthlyInterest) ** -yearsToMonths)
 }
 
 export const formatToPercent = (depositAmount: number, propertyValue: number) => {
@@ -48,17 +51,17 @@ export const handleMortgageDataChange = (arg: {
       month: 0,
       outstandingBalance: arg.amountToBorrow,
       interestPaid: 0,
-      interestPaidToDate: 0,
+      accumulativeMonthlyInterestPaid: 0,
       principalRepaid: 0,
-      principalRepaidToDate: 0,
+      accumulativeMonthlyPrincipal: 0,
       outstandingBalanceInflation: 0,
       inflationByMonth: 0,
       propertyValue: arg.propertyValue,
     },
   ]
   let outstandingBalance = arg.amountToBorrow
-  let interestPaidToDate = 0
-  let principalRepaidToDate = 0
+  let accumulativeMonthlyInterestPaid = 0
+  let accumulativeMonthlyPrincipal = 0
   let outstBalalceInflation = 0
   let inflationByMonth = 0
   let propertyValue = arg.propertyValue
@@ -77,12 +80,8 @@ export const handleMortgageDataChange = (arg: {
     inflationByMonth = monthInterestPaid * coefficientOfInflation
     coefficientOfInflation = coefficientOfInflation * (1 + arg.inflationMonthlyRate)
 
-    //accumulative monthly interest paid
-    interestPaidToDate = interestPaidToDate + monthInterestPaid
-
-    //accumulative monthly principal
-    principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
-    //loan left to pay
+    accumulativeMonthlyInterestPaid = accumulativeMonthlyInterestPaid + monthInterestPaid
+    accumulativeMonthlyPrincipal = accumulativeMonthlyPrincipal + monthPrincipalPaid
 
     //increased property value
     propertyValue = propertyValue * (1 + arg.inflationInterest / 100 / 12)
@@ -95,9 +94,9 @@ export const handleMortgageDataChange = (arg: {
       month: i,
       outstandingBalance: outstandingBalance,
       interestPaid: monthInterestPaid,
-      interestPaidToDate: interestPaidToDate,
+      accumulativeMonthlyInterestPaid: accumulativeMonthlyInterestPaid,
       principalRepaid: monthPrincipalPaid,
-      principalRepaidToDate: principalRepaidToDate,
+      accumulativeMonthlyPrincipal: accumulativeMonthlyPrincipal,
       outstandingBalanceInflation: outstBalalceInflation,
       inflationByMonth: inflationByMonth,
       propertyValue: propertyValue,
