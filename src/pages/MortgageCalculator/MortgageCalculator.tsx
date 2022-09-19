@@ -1,10 +1,9 @@
-import { GoBackButton } from '../../components/GoBackButton'
 import { Graph } from './Graph'
 import { PaymentsTable } from './PaymentsTable'
 import {
   formatToPercent,
   handleMortgageDataChange,
-  mortgageCalculation,
+  monthlyRateCalculation,
 } from '../../helpers/functions'
 import { inflationMonthlyRate } from '../../helpers/inflationMonthlyRate'
 import { theme } from '../../helpers/theme'
@@ -30,7 +29,7 @@ export const MortgageCalculator = () => {
   const [inflationInterest, setInflationInterest] = useState(5)
 
   const amountToBorrow = propertyPrice - depositAmount
-  const monthlyRate = mortgageCalculation(amountToBorrow, interest, mortgageTerm)
+  const monthlyRate = monthlyRateCalculation(amountToBorrow, interest, mortgageTerm)
   const totalAmountRepaid = monthlyRate * 12 * mortgageTerm
   const totalInterestPaid = totalAmountRepaid - amountToBorrow
   const inflationByMonth = inflationMonthlyRate(inflationInterest)

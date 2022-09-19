@@ -24,8 +24,9 @@ export const mixCards = <T>(array: T[]) => {
   return array.sort(() => Math.random() - 0.5)
 }
 
-export const mortgageCalculation = (amount: number, interest: number, year: number) => {
+export const monthlyRateCalculation = (amount: number, interest: number, year: number) => {
   return (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
+  // (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
 }
 
 export const formatToPercent = (depositAmount: number, propertyValue: number) => {
@@ -60,7 +61,6 @@ export const handleMortgageDataChange = (arg: {
   let principalRepaidToDate = 0
   let outstBalalceInflation = 0
   let inflationByMonth = 0
-  let previousOutstBalanceInflation = arg.amountToBorrow
   let propertyValue = arg.propertyValue
 
   let coefficientOfInflation = 1
@@ -68,31 +68,22 @@ export const handleMortgageDataChange = (arg: {
 
   //Loop each year of the mortgage term
   for (let i = 1; i <= arg.mortgageTerm; i++) {
-    // inflation by month decreasing
-    coefficientOfInflation = coefficientOfInflation * (1 + arg.inflationMonthlyRate)
-    outstBalalceInflation = arg.amountToBorrow * coefficientOfInflation
-    inflationByMonth = previousOutstBalanceInflation - outstBalalceInflation
-    previousOutstBalanceInflation = outstBalalceInflation
+    let monthInterestPaid = outstandingBalance * (arg.interest / 100 / 12)
+    let monthPrincipalPaid = arg.monthlyRate - monthInterestPaid
+    outstandingBalance = outstandingBalance - monthPrincipalPaid
 
-    //monthly interest paid
-    const getMonthInterestPaid = (interest: number, outstandingBalance: number) => {
-      return (outstandingBalance * interest) / 100 / 12
-    }
-    let monthInterestPaid = getMonthInterestPaid(arg.interest, outstandingBalance)
+    // inflation by month decreasing
+    outstBalalceInflation = outstandingBalance * coefficientOfInflation
+    inflationByMonth = monthInterestPaid * coefficientOfInflation
+    coefficientOfInflation = coefficientOfInflation * (1 + arg.inflationMonthlyRate)
 
     //accumulative monthly interest paid
     interestPaidToDate = interestPaidToDate + monthInterestPaid
 
-    //monthly principal
-    const getMonthPrincipalPaid = (monthlyRate: number, monthInterestPaid: number) => {
-      return monthlyRate - monthInterestPaid
-    }
-    let monthPrincipalPaid = getMonthPrincipalPaid(arg.monthlyRate, monthInterestPaid)
-
     //accumulative monthly principal
     principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
     //loan left to pay
-    outstandingBalance = outstandingBalance - monthPrincipalPaid
+    // outstandingBalance = outstandingBalance - monthPrincipalPaid
 
     //increased property value
     propertyValue = propertyValue * (1 + arg.inflationInterest / 100 / 12)
