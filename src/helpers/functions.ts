@@ -84,9 +84,9 @@ export const handleMortgageDataChange = (arg: {
       return monthlyRate - monthInterestPaid
     }
     let monthPrincipalPaid = getMonthPrincipalPaid(arg.monthlyRate, monthInterestPaid)
-
     //accumulative monthly principal
     principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
+
     //loan left to pay
     outstandingBalance = outstandingBalance - monthPrincipalPaid
 
