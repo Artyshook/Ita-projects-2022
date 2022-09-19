@@ -24,7 +24,7 @@ export const mixCards = <T>(array: T[]) => {
   return array.sort(() => Math.random() - 0.5)
 }
 
-// How to Calculate Your Mortgage Payment, Interest and Principal: https://www.businessinsider.com/personal-finance/how-to-calculate-mortgage-payment
+// How mortgage interest is calculated: Formula for monthly principal - https://www.businessinsider.com/personal-finance/how-to-calculate-mortgage-payment
 export const monthlyRateCalculation = (arg: { amount: number; interest: number; year: number }) => {
   const monthlyInterest = arg.interest / 100 / 12
   const yearsToMonths = arg.year * 12
