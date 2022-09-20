@@ -15,14 +15,17 @@ export const tasksReducer = (state = initialState, action: ActionTypes): Task[] 
     case 'ADD-TASK':
       return [...state, { id: v1(), task: action.title, isDone: false }]
     case 'REMOVE-TASK':
-      return state.filter(task => task.id !== action.id)
+      return [...state.filter(t => t.id !== action.id)]
     case 'CHANGE-STATUS':
-      return state.map(task => (task.id === action.id ? { ...task, isDone: !action.status } : task))
+      return [
+        ...state.map(task => (task.id === action.id ? { ...task, isDone: !action.status } : task)),
+      ]
     case 'CHANGE-ORDER':
       const dragItem = state[action.start]
-      state.splice(action.start, 1)
-      state.splice(action.end, 0, dragItem)
-      return [...state]
+      const stateCopy = [...state]
+      stateCopy.splice(action.start, 1)
+      stateCopy.splice(action.end, 0, dragItem)
+      return [...stateCopy]
     default:
       return state
   }
@@ -36,40 +39,18 @@ type ActionTypes =
   | changeOrderACType
 
 type addTaskACType = ReturnType<typeof addTaskAC>
-export const addTaskAC = (title: string) =>
-  ({
-    type: 'ADD-TASK',
-    title,
-  } as const)
+export const addTaskAC = (title: string) => ({ type: 'ADD-TASK', title } as const)
 type removeTaskACType = ReturnType<typeof removeTaskAC>
-export const removeTaskAC = (id: string) =>
-  ({
-    type: 'REMOVE-TASK',
-    id,
-  } as const)
-
+export const removeTaskAC = (id: string) => ({ type: 'REMOVE-TASK', id } as const)
 type changeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
 export const changeTaskStatusAC = (id: string, status: boolean) =>
-  ({
-    type: 'CHANGE-STATUS',
-    id,
-    status,
-  } as const)
-
+  ({ type: 'CHANGE-STATUS', id, status } as const)
 type changeFilterACType = ReturnType<typeof changeFilterAC>
 export const changeFilterAC = (filter: FilterValuesType) =>
-  ({
-    type: 'CHANGE-FILTER',
-    filter,
-  } as const)
-
+  ({ type: 'CHANGE-FILTER', filter } as const)
 type changeOrderACType = ReturnType<typeof changeOrderAC>
 export const changeOrderAC = (start: number, end: number) =>
-  ({
-    type: 'CHANGE-ORDER',
-    start,
-    end,
-  } as const)
+  ({ type: 'CHANGE-ORDER', start, end } as const)
 
 const persistConfig = {
   key: 'root',
