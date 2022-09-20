@@ -12,7 +12,7 @@ import { MortgageCalculator } from '../../pages/MortgageCalculator/MortgageCalcu
 import { Navbar } from './Navbar'
 import { Portfolio } from './portfolio/Portfolio'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { TodoList } from '../../pages/TodoList/TodoList'
+import { TodoList } from '../../pages/TodoListRedux/TodoList'
 import { theme } from '../theme'
 import { urls } from '../../helpers/urls'
 import React, { useState } from 'react'
