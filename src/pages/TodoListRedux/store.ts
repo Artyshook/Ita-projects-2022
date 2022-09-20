@@ -1,60 +1,28 @@
 import { FilterValuesType } from './TodoList'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { legacy_createStore } from 'redux'
+import { persistReducer, persistStore } from 'redux-persist'
 import { v1 } from 'uuid'
+import ReduxThunk from 'redux-thunk'
+import storage from 'redux-persist/lib/storage'
+
 export type Task = { id: string; task: string; isDone: boolean }
 
-export const loadState = (key: string) => {
-  try {
-    const serializedState = localStorage.getItem(key)
+const initialState: Task[] = []
 
-    if (serializedState === null) {
-      return []
-    }
-    return JSON.parse(serializedState) as []
-  } catch (err) {
-    return []
-  }
-}
-
-export const saveState = (key: string, state: Task[]) => {
-  try {
-    const serializedState = JSON.stringify(state)
-    localStorage.setItem('state', serializedState)
-  } catch (error) {
-    console.error
-  }
-}
-
-const setPersist = (value: Task[]) => {
-  saveState('state', value)
-}
-
-const initialState: Task[] = loadState('state')
 export const tasksReducer = (state = initialState, action: ActionTypes): Task[] => {
   switch (action.type) {
     case 'ADD-TASK':
-      const addTaskState = [...state, { id: v1(), task: action.title, isDone: false }]
-      setPersist(addTaskState)
-      return addTaskState
+      return [...state, { id: v1(), task: action.title, isDone: false }]
     case 'REMOVE-TASK':
-      const filterTaskState = state.filter(task => task.id !== action.id)
-      setPersist(filterTaskState)
-      return filterTaskState
-
+      return state.filter(task => task.id !== action.id)
     case 'CHANGE-STATUS':
-      const changeStatusState = state.map(task =>
-        task.id === action.id ? { ...task, isDone: !action.status } : task
-      )
-      setPersist(changeStatusState)
-      return changeStatusState
-
+      return state.map(task => (task.id === action.id ? { ...task, isDone: !action.status } : task))
     case 'CHANGE-ORDER':
       const dragItem = state[action.start]
       state.splice(action.start, 1)
       state.splice(action.end, 0, dragItem)
-      setPersist(state)
       return [...state]
-
     default:
       return state
   }
@@ -103,5 +71,16 @@ export const changeOrderAC = (start: number, end: number) =>
     end,
   } as const)
 
-export const store = legacy_createStore(tasksReducer)
-export type AppRootStateType = ReturnType<typeof tasksReducer>
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const rootReducer = combineReducers({
+  tasks: tasksReducer,
+})
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = legacy_createStore(persistedReducer, applyMiddleware(ReduxThunk))
+export const persistor = persistStore(store)
+export type AppRootStateType = ReturnType<typeof rootReducer>

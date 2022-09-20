@@ -18,7 +18,7 @@ type Task = { id: string; task: string; isDone: boolean }
 
 export const TodoList = () => {
   const dispatch = useDispatch()
-  let tasks = useSelector<AppRootStateType, Array<Task>>(state => state)
+  let tasks = useSelector<AppRootStateType, Array<Task>>(state => state.tasks)
   const [newTask, setNewTask] = useState('')
   const [error, setError] = useState(null as string | null)
   const [filter, setFilter] = useState('all' as FilterValuesType)
