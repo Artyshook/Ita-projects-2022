@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Blog App Server",
+    "description": "This is a swagger documentation for Blog App based on the OpenAPI 3.0 specification.  You can find out more about Swagger at [https://swagger.io](https://swagger.io).",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:1234/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Articles",
+      "description": "Articles in the database"
+    },
+    {
+      "name": "Article",
+      "description": "Operations with the article"
+    }
+  ],
+  "paths": {
+    "/articles": {
+      "get": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Get all articles",
+        "description": "Get all articles",
+        "operationId": "getAllArticles",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/post": {
+      "post": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Create new post",
+        "description": "Create new post",
+        "operationId": "createNewPost",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "query",
+            "description": "Article should look like this",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "post": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "cover": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article added successfully"
+          }
+        }
+      }
+    },
+    "/articles/blogSlug": {
+      "get": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Find article by slug",
+        "description": "Returns a single article",
+        "operationId": "getPostbySlug",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Article"
+        ],
+        "summary": "Deletes an Article by slug",
+        "description": "Deletes an Article by slug",
+        "operationId": "deleteArticle",
+        "responses": {
+          "400": {
+            "description": "Article succesfully deleted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Article": {
+        "required": [
+          "title",
+          "id",
+          "slug",
+          "category",
+          "post"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "new post"
+          },
+          "id": {
+            "type": "string",
+            "example": "dslkjsl-12n12-1wskls3"
+          },
+          "post": {
+            "type": "string",
+            "example": "My trip to Vienna"
+          },
+          "category": {
+            "type": "string",
+            "example": "vacation"
+          },
+          "slug": {
+            "type": "string",
+            "example": "my-trip"
+          },
+          "photoUrls": {
+            "type": "string",
+            "items": {
+              "type": "string",
+              "xml": {
+                "name": "photoUrl"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "pet"
+        }
+      }
+    },
+    "requestBodies": {
+      "Article": {
+        "description": "Pet object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Article"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Article"
+            }
+          }
+        }
+      }
+    }
+  }
+}
