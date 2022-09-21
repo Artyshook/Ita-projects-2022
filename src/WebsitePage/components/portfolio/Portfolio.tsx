@@ -8,33 +8,31 @@ import styled from 'styled-components'
 
 export const Portfolio = () => {
   return (
-    <>
-      <motion.div
-        initial='out'
-        animate='in'
-        exit='out'
-        variants={theme.animation}
-        transition={theme.transition}
-      >
-        <Box>
-          <Wrapper>
-            {' '}
-            <Grid sx={{ maxWidth: '1440px' }} container>
-              {info.portfolio.map((project, index) => (
-                <Grid item sx={{}} xs={12} md={6} key={index}>
-                  <PortfolioBlock
-                    image={project.image}
-                    live={project.live}
-                    source={project.source}
-                    title={project.title}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Wrapper>
-        </Box>
-      </motion.div>
-    </>
+    <motion.div
+      initial='out'
+      animate='in'
+      exit='out'
+      variants={theme.animation}
+      transition={theme.transition}
+    >
+      <Box>
+        <Wrapper>
+          {' '}
+          <Grid sx={{ maxWidth: '1440px' }} container>
+            {info.portfolio.map((project, index) => (
+              <Grid item sx={{}} xs={12} md={6} key={index}>
+                <PortfolioBlock
+                  image={project.image}
+                  live={project.live}
+                  source={project.source}
+                  title={project.title}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Wrapper>
+      </Box>
+    </motion.div>
   )
 }
 

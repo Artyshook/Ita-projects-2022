@@ -1,10 +1,9 @@
-import { GoBackButton } from '../../components/GoBackButton'
 import { Graph } from './Graph'
 import { PaymentsTable } from './PaymentsTable'
 import {
   formatToPercent,
   handleMortgageDataChange,
-  mortgageCalculation,
+  monthlyRateCalculation,
 } from '../../helpers/functions'
 import { inflationMonthlyRate } from '../../helpers/inflationMonthlyRate'
 import { theme } from '../../helpers/theme'
@@ -28,21 +27,28 @@ export const MortgageCalculator = () => {
   const [mortgageTerm, setMortgageTerm] = useState(30)
   const [interest, setInterest] = useState(4.99)
   const [inflationInterest, setInflationInterest] = useState(5)
-
   const amountToBorrow = propertyPrice - depositAmount
-  const monthlyRate = mortgageCalculation(amountToBorrow, interest, mortgageTerm)
+
+  let monthlyRateArgs = {
+    amount: amountToBorrow,
+    interest: interest,
+    year: mortgageTerm,
+  }
+  const monthlyRate = monthlyRateCalculation(monthlyRateArgs)
   const totalAmountRepaid = monthlyRate * 12 * mortgageTerm
   const totalInterestPaid = totalAmountRepaid - amountToBorrow
   const inflationByMonth = inflationMonthlyRate(inflationInterest)
 
-  let arg = {
+  let MortgageDataChangeArgs = {
     amountToBorrow: amountToBorrow,
     interest: interest,
     mortgageTerm: mortgageTerm,
     monthlyRate: monthlyRate,
     inflationMonthlyRate: inflationByMonth,
+    propertyValue: propertyPrice,
+    inflationInterest: inflationInterest,
   }
-  const monthlyPayments = handleMortgageDataChange(arg)
+  const monthlyPayments = handleMortgageDataChange(MortgageDataChangeArgs)
 
   return (
     <div>
@@ -186,7 +192,6 @@ const Input_GridItemRangeSlider = styled.input`
 const Label_GridItemLabel = styled.label`
   font-size: ${theme.fonts.xs};
 `
-
 const H1_Header = styled.h1`
   text-align: center;
   padding-top: 2rem;

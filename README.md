@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# My projects on IT Absolvent 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to start
+git clone https://github.com/Artyshook/Ita-projects-2022/<br/>
+npm i<br/>
+npm run start<br/>
 
-## Available Scripts
+## Blog with local storage
 
-In the project directory, you can run:
+A beautiful prototype of a blog for posting articles with Markdown support
 
-### `npm start`
+[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/Blog)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Frame 1 (1)](https://user-images.githubusercontent.com/100515756/190504555-64e968c9-fd9e-47e2-83b4-9c5d662f007a.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Mortgage Loan Calculator 
 
-### `npm test`
+A fantastic Mortgage Loan Calculator with Monthly Payments and Inflation and with tables and graphs
+
+[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/MortgageCalculator)
+
+![Frame 1 (2)](https://user-images.githubusercontent.com/100515756/190508423-fd65a659-ab07-4a4f-bee4-d9b74f5ff819.png)
+
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Memory game
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A fun memory game with emojis 🤯
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/MemoryGame)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Frame 1 (3)](https://user-images.githubusercontent.com/100515756/190510677-dd069d19-8414-477c-bea3-a6d8c633d856.png)
 
-### `npm run eject`
+## Blog with server
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+A beautiful prototype of a blog for posting articles with Markdown support
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Frame 1 (1)](https://user-images.githubusercontent.com/100515756/190504555-64e968c9-fd9e-47e2-83b4-9c5d662f007a.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Todo list with Redux
 
-## Learn More
+A simple application for organizing your daily tasks with Redux.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/TodoList) 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![mock1](https://user-images.githubusercontent.com/100515756/190504169-e58d20fe-0572-4a01-b42d-e7daea5b58ab.png)
+
+## Hacker Typer
+
+Hacker Simulator and Typer. Start typing random text on your keyboard to simulate that you're hacking a computer
+
+[See](https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/HackerType)
+
+![Frame 1 (4)](https://user-images.githubusercontent.com/100515756/190512606-7c90cce2-c5a4-4ba3-93a5-785417aeed19.png)
