@@ -24,8 +24,12 @@ export const mixCards = <T>(array: T[]) => {
   return array.sort(() => Math.random() - 0.5)
 }
 
-export const mortgageCalculation = (amount: number, interest: number, year: number) => {
-  return (amount * (interest / 12 / 100)) / (1 - (1 + interest / 12 / 100) ** -(year * 12))
+// How mortgage interest is calculated: Formula for monthly principal - https://www.businessinsider.com/personal-finance/how-to-calculate-mortgage-payment
+export const monthlyRateCalculation = (arg: { amount: number; interest: number; year: number }) => {
+  const monthlyInterest = arg.interest / 100 / 12
+  const yearsToMonths = arg.year * 12
+
+  return (arg.amount * monthlyInterest) / (1 - (1 + monthlyInterest) ** -yearsToMonths)
 }
 
 export const formatToPercent = (depositAmount: number, propertyValue: number) => {
@@ -38,6 +42,8 @@ export const handleMortgageDataChange = (arg: {
   mortgageTerm: number
   monthlyRate: number
   inflationMonthlyRate: number
+  propertyValue: number
+  inflationInterest: number
 }) => {
   //Set initial values for loop to calculate monthly figures
   let monthDataObject = [
@@ -45,19 +51,20 @@ export const handleMortgageDataChange = (arg: {
       month: 0,
       outstandingBalance: arg.amountToBorrow,
       interestPaid: 0,
-      interestPaidToDate: 0,
+      accumulativeMonthlyInterestPaid: 0,
       principalRepaid: 0,
-      principalRepaidToDate: 0,
+      accumulativeMonthlyPrincipal: 0,
       outstandingBalanceInflation: 0,
       inflationByMonth: 0,
+      propertyValue: arg.propertyValue,
     },
   ]
   let outstandingBalance = arg.amountToBorrow
-  let interestPaidToDate = 0
-  let principalRepaidToDate = 0
+  let accumulativeMonthlyInterestPaid = 0
+  let accumulativeMonthlyPrincipal = 0
   let outstBalalceInflation = 0
   let inflationByMonth = 0
-  let previousOutstBalanceInflation = arg.amountToBorrow
+  let propertyValue = arg.propertyValue
 
   let coefficientOfInflation = 1
   arg.mortgageTerm = arg.mortgageTerm * 12
@@ -88,9 +95,22 @@ export const handleMortgageDataChange = (arg: {
     principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
 
     //loan left to pay
+    let monthInterestPaid = outstandingBalance * (arg.interest / 100 / 12)
+    let monthPrincipalPaid = arg.monthlyRate - monthInterestPaid
     outstandingBalance = outstandingBalance - monthPrincipalPaid
 
-    //There's always around £10 left at the end which forces the fraph to go into minus. This just rounds the last figure off at £0.00.
+    // inflation by month decreasing
+    outstBalalceInflation = outstandingBalance * coefficientOfInflation
+    inflationByMonth = monthInterestPaid * coefficientOfInflation
+    coefficientOfInflation = coefficientOfInflation * (1 + arg.inflationMonthlyRate)
+
+    accumulativeMonthlyInterestPaid = accumulativeMonthlyInterestPaid + monthInterestPaid
+    accumulativeMonthlyPrincipal = accumulativeMonthlyPrincipal + monthPrincipalPaid
+
+    //increased property value
+    propertyValue = propertyValue * (1 + arg.inflationInterest / 100 / 12)
+
+    //This just rounds the last figure off at 0.00.
     if (i === arg.mortgageTerm) {
       outstandingBalance = 0
     }
@@ -98,11 +118,12 @@ export const handleMortgageDataChange = (arg: {
       month: i,
       outstandingBalance: outstandingBalance,
       interestPaid: monthInterestPaid,
-      interestPaidToDate: interestPaidToDate,
+      accumulativeMonthlyInterestPaid: accumulativeMonthlyInterestPaid,
       principalRepaid: monthPrincipalPaid,
-      principalRepaidToDate: principalRepaidToDate,
+      accumulativeMonthlyPrincipal: accumulativeMonthlyPrincipal,
       outstandingBalanceInflation: outstBalalceInflation,
       inflationByMonth: inflationByMonth,
+      propertyValue: propertyValue,
     })
   }
   return monthDataObject

@@ -27,9 +27,9 @@ export const PaymentsTable = (props: PropsType) => {
           <tr key={el.month}>
             <td>{el.month}</td>
             <td>{formatCurrency(el.interestPaid)}</td>
-            <td>{formatCurrency(el.interestPaidToDate)}</td>
+            <td>{formatCurrency(el.accumulativeMonthlyInterestPaid)}</td>
             <td>{formatCurrency(el.principalRepaid)}</td>
-            <td>{formatCurrency(el.principalRepaidToDate)}</td>
+            <td>{formatCurrency(el.accumulativeMonthlyPrincipal)}</td>
             <td>{formatCurrency(el.outstandingBalance)}</td>
             <td>{formatCurrency(el.outstandingBalanceInflation)}</td>
             <td>{formatCurrency(el.inflationByMonth)}</td>

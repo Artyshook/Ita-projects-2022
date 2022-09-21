@@ -22,6 +22,7 @@ export const Graph = (props: PropsType) => {
       remain: formatDecimals(el.outstandingBalance),
       outstandingBalanceInflation: formatDecimals(el.outstandingBalanceInflation),
       inflationByMonth: formatDecimals(el.inflationByMonth),
+      propertyValue: formatDecimals(el.propertyValue),
     }))
 
   return (
@@ -58,6 +59,13 @@ export const Graph = (props: PropsType) => {
               stroke='#F3C84B'
               activeDot={{ r: 8 }}
               name='Overall inflation'
+            />
+            <Line
+              type='monotone'
+              dataKey='propertyValue'
+              fill='blue'
+              stroke='blue'
+              name='Property value affected by Inflation'
             />
           </LineChart>
           <LineChart
