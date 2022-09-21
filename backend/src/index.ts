@@ -5,9 +5,12 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import fs from 'fs'
+import swagger from '../swagger.json'
+import swaggerUi from 'swagger-ui-express'
 
 const app = express()
 const port = 1234
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger))
 
 app.use(cors())
 app.use(bodyParser.json())
