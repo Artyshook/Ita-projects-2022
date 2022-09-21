@@ -71,30 +71,6 @@ export const handleMortgageDataChange = (arg: {
 
   //Loop each year of the mortgage term
   for (let i = 1; i <= arg.mortgageTerm; i++) {
-    // inflation by month decreasing
-    coefficientOfInflation = coefficientOfInflation * (1 + arg.inflationMonthlyRate)
-    outstBalalceInflation = arg.amountToBorrow * coefficientOfInflation
-    inflationByMonth = previousOutstBalanceInflation - outstBalalceInflation
-    previousOutstBalanceInflation = outstBalalceInflation
-
-    //monthly interest paid
-    const getMonthInterestPaid = (interest: number, outstandingBalance: number) => {
-      return (outstandingBalance * interest) / 100 / 12
-    }
-    let monthInterestPaid = getMonthInterestPaid(arg.interest, outstandingBalance)
-
-    //accumulative monthly interest paid
-    interestPaidToDate = interestPaidToDate + monthInterestPaid
-
-    //monthly principal
-    const getMonthPrincipalPaid = (monthlyRate: number, monthInterestPaid: number) => {
-      return monthlyRate - monthInterestPaid
-    }
-    let monthPrincipalPaid = getMonthPrincipalPaid(arg.monthlyRate, monthInterestPaid)
-    //accumulative monthly principal
-    principalRepaidToDate = principalRepaidToDate + monthPrincipalPaid
-
-    //loan left to pay
     let monthInterestPaid = outstandingBalance * (arg.interest / 100 / 12)
     let monthPrincipalPaid = arg.monthlyRate - monthInterestPaid
     outstandingBalance = outstandingBalance - monthPrincipalPaid
