@@ -22,10 +22,10 @@ export const tasksReducer = (state = initialState, action: ActionTypes): Task[] 
       ]
     case 'CHANGE-ORDER':
       const dragItem = state[action.start]
-      const stateCopy = [...state]
-      stateCopy.splice(action.start, 1)
-      stateCopy.splice(action.end, 0, dragItem)
-      return [...stateCopy]
+      const newState = state.slice(0)
+      newState.splice(action.start, 1)
+      newState.splice(action.end, 0, dragItem)
+      return newState
     default:
       return state
   }

@@ -6,6 +6,7 @@ import {
   removeTaskAC,
 } from './store'
 import { CgTrash } from 'react-icons/cg'
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,16 +15,14 @@ import styled from 'styled-components'
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
-type Task = { id: string; task: string; isDone: boolean }
+const getTasks = (state: AppRootStateType) => state.tasks
 
 export const TodoList = () => {
   const dispatch = useDispatch()
-  const tasks = useSelector<AppRootStateType, Array<Task>>(state => state.tasks)
+  const tasks = useSelector(getTasks)
   const [newTask, setNewTask] = useState('')
   const [error, setError] = useState(null as string | null)
   const [filter, setFilter] = useState('all' as FilterValuesType)
-  const [dragStart, setDragStart] = useState(0)
-  const [dragEnd, setDragEnd] = useState(0)
 
   const addTask = () => {
     if (newTask.trim() !== '') {
@@ -50,15 +49,20 @@ export const TodoList = () => {
       : tasks
   }
 
-  const onDragStart = (e: React.DragEvent<HTMLLIElement>, id: string) => {
-    setDragStart(tasks.findIndex(task => task.id === id))
-  }
-  const onDragOver = (e: React.DragEvent<HTMLLIElement>, id: string) => {
-    setDragEnd(tasks.findIndex(task => task.id === id))
+  const onDragEndHandler = (result: DropResult) => {
+    if (!result.destination) return
+    dispatch(changeOrderAC(result.source.index, result.destination.index))
   }
 
-  const drop = () => {
-    dispatch(changeOrderAC(dragStart, dragEnd))
+  const getStyle = (style: any, snapshot: any) => {
+    if (!snapshot.isDropAnimating) {
+      return style
+    }
+    return {
+      ...style,
+      transition: ` all 0.7s ease`,
+      backgroundColor: theme.colors.lightBlue,
+    }
   }
 
   return (
@@ -85,23 +89,39 @@ export const TodoList = () => {
           </Div_Input>
           <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
           <Div_Tasks>
-            {filteredTodolist(filter).map(task => (
-              <Li_Tasks
-                key={task.id}
-                draggable
-                onDragStart={event => onDragStart(event, task.id)}
-                onDragEnter={event => onDragOver(event, task.id)}
-                onDragEnd={drop}
-              >
-                <input
-                  type='checkbox'
-                  onClick={() => statusTodoList(task.id, task.isDone)}
-                  defaultChecked={task.isDone}
-                />
-                {task.task}
-                <CgTrash onClick={() => removeTask(task.id)} />
-              </Li_Tasks>
-            ))}
+            <DragDropContext onDragEnd={onDragEndHandler}>
+              <Droppable droppableId='tasks'>
+                {provided => (
+                  <ul {...provided.droppableProps} ref={provided.innerRef}>
+                    {filteredTodolist(filter).map((task, index) => (
+                      <Draggable key={task.id} draggableId={task.id} index={index}>
+                        {(provided, snapshot) => (
+                          <Li_Tasks
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                            style={getStyle(provided.draggableProps.style, snapshot)}
+                          >
+                            <input
+                              type='checkbox'
+                              onClick={() => statusTodoList(task.id, task.isDone)}
+                              defaultChecked={task.isDone}
+                            />
+                            {task.task}
+                            <CgTrash
+                              onClick={() => removeTask(task.id)}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </Li_Tasks>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
+            </DragDropContext>
           </Div_Tasks>
           <Div_Filter>
             <Button_FilterButton onClick={() => setFilter('all')}>ALL</Button_FilterButton>
@@ -142,13 +162,13 @@ const Div_Card = styled.div`
 `
 export const Div_Tasks = styled.div`
   font-size: ${theme.fonts.small};
-  margin-left: 2rem;
 `
 
-export const Li_Tasks = styled.li`
+export const Li_Tasks = styled.li<{ isDragging: boolean }>`
   display: flex;
   min-width: 20rem;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   input {
     padding: 0;
@@ -162,6 +182,7 @@ export const Li_Tasks = styled.li`
   &:hover {
     border: 2px solid ${theme.colors.blue};
   }
+  background-color: ${props => (props.isDragging ? theme.colors.green : '#none')};
 `
 
 export const Div_Input = styled.div`
