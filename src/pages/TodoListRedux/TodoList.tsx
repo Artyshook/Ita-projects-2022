@@ -54,17 +54,6 @@ export const TodoList = () => {
     dispatch(changeOrderAC(result.source.index, result.destination.index))
   }
 
-  const getStyle = (style: any, snapshot: any) => {
-    if (!snapshot.isDropAnimating) {
-      return style
-    }
-    return {
-      ...style,
-      transition: ` all 0.7s ease`,
-      backgroundColor: theme.colors.lightBlue,
-    }
-  }
-
   return (
     <HelmetProvider>
       <Div_Wrapper>
@@ -101,7 +90,6 @@ export const TodoList = () => {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
-                            style={getStyle(provided.draggableProps.style, snapshot)}
                           >
                             <input
                               type='checkbox'
@@ -109,10 +97,12 @@ export const TodoList = () => {
                               defaultChecked={task.isDone}
                             />
                             {task.task}
-                            <CgTrash
-                              onClick={() => removeTask(task.id)}
-                              style={{ cursor: 'pointer' }}
-                            />
+                            <Div_Trash>
+                              <CgTrash
+                                onClick={() => removeTask(task.id)}
+                                style={{ cursor: 'pointer' }}
+                              />
+                            </Div_Trash>
                           </Li_Tasks>
                         )}
                       </Draggable>
@@ -136,6 +126,9 @@ export const TodoList = () => {
   )
 }
 
+const Div_Trash = styled.div`
+  cursor: pointer;
+`
 export const Div_Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
