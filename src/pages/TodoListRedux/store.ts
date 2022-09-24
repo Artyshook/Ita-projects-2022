@@ -1,8 +1,8 @@
 import { FilterValuesType } from './TodoList'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
+import { changeOrder } from '../../helpers/functions'
 import { legacy_createStore } from 'redux'
 import { persistReducer, persistStore } from 'redux-persist'
-import { swap } from '../../helpers/functions'
 import { v1 } from 'uuid'
 import ReduxThunk from 'redux-thunk'
 import storage from 'redux-persist/lib/storage'
@@ -22,7 +22,7 @@ export const tasksReducer = (state = initialState, action: ActionTypes): Task[] 
         ...state.map(task => (task.id === action.id ? { ...task, isDone: !action.status } : task)),
       ]
     case 'CHANGE-ORDER':
-      return swap(state, action.start, action.end)
+      return changeOrder(state, action.start, action.end)
     default:
       return state
   }

@@ -115,9 +115,8 @@ export const convertToSlug = (title: string) => {
     .replace(/^-+|-+$/g, '')
 }
 
-export const swap = (arr: Task[], start: number, end: number) => {
+export const changeOrder = (arr: Task[], start: number, end: number) => {
   const dragItem = arr[start]
   const removeDraggedItem = arr.filter((el, index) => index !== start)
-  const insertItem = (arr: Task[]) => [...arr.slice(0, end), dragItem, ...arr.slice(end)]
-  return insertItem(removeDraggedItem)
+  return [...removeDraggedItem.slice(0, end), dragItem, ...removeDraggedItem.slice(end)]
 }
