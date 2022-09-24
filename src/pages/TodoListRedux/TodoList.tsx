@@ -1,19 +1,25 @@
-import { AppRootStateType, addTaskAC, changeTaskStatusAC, removeTaskAC } from './store'
+import {
+  AppRootStateType,
+  addTaskAC,
+  changeOrderAC,
+  changeTaskStatusAC,
+  removeTaskAC,
+} from './store'
 import { CgTrash } from 'react-icons/cg'
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { theme } from '../../helpers/theme'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocalStorage } from '../../helpers/functions'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
-type Task = { id: string; task: string; isDone: boolean }
+const getTasks = (state: AppRootStateType) => state.tasks
 
 export const TodoList = () => {
   const dispatch = useDispatch()
-  let tasks = useSelector<AppRootStateType, Array<Task>>(state => state)
+  const tasks = useSelector(getTasks)
   const [newTask, setNewTask] = useState('')
   const [error, setError] = useState(null as string | null)
   const [filter, setFilter] = useState('all' as FilterValuesType)
@@ -43,6 +49,11 @@ export const TodoList = () => {
       : tasks
   }
 
+  const onDragEndHandler = (result: DropResult) => {
+    if (!result.destination) return
+    dispatch(changeOrderAC(result.source.index, result.destination.index))
+  }
+
   return (
     <HelmetProvider>
       <Div_Wrapper>
@@ -67,17 +78,40 @@ export const TodoList = () => {
           </Div_Input>
           <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
           <Div_Tasks>
-            {filteredTodolist(filter).map(task => (
-              <Li_Tasks key={task.id}>
-                <input
-                  type='checkbox'
-                  onClick={() => statusTodoList(task.id, task.isDone)}
-                  defaultChecked={task.isDone}
-                />
-                {task.task}
-                <CgTrash onClick={() => removeTask(task.id)} />
-              </Li_Tasks>
-            ))}
+            <DragDropContext onDragEnd={onDragEndHandler}>
+              <Droppable droppableId='tasks'>
+                {provided => (
+                  <ul {...provided.droppableProps} ref={provided.innerRef}>
+                    {filteredTodolist(filter).map((task, index) => (
+                      <Draggable key={task.id} draggableId={task.id} index={index}>
+                        {(provided, snapshot) => (
+                          <Li_Tasks
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
+                          >
+                            <input
+                              type='checkbox'
+                              onClick={() => statusTodoList(task.id, task.isDone)}
+                              defaultChecked={task.isDone}
+                            />
+                            {task.task}
+                            <Div_Trash>
+                              <CgTrash
+                                onClick={() => removeTask(task.id)}
+                                style={{ cursor: 'pointer' }}
+                              />
+                            </Div_Trash>
+                          </Li_Tasks>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
+            </DragDropContext>
           </Div_Tasks>
           <Div_Filter>
             <Button_FilterButton onClick={() => setFilter('all')}>ALL</Button_FilterButton>
@@ -92,9 +126,12 @@ export const TodoList = () => {
   )
 }
 
+const Div_Trash = styled.div`
+  cursor: pointer;
+`
 export const Div_Wrapper = styled.div`
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -118,13 +155,13 @@ const Div_Card = styled.div`
 `
 export const Div_Tasks = styled.div`
   font-size: ${theme.fonts.small};
-  margin-left: 2rem;
 `
 
-export const Li_Tasks = styled.li`
+export const Li_Tasks = styled.li<{ isDragging: boolean }>`
   display: flex;
   min-width: 20rem;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   input {
     padding: 0;
@@ -138,6 +175,7 @@ export const Li_Tasks = styled.li`
   &:hover {
     border: 2px solid ${theme.colors.blue};
   }
+  background-color: ${props => (props.isDragging ? theme.colors.green : '#none')};
 `
 
 export const Div_Input = styled.div`

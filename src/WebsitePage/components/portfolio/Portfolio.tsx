@@ -60,7 +60,7 @@ export const PortfolioBlock = (props: PortfolioBlockType) => {
           <IconLink link={props.live} title={'Live Demo'} icon={'fa fa-safari'} />
         </Box>
         <Box p={1} border={'2px solid black'} borderRadius={'25px'}>
-          <IconLink link={props.source} title={'Source Code'} icon={'fa fa-code'} />
+          <IconLink2 link={props.source} title={'Source Code'} icon={'fa fa-code'} />
         </Box>
       </Box>
     </Box>
@@ -77,6 +77,14 @@ export const IconLink = (props: IconLinkProps) => {
     <Link to={props.link} rel='noopener noreferrer'>
       <i className={props.icon} /> {props.title}
     </Link>
+  )
+}
+
+export const IconLink2 = (props: IconLinkProps) => {
+  return (
+    <a href={props.link} rel='noopener noreferrer'>
+      <i className={props.icon} /> {props.title}
+    </a>
   )
 }
 

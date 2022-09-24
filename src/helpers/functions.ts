@@ -1,3 +1,4 @@
+import { Task } from '../pages/TodoListRedux/store'
 import { useEffect, useState } from 'react'
 
 export const useLocalStorage = <T>(key: string, defaultValue: T) => {
@@ -112,4 +113,10 @@ export const convertToSlug = (title: string) => {
     .replace(/[^\w\s-]/g, '')
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '')
+}
+
+export const changeOrder = <T>(arr: T[], start: number, end: number): T[] => {
+  const dragItem = arr[start]
+  const removeDraggedItem = arr.filter((el, index) => index !== start)
+  return [...removeDraggedItem.slice(0, end), dragItem, ...removeDraggedItem.slice(end)]
 }

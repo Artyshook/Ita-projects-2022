@@ -2,7 +2,6 @@
 
 A simple application for organizing your daily tasks with Redux.
 
-> #### what is implemented:
 >
 > - Add/Delite/Filter task 
 > - Input data checking
