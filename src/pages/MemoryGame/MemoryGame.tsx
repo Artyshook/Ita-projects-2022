@@ -161,3 +161,7 @@ export const Div_Icon = styled.div`
     color: ${theme.colors.green};
   }
 `
+const IconWrapper = styled.img`
+  width: 60px;
+  height: 60px;
+`

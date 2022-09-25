@@ -6,9 +6,32 @@ import { theme } from '../../theme'
 import React from 'react'
 import styled from 'styled-components'
 
+const myCV = require('../img/CV_Artem_Saibel.pdf')
+
 export const About = () => {
   const firstName = info.firstName.toLowerCase()
 
+  const downloadCV = () => {
+    return (
+      <>
+        <p>
+          <BaseColor_Span>
+            {firstName}
+            {info.lastName.toLowerCase()} $
+          </BaseColor_Span>{' '}
+          cd download/CV{' '}
+        </p>
+        <p>
+          <BaseColor_Span>
+            download/CV <Green_Span>(main)</Green_Span> ${' '}
+          </BaseColor_Span>
+          <a href={myCV}>
+            <Download>Download in PDF</Download>
+          </a>
+        </p>
+      </>
+    )
+  }
   const aboutMeText = () => {
     return (
       <>
@@ -77,7 +100,7 @@ export const About = () => {
           </BaseColor_Span>{' '}
           ls
         </p>
-        <ul>
+        <Skills_Ul>
           {info.hobbies.map((hobby, index) => (
             <li key={index}>
               <Box component={'span'} mr={'1rem'}>
@@ -86,7 +109,7 @@ export const About = () => {
               {hobby.label}
             </li>
           ))}
-        </ul>
+        </Skills_Ul>
       </>
     )
   }
@@ -103,11 +126,20 @@ export const About = () => {
         <Terminal text={aboutMeText()} />
         <Terminal text={skillsText()} />
         <Terminal text={miscText()} />
+        <Terminal text={downloadCV()} />
       </Box>
     </motion.div>
   )
 }
 
+export const Download = styled.button`
+background-color: ${theme.colors.backgroundColor.black};
+  border: none;
+  color: ${theme.colors.red};
+  text-decoration: none;
+  &:hover {
+    color: ${theme.colors.white};
+`
 const Skills_Ul = styled.ul`
   columns: 1;
   ${theme.breakpoint.minWidth} {
@@ -116,6 +148,7 @@ const Skills_Ul = styled.ul`
   li {
     margin: 0;
     line-height: 1.75;
+    max-width: 300px;
   }
 `
 
@@ -124,4 +157,10 @@ const Green_Span = styled.span`
 `
 const BaseColor_Span = styled.span`
   color: ${info.baseColor};
+`
+const BaseColor_Span2 = styled.span`
+  color: ${info.baseColor};
+  li {
+    max-width: 100px;
+  }
 `

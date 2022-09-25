@@ -5,14 +5,16 @@ import styled from 'styled-components'
 
 type PropsType = {
   monthlyPayments: MortgageDataType[]
+  darkMode: boolean
 }
 
 export const PaymentsTable = (props: PropsType) => {
+  console.log('darkmode', props.darkMode)
   return (
-    <Table_Container>
+    <Table_Container darkMode={props.darkMode}>
       <thead>
         <tr>
-          <th>Month</th>
+          <th>Year/Month</th>
           <th>Month Interest Paid</th>
           <th>Total Interest Paid</th>
           <th>Month Principal Repaid</th>
@@ -23,9 +25,9 @@ export const PaymentsTable = (props: PropsType) => {
         </tr>
       </thead>
       <tbody>
-        {props.monthlyPayments.map(el => (
-          <tr key={el.month}>
-            <td>{el.month}</td>
+        {props.monthlyPayments.map((el, index) => (
+          <tr key={index}>
+            <td>{`${el.year}/${el.month}`}</td>
             <td>{formatCurrency(el.interestPaid)}</td>
             <td>{formatCurrency(el.accumulativeMonthlyInterestPaid)}</td>
             <td>{formatCurrency(el.principalRepaid)}</td>
@@ -40,18 +42,19 @@ export const PaymentsTable = (props: PropsType) => {
   )
 }
 
-const Table_Container = styled.table`
+const Table_Container = styled.table<{ darkMode: boolean }>`
   width: 100%;
   & th {
     position: sticky;
     top: 0;
     background: ${theme.colors.grey};
+    background: ${props => (props.darkMode ? theme.colors.darkGrey : theme.colors.grey)};
   }
   & td,
   th {
     padding: 15px 5px;
   }
   & tr:nth-of-type(even) {
-    background-color: ${theme.colors.lightBlue};
+    background: ${props => (props.darkMode ? theme.colors.blue : theme.colors.lightBlue)};
   }
 `

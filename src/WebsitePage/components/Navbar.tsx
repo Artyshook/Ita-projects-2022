@@ -51,7 +51,7 @@ export const Navbar = (props: PropsType) => {
         {links.map((link, index) => (
           <Box key={index} component={'li'}>
             <Link to={link.to}>
-              {!link.type && <P>{link.name}</P>}
+              {!link.type && <p>{link.name}</p>}
               {link.type && <H1>{link.name}</H1>}
             </Link>
           </Box>
@@ -69,6 +69,8 @@ const BoxGlobal = styled(Box)`
   a:visited,
   a:active {
     text-decoration: none;
+    transform: none;
+    transition: none;
   }
   width: 100%;
 
@@ -93,7 +95,4 @@ const BoxWrapper = styled(Box)`
   text-transform: lowercase;
   font-size: 1.5rem;
   list-style-type: none;
-`
-const P = styled.p`
-  padding-bottom: 0.5rem;
 `

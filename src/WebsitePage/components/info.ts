@@ -78,8 +78,8 @@ export const info = {
       emoji: '🌊',
     },
     {
-      label: 'cooking',
-      emoji: '🌶',
+      label: 'MMORPG games',
+      emoji: '🎮',
     },
   ],
   portfolio: [

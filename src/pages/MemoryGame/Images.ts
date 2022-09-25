@@ -1,6 +1,6 @@
 import disgusted from './images/disgusted.png'
 import fox from './images/fox.png'
-import game from './images/game.jpg'
+import game from './images/game.png'
 import ghost from './images/ghost.png'
 import lion from './images/lion.png'
 import man2 from './images/man2.png'

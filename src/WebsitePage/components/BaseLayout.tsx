@@ -43,7 +43,10 @@ export const BaseLayout = () => {
                 <Route index element={<Portfolio />} />
                 <Route path={urls.todolist} element={<TodoList />} />
                 <Route path={urls.memoryGame} element={<MemoryGame />} />
-                <Route path={urls.calculator} element={<MortgageCalculator />} />
+                <Route
+                  path={urls.calculator}
+                  element={<MortgageCalculator darkMode={darkMode} />}
+                />
                 <Route path={urls.hackerTyper} element={<HackerTyper />} />
               </Route>
               <Route path={urls.blog.list} element={<BlogUseContext1 />} />
@@ -89,8 +92,9 @@ const GlobalBox = styled(Box)<{ darkMode: boolean }>`
 
   li {
     &:hover {
-      transform: translateY(-3px);
-      transition: all 250ms ease;
+      transform: translateY(2px) scale(1.2);
+      transition: all 300ms ease;
+      //transform: scale(1.2)
     }
   }
 `

@@ -1,4 +1,13 @@
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import { handleMortgageDataChange } from '../../helpers/functions'
 import React from 'react'
 import styled from 'styled-components'
@@ -29,89 +38,173 @@ export const Graph = (props: PropsType) => {
     <Div_Global>
       <Div_Container>
         <Div_Item>
-          <LineChart
-            width={700}
-            height={400}
-            data={chartData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid stroke='#eee' strokeDasharray='3 3' />
-            <XAxis dataKey='XAxis' interval={10} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type='monotone'
-              dataKey='remain'
-              fill='#82ca9d'
-              stroke='#82ca9d'
-              activeDot={{ r: 8 }}
-              name='Remain to pay by Month'
-            />
-            <Line
-              type='monotone'
-              dataKey='outstandingBalanceInflation'
-              stroke='#F3C84B'
-              activeDot={{ r: 8 }}
-              name='Overall inflation'
-            />
-            <Line
-              type='monotone'
-              dataKey='propertyValue'
-              fill='blue'
-              stroke='blue'
-              name='Property value affected by Inflation'
-            />
-          </LineChart>
-          <LineChart
-            width={700}
-            height={400}
-            data={chartData}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid stroke='#eee' strokeDasharray='3 3' />
-            <XAxis dataKey='xAxis' interval={10} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type='monotone'
-              dataKey='interestPaid'
-              strokeWidth={1}
-              fill='#82ca9d'
-              stroke='#82ca9d'
-              activeDot={{ r: 8 }}
-              name='Interest paid by Month'
-            />
-            <Line
-              type='monotone'
-              dataKey='principalPaid'
-              strokeWidth={1}
-              activeDot={{ r: 8 }}
-              fill='#8884d8'
-              stroke='#8884d8'
-              name='Principal paid by Month'
-            />
-            <Line
-              type='monotone'
-              dataKey='inflationByMonth'
-              strokeWidth={1}
-              activeDot={{ r: 8 }}
-              fill='#eeee'
-              stroke='#F3C84B'
-              name='Inflation by Month'
-            />
-          </LineChart>
+          <ResponsiveContainer width='100%' height='90%'>
+            <LineChart
+              width={700}
+              height={400}
+              data={chartData}
+              margin={{
+                right: 30,
+                left: 20,
+              }}
+            >
+              <CartesianGrid stroke='#eee' strokeDasharray='3 3' />
+              <XAxis dataKey='XAxis' interval={10} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type='monotone'
+                dataKey='remain'
+                fill='#82ca9d'
+                stroke='#82ca9d'
+                activeDot={{ r: 8 }}
+                name='Remain to pay by Month'
+              />
+              <Line
+                type='monotone'
+                dataKey='outstandingBalanceInflation'
+                stroke='#F3C84B'
+                activeDot={{ r: 8 }}
+                name='Overall inflation'
+              />
+              <Line
+                type='monotone'
+                dataKey='propertyValue'
+                fill='blue'
+                stroke='blue'
+                name='Property value affected by Inflation'
+              />
+            </LineChart>
+          </ResponsiveContainer>
+
+          {/*<LineChart*/}
+          {/*  width={700}*/}
+          {/*  height={400}*/}
+          {/*  data={chartData}*/}
+          {/*  margin={{*/}
+          {/*    top: 5,*/}
+          {/*    right: 30,*/}
+          {/*    left: 20,*/}
+          {/*    bottom: 5,*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <CartesianGrid stroke='#eee' strokeDasharray='3 3' />*/}
+          {/*  <XAxis dataKey='XAxis' interval={10} />*/}
+          {/*  <YAxis />*/}
+          {/*  <Tooltip />*/}
+          {/*  <Legend />*/}
+          {/*  <Line*/}
+          {/*    type='monotone'*/}
+          {/*    dataKey='remain'*/}
+          {/*    fill='#82ca9d'*/}
+          {/*    stroke='#82ca9d'*/}
+          {/*    activeDot={{ r: 8 }}*/}
+          {/*    name='Remain to pay by Month'*/}
+          {/*  />*/}
+          {/*  <Line*/}
+          {/*    type='monotone'*/}
+          {/*    dataKey='outstandingBalanceInflation'*/}
+          {/*    stroke='#F3C84B'*/}
+          {/*    activeDot={{ r: 8 }}*/}
+          {/*    name='Overall inflation'*/}
+          {/*  />*/}
+          {/*  <Line*/}
+          {/*    type='monotone'*/}
+          {/*    dataKey='propertyValue'*/}
+          {/*    fill='blue'*/}
+          {/*    stroke='blue'*/}
+          {/*    name='Property value affected by Inflation'*/}
+          {/*  />*/}
+          {/*</LineChart>*/}
+          <ResponsiveContainer width='100%' height='90%'>
+            <LineChart
+              width={700}
+              height={400}
+              data={chartData}
+              margin={{
+                right: 30,
+                left: 20,
+              }}
+            >
+              <CartesianGrid stroke='#eee' strokeDasharray='3 3' />
+              <XAxis dataKey='xAxis' interval={10} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type='monotone'
+                dataKey='interestPaid'
+                strokeWidth={1}
+                fill='#82ca9d'
+                stroke='#82ca9d'
+                activeDot={{ r: 8 }}
+                name='Interest paid by Month'
+              />
+              <Line
+                type='monotone'
+                dataKey='principalPaid'
+                strokeWidth={1}
+                activeDot={{ r: 8 }}
+                fill='#8884d8'
+                stroke='#8884d8'
+                name='Principal paid by Month'
+              />
+              <Line
+                type='monotone'
+                dataKey='inflationByMonth'
+                strokeWidth={1}
+                activeDot={{ r: 8 }}
+                fill='#eeee'
+                stroke='#F3C84B'
+                name='Inflation by Month'
+              />
+            </LineChart>
+          </ResponsiveContainer>
+          {/*<LineChart*/}
+          {/*  width={700}*/}
+          {/*  height={400}*/}
+          {/*  data={chartData}*/}
+          {/*  margin={{*/}
+          {/*    top: 5,*/}
+          {/*    right: 30,*/}
+          {/*    left: 20,*/}
+          {/*    bottom: 5,*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <CartesianGrid stroke='#eee' strokeDasharray='3 3' />*/}
+          {/*  <XAxis dataKey='xAxis' interval={10} />*/}
+          {/*  <YAxis />*/}
+          {/*  <Tooltip />*/}
+          {/*  <Legend />*/}
+          {/*  <Line*/}
+          {/*    type='monotone'*/}
+          {/*    dataKey='interestPaid'*/}
+          {/*    strokeWidth={1}*/}
+          {/*    fill='#82ca9d'*/}
+          {/*    stroke='#82ca9d'*/}
+          {/*    activeDot={{ r: 8 }}*/}
+          {/*    name='Interest paid by Month'*/}
+          {/*  />*/}
+          {/*  <Line*/}
+          {/*    type='monotone'*/}
+          {/*    dataKey='principalPaid'*/}
+          {/*    strokeWidth={1}*/}
+          {/*    activeDot={{ r: 8 }}*/}
+          {/*    fill='#8884d8'*/}
+          {/*    stroke='#8884d8'*/}
+          {/*    name='Principal paid by Month'*/}
+          {/*  />*/}
+          {/*  <Line*/}
+          {/*    type='monotone'*/}
+          {/*    dataKey='inflationByMonth'*/}
+          {/*    strokeWidth={1}*/}
+          {/*    activeDot={{ r: 8 }}*/}
+          {/*    fill='#eeee'*/}
+          {/*    stroke='#F3C84B'*/}
+          {/*    name='Inflation by Month'*/}
+          {/*  />*/}
+          {/*</LineChart>*/}
         </Div_Item>
       </Div_Container>
     </Div_Global>
@@ -123,11 +216,9 @@ const Div_Container = styled.div`
   justify-content: space-evenly;
   grid-template-columns: 50% 50%;
   padding-bottom: 2rem;
-  padding-top: 2rem;
 `
 const Div_Global = styled.div`
   margin: 0;
-  width: 100vw;
   text-align: center;
   overflow: scroll;
 `
@@ -136,6 +227,7 @@ const Div_Item = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 5px;
   border-radius: 10px;
+  height: 500px;
+  width: 90%;
 `
