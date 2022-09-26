@@ -93,12 +93,4 @@ const Container = styled(Box)<{ darkMode: boolean }>`
   ul {
     list-style-type: none;
   }
-
-  li {
-    &:hover {
-      //transform: translateY(2px) scale(1.2);
-      //transition: all 300ms ease;
-      //transform: scale(1.2)
-    }
-  }
 `

@@ -188,7 +188,6 @@ const Div_GridItem = styled.div`
   font-size: ${theme.fonts.xs};
 `
 const Div_GridItem2 = styled.div`
-  padding: 30px;
   padding-top: 60px;
   display: flex;
   flex-direction: column;

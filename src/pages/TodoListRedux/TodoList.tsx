@@ -177,7 +177,6 @@ export const Wrapper = styled.div`
   ${theme.breakpoint.phone} {
     width: 80%;
   }
-  //color: black;
 `
 export const BackgroundWrapper = styled.div`
   padding: 2.7em;

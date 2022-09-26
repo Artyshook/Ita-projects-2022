@@ -9,7 +9,6 @@ type PropsType = {
 }
 
 export const PaymentsTable = (props: PropsType) => {
-  console.log('darkmode', props.darkMode)
   return (
     <Table_Container darkMode={props.darkMode}>
       <thead>
@@ -66,9 +65,7 @@ const Table_Container = styled.table<{ darkMode: boolean }>`
     tr {
       display: block;
     }
-
-    /* Hide table headers (but not display: none;, for accessibility) */
-
+    
     thead tr {
       thead tr {
         position: absolute;
@@ -78,7 +75,6 @@ const Table_Container = styled.table<{ darkMode: boolean }>`
       tr { border: 1px solid #E74C3C; }
       tr + tr { margin-top: 1.5em; }
       td {
-        /* make like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
