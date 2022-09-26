@@ -127,7 +127,7 @@ export const changeOrder = <T>(arr: T[], start: number, end: number): T[] => {
 }
 
 export const getDate = () => {
-  let month = [
+  const month = [
     'January',
     'February',
     'March',
@@ -141,10 +141,10 @@ export const getDate = () => {
     'November',
     'December',
   ][new Date().getMonth()]
-  let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+  const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
     new Date().getDay()
   ]
-  let fullDay = weekday + ', ' + new Date().getDate() + ' of'
+  const fullDay = weekday + ', ' + new Date().getDate() + ' of'
   const date = [fullDay, month]
   return date
 }
