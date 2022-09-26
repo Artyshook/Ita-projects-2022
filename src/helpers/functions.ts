@@ -145,8 +145,7 @@ export const getDate = () => {
     new Date().getDay()
   ]
   const fullDay = weekday + ', ' + new Date().getDate() + ' of'
-  const date = [fullDay, month]
-  return date
+  return [fullDay, month]
 }
 
 export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
