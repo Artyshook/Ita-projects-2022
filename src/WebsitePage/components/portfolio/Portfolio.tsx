@@ -44,11 +44,13 @@ type PortfolioBlockType = {
 }
 export const PortfolioBlock = (props: PortfolioBlockType) => {
   const abc = () => {
-    ;<Link to={props.live} rel='noopener noreferrer' />
+    return <Link to={props.live} rel='noopener noreferrer' />
   }
   return (
     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-      <Box component={'img'} src={props.image} alt={'mockup'} width={'100%'} onClick={abc} />
+      <Link to={props.live}>
+        <Box component={'img'} src={props.image} alt={'mockup'} width={'100%'} onClick={abc} />
+      </Link>
       <h1 style={{ fontSize: '2rem' }}>{props.title}</h1>
       <Box
         className={'portfolio'}

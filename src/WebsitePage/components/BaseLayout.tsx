@@ -18,12 +18,16 @@ import { urls } from '../../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+export type DarkModeProps = {
+  darkMode: boolean
+}
+
 export const BaseLayout = () => {
   const [darkMode, setDarkMode] = useState(false)
   const location = useLocation()
 
   return (
-    <GlobalBox darkMode={darkMode}>
+    <Container darkMode={darkMode}>
       <Grid
         container
         display={'flex'}
@@ -70,11 +74,11 @@ export const BaseLayout = () => {
           </Box>
         </Grid>
       </Grid>
-    </GlobalBox>
+    </Container>
   )
 }
 
-const GlobalBox = styled(Box)<{ darkMode: boolean }>`
+const Container = styled(Box)<{ darkMode: boolean }>`
   background-color: ${props => (props.darkMode ? theme.colors.dark : theme.colors.white)};
   color: ${({ darkMode }) => (!darkMode ? theme.colors.dark : theme.colors.white)};
   transition: all 400ms;
@@ -92,8 +96,8 @@ const GlobalBox = styled(Box)<{ darkMode: boolean }>`
 
   li {
     &:hover {
-      transform: translateY(2px) scale(1.2);
-      transition: all 300ms ease;
+      //transform: translateY(2px) scale(1.2);
+      //transition: all 300ms ease;
       //transform: scale(1.2)
     }
   }

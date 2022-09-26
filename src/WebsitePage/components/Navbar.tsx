@@ -46,7 +46,7 @@ export const Navbar = (props: PropsType) => {
   const location = useLocation()
 
   return (
-    <BoxGlobal component={'nav'}>
+    <Container component={'nav'}>
       <BoxWrapper component={'ul'} gap={{ xs: '2rem', md: '8rem' }}>
         {links.map((link, index) => (
           <Box key={index} component={'li'}>
@@ -58,11 +58,11 @@ export const Navbar = (props: PropsType) => {
         ))}
         <Li>{<Toggler darkMode={props.darkMode} handleClick={props.handleClick} />}</Li>
       </BoxWrapper>
-    </BoxGlobal>
+    </Container>
   )
 }
 
-const BoxGlobal = styled(Box)`
+const Container = styled(Box)`
   a,
   a:link,
   a:hover,

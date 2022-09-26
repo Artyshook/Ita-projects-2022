@@ -125,3 +125,28 @@ export const changeOrder = <T>(arr: T[], start: number, end: number): T[] => {
   const removeDraggedItem = arr.filter((el, index) => index !== start)
   return [...removeDraggedItem.slice(0, end), dragItem, ...removeDraggedItem.slice(end)]
 }
+
+export const getDate = () => {
+  let month = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ][new Date().getMonth()]
+  let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+    new Date().getDay()
+  ]
+  let fullDay = weekday + ', ' + new Date().getDate() + ' of'
+  const date = [fullDay, month]
+  return date
+}
+
+export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))

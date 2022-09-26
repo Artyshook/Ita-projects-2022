@@ -57,4 +57,42 @@ const Table_Container = styled.table<{ darkMode: boolean }>`
   & tr:nth-of-type(even) {
     background: ${props => (props.darkMode ? theme.colors.blue : theme.colors.lightBlue)};
   }
+  ${theme.breakpoint.phone} {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+
+    thead tr {
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      tr { border: 1px solid #E74C3C; }
+      tr + tr { margin-top: 1.5em; }
+      td {
+        /* make like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        background-color: #F8D9D5;
+        text-align: left;
+      }
+      td:before {
+        content: attr(data-label);
+        display: inline-block;
+        line-height: 1.5;
+        margin-left: -100%;
+        width: 100%;
+        white-space: nowrap;
+      }
+  }
 `

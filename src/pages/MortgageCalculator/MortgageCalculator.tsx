@@ -1,3 +1,4 @@
+import { DarkModeProps } from '../../WebsitePage/components/BaseLayout'
 import { Graph } from './Graph'
 import { PaymentsTable } from './PaymentsTable'
 import {
@@ -21,9 +22,6 @@ export const formatCurrency = (value: number) => {
   }).format(value)
 }
 
-export type DarkModeProps = {
-  darkMode: boolean
-}
 export const MortgageCalculator = (props: DarkModeProps) => {
   const [depositAmount, setDepositAmount] = useState(1_000_000)
   const [propertyPrice, setPropertyPrice] = useState(3_000_000)
@@ -60,34 +58,6 @@ export const MortgageCalculator = (props: DarkModeProps) => {
           <H1_Header>Mortgage Calculator</H1_Header>
         </header>
         <Div_GridContainer>
-          {/*<Div_GridItemInfo darkMode={props.darkMode}>*/}
-          {/*  <Span_GridItemHeader>{formatCurrency(amountToBorrow)}</Span_GridItemHeader>*/}
-          {/*  <Label_GridItemLabel>Amount To Borrow</Label_GridItemLabel>*/}
-          {/*</Div_GridItemInfo>*/}
-          {/*<Div_GridItemInfo darkMode={props.darkMode}>*/}
-          {/*  <Span_GridItemHeader>{formatCurrency(monthlyRate)}</Span_GridItemHeader>*/}
-          {/*  <Label_GridItemLabel>Monthly Payment</Label_GridItemLabel>*/}
-          {/*</Div_GridItemInfo>*/}
-          {/*<Div_GridItemInfo darkMode={props.darkMode}>*/}
-          {/*  <Span_GridItemHeader>{formatCurrency(totalAmountRepaid)}</Span_GridItemHeader>*/}
-          {/*  <Label_GridItemLabel>Total Repaid</Label_GridItemLabel>*/}
-          {/*</Div_GridItemInfo>*/}
-          {/*<Div_GridItemInfo darkMode={props.darkMode}>*/}
-          {/*  <Span_GridItemHeader>{formatCurrency(totalInterestPaid)}</Span_GridItemHeader>*/}
-          {/*  <Label_GridItemLabel>Total Interest Paid</Label_GridItemLabel>*/}
-          {/*</Div_GridItemInfo>*/}
-          {/*<Div_GridItemInfo darkMode={props.darkMode}>*/}
-          {/*  <Span_GridItemHeader>*/}
-          {/*    {formatToPercent(depositAmount, propertyPrice)}*/}
-          {/*  </Span_GridItemHeader>*/}
-          {/*  <Label_GridItemLabel>Deposit</Label_GridItemLabel>*/}
-          {/*</Div_GridItemInfo>*/}
-          {/*<Div_GridItemInfo darkMode={props.darkMode}>*/}
-          {/*  <Span_GridItemHeader>*/}
-          {/*    {formatToPercent(amountToBorrow, propertyPrice)}*/}
-          {/*  </Span_GridItemHeader>*/}
-          {/*  <Label_GridItemLabel>Loan To Value</Label_GridItemLabel>*/}
-          {/*</Div_GridItemInfo>*/}
           <Div_GridItem>
             <Span_GridItemHeader>{formatCurrency(propertyPrice)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
@@ -189,7 +159,7 @@ const Div_Global = styled.div`
   width: 100vw;
   height: 100vh;
   text-align: center;
-  overflow: scroll;
+  overflow: auto;
 `
 const Div_GridContainer = styled.div`
   display: grid;
@@ -205,7 +175,6 @@ const Div_GridItemInfo = styled.div<{ darkMode: boolean }>`
   text-align: center;
   margin: 5px;
   border-radius: 10px;
-  // border-bottom: 2px solid ${theme.colors.whiteGrey};
   background: ${props => (props.darkMode ? theme.colors.blue : theme.colors.lightBlue)};
 `
 const Div_GridItem = styled.div`

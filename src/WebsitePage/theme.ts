@@ -42,7 +42,7 @@ export const theme = {
 
   breakpoint: {
     minWidth: {
-      mobile: '@media (min-width: 414px)',
+      mobile: '@media (min-width: 600px)',
       tablet: '@media (min-width:  940px)',
     },
   },
