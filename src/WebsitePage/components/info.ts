@@ -3,7 +3,7 @@ import calculator from './img/calculator.png'
 import game from './img/game.png'
 import hacker from './img/hacker.png'
 import self from './img/self.png'
-import todo from './img/todo.png'
+import todo from './img/cover-todo.png'
 
 export let colors = ['rgb(0,255,164)', 'rgb(166,104,255)']
 
@@ -50,7 +50,7 @@ export const info = {
       label: 'linkedin',
     },
   ],
-  bio: "Hey! I'm Artem. I'm a frontend developer. Working with my hands to make magic on the internet, I like to discover new coffee shops and enjoy the atmosphere and a cup of coffee.",
+  bio: "Hey! I'm Artem. I'm a frontend developer. Working with my hands to make magic on the internet, I like to discover new coffee shops and enjoy the atmosphere with a cup of coffee.",
   skills: {
     proficientWith: [
       'typescript',
@@ -62,7 +62,7 @@ export const info = {
       'styled components',
       'figma',
     ],
-    exposedTo: ['nodejs', 'python'],
+    exposedTo: ['nodejs', 'python', 'redux'],
   },
   hobbies: [
     {
@@ -78,8 +78,8 @@ export const info = {
       emoji: '🌊',
     },
     {
-      label: 'cooking',
-      emoji: '🌶',
+      label: 'MMORPG games',
+      emoji: '🎮',
     },
   ],
   portfolio: [
@@ -103,16 +103,16 @@ export const info = {
       image: game,
     },
     {
-      title: 'Hacker Typer',
-      live: '/portfolio/hacker-typer',
-      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/HackerType',
-      image: hacker,
-    },
-    {
       title: 'Todo List',
       live: '/portfolio/todolist',
       source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/TodoList',
       image: todo,
+    },
+    {
+      title: 'Hacker Typer',
+      live: '/portfolio/hacker-typer',
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/HackerType',
+      image: hacker,
     },
     {
       title: 'Blog with Server',

@@ -49,6 +49,7 @@ export const handleMortgageDataChange = (arg: {
   //Set initial values for loop to calculate monthly figures
   let monthDataObject = [
     {
+      year: 0,
       month: 0,
       outstandingBalance: arg.amountToBorrow,
       interestPaid: 0,
@@ -87,12 +88,16 @@ export const handleMortgageDataChange = (arg: {
     //increased property value
     propertyValue = propertyValue * (1 + arg.inflationInterest / 100 / 12)
 
+    let year = Math.floor((i - 1) / 12 + 1)
+    let month = ((i - 1) % 12) + 1
+
     //This just rounds the last figure off at 0.00.
     if (i === arg.mortgageTerm) {
       outstandingBalance = 0
     }
     monthDataObject.push({
-      month: i,
+      year: year,
+      month: month,
       outstandingBalance: outstandingBalance,
       interestPaid: monthInterestPaid,
       accumulativeMonthlyInterestPaid: accumulativeMonthlyInterestPaid,
@@ -120,3 +125,27 @@ export const changeOrder = <T>(arr: T[], start: number, end: number): T[] => {
   const removeDraggedItem = arr.filter((el, index) => index !== start)
   return [...removeDraggedItem.slice(0, end), dragItem, ...removeDraggedItem.slice(end)]
 }
+
+export const getDate = () => {
+  const month = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ][new Date().getMonth()]
+  const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+    new Date().getDay()
+  ]
+  const fullDay = weekday + ', ' + new Date().getDate() + ' of'
+  return [fullDay, month]
+}
+
+export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))

@@ -43,9 +43,14 @@ type PortfolioBlockType = {
   image: string
 }
 export const PortfolioBlock = (props: PortfolioBlockType) => {
+  const abc = () => {
+    return <Link to={props.live} rel='noopener noreferrer' />
+  }
   return (
     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
-      <Box component={'img'} src={props.image} alt={'mockup'} width={'100%'} />
+      <Link to={props.live}>
+        <Box component={'img'} src={props.image} alt={'mockup'} width={'100%'} onClick={abc} />
+      </Link>
       <h1 style={{ fontSize: '2rem' }}>{props.title}</h1>
       <Box
         className={'portfolio'}
@@ -56,10 +61,16 @@ export const PortfolioBlock = (props: PortfolioBlockType) => {
         fontSize={'1.5rem'}
         py={'2rem'}
       >
-        <Box p={1} border={'2px solid black'} borderRadius={'25px'}>
+        <Box
+          p={1}
+          border={theme.colors.border}
+          borderRadius={'25px'}
+          width={'150px'}
+          justifyContent={'space-around'}
+        >
           <IconLink link={props.live} title={'Live Demo'} icon={'fa fa-safari'} />
         </Box>
-        <Box p={1} border={'2px solid black'} borderRadius={'25px'}>
+        <Box p={1} border={theme.colors.border} borderRadius={'25px'} width={'150px'}>
           <IconLink2 link={props.source} title={'Source Code'} icon={'fa fa-code'} />
         </Box>
       </Box>
@@ -72,19 +83,21 @@ type IconLinkProps = {
   title: string
   icon: string
 }
-export const IconLink = (props: IconLinkProps) => {
+const IconLink = (props: IconLinkProps) => {
   return (
-    <Link to={props.link} rel='noopener noreferrer'>
-      <i className={props.icon} /> {props.title}
-    </Link>
+    <DemoLink to={props.link} rel='noopener noreferrer'>
+      <i className={props.icon} /> {''}
+      {props.title}
+    </DemoLink>
   )
 }
 
-export const IconLink2 = (props: IconLinkProps) => {
+const IconLink2 = (props: IconLinkProps) => {
   return (
-    <a href={props.link} rel='noopener noreferrer'>
-      <i className={props.icon} /> {props.title}
-    </a>
+    <GitLink href={props.link} rel='noopener noreferrer'>
+      <i className={props.icon} /> {''}
+      {props.title}
+    </GitLink>
   )
 }
 
@@ -95,4 +108,10 @@ const Wrapper = styled.div`
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;
+`
+const DemoLink = styled(Link)`
+  text-decoration: none;
+`
+const GitLink = styled.a`
+  text-decoration: none;
 `

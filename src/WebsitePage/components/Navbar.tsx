@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import { H1 } from './home/Home'
 import { Link, useLocation } from 'react-router-dom'
 import { Toggler } from './home/Toggler'
 import { info } from './info'
@@ -46,29 +45,31 @@ export const Navbar = (props: PropsType) => {
   const location = useLocation()
 
   return (
-    <BoxGlobal component={'nav'}>
+    <Container component={'nav'}>
       <BoxWrapper component={'ul'} gap={{ xs: '2rem', md: '8rem' }}>
         {links.map((link, index) => (
           <Box key={index} component={'li'}>
             <Link to={link.to}>
-              {!link.type && <P>{link.name}</P>}
+              {!link.type && <p>{link.name}</p>}
               {link.type && <H1>{link.name}</H1>}
             </Link>
           </Box>
         ))}
         <Li>{<Toggler darkMode={props.darkMode} handleClick={props.handleClick} />}</Li>
       </BoxWrapper>
-    </BoxGlobal>
+    </Container>
   )
 }
 
-const BoxGlobal = styled(Box)`
+const Container = styled(Box)`
   a,
   a:link,
   a:hover,
   a:visited,
   a:active {
     text-decoration: none;
+    transform: none;
+    transition: none;
   }
   width: 100%;
 
@@ -94,6 +95,12 @@ const BoxWrapper = styled(Box)`
   font-size: 1.5rem;
   list-style-type: none;
 `
-const P = styled.p`
-  padding-bottom: 0.5rem;
+const H1 = styled.h1`
+  font-size: 2rem;
+  text-align: center;
+  ${theme.breakpoint.minWidth} {
+    font-size: 3rem;
+    text-align: left;
+  }
+  text-decoration: none;
 `

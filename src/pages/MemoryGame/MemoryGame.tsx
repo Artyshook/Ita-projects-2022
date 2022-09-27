@@ -3,14 +3,11 @@ import { CardType } from './Images'
 import { CgSmileMouthOpen } from 'react-icons/cg'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { IoFootstepsSharp } from 'react-icons/io5'
-import { VscDebugRestart } from 'react-icons/vsc'
 import { createCardsBoard } from './Images'
-import { mixCards } from '../../helpers/functions'
+import { mixCards, sleep } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
 export const MemoryGame = () => {
   const [cards, setCards] = useState(mixCards(createCardsBoard()))
@@ -107,8 +104,8 @@ export const MemoryGame = () => {
 }
 
 const Div_GridWrapper = styled.div`
-  width: 80vw;
-  height: 80vh;
+  width: 100vw;
+  height: 100vh;
   align-items: start;
   display: flex;
   flex-direction: column;
@@ -137,7 +134,7 @@ const Button_MyButton = styled.button`
     color: ${theme.colors.green};
   }
 `
-export const Div_Title = styled.div`
+const Div_Title = styled.div`
   display: grid;
   flex-direction: column;
   font-size: ${theme.fonts.medium};
@@ -146,18 +143,8 @@ export const Div_Title = styled.div`
   padding-left: 5rem;
 `
 
-export const Div_Counter = styled.div`
+const Div_Counter = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-`
-export const Div_Icon = styled.div`
-  display: grid;
-  color: ${theme.colors.blue};
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  &:hover {
-    color: ${theme.colors.green};
-  }
 `

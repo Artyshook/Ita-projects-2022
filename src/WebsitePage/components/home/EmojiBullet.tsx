@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
+import styled from 'styled-components'
 
 type PropsType = {
   emoji: string
@@ -7,7 +8,7 @@ type PropsType = {
 }
 export const EmojiBullet = (props: PropsType) => {
   return (
-    <Box component={'li'} fontSize={'1.3rem'} lineHeight={1.5} style={{ cursor: 'default' }}>
+    <Box component={'li'} fontSize={'1.5rem'} lineHeight={1.5} style={{ cursor: 'default' }}>
       <Box
         component={'span'}
         aria-label='cheese'

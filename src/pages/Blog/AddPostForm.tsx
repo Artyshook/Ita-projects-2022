@@ -1,5 +1,6 @@
 import { BlogContext } from './Blog'
 import { options } from '../../helpers/data'
+import { theme } from '../../helpers/theme'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
@@ -12,7 +13,7 @@ export const AddPostForm = () => {
 
   return (
     <div>
-      <Modal
+      <MyModal
         show={logic.formShown}
         onHide={() => {
           logic.resetStates()
@@ -67,7 +68,7 @@ export const AddPostForm = () => {
             Save
           </Button>
         </Modal.Footer>
-      </Modal>
+      </MyModal>
     </div>
   )
 }
@@ -75,4 +76,10 @@ export const AddPostForm = () => {
 const ErrorMessage = styled.div`
   text-align: center;
   color: red;
+`
+const MyModal = styled(Modal)`
+  padding-top: 200px;
+  ${theme.breakpoint.phone} {
+    padding-top: 100px;
+  }
 `

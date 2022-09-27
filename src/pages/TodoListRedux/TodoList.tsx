@@ -8,6 +8,8 @@ import {
 import { CgTrash } from 'react-icons/cg'
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { getDate, sleep } from '../../helpers/functions'
+import { motion } from 'framer-motion'
 import { theme } from '../../helpers/theme'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react'
@@ -24,7 +26,7 @@ export const TodoList = () => {
   const [error, setError] = useState(null as string | null)
   const [filter, setFilter] = useState('all' as FilterValuesType)
 
-  const addTask = () => {
+  const addTask = async () => {
     if (newTask.trim() !== '') {
       setError(null)
       dispatch(addTaskAC(newTask))
@@ -56,193 +58,214 @@ export const TodoList = () => {
 
   return (
     <HelmetProvider>
-      <Div_Wrapper>
+      <Conteiner>
         <Helmet>
           <title>Artem Saibel - TodoList app</title>
           <meta name='description' content='Todo List App with React (using Hooks and Contexts)' />
         </Helmet>
-        <Div_Card>
-          <Div_Title>TODOS</Div_Title>
-          <Div_Input>
-            <Input_Input
-              type='text'
-              placeholder='Enter your task'
-              onChange={event => {
-                setError(null)
-                setNewTask(event.target.value)
-              }}
-              value={newTask}
-              onKeyDown={event => (event.key === 'Enter' ? addTask() : null)}
-            />
-            <Button_MyButton onClick={addTask}>+</Button_MyButton>
-          </Div_Input>
-          <Div_ErrorMessage>{error && <div> {error} </div>} </Div_ErrorMessage>
-          <Div_Tasks>
+        <Wrapper>
+          <BackgroundWrapper>
+            <TitleWrapper>{getDate()[0]}</TitleWrapper>
+            <TitleWrapper>{getDate()[1]}</TitleWrapper>
+          </BackgroundWrapper>
+          <TodoInputWrapper
+            type='text'
+            placeholder='Enter your task...'
+            onChange={event => {
+              setError(null)
+              setNewTask(event.target.value)
+            }}
+            value={newTask}
+            onKeyDown={event => (event.key === 'Enter' ? addTask() : null)}
+          />
+          <Div_ErrorMessage>{error && <Error_Div> {error} </Error_Div>} </Div_ErrorMessage>
+          <div>
             <DragDropContext onDragEnd={onDragEndHandler}>
               <Droppable droppableId='tasks'>
                 {provided => (
-                  <ul {...provided.droppableProps} ref={provided.innerRef}>
+                  <Ul {...provided.droppableProps} ref={provided.innerRef}>
                     {filteredTodolist(filter).map((task, index) => (
                       <Draggable key={task.id} draggableId={task.id} index={index}>
                         {(provided, snapshot) => (
-                          <Li_Tasks
+                          <MapTasksWrapper
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                           >
-                            <input
-                              type='checkbox'
-                              onClick={() => statusTodoList(task.id, task.isDone)}
-                              defaultChecked={task.isDone}
-                            />
-                            {task.task}
-                            <Div_Trash>
-                              <CgTrash
-                                onClick={() => removeTask(task.id)}
-                                style={{ cursor: 'pointer' }}
-                              />
-                            </Div_Trash>
-                          </Li_Tasks>
+                            <MapTodosWrapper>
+                              <IconsWrapper>
+                                <CheckBoxWrapper
+                                  type='checkbox'
+                                  onClick={() => statusTodoList(task.id, task.isDone)}
+                                  defaultChecked={task.isDone}
+                                />
+                                <Text isDone={task.isDone}> {task.task}</Text>
+                                <ButtonsTaskWrapper>
+                                  <CgTrash
+                                    onClick={() => removeTask(task.id)}
+                                    style={{ cursor: 'pointer' }}
+                                  />
+                                </ButtonsTaskWrapper>
+                              </IconsWrapper>
+                            </MapTodosWrapper>
+                          </MapTasksWrapper>
                         )}
                       </Draggable>
                     ))}
                     {provided.placeholder}
-                  </ul>
+                  </Ul>
                 )}
               </Droppable>
             </DragDropContext>
-          </Div_Tasks>
-          <Div_Filter>
-            <Button_FilterButton onClick={() => setFilter('all')}>ALL</Button_FilterButton>
-            <Button_FilterButton onClick={() => setFilter('active')}>ACTIVE</Button_FilterButton>
-            <Button_FilterButton onClick={() => setFilter('completed')}>
+          </div>
+          <FilterWrapper>
+            <FilterItemWraper
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setFilter('all')}
+            >
+              ALL
+            </FilterItemWraper>
+            <FilterItemWraper
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setFilter('active')}
+            >
+              ACTIVE
+            </FilterItemWraper>
+            <FilterItemWraper
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setFilter('completed')}
+            >
               COMPLETED
-            </Button_FilterButton>
-          </Div_Filter>
-        </Div_Card>
-      </Div_Wrapper>
+            </FilterItemWraper>
+          </FilterWrapper>
+        </Wrapper>
+      </Conteiner>
     </HelmetProvider>
   )
 }
 
-const Div_Trash = styled.div`
-  cursor: pointer;
+const Error_Div = styled.div`
+  padding-top: 5px;
+  text-align: center;
+  color: red;
 `
-export const Div_Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  display: flex;
+const Ul = styled.ul`
+  padding: 0;
+`
+const Div_ErrorMessage = styled.div`
   justify-content: center;
-  flex-direction: column;
-  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  background: ${theme.background.backgroundColor};
-  color: ${theme.colors.blue};
-`
-const Div_Card = styled.div`
-  border: 1px solid white;
-  border-radius: 20px;
-  box-shadow: ${theme.colors.boxShadow2};
-  padding: 6rem;
-  max-width: 650px;
-  margin: 2rem auto;
-  gap: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-export const Div_Tasks = styled.div`
   font-size: ${theme.fonts.small};
 `
-
-export const Li_Tasks = styled.li<{ isDragging: boolean }>`
+const Conteiner = styled.div`
+  margin-top: 40px;
   display: flex;
-  min-width: 20rem;
+  justify-content: center;
+  align-items: center;
+`
+
+const Wrapper = styled.div`
+  width: 550px;
+  min-height: 50vh;
+  background-color: white;
+  box-shadow: ${theme.colors.boxShadow3};
+  border-radius: 10px;
+  ${theme.breakpoint.phone} {
+    width: 80%;
+  }
+`
+const BackgroundWrapper = styled.div`
+  padding: 2.7em;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-image: ${theme.background.backgroundImage},
+    url('https://images.unsplash.com/photo-1553335538-efce787fe4f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+`
+const TitleWrapper = styled.div`
+  font-size: ${theme.fonts.medium};
+  text-align: center;
+  margin-bottom: -0.3rem;
+  color: ${theme.colors.white};
+  text-shadow: ${theme.colors.textShadow};
+`
+
+const TodoInputWrapper = styled.input`
+  background-color: ${theme.colors.lily};
+  border: none;
+  font-size: ${theme.fonts.small};
+  margin: 0;
+  padding: 1em 1em;
+  width: 100%;
+`
+const MapTasksWrapper = styled.li`
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  input {
-    padding: 0;
-    margin: 0;
-    width: 3rem;
-  }
-  border: 0.2rem solid ${theme.colors.grey};
-  border-radius: 20px;
-  margin: 0.5rem;
-  box-shadow: ${theme.colors.boxShadow};
+  padding: 5px;
+  border: 0.1rem solid ${theme.colors.whiteGrey};
+  background-color: ${theme.background.taskBackground};
+  margin: 0.2rem;
   &:hover {
-    border: 2px solid ${theme.colors.blue};
+    border: 2px solid ${theme.colors.blue2};
   }
-  background-color: ${props => (props.isDragging ? theme.colors.green : '#none')};
+`
+const MapTodosWrapper = styled.span`
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: ${theme.fonts.small};
+  width: 100%;
+`
+const ButtonsTaskWrapper = styled.div`
+  opacity: 0;
+`
+const Text = styled.div<{ isDone: boolean }>`
+  color: ${theme.colors.black};
+  text-decoration: ${props => (props.isDone ? 'line-through' : 'none')};
 `
 
-export const Div_Input = styled.div`
-  border: 1px solid ${theme.colors.blue};
-  border-radius: 40px;
+const IconsWrapper = styled.div`
+  justify-content: space-between;
+  align-items: baseline;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-left: 2rem;
+  padding: 12px;
+  gap: 1.2rem;
+  cursor: pointer;
+  &:hover ${ButtonsTaskWrapper} {
+    opacity: 1;
+  }
 `
-export const Div_Filter = styled.div`
-  font-size: ${theme.fonts.small};
+const CheckBoxWrapper = styled.input`
+  height: 20px;
+  width: 15px;
+`
+const FilterWrapper = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
   margin-top: 1.5rem;
-`
-export const Button_FilterButton = styled.button`
-  border: 0.1rem solid ${theme.colors.green};
-  border-radius: 40px;
-  padding: 1.5rem;
-  color: ${theme.colors.blue};
-  font-size: ${theme.fonts.small};
-  background: none;
-  box-shadow: ${theme.colors.boxShadow};
-  &:hover {
-    border-color: ${theme.colors.blue};
-    color: ${theme.colors.blue};
-  }
-`
-const Input_Input = styled.input`
-  margin: 1rem;
-  outline: none;
-  border: none;
-  color: ${theme.colors.darkGrey};
-  font-size: ${theme.fonts.small};
-  &:hover {
-    border-color: ${theme.colors.blue};
-  }
-`
-export const Button_MyButton = styled.button`
-  letter-spacing: 1px;
-  font-size: 1.5rem;
-  border-radius: 60px;
-  border: none;
-  color: #00ff7f;
-  background-color: ${theme.colors.blue};
-  height: 5rem;
-  width: 7rem;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    background: ${theme.colors.blue2};
-  }
-`
-export const Div_Title = styled.div`
-  display: block;
-  font-size: ${theme.fonts.large};
-  letter-spacing: 0.05em;
   margin-bottom: 2rem;
-  color: ${theme.colors.grey};
-  &:hover {
-    color: ${theme.colors.blue};
+  ${theme.breakpoint.phone} {
+    gap: 0.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
   }
 `
-export const Div_ErrorMessage = styled.div`
-  justify-content: center;
-  font-size: ${theme.fonts.small};
+const FilterItemWraper = styled(motion.span)`
+  font-size: 18px;
+  background-image: ${theme.background.filterButtonBackground};
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  color: ${theme.colors.black};
+  padding: 10px 20px;
+  ${theme.breakpoint.phone} {
+    font-size: ${theme.fonts.xs};
+    padding: 15px 20px;
+  }
 `

@@ -82,7 +82,7 @@ const Box_Wrapper = styled(Box)`
   }
 `
 
-export const H1 = styled.h1`
+const H1 = styled.h1`
   font-size: 2rem;
   text-align: center;
   ${theme.breakpoint.minWidth} {
@@ -92,7 +92,7 @@ export const H1 = styled.h1`
   text-decoration: none;
 `
 
-export const H2 = styled.h2`
+const H2 = styled.h2`
   font-size: 1.25rem;
   text-align: center;
   ${theme.breakpoint.minWidth} {
@@ -101,7 +101,7 @@ export const H2 = styled.h2`
   }
 `
 
-export const wave = keyframes`
+const wave = keyframes`
   0% {
     transform: rotate(0deg);
   }
@@ -128,7 +128,7 @@ export const wave = keyframes`
   }
 `
 
-export const Hand = styled.span`
+const Hand = styled.span`
   animation-name: ${wave};
   animation-duration: 2.5s;
   animation-iteration-count: infinite;

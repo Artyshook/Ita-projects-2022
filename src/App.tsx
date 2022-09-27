@@ -17,9 +17,6 @@ export const App = () => {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-size: 1.5vh;
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
     background-color: ${theme.background.backgroundColor};
     font-family: 'Montserrat', sans-serif;

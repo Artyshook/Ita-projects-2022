@@ -1,3 +1,4 @@
+import { DarkModeProps } from '../../WebsitePage/components/BaseLayout'
 import { Graph } from './Graph'
 import { PaymentsTable } from './PaymentsTable'
 import {
@@ -21,7 +22,7 @@ export const formatCurrency = (value: number) => {
   }).format(value)
 }
 
-export const MortgageCalculator = () => {
+export const MortgageCalculator = (props: DarkModeProps) => {
   const [depositAmount, setDepositAmount] = useState(1_000_000)
   const [propertyPrice, setPropertyPrice] = useState(3_000_000)
   const [mortgageTerm, setMortgageTerm] = useState(30)
@@ -58,34 +59,6 @@ export const MortgageCalculator = () => {
         </header>
         <Div_GridContainer>
           <Div_GridItem>
-            <Span_GridItemHeader>{formatCurrency(amountToBorrow)}</Span_GridItemHeader>
-            <Label_GridItemLabel>Amount To Borrow</Label_GridItemLabel>
-          </Div_GridItem>
-          <Div_GridItem>
-            <Span_GridItemHeader>{formatCurrency(monthlyRate)}</Span_GridItemHeader>
-            <Label_GridItemLabel>Monthly Payment</Label_GridItemLabel>
-          </Div_GridItem>
-          <Div_GridItem>
-            <Span_GridItemHeader>{formatCurrency(totalAmountRepaid)}</Span_GridItemHeader>
-            <Label_GridItemLabel>Total Repaid</Label_GridItemLabel>
-          </Div_GridItem>
-          <Div_GridItem>
-            <Span_GridItemHeader>{formatCurrency(totalInterestPaid)}</Span_GridItemHeader>
-            <Label_GridItemLabel>Total Interest Paid</Label_GridItemLabel>
-          </Div_GridItem>
-          <Div_GridItem>
-            <Span_GridItemHeader>
-              {formatToPercent(depositAmount, propertyPrice)}
-            </Span_GridItemHeader>
-            <Label_GridItemLabel>Deposit</Label_GridItemLabel>
-          </Div_GridItem>
-          <Div_GridItem>
-            <Span_GridItemHeader>
-              {formatToPercent(amountToBorrow, propertyPrice)}
-            </Span_GridItemHeader>
-            <Label_GridItemLabel>Loan To Value</Label_GridItemLabel>
-          </Div_GridItem>
-          <Div_GridItem>
             <Span_GridItemHeader>{formatCurrency(propertyPrice)}</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
@@ -111,7 +84,7 @@ export const MortgageCalculator = () => {
             />
             <Label_GridItemLabel htmlFor='points'>Deposit</Label_GridItemLabel>
           </Div_GridItem>
-          <Div_GridItem>
+          <Div_GridItem2>
             <Span_GridItemHeader>{mortgageTerm} Years</Span_GridItemHeader>
             <Input_GridItemRangeSlider
               type='range'
@@ -122,7 +95,7 @@ export const MortgageCalculator = () => {
               onChange={event => setMortgageTerm(+event.target.value)}
             />
             <Label_GridItemLabel>Mortgage Term</Label_GridItemLabel>
-          </Div_GridItem>
+          </Div_GridItem2>
           <Div_GridItem>
             <Span_GridItemHeader>{interest}%</Span_GridItemHeader>
             <Input_GridItemRangeSlider
@@ -145,9 +118,37 @@ export const MortgageCalculator = () => {
             />
             <Label_GridItemLabel>Inflation rate</Label_GridItemLabel>
           </Div_GridItem>
+          <Div_GridItemInfo darkMode={props.darkMode}>
+            <Span_GridItemHeader>{formatCurrency(amountToBorrow)}</Span_GridItemHeader>
+            <Label_GridItemLabel>Amount To Borrow</Label_GridItemLabel>
+          </Div_GridItemInfo>
+          <Div_GridItemInfo darkMode={props.darkMode}>
+            <Span_GridItemHeader>{formatCurrency(monthlyRate)}</Span_GridItemHeader>
+            <Label_GridItemLabel>Monthly Payment</Label_GridItemLabel>
+          </Div_GridItemInfo>
+          <Div_GridItemInfo darkMode={props.darkMode}>
+            <Span_GridItemHeader>{formatCurrency(totalAmountRepaid)}</Span_GridItemHeader>
+            <Label_GridItemLabel>Total Repaid</Label_GridItemLabel>
+          </Div_GridItemInfo>
+          <Div_GridItemInfo darkMode={props.darkMode}>
+            <Span_GridItemHeader>{formatCurrency(totalInterestPaid)}</Span_GridItemHeader>
+            <Label_GridItemLabel>Total Interest Paid</Label_GridItemLabel>
+          </Div_GridItemInfo>
+          <Div_GridItemInfo darkMode={props.darkMode}>
+            <Span_GridItemHeader>
+              {formatToPercent(depositAmount, propertyPrice)}
+            </Span_GridItemHeader>
+            <Label_GridItemLabel>Deposit</Label_GridItemLabel>
+          </Div_GridItemInfo>
+          <Div_GridItemInfo darkMode={props.darkMode}>
+            <Span_GridItemHeader>
+              {formatToPercent(amountToBorrow, propertyPrice)}
+            </Span_GridItemHeader>
+            <Label_GridItemLabel>Loan To Value</Label_GridItemLabel>
+          </Div_GridItemInfo>
         </Div_GridContainer>
         <Graph calculatedMortgage={monthlyPayments} />
-        <PaymentsTable monthlyPayments={monthlyPayments} />
+        <PaymentsTable monthlyPayments={monthlyPayments} darkMode={props.darkMode} />
       </Div_Global>
     </div>
   )
@@ -158,7 +159,7 @@ const Div_Global = styled.div`
   width: 100vw;
   height: 100vh;
   text-align: center;
-  overflow: scroll;
+  overflow: auto;
 `
 const Div_GridContainer = styled.div`
   display: grid;
@@ -167,6 +168,15 @@ const Div_GridContainer = styled.div`
   padding-top: 2rem;
 `
 
+const Div_GridItemInfo = styled.div<{ darkMode: boolean }>`
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 5px;
+  border-radius: 10px;
+  background: ${props => (props.darkMode ? theme.colors.blue : theme.colors.lightBlue)};
+`
 const Div_GridItem = styled.div`
   padding: 30px;
   display: flex;
@@ -175,11 +185,16 @@ const Div_GridItem = styled.div`
   border: 1px solid ${theme.colors.whiteGrey};
   margin: 5px;
   border-radius: 10px;
-  &:hover {
-    background-color: ${theme.colors.lightBlue};
-    box-shadow: 0 10px gainsboro;
-    transition: box-shadow 0.3s;
-  }
+  font-size: ${theme.fonts.xs};
+`
+const Div_GridItem2 = styled.div`
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid ${theme.colors.whiteGrey};
+  margin: 5px;
+  border-radius: 10px;
 `
 const Span_GridItemHeader = styled.span`
   font-weight: bold;
@@ -190,7 +205,7 @@ const Input_GridItemRangeSlider = styled.input`
   margin-bottom: 10px;
 `
 const Label_GridItemLabel = styled.label`
-  font-size: ${theme.fonts.xs};
+  font-size: ${theme.fonts.small};
 `
 const H1_Header = styled.h1`
   text-align: center;
