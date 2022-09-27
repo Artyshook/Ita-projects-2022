@@ -3,14 +3,11 @@ import { CardType } from './Images'
 import { CgSmileMouthOpen } from 'react-icons/cg'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { IoFootstepsSharp } from 'react-icons/io5'
-import { VscDebugRestart } from 'react-icons/vsc'
 import { createCardsBoard } from './Images'
 import { mixCards, sleep } from '../../helpers/functions'
 import { theme } from '../../helpers/theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
-// export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
 export const MemoryGame = () => {
   const [cards, setCards] = useState(mixCards(createCardsBoard()))

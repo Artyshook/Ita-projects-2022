@@ -33,8 +33,6 @@ export const TodoList = () => {
       setNewTask('')
     } else {
       setError('Title is required')
-      await sleep(600)
-      setError(null)
       return
     }
   }
@@ -72,7 +70,7 @@ export const TodoList = () => {
           </BackgroundWrapper>
           <TodoInputWrapper
             type='text'
-            placeholder='Enter your task  ...'
+            placeholder='Enter your task...'
             onChange={event => {
               setError(null)
               setNewTask(event.target.value)
