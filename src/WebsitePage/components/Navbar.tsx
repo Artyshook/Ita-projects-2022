@@ -88,18 +88,22 @@ const Li = styled.li`
   color: ${theme.colors.dark};
 `
 const BoxWrapper = styled(Box)`
+  padding-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-transform: lowercase;
   font-size: 1.5rem;
   list-style-type: none;
+  ${theme.breakpoint.phone} {
+    gap: 0.5rem;
+  }
 `
 const H1 = styled.h1`
   font-size: 2rem;
   text-align: center;
-  ${theme.breakpoint.minWidth} {
-    font-size: 3rem;
+  ${theme.breakpoint.phone} {
+    font-size: 2rem;
     text-align: left;
   }
   text-decoration: none;

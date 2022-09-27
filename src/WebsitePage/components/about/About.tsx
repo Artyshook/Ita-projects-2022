@@ -138,7 +138,7 @@ background-color: ${theme.colors.backgroundColor.black};
 `
 const Skills_Ul = styled.ul`
   columns: 1;
-  ${theme.breakpoint.minWidth} {
+  ${theme.breakpoint.phone} {
     columns: 2;
   }
   li {

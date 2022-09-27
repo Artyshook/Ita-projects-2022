@@ -1,3 +1,5 @@
+import { device } from '../helpers/theme'
+
 export const theme = {
   colors: {
     purple: '#8D53FF',
@@ -41,9 +43,9 @@ export const theme = {
   },
 
   breakpoint: {
-    minWidth: {
-      mobile: '@media (min-width: 600px)',
-      tablet: '@media (min-width:  940px)',
-    },
+    phone: `@media (max-width: ${device.phone}px)`,
+    tablet: `@media (max-width: ${device.tablet}px)`,
+    notebook: `@media (max-width: ${device.notebook}px)`,
+    desktop: `@media (max-width: ${device.desktop}px)`,
   },
 } as const
