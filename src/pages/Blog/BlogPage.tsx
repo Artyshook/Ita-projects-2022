@@ -43,6 +43,9 @@ const Div_Wrapper = styled.div`
   width: 95%;
   padding: 2rem 0;
   gap: 1rem;
+  ${theme.breakpoint.phone} {
+    width: 90%;
+  }
 `
 
 const H1 = styled.h1`

@@ -80,6 +80,6 @@ const ErrorMessage = styled.div`
 const MyModal = styled(Modal)`
   padding-top: 200px;
   ${theme.breakpoint.phone} {
-    padding-top: 200px;
+    padding-top: 100px;
   }
 `

@@ -1,5 +1,4 @@
 import { Box } from '@mui/material'
-import { H1 } from './home/Home'
 import { Link, useLocation } from 'react-router-dom'
 import { Toggler } from './home/Toggler'
 import { info } from './info'
@@ -95,4 +94,13 @@ const BoxWrapper = styled(Box)`
   text-transform: lowercase;
   font-size: 1.5rem;
   list-style-type: none;
+`
+const H1 = styled.h1`
+  font-size: 2rem;
+  text-align: center;
+  ${theme.breakpoint.minWidth} {
+    font-size: 3rem;
+    text-align: left;
+  }
+  text-decoration: none;
 `

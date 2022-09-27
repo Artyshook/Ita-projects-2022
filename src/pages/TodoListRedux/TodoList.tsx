@@ -157,18 +157,18 @@ const Error_Div = styled.div`
 const Ul = styled.ul`
   padding: 0;
 `
-export const Div_ErrorMessage = styled.div`
+const Div_ErrorMessage = styled.div`
   justify-content: center;
   font-size: ${theme.fonts.small};
 `
-export const Conteiner = styled.div`
+const Conteiner = styled.div`
   margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   width: 550px;
   min-height: 50vh;
   background-color: white;
@@ -178,7 +178,7 @@ export const Wrapper = styled.div`
     width: 80%;
   }
 `
-export const BackgroundWrapper = styled.div`
+const BackgroundWrapper = styled.div`
   padding: 2.7em;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -188,7 +188,7 @@ export const BackgroundWrapper = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
 `
-export const TitleWrapper = styled.div`
+const TitleWrapper = styled.div`
   font-size: ${theme.fonts.medium};
   text-align: center;
   margin-bottom: -0.3rem;
@@ -196,7 +196,7 @@ export const TitleWrapper = styled.div`
   text-shadow: ${theme.colors.textShadow};
 `
 
-export const TodoInputWrapper = styled.input`
+const TodoInputWrapper = styled.input`
   background-color: ${theme.colors.lily};
   border: none;
   font-size: ${theme.fonts.small};
@@ -204,7 +204,7 @@ export const TodoInputWrapper = styled.input`
   padding: 1em 1em;
   width: 100%;
 `
-export const MapTasksWrapper = styled.li`
+const MapTasksWrapper = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -216,22 +216,22 @@ export const MapTasksWrapper = styled.li`
     border: 2px solid ${theme.colors.blue2};
   }
 `
-export const MapTodosWrapper = styled.span`
+const MapTodosWrapper = styled.span`
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: ${theme.fonts.small};
   width: 100%;
 `
-export const ButtonsTaskWrapper = styled.div`
+const ButtonsTaskWrapper = styled.div`
   opacity: 0;
 `
-export const Text = styled.div<{ isDone: boolean }>`
+const Text = styled.div<{ isDone: boolean }>`
   color: ${theme.colors.black};
   text-decoration: ${props => (props.isDone ? 'line-through' : 'none')};
 `
 
-export const IconsWrapper = styled.div`
+const IconsWrapper = styled.div`
   justify-content: space-between;
   align-items: baseline;
   display: flex;
@@ -242,11 +242,11 @@ export const IconsWrapper = styled.div`
     opacity: 1;
   }
 `
-export const CheckBoxWrapper = styled.input`
+const CheckBoxWrapper = styled.input`
   height: 20px;
   width: 15px;
 `
-export const FilterWrapper = styled.div`
+const FilterWrapper = styled.div`
   display: flex;
   gap: 0.5rem;
   justify-content: center;
@@ -258,7 +258,7 @@ export const FilterWrapper = styled.div`
     margin-bottom: 1rem;
   }
 `
-export const FilterItemWraper = styled(motion.span)`
+const FilterItemWraper = styled(motion.span)`
   font-size: 18px;
   background-image: ${theme.background.filterButtonBackground};
   cursor: pointer;

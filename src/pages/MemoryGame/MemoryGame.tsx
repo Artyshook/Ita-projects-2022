@@ -137,7 +137,7 @@ const Button_MyButton = styled.button`
     color: ${theme.colors.green};
   }
 `
-export const Div_Title = styled.div`
+const Div_Title = styled.div`
   display: grid;
   flex-direction: column;
   font-size: ${theme.fonts.medium};
@@ -146,7 +146,7 @@ export const Div_Title = styled.div`
   padding-left: 5rem;
 `
 
-export const Div_Counter = styled.div`
+const Div_Counter = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;

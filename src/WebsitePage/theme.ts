@@ -14,7 +14,7 @@ export const theme = {
       gray: '#8c8c8c',
       black: '#27242f',
     },
-    border: '',
+    border: '2px solid black',
   },
   borderRadius: {
     border1: '0.5rem 0.5rem 0 0',

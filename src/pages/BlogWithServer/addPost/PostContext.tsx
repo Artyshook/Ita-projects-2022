@@ -160,6 +160,10 @@ const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  ${theme.breakpoint.phone} {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
 `
 
 export const Button_MyButton = styled.button`

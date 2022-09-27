@@ -63,14 +63,14 @@ export const PortfolioBlock = (props: PortfolioBlockType) => {
       >
         <Box
           p={1}
-          border={'2px solid black'}
+          border={theme.colors.border}
           borderRadius={'25px'}
           width={'150px'}
           justifyContent={'space-around'}
         >
           <IconLink link={props.live} title={'Live Demo'} icon={'fa fa-safari'} />
         </Box>
-        <Box p={1} border={'2px solid black'} borderRadius={'25px'} width={'150px'}>
+        <Box p={1} border={theme.colors.border} borderRadius={'25px'} width={'150px'}>
           <IconLink2 link={props.source} title={'Source Code'} icon={'fa fa-code'} />
         </Box>
       </Box>
@@ -83,7 +83,7 @@ type IconLinkProps = {
   title: string
   icon: string
 }
-export const IconLink = (props: IconLinkProps) => {
+const IconLink = (props: IconLinkProps) => {
   return (
     <DemoLink to={props.link} rel='noopener noreferrer'>
       <i className={props.icon} /> {''}
@@ -92,7 +92,7 @@ export const IconLink = (props: IconLinkProps) => {
   )
 }
 
-export const IconLink2 = (props: IconLinkProps) => {
+const IconLink2 = (props: IconLinkProps) => {
   return (
     <GitLink href={props.link} rel='noopener noreferrer'>
       <i className={props.icon} /> {''}
