@@ -78,7 +78,7 @@ const ErrorMessage = styled.div`
   color: red;
 `
 const MyModal = styled(Modal)`
-  padding-top: 200px;
+  padding-top: 100px;
   ${theme.breakpoint.phone} {
     padding-top: 100px;
   }

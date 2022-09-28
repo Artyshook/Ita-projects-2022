@@ -211,7 +211,7 @@ const MapTasksWrapper = styled.li`
   background-color: ${theme.background.taskBackground};
   margin: 0.2rem;
   &:hover {
-    border: 2px solid ${theme.colors.blue2};
+    background-color: ${theme.colors.lily};
   }
 `
 const MapTodosWrapper = styled.span`

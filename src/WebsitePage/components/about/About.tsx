@@ -137,7 +137,7 @@ background-color: ${theme.colors.backgroundColor.black};
     color: ${theme.colors.white};
 `
 const Skills_Ul = styled.ul`
-  columns: 1;
+  columns: 2;
   ${theme.breakpoint.phone} {
     columns: 2;
   }
