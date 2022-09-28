@@ -95,12 +95,9 @@ const BoxWrapper = styled(Box)`
   text-transform: lowercase;
   font-size: 1.5rem;
   list-style-type: none;
-  ${theme.breakpoint.phone} {
-    gap: 0.5rem;
-  }
 `
 const H1 = styled.h1`
-  font-size: 2rem;
+  font-size: 3rem;
   text-align: center;
   ${theme.breakpoint.phone} {
     font-size: 2rem;
