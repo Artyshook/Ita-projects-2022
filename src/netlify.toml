@@ -5,6 +5,12 @@
 
   [[redirects]]
   from = "https://ita-artem.netlify.app/*"
-  to = "https://www.saibel.cz/"
+  to = "https://www.saibel.cz/:splat"
+  status = 301
+  force = true
+
+  [[redirects]]
+  from = "https://www.ita-artem.netlify.app/*"
+  to = "https://www.saibel.cz/:splat"
   status = 301
   force = true
