@@ -83,8 +83,8 @@ const Box_Wrapper = styled(Box)`
 `
 
 const H1 = styled.h1`
-  font-size: 2rem;
-  text-align: center;
+  font-size: 3rem;
+  text-align: left;
   ${theme.breakpoint.phone} {
     font-size: 3rem;
     text-align: left;
@@ -93,8 +93,8 @@ const H1 = styled.h1`
 `
 
 const H2 = styled.h2`
-  font-size: 1.25rem;
-  text-align: center;
+  font-size: 1.5rem;
+  text-align: left;
   ${theme.breakpoint.phone} {
     font-size: 2rem;
     text-align: left;
