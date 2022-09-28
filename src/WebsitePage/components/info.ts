@@ -105,7 +105,7 @@ export const info = {
     {
       title: 'Todo List',
       live: '/portfolio/todolist',
-      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/TodoList',
+      source: 'https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/TodoListRedux',
       image: todo,
     },
     {

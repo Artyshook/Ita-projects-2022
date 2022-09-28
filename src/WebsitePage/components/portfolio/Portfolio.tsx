@@ -65,12 +65,12 @@ export const PortfolioBlock = (props: PortfolioBlockType) => {
           p={1}
           border={theme.colors.border}
           borderRadius={'25px'}
-          width={'150px'}
+          width={'160px'}
           justifyContent={'space-around'}
         >
           <IconLink link={props.live} title={'Live Demo'} icon={'fa fa-safari'} />
         </Box>
-        <Box p={1} border={theme.colors.border} borderRadius={'25px'} width={'150px'}>
+        <Box p={1} border={theme.colors.border} borderRadius={'25px'} width={'160px'}>
           <IconLink2 link={props.source} title={'Source Code'} icon={'fa fa-code'} />
         </Box>
       </Box>
@@ -87,7 +87,7 @@ const IconLink = (props: IconLinkProps) => {
   return (
     <DemoLink to={props.link} rel='noopener noreferrer'>
       <i className={props.icon} /> {''}
-      {props.title}
+      <div>{props.title}</div>
     </DemoLink>
   )
 }
@@ -111,7 +111,17 @@ const Wrapper = styled.div`
 `
 const DemoLink = styled(Link)`
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
 `
 const GitLink = styled.a`
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
 `
