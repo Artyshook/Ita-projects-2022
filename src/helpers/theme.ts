@@ -33,6 +33,8 @@ export const theme = {
     green: '#00ff7f',
     yellow: '#F3C84B',
     black: '#1c1c1c',
+    superBlack: '#212121',
+    dark: '#383838',
     grey: '#dcdcdc',
     lily: 'rgb(237, 236, 248)',
     darkGrey: '#818589',
@@ -53,6 +55,8 @@ export const theme = {
     backgroundImage:
       'linear-gradient(90deg, rgba(224, 195, 252, 0.7) 0%, rgba(142, 197, 252, 0.7) 100%)',
     filterButtonBackground: 'linear-gradient(to right, #f5f0ff, #ebf8ff)',
+    filterButtonBackgroundDark:
+      'linear-gradient(34deg, rgba(37,59,86,0.20258525773590685) 10%, rgba(50,56,122,1) 100%)',
   },
 
   breakpoint: {

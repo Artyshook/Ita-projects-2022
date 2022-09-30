@@ -6,6 +6,7 @@ import {
   removeTaskAC,
 } from './store'
 import { CgTrash } from 'react-icons/cg'
+import { DarkModeProps } from '../../WebsitePage/components/BaseLayout'
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { getDate, sleep } from '../../helpers/functions'
@@ -19,7 +20,7 @@ export type FilterValuesType = 'all' | 'active' | 'completed'
 
 const getTasks = (state: AppRootStateType) => state.tasks
 
-export const TodoList = () => {
+export const TodoList = (props: DarkModeProps) => {
   const dispatch = useDispatch()
   const tasks = useSelector(getTasks)
   const [newTask, setNewTask] = useState('')
@@ -63,12 +64,13 @@ export const TodoList = () => {
           <title>Artem Saibel - TodoList app</title>
           <meta name='description' content='Todo List App with React (using Hooks and Contexts)' />
         </Helmet>
-        <Wrapper>
-          <BackgroundWrapper>
-            <TitleWrapper>{getDate()[0]}</TitleWrapper>
-            <TitleWrapper>{getDate()[1]}</TitleWrapper>
+        <Wrapper darkMode={props.darkMode}>
+          <BackgroundWrapper darkMode={props.darkMode}>
+            <TitleWrapper darkMode={props.darkMode}>{getDate()[0]}</TitleWrapper>
+            <TitleWrapper darkMode={props.darkMode}>{getDate()[1]}</TitleWrapper>
           </BackgroundWrapper>
           <TodoInputWrapper
+            darkMode={props.darkMode}
             type='text'
             placeholder='Enter your task...'
             onChange={event => {
@@ -88,6 +90,7 @@ export const TodoList = () => {
                       <Draggable key={task.id} draggableId={task.id} index={index}>
                         {(provided, snapshot) => (
                           <MapTasksWrapper
+                            darkMode={props.darkMode}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
@@ -120,6 +123,7 @@ export const TodoList = () => {
           </div>
           <FilterWrapper>
             <FilterItemWraper
+              darkMode={props.darkMode}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setFilter('all')}
@@ -127,6 +131,7 @@ export const TodoList = () => {
               ALL
             </FilterItemWraper>
             <FilterItemWraper
+              darkMode={props.darkMode}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setFilter('active')}
@@ -134,6 +139,7 @@ export const TodoList = () => {
               ACTIVE
             </FilterItemWraper>
             <FilterItemWraper
+              darkMode={props.darkMode}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setFilter('completed')}
@@ -166,27 +172,30 @@ const Conteiner = styled.div`
   align-items: center;
 `
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ darkMode: boolean }>`
   width: 550px;
   min-height: 50vh;
-  background-color: white;
+  background-color: ${props => (props.darkMode ? theme.colors.dark : 'white')};
   box-shadow: ${theme.colors.boxShadow3};
   border-radius: 10px;
   ${theme.breakpoint.phone} {
     width: 80%;
   }
 `
-const BackgroundWrapper = styled.div`
+const BackgroundWrapper = styled.div<{ darkMode: boolean }>`
   padding: 2.7em;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  background-image: ${theme.background.backgroundImage},
+  background-image: ${props =>
+      props.darkMode
+        ? theme.background.filterButtonBackgroundDark
+        : theme.background.backgroundImage},
     url('https://images.unsplash.com/photo-1553335538-efce787fe4f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 `
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.div<{ darkMode: boolean }>`
   font-size: ${theme.fonts.medium};
   text-align: center;
   margin-bottom: -0.3rem;
@@ -194,25 +203,24 @@ const TitleWrapper = styled.div`
   text-shadow: ${theme.colors.textShadow};
 `
 
-const TodoInputWrapper = styled.input`
-  background-color: ${theme.colors.lily};
+const TodoInputWrapper = styled.input<{ darkMode: boolean }>`
+  background-color: ${props => (props.darkMode ? theme.colors.dark : theme.colors.lily)};
   border: none;
   font-size: ${theme.fonts.small};
   margin: 0;
   padding: 1em 1em;
   width: 100%;
 `
-const MapTasksWrapper = styled.li`
+const MapTasksWrapper = styled.li<{ darkMode: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  border: 0.1rem solid ${theme.colors.whiteGrey};
-  background-color: ${theme.background.taskBackground};
+  background-color: ${props =>
+    props.darkMode ? theme.colors.superBlack : theme.background.taskBackground};
   margin: 0.2rem;
   &:hover {
-    background-color: ${theme.colors.lily};
-  }
+    background-color: ${props => (props.darkMode ? theme.colors.dark : theme.colors.lily)}
 `
 const MapTodosWrapper = styled.span`
   text-decoration: none;
@@ -225,7 +233,6 @@ const ButtonsTaskWrapper = styled.div`
   opacity: 0;
 `
 const Text = styled.div<{ isDone: boolean }>`
-  color: ${theme.colors.black};
   text-decoration: ${props => (props.isDone ? 'line-through' : 'none')};
 `
 
@@ -256,16 +263,17 @@ const FilterWrapper = styled.div`
     margin-bottom: 1rem;
   }
 `
-const FilterItemWraper = styled(motion.span)`
+const FilterItemWraper = styled(motion.span)<{ darkMode: boolean }>`
   font-size: 18px;
-  background-image: ${theme.background.filterButtonBackground};
+  background-image: ${props => (props.darkMode ? 'none' : theme.background.filterButtonBackground)};
   cursor: pointer;
   border-radius: 20px;
-  border: none;
-  color: ${theme.colors.black};
+  border: 2px solid ${theme.colors.white};
+  color: ${props => (props.darkMode ? theme.colors.white : theme.colors.black)};
   padding: 10px 20px;
   ${theme.breakpoint.phone} {
     font-size: ${theme.fonts.xs};
     padding: 15px 20px;
+    border: 1px solid ${theme.colors.white};
   }
 `

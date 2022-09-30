@@ -45,7 +45,7 @@ export const BaseLayout = () => {
               <Route path={urls.about} element={<About />} />
               <Route path={urls.portfolio}>
                 <Route index element={<Portfolio />} />
-                <Route path={urls.todolist} element={<TodoList />} />
+                <Route path={urls.todolist} element={<TodoList darkMode={darkMode} />} />
                 <Route path={urls.memoryGame} element={<MemoryGame />} />
                 <Route
                   path={urls.calculator}
