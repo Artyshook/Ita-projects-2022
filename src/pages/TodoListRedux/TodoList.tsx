@@ -205,6 +205,7 @@ const TitleWrapper = styled.div<{ darkMode: boolean }>`
 
 const TodoInputWrapper = styled.input<{ darkMode: boolean }>`
   background-color: ${props => (props.darkMode ? theme.colors.dark : theme.colors.lily)};
+  color: ${props => (props.darkMode ? theme.colors.white : theme.colors.dark)};
   border: none;
   font-size: ${theme.fonts.small};
   margin: 0;
