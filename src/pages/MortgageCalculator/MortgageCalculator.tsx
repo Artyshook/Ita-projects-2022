@@ -163,7 +163,9 @@ const Div_Global = styled.div`
 `
 const Div_GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 50% 50%;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 40% 40%;
   padding-bottom: 2rem;
   padding-top: 2rem;
 `

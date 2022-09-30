@@ -10,34 +10,36 @@ type PropsType = {
 
 export const PaymentsTable = (props: PropsType) => {
   return (
-    <Table_Container darkMode={props.darkMode}>
-      <thead>
-        <TR darkMode={props.darkMode}>
-          <TH>Year/Month</TH>
-          <TH>Month Interest Paid</TH>
-          <TH>Total Interest Paid</TH>
-          <TH>Month Principal Repaid</TH>
-          <TH>Total Principal Repaid</TH>
-          <TH>Mortgage Balance</TH>
-          <TH>Money value after inflation</TH>
-          <TH>Inflation by month</TH>
-        </TR>
-      </thead>
-      <tbody>
-        {props.monthlyPayments.map((el, index) => (
-          <TR2 darkMode={props.darkMode} key={index}>
-            <TD>{`${el.year}/${el.month}`}</TD>
-            <TD>{formatCurrency(el.interestPaid)}</TD>
-            <TD>{formatCurrency(el.accumulativeMonthlyInterestPaid)}</TD>
-            <TD>{formatCurrency(el.principalRepaid)}</TD>
-            <TD>{formatCurrency(el.accumulativeMonthlyPrincipal)}</TD>
-            <TD>{formatCurrency(el.outstandingBalance)}</TD>
-            <TD>{formatCurrency(el.outstandingBalanceInflation)}</TD>
-            <TD>{formatCurrency(el.inflationByMonth)}</TD>
-          </TR2>
-        ))}
-      </tbody>
-    </Table_Container>
+    <Table_Wrapper>
+      <Table_Container darkMode={props.darkMode}>
+        <thead>
+          <TR darkMode={props.darkMode}>
+            <TH>Year/Month</TH>
+            <TH>Month Interest Paid</TH>
+            <TH>Total Interest Paid</TH>
+            <TH>Month Principal Repaid</TH>
+            <TH>Total Principal Repaid</TH>
+            <TH>Mortgage Balance</TH>
+            <TH>Money value after inflation</TH>
+            <TH>Inflation by month</TH>
+          </TR>
+        </thead>
+        <tbody>
+          {props.monthlyPayments.map((el, index) => (
+            <TR2 darkMode={props.darkMode} key={index}>
+              <TD>{`${el.year}/${el.month}`}</TD>
+              <TD>{formatCurrency(el.interestPaid)}</TD>
+              <TD>{formatCurrency(el.accumulativeMonthlyInterestPaid)}</TD>
+              <TD>{formatCurrency(el.principalRepaid)}</TD>
+              <TD>{formatCurrency(el.accumulativeMonthlyPrincipal)}</TD>
+              <TD>{formatCurrency(el.outstandingBalance)}</TD>
+              <TD>{formatCurrency(el.outstandingBalanceInflation)}</TD>
+              <TD>{formatCurrency(el.inflationByMonth)}</TD>
+            </TR2>
+          ))}
+        </tbody>
+      </Table_Container>
+    </Table_Wrapper>
   )
 }
 
@@ -59,8 +61,12 @@ const TR2 = styled.tr<{ darkMode: boolean }>`
   }
   }
 `
-
+const Table_Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 const Table_Container = styled.table<{ darkMode: boolean }>`
-  width: 100%;
+  width: 80%;
   overflow: auto;
 `
