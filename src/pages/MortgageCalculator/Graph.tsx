@@ -136,6 +136,13 @@ const Div_Container = styled.div`
   align-items: center;
   grid-template-columns: 40% 40%;
   padding-bottom: 2rem;
+  ${theme.breakpoint.phone} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
 `
 const Div_Global = styled.div`
   margin: 0;

@@ -168,6 +168,9 @@ const Div_GridContainer = styled.div`
   grid-template-columns: 40% 40%;
   padding-bottom: 2rem;
   padding-top: 2rem;
+  ${theme.breakpoint.phone} {
+    grid-template-columns: 45% 45%;
+  }
 `
 
 const Div_GridItemInfo = styled.div<{ darkMode: boolean }>`
@@ -190,13 +193,14 @@ const Div_GridItem = styled.div`
   font-size: ${theme.fonts.xs};
 `
 const Div_GridItem2 = styled.div`
-  padding-top: 60px;
+  padding: 70px 30px;
   display: flex;
   flex-direction: column;
   text-align: center;
   border: 1px solid ${theme.colors.whiteGrey};
   margin: 5px;
   border-radius: 10px;
+  height: 95%;
 `
 const Span_GridItemHeader = styled.span`
   font-weight: bold;
@@ -208,6 +212,9 @@ const Input_GridItemRangeSlider = styled.input`
 `
 const Label_GridItemLabel = styled.label`
   font-size: ${theme.fonts.small};
+  ${theme.breakpoint.phone} {
+    font-size: 1rem;
+  }
 `
 const H1_Header = styled.h1`
   text-align: center;
