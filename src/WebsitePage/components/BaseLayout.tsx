@@ -51,7 +51,7 @@ export const BaseLayout = () => {
                   path={urls.calculator}
                   element={<MortgageCalculator darkMode={darkMode} />}
                 />
-                <Route path={urls.hackerTyper} element={<HackerTyper />} />
+                <Route path={urls.hackerTyper} element={<HackerTyper darkMode={setDarkMode} />} />
               </Route>
               <Route path={urls.blog.list} element={<BlogUseContext1 />} />
               <Route path={urls.blog.page} element={<BlogPage />} />

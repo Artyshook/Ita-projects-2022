@@ -1,29 +1,35 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { TbHandClick } from 'react-icons/tb'
 import { code } from './code'
+import { services } from '../../helpers/services'
 import { theme } from '../../helpers/theme'
-import React, { Dispatch, useState } from 'react'
+import { useAsyncComponentDidMount } from '../../helpers/UseComponentDidMount'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import styled from 'styled-components'
 
-type AlertType = 'granted' | 'denied' | null
+type AlertType = 'ACCESS GRANTED' | 'ACCESS DENIED' | null
 type AlertPropsType = {
-  alert: AlertType
-  setAlert: Dispatch<AlertType>
+  alertMessage: AlertType
+  setAlertMessage: Dispatch<AlertType>
+}
+
+type DarkModeProps = {
+  darkMode: Dispatch<SetStateAction<boolean>>
 }
 
 export const CheckAlert = (props: AlertPropsType) => {
-  switch (props.alert) {
-    case 'granted':
+  switch (props.alertMessage) {
+    case 'ACCESS GRANTED':
       return (
-        <Div_GrantedMessage onClick={() => props.setAlert(null)}>
-          Access Granted
+        <Div_GrantedMessage onClick={() => props.setAlertMessage(null)}>
+          ACCESS GRANTED
           <TbHandClick />
         </Div_GrantedMessage>
       )
-    case 'denied':
+    case 'ACCESS DENIED':
       return (
-        <Div_DeniedMessage onClick={() => props.setAlert(null)}>
-          Access Denied
+        <Div_DeniedMessage onClick={() => props.setAlertMessage(null)}>
+          ACCESS DENIED
           <TbHandClick />
         </Div_DeniedMessage>
       )
@@ -32,38 +38,24 @@ export const CheckAlert = (props: AlertPropsType) => {
   }
 }
 
-export const HackerTyper = () => {
-  const [alert, setAlert] = useState<AlertType>(null)
+export const HackerTyper = (props: DarkModeProps) => {
   const [index, setIndex] = useState(0)
+  const [alertMessage, setAlertMessage] = useState<'ACCESS DENIED' | 'ACCESS GRANTED' | null>(null)
 
-  const checkAlertRender = (alert: AlertType) => {
-    switch (alert) {
-      case 'granted':
-        return (
-          <Div_GrantedMessage onClick={() => setAlert(null)}>
-            Access Granted
-            <TbHandClick />
-          </Div_GrantedMessage>
-        )
-      case 'denied':
-        return (
-          <Div_DeniedMessage onClick={() => setAlert(null)}>
-            Access Denied
-            <TbHandClick />
-          </Div_DeniedMessage>
-        )
-      case null:
-        break
-    }
-  }
+  useAsyncComponentDidMount(async () => {
+    try {
+      props.darkMode(true)
+    } catch (error) {}
+  })
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      setAlert('granted')
+      setAlertMessage('ACCESS DENIED')
     } else if (e.key === 'Escape') {
-      setAlert('denied')
+      setAlertMessage('ACCESS GRANTED')
     } else {
-      setAlert(null)
-      setIndex(index + 3)
+      setAlertMessage(null)
+      setIndex(index + 7)
     }
   }
 
@@ -78,7 +70,7 @@ export const HackerTyper = () => {
           value={index === 0 ? 'Please type anything' : code.slice(0, index)}
           onKeyDown={handleKeyDown}
         />
-        <CheckAlert alert={alert} setAlert={setAlert} />
+        <CheckAlert alertMessage={alertMessage} setAlertMessage={setAlertMessage} />
       </Div_Wrapper>
     </HelmetProvider>
   )
@@ -86,25 +78,27 @@ export const HackerTyper = () => {
 
 export const Div_Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
-  gap: 2rem;
+  height: 90vh;
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
-  background: ${theme.background.backgroundColor};
+  background: black;
+  color: #03a062;
 `
 const TextArea_Code = styled.textarea`
   border: 2px solid ${theme.colors.green};
-  width: 70%;
-  height: 50vh;
-  background: ${theme.background.backgroundColor}
+  width: 100%;
+  height: 100vh;
+  background: black;
+  color: #03a062;
   padding: 2rem;
+  hyphens: none;
   font-size: ${theme.fonts.small};
-'&:focus': {
-  outline: none;
-}
+  '&:focus': {
+    outline: none;
+  }
 `
 const Div_DeniedMessage = styled.div`
   font-size: ${theme.fonts.medium};
@@ -123,7 +117,7 @@ const Div_DeniedMessage = styled.div`
 `
 const Div_GrantedMessage = styled.div`
   font-size: ${theme.fonts.medium};
-  color: ${theme.colors.blue};
+  color: ${theme.colors.green};
   align-items: center;
   flex-direction: column;
   display: flex;
@@ -135,4 +129,5 @@ const Div_GrantedMessage = styled.div`
   top: 0;
   left: 0;
   transform: translate(0, 0);
+  animation: blinker 2s infinite;
 `
