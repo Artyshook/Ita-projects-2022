@@ -1,5 +1,8 @@
+import * as https from 'https'
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
+// import { Div_Wrapper } from '../../HackerType/HackerTyper'
+import { Link } from 'react-router-dom'
 import { Link_GoBack } from '../../Blog/BlogPage'
 import { PostCard2 } from './PostCard'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
@@ -35,7 +38,7 @@ const useLogicState = () => {
       setError(null)
       setLoading(false)
     } catch (error) {
-      setError(`fetching error`)
+      setError(`Database is unavailable`)
     } finally {
       setLoading(false)
     }
@@ -127,17 +130,34 @@ export const BlogWithServer = () => {
     <>
       <Div_Wrapper>
         <H1>All Articles</H1>
-        <p>an amazing place to make yourself productive and have fun with daily updates.</p>
+        <P>an amazing place to make yourself productive and have fun with daily updates.</P>
         <Button_MyButton onClick={() => logic.setFormShown(true)}>
           <CgAddR size='2rem' />
           <div>Add your post</div>
         </Button_MyButton>
         <AddPostForm />
-        <GridContainer>
-          {logic.data?.map(post => (
-            <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
-          ))}
-        </GridContainer>
+        <>
+          {logic.data[0] ? (
+            <GridContainer>
+              {logic.data?.map(post => (
+                <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
+              ))}
+            </GridContainer>
+          ) : (
+            <MessageError>
+              <P>
+                Database is unavailable <br />
+                Make sure you downloaded the repository from
+                {
+                  <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
+                    👉 here{' '}
+                  </A>
+                }
+                and launch it on localhost
+              </P>
+            </MessageError>
+          )}
+        </>
       </Div_Wrapper>
     </>
   )
@@ -186,5 +206,23 @@ export const Button_MyButton = styled.button`
 const H1 = styled.h1`
   font-size: ${theme.fonts.medium};
   color: ${theme.colors.blue};
+  font-weight: bold;
+`
+const P = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: ${theme.fonts.small};
+`
+const MessageError = styled.div`
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const A = styled.a`
+  text-decoration: none;
   font-weight: bold;
 `

@@ -3,7 +3,7 @@ export const coverArr = {
     'https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   nature:
     'https://images.pexels.com/photos/7219549/pexels-photo-7219549.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  art: 'https:/images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  art: 'https://images.pexels.com/photos/5388822/pexels-photo-5388822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   vacation:
     'https://images.pexels.com/photos/10072847/pexels-photo-10072847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   coding:
