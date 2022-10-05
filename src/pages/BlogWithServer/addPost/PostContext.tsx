@@ -1,14 +1,9 @@
-import * as https from 'https'
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
-// import { Div_Wrapper } from '../../HackerType/HackerTyper'
-import { Link } from 'react-router-dom'
-import { Link_GoBack } from '../../Blog/BlogPage'
 import { PostCard2 } from './PostCard'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
 import { services } from '../../../helpers/services'
 import { theme } from '../../../helpers/theme'
-import { urls } from '../../../helpers/urls'
 import { useAsyncComponentDidMount } from '../../../helpers/UseComponentDidMount'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
@@ -29,6 +24,7 @@ const useLogicState = () => {
   const [postText, setPostText] = useState('')
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
+  const [validationError, setValidationError] = useState(null as string | null)
   const [loading, setLoading] = useState(false)
 
   useAsyncComponentDidMount(async () => {
@@ -61,6 +57,7 @@ const useLogicState = () => {
     } finally {
       setLoading(false)
       setFormShown(false)
+      setError(null)
       resetStates()
     }
   }
@@ -81,16 +78,14 @@ const useLogicState = () => {
 
   const inputCheck = () => {
     if (!title.trim()) {
-      setError('title is required')
+      setValidationError('title is required')
     } else if (data.find(el => el.slug === title)) {
-      setError('a similar title already exists, please type another')
+      setValidationError('a similar title already exists, please type another')
     } else if (!category) {
-      setError('please select a category')
+      setValidationError('please select a category')
     } else if (!postText.trim()) {
-      setError('the article was not entered ')
-    } else {
-      addPost()
-    }
+      setValidationError('the article was not entered ')
+    } else addPost()
   }
 
   return {
@@ -109,6 +104,8 @@ const useLogicState = () => {
     setError,
     resetStates,
     deleteBySlug,
+    validationError,
+    setValidationError,
   }
 }
 
@@ -131,33 +128,33 @@ export const BlogWithServer = () => {
       <Div_Wrapper>
         <H1>All Articles</H1>
         <P>an amazing place to make yourself productive and have fun with daily updates.</P>
-        <Button_MyButton onClick={() => logic.setFormShown(true)}>
-          <CgAddR size='2rem' />
-          <div>Add your post</div>
-        </Button_MyButton>
-        <AddPostForm />
-        <>
-          {logic.data[0] ? (
+        {!logic.error ? (
+          <>
+            <Button_MyButton onClick={() => logic.setFormShown(true)}>
+              <CgAddR size='2rem' />
+              <div>Add your post</div>
+            </Button_MyButton>
+            <AddPostForm />
             <GridContainer>
               {logic.data?.map(post => (
                 <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
               ))}
             </GridContainer>
-          ) : (
-            <MessageError>
-              <P>
-                Database is unavailable <br />
-                Make sure you downloaded the repository from
-                {
-                  <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
-                    👉 here{' '}
-                  </A>
-                }
-                and launch it on localhost
-              </P>
-            </MessageError>
-          )}
-        </>
+          </>
+        ) : (
+          <MessageError>
+            <P>
+              Database is unavailable <br />
+              Make sure you downloaded the repository from
+              {
+                <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
+                  👉 here{' '}
+                </A>
+              }
+              and launch it on localhost
+            </P>
+          </MessageError>
+        )}
       </Div_Wrapper>
     </>
   )
@@ -217,7 +214,7 @@ const P = styled.p`
   font-size: ${theme.fonts.small};
 `
 const MessageError = styled.div`
-  height: 50vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
