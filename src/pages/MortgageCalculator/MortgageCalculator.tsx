@@ -28,6 +28,8 @@ export const MortgageCalculator = (props: DarkModeProps) => {
   const [mortgageTerm, setMortgageTerm] = useState(30)
   const [interest, setInterest] = useState(4.99)
   const [inflationInterest, setInflationInterest] = useState(5)
+  const [visibleYear, setVisibleYear] = useState(1)
+
   const amountToBorrow = propertyPrice - depositAmount
 
   let monthlyRateArgs = {
@@ -148,7 +150,12 @@ export const MortgageCalculator = (props: DarkModeProps) => {
           </Div_GridItemInfo>
         </Div_GridContainer>
         <Graph calculatedMortgage={monthlyPayments} />
-        <PaymentsTable monthlyPayments={monthlyPayments} darkMode={props.darkMode} />
+        <PaymentsTable
+          monthlyPayments={monthlyPayments}
+          darkMode={props.darkMode}
+          visibleYear={visibleYear}
+          setVisibleYear={setVisibleYear}
+        />
       </Div_Global>
     </div>
   )
