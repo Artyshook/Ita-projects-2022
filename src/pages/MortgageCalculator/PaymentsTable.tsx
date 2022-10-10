@@ -10,15 +10,6 @@ type PropsType = {
   setVisibleYear: Dispatch<SetStateAction<number>>
 }
 
-type TR2Type = {
-  monthlyPayments: MortgageDataType[]
-  darkMode: boolean
-  visibleYear: number
-  setVisibleYear: Dispatch<SetStateAction<number>>
-  month: number
-  year: number
-}
-
 export const PaymentsTable = (props: PropsType) => {
   return (
     <Table_Wrapper>
@@ -77,11 +68,12 @@ const TH = styled.th<{ darkMode: boolean }>`
   background: ${props => (props.darkMode ? theme.colors.blue2 : theme.colors.lightBlue)};
 `
 const TR = styled.tr<{ darkMode: boolean }>`
-  background: ${props => (props.darkMode ? theme.colors.blue2 : theme.colors.grey)};
+  background: ${props => (props.darkMode ? theme.colors.blue : theme.colors.grey)};
 `
 
 const TD = styled.td`
   padding: 15px 5px;
+  cursor: pointer;
 `
 const TR2 = styled.tr<TrProps>`
   display: ${props => (props.expandeble === 1 ? '' : 'none')};

@@ -174,7 +174,6 @@ const Conteiner = styled.div`
 
 const Wrapper = styled.div<{ darkMode: boolean }>`
   width: 550px;
-  min-height: 50vh;
   background-color: ${props => (props.darkMode ? theme.colors.dark : 'white')};
   box-shadow: ${theme.colors.boxShadow3};
   border-radius: 10px;
@@ -271,10 +270,10 @@ const FilterItemWraper = styled(motion.span)<{ darkMode: boolean }>`
   border-radius: 20px;
   border: 2px solid ${theme.colors.white};
   color: ${props => (props.darkMode ? theme.colors.white : theme.colors.black)};
-  padding: 10px 20px;
+  padding: 15px 20px;
   ${theme.breakpoint.phone} {
     font-size: ${theme.fonts.xs};
-    padding: 15px 20px;
+    padding: 10px 15px;
     border: 1px solid ${theme.colors.white};
   }
 `
