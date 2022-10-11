@@ -10,8 +10,3 @@ A simple application for organizing your daily tasks with Redux.
 
 ![Frame 1 (5)](https://user-images.githubusercontent.com/100515756/192494399-adac3846-41a2-4ead-bc1d-95c584523d14.png)
 
-
-<p><img align="center" alt="gif" src="https://gitlab.com/ita-2022-react/artem-ita-2022/-/blob/main/src/WebsitePage/components/img/todo-gif.gif"/></p>
-
-
-
