@@ -101,7 +101,7 @@ const H2 = styled.h2`
   }
 `
 
-const wave = keyframes`
+export const wave = keyframes`
   0% {
     transform: rotate(0deg);
   }

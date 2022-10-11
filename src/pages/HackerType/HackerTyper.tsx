@@ -40,7 +40,7 @@ export const CheckAlert = (props: AlertPropsType) => {
 
 export const HackerTyper = (props: DarkModeProps) => {
   const [index, setIndex] = useState(0)
-  const [alertMessage, setAlertMessage] = useState<'ACCESS DENIED' | 'ACCESS GRANTED' | null>(null)
+  const [alertMessage, setAlertMessage] = useState(null as AlertType)
 
   useAsyncComponentDidMount(async () => {
     try {

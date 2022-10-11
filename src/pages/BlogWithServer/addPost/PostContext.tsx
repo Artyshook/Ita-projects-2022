@@ -5,8 +5,9 @@ import { genericHookContextBuilder } from '../../../helpers/genericHookContextBu
 import { services } from '../../../helpers/services'
 import { theme } from '../../../helpers/theme'
 import { useAsyncComponentDidMount } from '../../../helpers/UseComponentDidMount'
+import { wave } from '../../../WebsitePage/components/home/Home'
 import React, { useContext, useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export type BlogData = {
   id: string
@@ -49,15 +50,15 @@ const useLogicState = () => {
   const addPost = async () => {
     try {
       setLoading(true)
-      setError(null)
+      setValidationError(null)
       const response = await services.blog.addNewPost({ title, postText, category })
       setData(await services.blog.list())
     } catch (err) {
-      setError('Can`t fetch data')
+      setValidationError('Can`t fetch data')
     } finally {
       setLoading(false)
       setFormShown(false)
-      setError(null)
+      setValidationError(null)
       resetStates()
     }
   }
@@ -106,6 +107,7 @@ const useLogicState = () => {
     deleteBySlug,
     validationError,
     setValidationError,
+    loading,
   }
 }
 
@@ -128,37 +130,56 @@ export const BlogWithServer = () => {
       <Div_Wrapper>
         <H1>All Articles</H1>
         <P>an amazing place to make yourself productive and have fun with daily updates.</P>
-        {!logic.error ? (
-          <>
-            <Button_MyButton onClick={() => logic.setFormShown(true)}>
-              <CgAddR size='2rem' />
-              <div>Add your post</div>
-            </Button_MyButton>
-            <AddPostForm />
-            <GridContainer>
-              {logic.data?.map(post => (
-                <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
-              ))}
-            </GridContainer>
-          </>
-        ) : (
+        {logic.loading ? (
           <MessageError>
-            <P>
-              Database is unavailable <br />
-              Make sure you downloaded the repository from
-              {
-                <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
-                  👉 here{' '}
-                </A>
-              }
-              and launch it on localhost
-            </P>
+            <Loading>⌛</Loading>
+            <Loading>⌛</Loading>
+            <Loading>⌛</Loading>
           </MessageError>
+        ) : (
+          <div>
+            {logic.error ? (
+              <MessageError>
+                <P>
+                  Database is unavailable <br />
+                  Make sure you downloaded the repository from
+                  {
+                    <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
+                      👉 here{' '}
+                    </A>
+                  }
+                  and launched it on localhost
+                </P>
+              </MessageError>
+            ) : (
+              <>
+                <Button_MyButton onClick={() => logic.setFormShown(true)}>
+                  <CgAddR size='2rem' />
+                  <div>Add your post</div>
+                </Button_MyButton>
+                <AddPostForm />
+                <GridContainer>
+                  {logic.data?.map(post => (
+                    <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
+                  ))}
+                </GridContainer>
+              </>
+            )}
+          </div>
         )}
       </Div_Wrapper>
     </>
   )
 }
+
+const Loading = styled.span`
+  font-size: ${theme.fonts.small};
+  animation-name: ${wave};
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+`
 
 const Div_Wrapper = styled.div`
   max-width: 1140px;

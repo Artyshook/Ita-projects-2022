@@ -91,11 +91,14 @@ const Table_Wrapper = styled.div`
   ${theme.breakpoint.phone} {
     padding: 0;
   }
+  ${theme.breakpoint.tablet} {
+    padding: 0;
+  }
 `
 const Table_Container = styled.table`
   width: 100%;
   overflow: auto;
-  ${theme.breakpoint.phone} {
-    overflow: auto;
-  }
+  // ${theme.breakpoint.phone} {
+  //   overflow: auto;
+  // }
 `
