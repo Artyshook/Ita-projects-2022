@@ -52,7 +52,6 @@ export const MortgageCalculator = (props: DarkModeProps) => {
     inflationInterest: inflationInterest,
   }
   const monthlyPayments = handleMortgageDataChange(MortgageDataChangeArgs)
-  console.log(monthlyPayments)
 
   return (
     <div>

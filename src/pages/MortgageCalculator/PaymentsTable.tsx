@@ -98,7 +98,7 @@ const Table_Wrapper = styled.div`
 const Table_Container = styled.table`
   width: 100%;
   overflow: auto;
-  // ${theme.breakpoint.phone} {
-  //   overflow: auto;
-  // }
+  ${theme.breakpoint.phone} {
+    overflow: auto;
+  }
 `
