@@ -45,13 +45,13 @@ export const BaseLayout = () => {
               <Route path={urls.about} element={<About />} />
               <Route path={urls.portfolio}>
                 <Route index element={<Portfolio />} />
-                <Route path={urls.todolist} element={<TodoList />} />
+                <Route path={urls.todolist} element={<TodoList darkMode={darkMode} />} />
                 <Route path={urls.memoryGame} element={<MemoryGame />} />
                 <Route
                   path={urls.calculator}
                   element={<MortgageCalculator darkMode={darkMode} />}
                 />
-                <Route path={urls.hackerTyper} element={<HackerTyper />} />
+                <Route path={urls.hackerTyper} element={<HackerTyper darkMode={setDarkMode} />} />
               </Route>
               <Route path={urls.blog.list} element={<BlogUseContext1 />} />
               <Route path={urls.blog.page} element={<BlogPage />} />

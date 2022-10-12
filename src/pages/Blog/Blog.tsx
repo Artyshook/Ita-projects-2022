@@ -1,5 +1,6 @@
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
+import { Link } from 'react-router-dom'
 import { Link_GoBack } from './BlogPage'
 import { PostCard } from './PostCard'
 import { convertToSlug, useLocalStorage } from '../../helpers/functions'
@@ -104,7 +105,7 @@ export const Blog = () => {
         <p>an amazing place to make yourself productive and have fun with daily updates.</p>
         <Button_MyButton onClick={() => logic.setFormShown(true)}>
           <CgAddR size='2rem' />
-          <div>Add your post</div>
+          <div>Add article</div>
         </Button_MyButton>
         <AddPostForm />
         <GridContainer>
@@ -126,6 +127,7 @@ const Div_Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
+  font-size: ${theme.fonts.small};
 `
 
 const GridContainer = styled.div`

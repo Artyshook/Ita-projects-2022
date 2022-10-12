@@ -1,14 +1,13 @@
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
-import { Link_GoBack } from '../../Blog/BlogPage'
 import { PostCard2 } from './PostCard'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
 import { services } from '../../../helpers/services'
 import { theme } from '../../../helpers/theme'
-import { urls } from '../../../helpers/urls'
 import { useAsyncComponentDidMount } from '../../../helpers/UseComponentDidMount'
+import { wave } from '../../../WebsitePage/components/home/Home'
 import React, { useContext, useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export type BlogData = {
   id: string
@@ -26,6 +25,7 @@ const useLogicState = () => {
   const [postText, setPostText] = useState('')
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
+  const [validationError, setValidationError] = useState(null as string | null)
   const [loading, setLoading] = useState(false)
 
   useAsyncComponentDidMount(async () => {
@@ -35,7 +35,7 @@ const useLogicState = () => {
       setError(null)
       setLoading(false)
     } catch (error) {
-      setError(`fetching error`)
+      setError(`Database is unavailable`)
     } finally {
       setLoading(false)
     }
@@ -50,14 +50,15 @@ const useLogicState = () => {
   const addPost = async () => {
     try {
       setLoading(true)
-      setError(null)
+      setValidationError(null)
       const response = await services.blog.addNewPost({ title, postText, category })
       setData(await services.blog.list())
     } catch (err) {
-      setError('Can`t fetch data')
+      setValidationError('Can`t fetch data')
     } finally {
       setLoading(false)
       setFormShown(false)
+      setValidationError(null)
       resetStates()
     }
   }
@@ -78,16 +79,14 @@ const useLogicState = () => {
 
   const inputCheck = () => {
     if (!title.trim()) {
-      setError('title is required')
+      setValidationError('title is required')
     } else if (data.find(el => el.slug === title)) {
-      setError('a similar title already exists, please type another')
+      setValidationError('a similar title already exists, please type another')
     } else if (!category) {
-      setError('please select a category')
+      setValidationError('please select a category')
     } else if (!postText.trim()) {
-      setError('the article was not entered ')
-    } else {
-      addPost()
-    }
+      setValidationError('the article was not entered ')
+    } else addPost()
   }
 
   return {
@@ -106,6 +105,9 @@ const useLogicState = () => {
     setError,
     resetStates,
     deleteBySlug,
+    validationError,
+    setValidationError,
+    loading,
   }
 }
 
@@ -127,21 +129,57 @@ export const BlogWithServer = () => {
     <>
       <Div_Wrapper>
         <H1>All Articles</H1>
-        <p>an amazing place to make yourself productive and have fun with daily updates.</p>
-        <Button_MyButton onClick={() => logic.setFormShown(true)}>
-          <CgAddR size='2rem' />
-          <div>Add your post</div>
-        </Button_MyButton>
-        <AddPostForm />
-        <GridContainer>
-          {logic.data?.map(post => (
-            <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
-          ))}
-        </GridContainer>
+        <P>an amazing place to make yourself productive and have fun with daily updates.</P>
+        {logic.loading ? (
+          <MessageError>
+            <Loading>⌛</Loading>
+            <Loading>⌛</Loading>
+            <Loading>⌛</Loading>
+          </MessageError>
+        ) : (
+          <div>
+            {logic.error ? (
+              <MessageError>
+                <P>
+                  Database is unavailable <br />
+                  Make sure you download the repository from
+                  {
+                    <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
+                      👉 here{' '}
+                    </A>
+                  }
+                  and run it on localhost
+                </P>
+              </MessageError>
+            ) : (
+              <>
+                <Button_MyButton onClick={() => logic.setFormShown(true)}>
+                  <CgAddR size='2rem' />
+                  <div>Add your post</div>
+                </Button_MyButton>
+                <AddPostForm />
+                <GridContainer>
+                  {logic.data?.map(post => (
+                    <PostCard2 key={post.id} post={post} deleteBySlug={logic.deleteBySlug} />
+                  ))}
+                </GridContainer>
+              </>
+            )}
+          </div>
+        )}
       </Div_Wrapper>
     </>
   )
 }
+
+const Loading = styled.span`
+  font-size: ${theme.fonts.small};
+  animation-name: ${wave};
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+`
 
 const Div_Wrapper = styled.div`
   max-width: 1140px;
@@ -186,5 +224,23 @@ export const Button_MyButton = styled.button`
 const H1 = styled.h1`
   font-size: ${theme.fonts.medium};
   color: ${theme.colors.blue};
+  font-weight: bold;
+`
+const P = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: ${theme.fonts.small};
+`
+const MessageError = styled.div`
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const A = styled.a`
+  text-decoration: none;
   font-weight: bold;
 `

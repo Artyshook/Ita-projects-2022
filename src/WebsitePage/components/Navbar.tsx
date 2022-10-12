@@ -95,6 +95,9 @@ const BoxWrapper = styled(Box)`
   text-transform: lowercase;
   font-size: 1.5rem;
   list-style-type: none;
+  ${theme.breakpoint.phone} {
+    font-size: 1.3rem;
+  }
 `
 const H1 = styled.h1`
   font-size: 3rem;

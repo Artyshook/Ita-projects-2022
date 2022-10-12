@@ -13,7 +13,9 @@ type PropsType = {
 export const PostCard = (props: PropsType) => {
   return (
     <Div_Container>
-      <Img_Cover src={props.post.cover} alt='cover' />
+      <Link_Link to={urls.blog.getBlogSlug(props.post.url)}>
+        <Img_Cover src={props.post.cover} alt='cover' />
+      </Link_Link>
       <H3>{props.post.title}</H3>
       <P_Post>
         <Markdown>{props.post.post}</Markdown>

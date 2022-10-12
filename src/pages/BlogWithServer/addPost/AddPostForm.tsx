@@ -16,7 +16,7 @@ export const AddPostForm = () => {
         onHide={() => {
           logic.resetStates()
           logic.setFormShown(false)
-          logic.setError(null)
+          logic.setValidationError(null)
         }}
       >
         <Modal.Header closeButton>
@@ -61,7 +61,7 @@ export const AddPostForm = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {logic.error && <ErrorMessage>{logic.error}</ErrorMessage>}
+          {logic.validationError && <ErrorMessage>{logic.validationError}</ErrorMessage>}
           <Button variant='primary' onClick={logic.inputCheck}>
             Save
           </Button>

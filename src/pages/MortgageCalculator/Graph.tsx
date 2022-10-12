@@ -78,6 +78,8 @@ export const Graph = (props: PropsType) => {
               />
             </LineChart>
           </ResponsiveContainer>
+        </Div_Item>
+        <Div_Item>
           <ResponsiveContainer width='100%' height='90%'>
             <LineChart
               width={700}
@@ -129,15 +131,22 @@ export const Graph = (props: PropsType) => {
 }
 
 const Div_Container = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  grid-template-columns: 50% 50%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 40% 40%;
   padding-bottom: 2rem;
+  ${theme.breakpoint.phone} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
 `
 const Div_Global = styled.div`
   margin: 0;
   text-align: center;
-  overflow: scroll;
 `
 const Div_Item = styled.div`
   display: flex;
@@ -145,8 +154,8 @@ const Div_Item = styled.div`
   justify-content: center;
   text-align: center;
   border-radius: 10px;
-  height: 500px;
-  width: 90%;
+  height: 400px;
+  width: 100%;
   ${theme.breakpoint.phone} {
     display: flex;
     flex-direction: column;
