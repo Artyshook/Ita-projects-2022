@@ -142,13 +142,13 @@ export const BlogWithServer = () => {
               <MessageError>
                 <P>
                   Database is unavailable <br />
-                  Make sure you downloaded the repository from
+                  Make sure you download the repository from
                   {
                     <A href='https://github.com/Artyshook/Ita-projects-2022/tree/main/src/pages/BlogWithServer'>
                       👉 here{' '}
                     </A>
                   }
-                  and launched it on localhost
+                  and run it on localhost
                 </P>
               </MessageError>
             ) : (
