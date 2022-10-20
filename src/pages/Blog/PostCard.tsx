@@ -13,28 +13,53 @@ type PropsType = {
 export const PostCard = (props: PropsType) => {
   return (
     <Div_Container>
-      <Link_Link to={urls.blog.getBlogSlug(props.post.url)}>
-        <Img_Cover src={props.post.cover} alt='cover' />
-      </Link_Link>
-      <H3>{props.post.title}</H3>
-      <P_Post>
-        <Markdown>{props.post.post}</Markdown>
-      </P_Post>
-      <Footer>
-        <Div_Author>
-          <Img_AuthorImg src={avatar} alt='avatar' />
-        </Div_Author>
-        <Link_Link to={urls.blog.getBlogSlug(props.post.url)}>Discover ➝</Link_Link>
-      </Footer>
+      <Wrapper>
+        <Link_Link to={urls.blog.getBlogSlug(props.post.url)}>
+          <Img_Cover src={props.post.cover} alt='cover' />
+          <PostInfo>
+            <P_Category>{props.post.category}</P_Category>
+            <Title>{props.post.title.charAt(0).toUpperCase() + props.post.title.slice(1)}</Title>
+            <P_Post>
+              <Markdown>{props.post.post}</Markdown>
+            </P_Post>
+          </PostInfo>
+        </Link_Link>
+      </Wrapper>
     </Div_Container>
   )
 }
+const P_Category = styled.p`
+  font-size: ${theme.fonts.xs};
+  background: ${theme.background.tagBackground};
+  color: #ffffff;
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
+  width: fit-content;
+  text-transform: capitalize;
+  align-items: start;
+  justify-content: start;
+`
+const Wrapper = styled.div`
+  background-color: white;
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  :hover {
+    transition: transform 200ms ease-out, box-shadow 300ms ease-out;
+    transform: translate(0px, -4px);
+    box-shadow: -1px 1px 9px 0px rgba(8, 6, 6, 0.04);
 
+`
 const Div_Container = styled.div`
   display: flex;
   flex-direction: column;
 `
-
+const PostInfo = styled.div`
+  margin: 0;
+  padding: 30px;
+`
 const Footer = styled.footer`
   display: flex;
   align-items: center;
@@ -45,41 +70,31 @@ const Img_Cover = styled.img`
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
   margin-bottom: 0.5rem;
 `
-const H3 = styled.h3`
+const Title = styled.h3`
+  color: black;
   margin: 0.5rem 0 1rem 0;
   flex: 1;
   max-width: 300px;
   overflow: hidden;
+  font-weight: 600;
 `
 
 const P_Post = styled.p`
-  :before {
-    position: absolute;
-    content: '...';
-    bottom: 0;
-    right: 0;
-  }
+  padding: 5px;
+  text-overflow: ellipsis;
   position: relative;
-  max-height: 50px;
-  max-width: 300px;
+  max-height: 200px;
   overflow: hidden;
-  padding-right: 0.6rem;
+  line-height: 24px;
+  box-sizing: border-box;
+  cursor: pointer;
   color: ${theme.colors.darkGrey};
   font-size: ${theme.fonts.xs};
 `
-const Div_Author = styled.div`
-  display: flex;
-  align-items: center;
-`
-const Img_AuthorImg = styled.img`
-  max-height: 35px;
-  max-width: 35px;
-  border-radius: 40px;
-`
-
 const Link_Link = styled(Link)`
   text-decoration: none;
   color: inherit;

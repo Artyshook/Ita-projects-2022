@@ -15,33 +15,44 @@ export const BlogPage = () => {
   const blog = blogData?.find(post => post.url === params.blogSlug)
 
   return (
-    <>
-      <Link_GoBack to={urls.blog.list}>
-        <span> ← </span> <span>Go Back</span>
-      </Link_GoBack>
-      <Div_Wrapper>
-        {blog && (
-          <div>
-            <Header>
-              <H1>{blog.title}</H1>
-              <P_Category>{blog.category}</P_Category>
-            </Header>
+    <Div_Wrapper>
+      {blog && (
+        <Content>
+          <Header>
+            <H1>{blog.title}</H1>
+            <P_Category>{blog.category}</P_Category>
+          </Header>
+          <Body>
             <Img_Cover src={blog.cover} alt='cover' />
             <P_Post>
               <Markdown>{blog.post}</Markdown>
             </P_Post>
-          </div>
-        )}
-      </Div_Wrapper>
-    </>
+          </Body>
+        </Content>
+      )}
+    </Div_Wrapper>
   )
 }
 
+const Content = styled.div`
+  margin: 0;
+  padding: 10px;
+`
+const Body = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
 const Div_Wrapper = styled.div`
-  max-width: 700px;
+  max-width: 1000px;
+  background-color: white;
+  box-shadow: rgb(102 102 102 / 5%) 0px 60px 30px;
+  border-radius: 20px;
   margin: 0 auto;
-  width: 95%;
-  padding: 2rem 0;
+  width: 90%;
+  padding: 1rem 0;
   gap: 1rem;
   ${theme.breakpoint.phone} {
     width: 90%;
@@ -51,12 +62,16 @@ const Div_Wrapper = styled.div`
 const H1 = styled.h1`
   max-width: 700px;
   word-break: break-all;
+  text-align: start;
+  color: black;
 `
 const Header = styled.header`
-  text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: start;
+  justify-content: start;
   gap: 1rem;
+  padding-left: 10%;
 `
 
 const P_Category = styled.p`
@@ -75,11 +90,11 @@ const P_Post = styled.div`
   margin-top: 1.5rem;
   font-family: 'Montserrat', sans-serif;
   font-size: ${theme.fonts.small};
-  max-width: 700px;
+  max-width: 800px;
   word-break: break-all;
 `
 const Img_Cover = styled.img`
-  width: 100%;
+  width: 80%;
 `
 export const Link_GoBack = styled(Link)`
   padding: 2rem 4rem;

@@ -1,13 +1,10 @@
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
-import { Link } from 'react-router-dom'
-import { Link_GoBack } from './BlogPage'
 import { PostCard } from './PostCard'
 import { convertToSlug, useLocalStorage } from '../../helpers/functions'
 import { coverArr } from '../../helpers/data'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
-import { urls } from '../../helpers/urls'
 import { v1 } from 'uuid'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
@@ -54,8 +51,14 @@ const useLogicState = () => {
     resetStates()
   }
 
+  const letterNumber = /^[0-9a-zA-Z]+$/
+
   const inputCheck = () => {
-    if (formData.find(el => el.url === title.trim())) {
+    if (!title.trim()) {
+      setError('please enter the title')
+    } else if (!letterNumber.test(title)) {
+      setError('please enter the title in English')
+    } else if (formData.find(el => el.url === title.trim())) {
       setError('a similar title already exists, please type another')
     } else if (!category) {
       setError('please select a category')
@@ -99,28 +102,26 @@ export const Blog = () => {
   const logic = useContext(BlogContext)
 
   return (
-    <>
-      <Div_Wrapper>
-        <H1>All Articles</H1>
-        <p>an amazing place to make yourself productive and have fun with daily updates.</p>
-        <Button_MyButton onClick={() => logic.setFormShown(true)}>
-          <CgAddR size='2rem' />
-          <div>Add article</div>
-        </Button_MyButton>
-        <AddPostForm />
-        <GridContainer>
-          {logic.formData.map(post => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </GridContainer>
-      </Div_Wrapper>
-    </>
+    <Div_Wrapper>
+      <H1>All Articles</H1>
+      <p>an amazing place to make yourself productive and have fun with daily updates.</p>
+      <Button_MyButton onClick={() => logic.setFormShown(true)}>
+        <CgAddR size='2rem' />
+        <div>Add article</div>
+      </Button_MyButton>
+      <AddPostForm />
+      <GridContainer>
+        {logic.formData.map(post => (
+          <PostCard key={post.id} post={post} />
+        ))}
+      </GridContainer>
+    </Div_Wrapper>
   )
 }
 
 const Div_Wrapper = styled.div`
   max-width: 1140px;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -132,9 +133,9 @@ const Div_Wrapper = styled.div`
 
 const GridContainer = styled.div`
   padding-top: 1rem;
-  width: 100%;
+  width: 80%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   ${theme.breakpoint.phone} {
     grid-template-columns: repeat(1, 1fr);
@@ -143,7 +144,7 @@ const GridContainer = styled.div`
 `
 const Button_MyButton = styled.button`
   font-size: 1.5rem;
-  border-radius: 20px;
+  border-radius: 10px;
   border: none;
   color: white;
   background-color: ${theme.background.lightBlue};

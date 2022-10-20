@@ -1,4 +1,3 @@
-import { Task } from '../pages/TodoListRedux/store'
 import { useEffect, useState } from 'react'
 
 export const useLocalStorage = <T>(key: string, defaultValue: T) => {

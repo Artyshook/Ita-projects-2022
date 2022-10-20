@@ -77,9 +77,13 @@ const useLogicState = () => {
     }
   }
 
+  const letterNumber = /^[0-9a-zA-Z]+$/
+
   const inputCheck = () => {
     if (!title.trim()) {
-      setValidationError('title is required')
+      setValidationError('please enter the title')
+    } else if (!letterNumber.test(title)) {
+      setValidationError('please enter the title in English')
     } else if (data.find(el => el.slug === title)) {
       setValidationError('a similar title already exists, please type another')
     } else if (!category) {
