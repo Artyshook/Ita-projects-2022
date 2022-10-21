@@ -60,12 +60,6 @@ const PostInfo = styled.div`
   margin: 0;
   padding: 30px;
 `
-const Footer = styled.footer`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  justify-content: space-between;
-`
 const Img_Cover = styled.img`
   width: 100%;
   height: 250px;
@@ -80,6 +74,7 @@ const Title = styled.h3`
   flex: 1;
   max-width: 300px;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 600;
 `
 
@@ -87,7 +82,8 @@ const P_Post = styled.p`
   padding: 5px;
   text-overflow: ellipsis;
   position: relative;
-  max-height: 200px;
+  max-height: 100px;
+  max-width: 300px;
   overflow: hidden;
   line-height: 24px;
   box-sizing: border-box;

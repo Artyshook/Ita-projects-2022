@@ -16,20 +16,22 @@ export const BlogPage = () => {
 
   return (
     <Div_Wrapper>
-      {blog && (
-        <Content>
-          <Header>
-            <H1>{blog.title}</H1>
-            <P_Category>{blog.category}</P_Category>
-          </Header>
-          <Body>
-            <Img_Cover src={blog.cover} alt='cover' />
-            <P_Post>
-              <Markdown>{blog.post}</Markdown>
-            </P_Post>
-          </Body>
-        </Content>
-      )}
+      <Container>
+        {blog && (
+          <Content>
+            <Header>
+              <H1>{blog.title}</H1>
+              <P_Category>{blog.category}</P_Category>
+            </Header>
+            <Body>
+              <Img_Cover src={blog.cover} alt='cover' />
+              <Div_Post>
+                <Markdown>{blog.post}</Markdown>
+              </Div_Post>
+            </Body>
+          </Content>
+        )}
+      </Container>
     </Div_Wrapper>
   )
 }
@@ -37,6 +39,10 @@ export const BlogPage = () => {
 const Content = styled.div`
   margin: 0;
   padding: 10px;
+  width: 80%;
+  ${theme.breakpoint.phone} {
+    width: 90%;
+  }
 `
 const Body = styled.div`
   display: flex;
@@ -52,13 +58,18 @@ const Div_Wrapper = styled.div`
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
-  padding: 1rem 0;
+  padding: 2rem 0;
   gap: 1rem;
   ${theme.breakpoint.phone} {
     width: 90%;
   }
 `
-
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
 const H1 = styled.h1`
   max-width: 700px;
   word-break: break-all;
@@ -71,36 +82,25 @@ const Header = styled.header`
   align-items: start;
   justify-content: start;
   gap: 1rem;
-  padding-left: 10%;
 `
 
 const P_Category = styled.p`
-  font-size: 0.7rem;
+  font-size: ${theme.fonts.xs};
   background: ${theme.background.tagBackground};
   color: #fff;
   padding: 0.5rem 0.7rem;
   border-radius: 5px;
   width: fit-content;
   text-transform: capitalize;
-  align-items: start;
-  justify-content: start;
+  text-align: left;
 `
-const P_Post = styled.div`
-  padding: 1rem;
+const Div_Post = styled.div`
+  text-align: left;
   margin-top: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
   font-size: ${theme.fonts.small};
-  max-width: 800px;
   word-break: break-all;
+  color: black;
 `
 const Img_Cover = styled.img`
-  width: 80%;
-`
-export const Link_GoBack = styled(Link)`
-  padding: 2rem 4rem;
-  text-decoration: none;
-  font-size: ${theme.fonts.xs};
-  color: ${theme.colors.link};
-  font-weight: 500;
-  display: block;
+  width: 100%;
 `

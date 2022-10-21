@@ -103,8 +103,8 @@ export const Blog = () => {
 
   return (
     <Div_Wrapper>
-      <H1>All Articles</H1>
-      <p>an amazing place to make yourself productive and have fun with daily updates.</p>
+      {/*<H1>All Articles</H1>*/}
+      {/*<p>an amazing place to make yourself productive and have fun with daily updates.</p>*/}
       <Button_MyButton onClick={() => logic.setFormShown(true)}>
         <CgAddR size='2rem' />
         <div>Add article</div>
