@@ -1,6 +1,7 @@
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
 import { PostCard2 } from './PostCard'
+import { Toast, ToastBody, ToastHeader } from 'reactstrap'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
 import { services } from '../../../helpers/services'
 import { theme } from '../../../helpers/theme'

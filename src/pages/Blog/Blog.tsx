@@ -1,6 +1,11 @@
-import { AddPostForm } from './AddPostForm'
-import { CgAddR } from 'react-icons/cg'
+import { AddPostCollapse } from './AddPostCollapse'
+// import { Form, FormGroup, Input, InputGroup } from 'reactstrap'
+import { Button, FormControl, InputGroup } from 'react-bootstrap'
+// import { FaMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { FaPlus } from 'react-icons/fa'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { PostCard } from './PostCard'
+import { ToastContainer, toast } from 'react-toastify'
 import { convertToSlug, useLocalStorage } from '../../helpers/functions'
 import { coverArr } from '../../helpers/data'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
@@ -26,6 +31,9 @@ const useLogicState = () => {
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
 
+  const notify = () => {
+    toast('🙌 Upload successfully')
+  }
   const slug = convertToSlug(title)
   const cover2 = coverArr[category]
 
@@ -65,7 +73,9 @@ const useLogicState = () => {
     } else if (!postText.trim()) {
       setError('the article was not entered ')
     } else {
+      notify()
       setData()
+      setError(null)
     }
   }
 
@@ -103,22 +113,56 @@ export const Blog = () => {
 
   return (
     <Div_Wrapper>
-      {/*<H1>All Articles</H1>*/}
-      {/*<p>an amazing place to make yourself productive and have fun with daily updates.</p>*/}
-      <Button_MyButton onClick={() => logic.setFormShown(true)}>
-        <CgAddR size='2rem' />
-        <div>Add article</div>
-      </Button_MyButton>
-      <AddPostForm />
-      <GridContainer>
-        {logic.formData.map(post => (
-          <PostCard key={post.id} post={post} />
-        ))}
-      </GridContainer>
+      <Container>
+        <AddPostContent>
+          <AddPostCollapse />
+        </AddPostContent>
+        <div>
+          <InputGroup className='mb-3'>
+            <FormControl
+              placeholder="Recipient's username"
+              aria-label="Recipient's username"
+              aria-describedby='basic-addon2'
+            />
+            <Button></Button>
+          </InputGroup>
+        </div>
+        <Content>
+          <GridContainer>
+            {logic.formData.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </GridContainer>
+        </Content>
+      </Container>
+      <MyToastContainer
+        position='top-center'
+        autoClose={500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
     </Div_Wrapper>
   )
 }
 
+const Content = styled.div`
+  width: 80%;
+`
+const AddPostContent = styled.div`
+  width: 80%;
+`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 const Div_Wrapper = styled.div`
   max-width: 1140px;
   width: 100%;
@@ -133,7 +177,6 @@ const Div_Wrapper = styled.div`
 
 const GridContainer = styled.div`
   padding-top: 1rem;
-  width: 80%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
@@ -164,3 +207,19 @@ const H1 = styled.h1`
   color: ${theme.colors.blue};
   font-weight: bold;
 `
+
+const MyToastContainer = styled(ToastContainer)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  ${theme.breakpoint.phone} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+`
+// const MyForm = styled(Form)`
+//   width: 300px;
+// `
