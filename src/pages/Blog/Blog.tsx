@@ -33,7 +33,7 @@ const useLogicState = () => {
   const [filterCategory, setFilterCategory] = useState('' as string)
   const [searchInput, setSearchInput] = useState('' as string)
   const [filter, setFilter] = useState({ input: '', category: '' })
-  console.log('input', filter.input)
+  // console.log('input', filter.input)
 
   const notify = () => {
     toast('🙌 Upload successfully')
@@ -96,7 +96,7 @@ const useLogicState = () => {
       : formData.filter(article => article.title === filter.input)
   }
 
-  console.log(filteredList())
+  // console.log(filteredList())
 
   return {
     formData,
