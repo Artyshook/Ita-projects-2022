@@ -1,17 +1,17 @@
 import { AddPostCollapse } from './AddPostCollapse'
-// import { Form, FormGroup, Input, InputGroup } from 'reactstrap'
 import { Button, FormControl, InputGroup } from 'react-bootstrap'
-// import { FaMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { FaPlus } from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormGroup } from 'reactstrap'
 import { PostCard } from './PostCard'
 import { ToastContainer, toast } from 'react-toastify'
 import { convertToSlug, useLocalStorage } from '../../helpers/functions'
-import { coverArr } from '../../helpers/data'
+import { coverArr, initialBlogData, options, options2 } from '../../helpers/data'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
 import { v1 } from 'uuid'
 import React, { useContext, useState } from 'react'
+import Select from 'react-select'
 import styled from 'styled-components'
 
 export type BlogData = {
@@ -25,11 +25,15 @@ export type BlogData = {
 
 const useLogicState = () => {
   const [formShown, setFormShown] = useState(false)
-  const [formData, setFormData] = useLocalStorage('blog', [] as BlogData[])
+  const [formData, setFormData] = useLocalStorage('blog', initialBlogData as BlogData[])
   const [title, setTitle] = useState('')
   const [postText, setPostText] = useState('')
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
+  const [filterCategory, setFilterCategory] = useState('' as string)
+  const [searchInput, setSearchInput] = useState('' as string)
+  const [filter, setFilter] = useState({ input: '', category: '' })
+  console.log('input', filter.input)
 
   const notify = () => {
     toast('🙌 Upload successfully')
@@ -79,6 +83,21 @@ const useLogicState = () => {
     }
   }
 
+  // ===>>>>
+  const filteredList = () => {
+    // console.log('category', filter.category)
+    // console.log('input', filter.input)
+    // console.log('test', filter.category === '' && filter.input === '')
+    // console.log('DATA', formData)
+    return filter.category === '' && filter.input === ''
+      ? formData
+      : filter.input === ''
+      ? formData.filter(article => article.category === filter.category)
+      : formData.filter(article => article.title === filter.input)
+  }
+
+  console.log(filteredList())
+
   return {
     formData,
     setFormData,
@@ -94,6 +113,13 @@ const useLogicState = () => {
     error,
     setError,
     resetStates,
+    setFilterCategory,
+    filterCategory,
+    filteredList,
+    searchInput,
+    setSearchInput,
+    setFilter,
+    filter,
   }
 }
 
@@ -111,25 +137,58 @@ export const BlogUseContext1 = () => {
 export const Blog = () => {
   const logic = useContext(BlogContext)
 
+  const customStyles = {
+    control: () => ({
+      border: 'none',
+      display: 'flex',
+      color: 'black',
+    }),
+    option: () => ({
+      color: 'black',
+      fontSize: theme.fonts.xs,
+      padding: '4px',
+      paddingLeft: '2%',
+      '&:hover': {
+        background: theme.colors.lightBlue,
+      },
+    }),
+  }
+  // const [filter, setFilter] = useState({ input: '', catgory: '' })
+
   return (
     <Div_Wrapper>
       <Container>
-        <AddPostContent>
+        <Header>
           <AddPostCollapse />
-        </AddPostContent>
-        <div>
-          <InputGroup className='mb-3'>
+          <MyInputGroup>
             <FormControl
               placeholder="Recipient's username"
               aria-label="Recipient's username"
               aria-describedby='basic-addon2'
+              onChange={e => {
+                logic.setFilter({ ...logic.filter, input: e.currentTarget.value })
+              }}
             />
-            <Button></Button>
-          </InputGroup>
-        </div>
+            <Button onClick={() => logic.filteredList()}>
+              <FontAwesomeIcon icon={faSearch} />
+            </Button>
+          </MyInputGroup>
+          <MyFormGroup>
+            <Select
+              styles={customStyles}
+              placeholder={'Category'}
+              options={options}
+              value={options.filter(option => option.value === logic.category)}
+              onChange={e => {
+                if (e === null) return
+                logic.setFilter({ ...logic.filter, category: e.value })
+              }}
+            />
+          </MyFormGroup>
+        </Header>
         <Content>
           <GridContainer>
-            {logic.formData.map(post => (
+            {logic.filteredList().map(post => (
               <PostCard key={post.id} post={post} />
             ))}
           </GridContainer>
@@ -151,10 +210,11 @@ export const Blog = () => {
   )
 }
 
-const Content = styled.div`
+const Header = styled.div`
   width: 80%;
 `
-const AddPostContent = styled.div`
+
+const Content = styled.div`
   width: 80%;
 `
 const Container = styled.div`
@@ -162,6 +222,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 70%;
 `
 const Div_Wrapper = styled.div`
   max-width: 1140px;
@@ -220,6 +281,13 @@ const MyToastContainer = styled(ToastContainer)`
     width: 100%;
   }
 `
-// const MyForm = styled(Form)`
-//   width: 300px;
-// `
+
+const MyInputGroup = styled(InputGroup)`
+  padding-top: 10px;
+  height: 4.5rem;
+  padding-bottom: 5px;
+`
+const MyFormGroup = styled(FormGroup)`
+  display: flex;
+  flex-direction: row;
+`

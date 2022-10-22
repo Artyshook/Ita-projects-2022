@@ -49,7 +49,6 @@ export const AddPostCollapse = () => {
   return (
     <React.StrictMode>
       <Button_MyButton onClick={toggle} style={{ marginBottom: '1rem' }}>
-        <CgAddR size='2rem' />
         Add article
       </Button_MyButton>
       <Collapse isOpen={logic.formShown}>
