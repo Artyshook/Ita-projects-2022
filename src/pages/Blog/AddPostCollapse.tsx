@@ -97,23 +97,8 @@ export const AddPostCollapse = () => {
   )
 }
 
-const MessageError = styled.div`
-  height: 40vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-const Loading = styled.span`
-  font-size: ${theme.fonts.small};
-  animation-name: ${wave};
-  animation-duration: 2.5s;
-  animation-iteration-count: infinite;
-  transform-origin: 70% 70%;
-  display: inline-block;
-`
-
 const Button_MyButton = styled.button`
-  font-size: 1.5rem;
+  font-size: ${theme.fonts.small};
   border-radius: 10px;
   border: none;
   color: white;

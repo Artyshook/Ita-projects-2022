@@ -1,12 +1,15 @@
 import { AddPostCollapse } from './AddPostCollapse'
-import { Button, FormControl, InputGroup } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormControl, InputGroup } from 'react-bootstrap'
 import { FormGroup } from 'reactstrap'
 import { PostCard } from './PostCard'
 import { ToastContainer, toast } from 'react-toastify'
-import { convertToSlug, useLocalStorage } from '../../helpers/functions'
+import {
+  convertToSlug,
+  customStylesSelector,
+  letterNumberCheck,
+  useLocalStorage,
+} from '../../helpers/functions'
 import { coverArr, initialBlogData, options, options2 } from '../../helpers/data'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
 import { v1 } from 'uuid'
@@ -31,13 +34,13 @@ const useLogicState = () => {
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
   const [filterCategory, setFilterCategory] = useState('' as string)
-  const [searchInput, setSearchInput] = useState('' as string)
+  const [searchInput, setSearchInput] = useState('')
   const [filter, setFilter] = useState({ input: '', category: '' })
-  // console.log('input', filter.input)
 
-  const notify = () => {
+  const notification = () => {
     toast('🙌 Upload successfully')
   }
+
   const slug = convertToSlug(title)
   const cover2 = coverArr[category]
 
@@ -63,12 +66,10 @@ const useLogicState = () => {
     resetStates()
   }
 
-  const letterNumber = /^[0-9a-zA-Z]+$/
-
   const inputCheck = () => {
     if (!title.trim()) {
       setError('please enter the title')
-    } else if (!letterNumber.test(title)) {
+    } else if (!letterNumberCheck.test(title)) {
       setError('please enter the title in English')
     } else if (formData.find(el => el.url === title.trim())) {
       setError('a similar title already exists, please type another')
@@ -77,26 +78,21 @@ const useLogicState = () => {
     } else if (!postText.trim()) {
       setError('the article was not entered ')
     } else {
-      notify()
+      notification()
       setData()
       setError(null)
     }
   }
 
-  // ===>>>>
   const filteredList = () => {
-    // console.log('category', filter.category)
-    // console.log('input', filter.input)
-    // console.log('test', filter.category === '' && filter.input === '')
-    // console.log('DATA', formData)
     return filter.category === '' && filter.input === ''
       ? formData
       : filter.input === ''
-      ? formData.filter(article => article.category === filter.category)
-      : formData.filter(article => article.title === filter.input)
+      ? formData.filter(article =>
+          filter.category === 'all' ? article : article.category === filter.category
+        )
+      : formData.filter(article => article.title.toLowerCase().includes(filter.input.toLowerCase()))
   }
-
-  // console.log(filteredList())
 
   return {
     formData,
@@ -137,51 +133,30 @@ export const BlogUseContext1 = () => {
 export const Blog = () => {
   const logic = useContext(BlogContext)
 
-  const customStyles = {
-    control: () => ({
-      border: 'none',
-      display: 'flex',
-      color: 'black',
-    }),
-    option: () => ({
-      color: 'black',
-      fontSize: theme.fonts.xs,
-      padding: '4px',
-      paddingLeft: '2%',
-      '&:hover': {
-        background: theme.colors.lightBlue,
-      },
-    }),
-  }
-  // const [filter, setFilter] = useState({ input: '', catgory: '' })
-
   return (
     <Div_Wrapper>
       <Container>
         <Header>
           <AddPostCollapse />
           <MyInputGroup>
-            <FormControl
-              placeholder="Recipient's username"
+            <MyFormControl
+              placeholder='Search by title'
               aria-label="Recipient's username"
               aria-describedby='basic-addon2'
-              onChange={e => {
+              onChange={(e: { currentTarget: { value: any } }) => {
                 logic.setFilter({ ...logic.filter, input: e.currentTarget.value })
               }}
             />
-            <Button onClick={() => logic.filteredList()}>
-              <FontAwesomeIcon icon={faSearch} />
-            </Button>
           </MyInputGroup>
           <MyFormGroup>
             <Select
-              styles={customStyles}
+              styles={customStylesSelector}
               placeholder={'Category'}
-              options={options}
-              value={options.filter(option => option.value === logic.category)}
+              options={options2}
+              value={options2.filter(option => option.value === logic.filter.category)}
               onChange={e => {
                 if (e === null) return
-                logic.setFilter({ ...logic.filter, category: e.value })
+                logic.setFilter({ input: '', category: e.value })
               }}
             />
           </MyFormGroup>
@@ -196,7 +171,7 @@ export const Blog = () => {
       </Container>
       <MyToastContainer
         position='top-center'
-        autoClose={500}
+        autoClose={1000}
         hideProgressBar
         newestOnTop={false}
         closeOnClick
@@ -212,6 +187,10 @@ export const Blog = () => {
 
 const Header = styled.div`
   width: 80%;
+  ${theme.breakpoint.phone} {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
 `
 
 const Content = styled.div`
@@ -243,30 +222,7 @@ const GridContainer = styled.div`
   gap: 2rem;
   ${theme.breakpoint.phone} {
     grid-template-columns: repeat(1, 1fr);
-    width: 90%;
   }
-`
-const Button_MyButton = styled.button`
-  font-size: 1.5rem;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  background-color: ${theme.background.lightBlue};
-  height: 4.5rem;
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  &:hover {
-    background: ${theme.colors.blue2};
-  }
-`
-
-const H1 = styled.h1`
-  font-size: ${theme.fonts.medium};
-  color: ${theme.colors.blue};
-  font-weight: bold;
 `
 
 const MyToastContainer = styled(ToastContainer)`
@@ -284,10 +240,16 @@ const MyToastContainer = styled(ToastContainer)`
 
 const MyInputGroup = styled(InputGroup)`
   padding-top: 10px;
-  height: 4.5rem;
+  height: 5rem;
   padding-bottom: 5px;
+  font-size: ${theme.fonts.xs};
 `
 const MyFormGroup = styled(FormGroup)`
   display: flex;
   flex-direction: row;
+  font-size: ${theme.fonts.xs};
+`
+
+const MyFormControl = styled(FormControl)`
+  font-size: ${theme.fonts.xs};
 `

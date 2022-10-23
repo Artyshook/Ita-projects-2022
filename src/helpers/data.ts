@@ -58,6 +58,7 @@ export const initialBlogData = [
 ]
 
 export const options2 = [
+  { value: 'all', label: 'all' },
   { value: 'travel', label: 'travel' },
   { value: 'nature', label: 'nature' },
   { value: 'art', label: 'art' },
