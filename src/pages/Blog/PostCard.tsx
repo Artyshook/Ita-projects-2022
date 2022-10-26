@@ -10,6 +10,7 @@ import styled from 'styled-components'
 type PropsType = {
   post: BlogData
 }
+
 export const PostCard = (props: PropsType) => {
   return (
     <Div_Container>

@@ -42,15 +42,9 @@ export const AddPostCollapse = () => {
     }),
   }
 
-  const onClickHandler = () => {
-    logic.inputCheck()
-  }
-
   return (
     <React.StrictMode>
-      <Button_MyButton onClick={toggle} style={{ marginBottom: '1rem' }}>
-        Add article
-      </Button_MyButton>
+      <Button_MyButton onClick={toggle}>Add article</Button_MyButton>
       <Collapse isOpen={logic.formShown}>
         <Form>
           <FormGroup>
@@ -89,7 +83,7 @@ export const AddPostCollapse = () => {
           </FormGroup>
           <>
             {logic.error ? <ErrorMessage>{logic.error}</ErrorMessage> : null}
-            <Button_Add onClick={onClickHandler}>Save</Button_Add>
+            <Button_Add onClick={() => logic.inputCheck()}>Save</Button_Add>
           </>
         </Form>
       </Collapse>
@@ -105,6 +99,7 @@ const Button_MyButton = styled.button`
   background-color: ${theme.background.lightBlue};
   height: 4.5rem;
   width: fit-content;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;

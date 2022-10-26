@@ -28,7 +28,7 @@ export type BlogData = {
 
 const useLogicState = () => {
   const [formShown, setFormShown] = useState(false)
-  const [formData, setFormData] = useLocalStorage('blog', initialBlogData as BlogData[])
+  const [formData, setFormData] = useLocalStorage('blog', initialBlogData)
   const [title, setTitle] = useState('')
   const [postText, setPostText] = useState('')
   const [category, setCategory] = useState('' as string)
@@ -84,15 +84,14 @@ const useLogicState = () => {
     }
   }
 
-  const filteredList = () => {
-    return filter.category === '' && filter.input === ''
+  const filteredList =
+    filter.category === '' && filter.input === ''
       ? formData
       : filter.input === ''
       ? formData.filter(article =>
           filter.category === 'all' ? article : article.category === filter.category
         )
       : formData.filter(article => article.title.toLowerCase().includes(filter.input.toLowerCase()))
-  }
 
   return {
     formData,
@@ -163,7 +162,7 @@ export const Blog = () => {
         </Header>
         <Content>
           <GridContainer>
-            {logic.filteredList().map(post => (
+            {logic.filteredList.map(post => (
               <PostCard key={post.id} post={post} />
             ))}
           </GridContainer>
@@ -252,4 +251,21 @@ const MyFormGroup = styled(FormGroup)`
 
 const MyFormControl = styled(FormControl)`
   font-size: ${theme.fonts.xs};
+`
+const MySelectStyle = styled(Select)`
+  .Select__control {
+    border: none;
+    display: flex;
+    color: gray;
+  }
+  ,
+  .Select__options {
+    color: black;
+    fontsize: ${theme.fonts.xs};
+    padding: 4px;
+    paddingleft: 2%;
+  }
+  .select__options:hover {
+    background: ${theme.colors.lightBlue};
+  }
 `
