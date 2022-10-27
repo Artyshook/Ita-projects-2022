@@ -53,8 +53,8 @@ const Body = styled.div`
 
 const Div_Wrapper = styled.div`
   max-width: 1000px;
-  background-color: white;
-  box-shadow: rgb(102 102 102 / 5%) 0px 60px 30px;
+  background-color: ${theme.colors.superWhite};
+  box-shadow: ${theme.colors.boxShadow4}
   border-radius: 20px;
   margin: 0 auto;
   width: 90%;
@@ -74,7 +74,7 @@ const H1 = styled.h1`
   max-width: 700px;
   word-break: break-all;
   text-align: start;
-  color: black;
+  color: ${theme.colors.black};
 `
 const Header = styled.header`
   display: flex;
@@ -87,7 +87,7 @@ const Header = styled.header`
 const P_Category = styled.p`
   font-size: ${theme.fonts.xs};
   background: ${theme.background.tagBackground};
-  color: #fff;
+  color: ${theme.colors.white};
   padding: 0.5rem 0.7rem;
   border-radius: 5px;
   width: fit-content;
@@ -99,7 +99,7 @@ const Div_Post = styled.div`
   margin-top: 1.5rem;
   font-size: ${theme.fonts.small};
   word-break: break-all;
-  color: black;
+  color: ${theme.colors.black};
 `
 const Img_Cover = styled.img`
   width: 100%;

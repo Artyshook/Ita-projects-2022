@@ -150,8 +150,6 @@ export const getDate = () => {
 
 export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
-export const letterNumberCheck = /^[0-9a-zA-Z \-'_"]+$/
-
 export const customStylesSelector = {
   control: () => ({
     border: 'none',

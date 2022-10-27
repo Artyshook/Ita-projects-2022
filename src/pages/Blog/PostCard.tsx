@@ -32,7 +32,7 @@ export const PostCard = (props: PropsType) => {
 const P_Category = styled.p`
   font-size: ${theme.fonts.xs};
   background: ${theme.background.tagBackground};
-  color: #ffffff;
+  color: ${theme.colors.white};
   padding: 0.5rem 0.7rem;
   border-radius: 5px;
   width: fit-content;
@@ -41,7 +41,7 @@ const P_Category = styled.p`
   justify-content: start;
 `
 const Wrapper = styled.div`
-  background-color: white;
+  background-color: ${theme.colors.superWhite};
   border-radius: 20px;
   box-sizing: border-box;
   display: flex;
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   :hover {
     transition: transform 200ms ease-out, box-shadow 300ms ease-out;
     transform: translate(0px, -4px);
-    box-shadow: -1px 1px 9px 0px rgba(8, 6, 6, 0.04);
+    box-shadow: ${theme.colors.boxShadow5};
 
 `
 const Div_Container = styled.div`
@@ -70,7 +70,7 @@ const Img_Cover = styled.img`
   margin-bottom: 0.5rem;
 `
 const Title = styled.h3`
-  color: black;
+  color: ${theme.colors.black};
   margin: 0.5rem 0 1rem 0;
   flex: 1;
   max-width: 300px;

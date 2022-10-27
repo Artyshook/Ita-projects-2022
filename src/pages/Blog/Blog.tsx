@@ -3,12 +3,7 @@ import { FormControl, InputGroup } from 'react-bootstrap'
 import { FormGroup } from 'reactstrap'
 import { PostCard } from './PostCard'
 import { ToastContainer, toast } from 'react-toastify'
-import {
-  convertToSlug,
-  customStylesSelector,
-  letterNumberCheck,
-  useLocalStorage,
-} from '../../helpers/functions'
+import { convertToSlug, customStylesSelector, useLocalStorage } from '../../helpers/functions'
 import { coverArr, initialBlogData, options, options2 } from '../../helpers/data'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
@@ -69,7 +64,7 @@ const useLogicState = () => {
   const inputCheck = () => {
     if (!title.trim()) {
       setError('please enter the title')
-    } else if (!letterNumberCheck.test(title)) {
+    } else if (!/^[0-9a-zA-Z \-'_"]+$/.test(title)) {
       setError('please enter the title in English')
     } else if (formData.find(el => el.url === title.trim())) {
       setError('a similar title already exists, please type another')
@@ -261,9 +256,9 @@ const MySelectStyle = styled(Select)`
   ,
   .Select__options {
     color: black;
-    fontsize: ${theme.fonts.xs};
-    padding: 4px;
-    paddingleft: 2%;
+    // fontsize: ${theme.fonts.xs};
+    // padding: 4px;
+    // paddingleft: 2%;
   }
   .select__options:hover {
     background: ${theme.colors.lightBlue};
