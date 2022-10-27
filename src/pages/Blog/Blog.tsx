@@ -31,6 +31,7 @@ const useLogicState = () => {
   const [filterCategory, setFilterCategory] = useState('' as string)
   const [searchInput, setSearchInput] = useState('')
   const [filter, setFilter] = useState({ input: '', category: '' })
+  const [selectedOption, setSelectedOption] = useState('' as string)
 
   const notification = () => {
     toast('🙌 Upload successfully')
@@ -80,13 +81,13 @@ const useLogicState = () => {
   }
 
   const filteredList =
-    filter.category === '' && filter.input === ''
+    selectedOption === '' && searchInput === ''
       ? formData
-      : filter.input === ''
+      : searchInput === ''
       ? formData.filter(article =>
-          filter.category === 'all' ? article : article.category === filter.category
+          selectedOption === 'all' ? article : article.category === selectedOption
         )
-      : formData.filter(article => article.title.toLowerCase().includes(filter.input.toLowerCase()))
+      : formData.filter(article => article.title.toLowerCase().includes(searchInput.toLowerCase()))
 
   return {
     formData,
@@ -110,6 +111,8 @@ const useLogicState = () => {
     setSearchInput,
     setFilter,
     filter,
+    setSelectedOption,
+    selectedOption,
   }
 }
 
@@ -137,8 +140,8 @@ export const Blog = () => {
               placeholder='Search by title'
               aria-label="Recipient's username"
               aria-describedby='basic-addon2'
-              onChange={(e: { currentTarget: { value: any } }) => {
-                logic.setFilter({ ...logic.filter, input: e.currentTarget.value })
+              onChange={(e: React.ChangeEvent<{ value: string }>) => {
+                logic.setSearchInput(e.currentTarget.value)
               }}
             />
           </MyInputGroup>
@@ -147,10 +150,10 @@ export const Blog = () => {
               styles={customStylesSelector}
               placeholder={'Category'}
               options={options2}
-              value={options2.filter(option => option.value === logic.filter.category)}
+              value={options2.filter(option => option.value === logic.selectedOption)}
               onChange={e => {
                 if (e === null) return
-                logic.setFilter({ input: '', category: e.value })
+                logic.setSelectedOption(e.value)
               }}
             />
           </MyFormGroup>
@@ -256,9 +259,9 @@ const MySelectStyle = styled(Select)`
   ,
   .Select__options {
     color: black;
-    // fontsize: ${theme.fonts.xs};
-    // padding: 4px;
-    // paddingleft: 2%;
+    fontsize: ${theme.fonts.xs};
+    padding: 4px;
+    paddingleft: 2%;
   }
   .select__options:hover {
     background: ${theme.colors.lightBlue};
