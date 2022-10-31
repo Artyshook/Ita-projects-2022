@@ -20,5 +20,5 @@
 </br>
 </br>
 
-<p align="center"> <img width="1000" alt="animated" src="https://github.com/Artyshook/Ita-projects-2022/blob/main/src/WebsitePage/components/img/blog-gif.gif"/>
+<p align="center"> <img width="1000" alt="animated" src="https://github.com/Artyshook/Ita-projects-2022/blob/main/src/WebsitePage/components/img/blog.gif"/>
  </p>
