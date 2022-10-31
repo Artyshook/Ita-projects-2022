@@ -1,4 +1,4 @@
-import { Task } from '../pages/TodoListRedux/store'
+import { theme } from './theme'
 import { useEffect, useState } from 'react'
 
 export const useLocalStorage = <T>(key: string, defaultValue: T) => {
@@ -149,3 +149,20 @@ export const getDate = () => {
 }
 
 export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
+
+export const customStylesSelector = {
+  control: () => ({
+    border: 'none',
+    display: 'flex',
+    color: 'gray',
+  }),
+  option: () => ({
+    color: 'black',
+    fontSize: theme.fonts.xs,
+    padding: '4px',
+    paddingLeft: '2%',
+    '&:hover': {
+      background: theme.colors.lightBlue,
+    },
+  }),
+}

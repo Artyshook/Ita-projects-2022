@@ -1,15 +1,15 @@
-import { AddPostForm } from './AddPostForm'
-import { CgAddR } from 'react-icons/cg'
-import { Link } from 'react-router-dom'
-import { Link_GoBack } from './BlogPage'
+import { AddPostCollapse } from './AddPostCollapse'
+import { FormControl, InputGroup } from 'react-bootstrap'
+import { FormGroup } from 'reactstrap'
 import { PostCard } from './PostCard'
-import { convertToSlug, useLocalStorage } from '../../helpers/functions'
-import { coverArr } from '../../helpers/data'
+import { ToastContainer, toast } from 'react-toastify'
+import { convertToSlug, customStylesSelector, useLocalStorage } from '../../helpers/functions'
+import { coverArr, initialBlogData, options, options2 } from '../../helpers/data'
 import { genericHookContextBuilder } from '../../helpers/genericHookContextBuilder'
 import { theme } from '../../helpers/theme'
-import { urls } from '../../helpers/urls'
 import { v1 } from 'uuid'
 import React, { useContext, useState } from 'react'
+import Select from 'react-select'
 import styled from 'styled-components'
 
 export type BlogData = {
@@ -23,11 +23,19 @@ export type BlogData = {
 
 const useLogicState = () => {
   const [formShown, setFormShown] = useState(false)
-  const [formData, setFormData] = useLocalStorage('blog', [] as BlogData[])
+  const [formData, setFormData] = useLocalStorage('blog', initialBlogData)
   const [title, setTitle] = useState('')
   const [postText, setPostText] = useState('')
   const [category, setCategory] = useState('' as string)
   const [error, setError] = useState(null as string | null)
+  const [filterCategory, setFilterCategory] = useState('' as string)
+  const [searchInput, setSearchInput] = useState('')
+  const [filter, setFilter] = useState({ input: '', category: '' })
+  const [selectedOption, setSelectedOption] = useState('' as string)
+
+  const notification = () => {
+    toast('🙌 Upload successfully')
+  }
 
   const slug = convertToSlug(title)
   const cover2 = coverArr[category]
@@ -55,16 +63,31 @@ const useLogicState = () => {
   }
 
   const inputCheck = () => {
-    if (formData.find(el => el.url === title.trim())) {
+    if (!title.trim()) {
+      setError('please enter the title')
+    } else if (!/^[0-9a-zA-Z \-'_"]+$/.test(title)) {
+      setError('please enter the title in English')
+    } else if (formData.find(el => el.url === title.trim())) {
       setError('a similar title already exists, please type another')
     } else if (!category) {
       setError('please select a category')
     } else if (!postText.trim()) {
       setError('the article was not entered ')
     } else {
+      notification()
       setData()
+      setError(null)
     }
   }
+
+  const filteredList =
+    selectedOption === '' && searchInput === ''
+      ? formData
+      : searchInput === ''
+      ? formData.filter(article =>
+          selectedOption === 'all' ? article : article.category === selectedOption
+        )
+      : formData.filter(article => article.title.toLowerCase().includes(searchInput.toLowerCase()))
 
   return {
     formData,
@@ -81,6 +104,15 @@ const useLogicState = () => {
     error,
     setError,
     resetStates,
+    setFilterCategory,
+    filterCategory,
+    filteredList,
+    searchInput,
+    setSearchInput,
+    setFilter,
+    filter,
+    setSelectedOption,
+    selectedOption,
   }
 }
 
@@ -99,28 +131,78 @@ export const Blog = () => {
   const logic = useContext(BlogContext)
 
   return (
-    <>
-      <Div_Wrapper>
-        <H1>All Articles</H1>
-        <p>an amazing place to make yourself productive and have fun with daily updates.</p>
-        <Button_MyButton onClick={() => logic.setFormShown(true)}>
-          <CgAddR size='2rem' />
-          <div>Add article</div>
-        </Button_MyButton>
-        <AddPostForm />
-        <GridContainer>
-          {logic.formData.map(post => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </GridContainer>
-      </Div_Wrapper>
-    </>
+    <Div_Wrapper>
+      <Container>
+        <Header>
+          <AddPostCollapse />
+          <MyInputGroup>
+            <MyFormControl
+              placeholder='Search by title'
+              aria-label="Recipient's username"
+              aria-describedby='basic-addon2'
+              onChange={(e: React.ChangeEvent<{ value: string }>) => {
+                logic.setSearchInput(e.currentTarget.value)
+              }}
+            />
+          </MyInputGroup>
+          <MyFormGroup>
+            <Select
+              styles={customStylesSelector}
+              placeholder={'Category'}
+              options={options2}
+              value={options2.filter(option => option.value === logic.selectedOption)}
+              onChange={e => {
+                if (e === null) return
+                logic.setSelectedOption(e.value)
+              }}
+            />
+          </MyFormGroup>
+        </Header>
+        <Content>
+          <GridContainer>
+            {logic.filteredList.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </GridContainer>
+        </Content>
+      </Container>
+      <MyToastContainer
+        position='top-center'
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
+    </Div_Wrapper>
   )
 }
 
+const Header = styled.div`
+  width: 80%;
+  ${theme.breakpoint.phone} {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
+`
+
+const Content = styled.div`
+  width: 80%;
+`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 70%;
+`
 const Div_Wrapper = styled.div`
   max-width: 1140px;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -132,34 +214,56 @@ const Div_Wrapper = styled.div`
 
 const GridContainer = styled.div`
   padding-top: 1rem;
-  width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   ${theme.breakpoint.phone} {
     grid-template-columns: repeat(1, 1fr);
-    width: 90%;
-  }
-`
-const Button_MyButton = styled.button`
-  font-size: 1.5rem;
-  border-radius: 20px;
-  border: none;
-  color: white;
-  background-color: ${theme.background.lightBlue};
-  height: 4.5rem;
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  &:hover {
-    background: ${theme.colors.blue2};
   }
 `
 
-const H1 = styled.h1`
-  font-size: ${theme.fonts.medium};
-  color: ${theme.colors.blue};
-  font-weight: bold;
+const MyToastContainer = styled(ToastContainer)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  ${theme.breakpoint.phone} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+`
+
+const MyInputGroup = styled(InputGroup)`
+  padding-top: 10px;
+  height: 5rem;
+  padding-bottom: 5px;
+  font-size: ${theme.fonts.xs};
+`
+const MyFormGroup = styled(FormGroup)`
+  display: flex;
+  flex-direction: row;
+  font-size: ${theme.fonts.xs};
+`
+
+const MyFormControl = styled(FormControl)`
+  font-size: ${theme.fonts.xs};
+`
+const MySelectStyle = styled(Select)`
+  .Select__control {
+    border: none;
+    display: flex;
+    color: gray;
+  }
+  ,
+  .Select__options {
+    color: black;
+    fontsize: ${theme.fonts.xs};
+    padding: 4px;
+    paddingleft: 2%;
+  }
+  .select__options:hover {
+    background: ${theme.colors.lightBlue};
+  }
 `

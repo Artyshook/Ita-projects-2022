@@ -27,6 +27,7 @@ export const theme = {
   },
   colors: {
     white: '#f5f5f5',
+    superWhite: 'white',
     blue: '#507CFB',
     blue2: '#7A4BDD',
     lightBlue: '#d8edff',
@@ -43,6 +44,8 @@ export const theme = {
     boxShadow: '6px 4px 8px 0px rgba(34, 60, 80, 0.2)',
     boxShadow2: `6px 4px 15px 3px rgba(33, 60, 70, 0.2)`,
     boxShadow3: '6px 4px 15px 3px rgba(33, 60, 70, 0.2)',
+    boxShadow4: 'rgb(102 102 102 / 5%) 0px 60px 30px;',
+    boxShadow5: '-1px 1px 9px 0px rgba(8, 6, 6, 0.04)',
     textShadow: '1px 2px 5px rgba(255, 85, 105, 0.3), 3px -1px 5px rgba(80, 220, 251, 0.08)',
   },
   background: {

@@ -21,9 +21,9 @@ export const DetailPost = () => {
               <H1>{logic.blogData.title}</H1>
               <P_Category>{logic.blogData.category}</P_Category>
             </Header>
-            <Img_Cover src={logic.blogData.cover ?? ''} alt='cover' />
+            <Img_Cover src={logic.blogData.cover} alt='cover' />
             <P_Post>
-              <Markdown>{logic.blogData.post ?? ''}</Markdown>
+              <Markdown>{logic.blogData.post}</Markdown>
             </P_Post>
           </div>
         )}

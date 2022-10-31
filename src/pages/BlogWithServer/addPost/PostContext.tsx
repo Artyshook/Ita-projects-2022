@@ -1,6 +1,7 @@
 import { AddPostForm } from './AddPostForm'
 import { CgAddR } from 'react-icons/cg'
 import { PostCard2 } from './PostCard'
+import { Toast, ToastBody, ToastHeader } from 'reactstrap'
 import { genericHookContextBuilder } from '../../../helpers/genericHookContextBuilder'
 import { services } from '../../../helpers/services'
 import { theme } from '../../../helpers/theme'
@@ -77,9 +78,13 @@ const useLogicState = () => {
     }
   }
 
+  const letterNumber = /^[0-9a-zA-Z]+$/
+
   const inputCheck = () => {
     if (!title.trim()) {
-      setValidationError('title is required')
+      setValidationError('please enter the title')
+    } else if (!letterNumber.test(title)) {
+      setValidationError('please enter the title in English')
     } else if (data.find(el => el.slug === title)) {
       setValidationError('a similar title already exists, please type another')
     } else if (!category) {
